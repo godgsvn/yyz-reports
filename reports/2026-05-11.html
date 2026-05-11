@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-05-11</title>
+<style>
+:root {
+  --red: #e74c3c;
+  --green: #2ecc71;
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #f0b429;
+  --blue: #58a6ff;
+  --purple: #bc8cff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 1.8rem; margin-bottom: 6px; }
+.date { color: var(--muted); margin-bottom: 20px; }
+h2 { font-size: 1.3rem; margin: 28px 0 14px; padding-left: 12px; border-left: 4px solid var(--accent); }
+h3 { font-size: 1.1rem; margin: 20px 0 10px; color: var(--blue); }
+
+/* Market Overview */
+.market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.market-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+.market-card .name { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.market-card .val { font-size: 1.3rem; font-weight: bold; }
+.market-card .chg { font-size: 0.9rem; margin-top: 2px; }
+.up { color: var(--red); }
+.down { color: var(--green); }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 0.9rem; }
+th { background: #1c2128; padding: 10px 8px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; color: var(--muted); font-weight: 600; }
+td { padding: 10px 8px; border-bottom: 1px solid var(--border); }
+tr:hover { background: rgba(255,255,255,0.03); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-hot { background: rgba(231,76,60,0.15); color: var(--red); }
+.tag-warm { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-mid { background: rgba(88,166,255,0.15); color: var(--blue); }
+.tag-buy { background: rgba(46,204,113,0.15); color: var(--green); }
+.tag-wait { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-skip { background: rgba(139,148,158,0.15); color: var(--muted); }
+
+/* Stock cards */
+.stock-section { margin-bottom: 20px; }
+.stock-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.stock-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+.stock-card .stock-name { font-size: 1.1rem; font-weight: bold; }
+.stock-card .stock-code { color: var(--muted); font-size: 0.85rem; }
+.stock-card .price { font-size: 1.4rem; font-weight: bold; }
+.stock-card .analysis { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+.stock-card .analysis strong { color: var(--text); }
+.check-item { display: flex; gap: 8px; align-items: flex-start; margin: 4px 0; }
+.check-icon { flex-shrink: 0; }
+.pass { color: var(--green); }
+.fail { color: var(--red); }
+
+/* Operation Box */
+.op-box { background: #1c2128; border-radius: 8px; padding: 14px 16px; margin-top: 10px; border-left: 3px solid var(--purple); }
+.op-box .op-title { color: var(--purple); font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; }
+.op-box .op-row { display: flex; gap: 8px; margin: 5px 0; align-items: flex-start; }
+.op-box .op-label { flex-shrink: 0; font-weight: 600; min-width: 60px; color: var(--text); }
+.op-box .op-val { color: var(--muted); }
+.op-box .op-val strong { color: var(--text); }
+.op-box .op-val .buy-price { color: var(--green); font-weight: bold; }
+.op-box .op-val .sell-price { color: var(--red); font-weight: bold; }
+.op-box .op-val .stop-price { color: var(--red); font-weight: bold; text-decoration: underline; }
+
+/* Action Summary */
+.action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; margin: 16px 0; }
+.action-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.action-card .action-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.action-card .action-name { font-weight: bold; font-size: 1rem; }
+.action-card .action-detail { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.action-card .action-detail strong { color: var(--text); }
+
+/* Section descriptions */
+.section-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
+
+/* Footer */
+.footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+.warning { background: rgba(240,180,41,0.1); border: 1px solid rgba(240,180,41,0.3); border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 0.85rem; color: var(--accent); }
+.risk-warning { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.25); border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 0.85rem; color: var(--red); }
+
+@media (max-width: 600px) {
+  body { padding: 12px; }
+  .market-grid { grid-template-columns: repeat(2, 1fr); }
+  .action-grid { grid-template-columns: 1fr; }
+  table { font-size: 0.8rem; }
+  th, td { padding: 8px 4px; }
+}
+</style>
+</head>
+<body>
+
+<h1>一阳指选股复盘</h1>
+<p class="date">2026年5月11日（周一）收盘前盘中复盘 · 10:09数据快照</p>
+
+<div class="warning">本报告基于「一阳指」战法体系（转势战法 + 开门战法）自动筛选，仅供参考学习，不构成投资建议。</div>
+
+<!-- 市场概览 -->
+<h2>市场概览</h2>
+<div class="market-grid">
+  <div class="market-card">
+    <div class="name">上证指数</div>
+    <div class="val up">4207.43</div>
+    <div class="chg up">+0.66%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">深证成指</div>
+    <div class="val up">15777.72</div>
+    <div class="chg up">+1.37%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">创业板指</div>
+    <div class="val up">3856.17</div>
+    <div class="chg up">+1.58%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">涨停家数</div>
+    <div class="val">70+</div>
+    <div class="chg" style="color:var(--accent)">半导体主导</div>
+  </div>
+</div>
+<div class="stock-card">
+  <div class="analysis">
+    <strong>今日市场特征：</strong>三大指数全线上涨，创业板指涨幅最大（+1.58%），5日涨幅+4.58%。市场做多情绪强烈，量比整体偏高（上证量比2.73，深证量比2.82，创业板量比2.62）。<strong>半导体/CPU/存储器/工程机械</strong>为今日最强主线，多只个股实现20cm涨停。上证年初至今涨幅+6.01%，历史估值处于99.96%百分位高位区间，注意整体系统性风险。
+  </div>
+</div>
+
+<!-- 热门板块 -->
+<h2>热门板块 TOP5</h2>
+<table>
+  <tr><th>排名</th><th>板块（概念/行业）</th><th>涨跌幅</th><th>领涨股</th><th>领涨涨幅</th></tr>
+  <tr><td>1</td><td>CPU概念</td><td class="up">+6.33%</td><td>澜起科技 sh688008</td><td class="up">+14.61%</td></tr>
+  <tr><td>2</td><td>工程机械（行业）</td><td class="up">+5.63%</td><td>徐工机械 sz000425</td><td class="up">+10.03%</td></tr>
+  <tr><td>3</td><td>国家大基金持股</td><td class="up">+5.06%</td><td>兴福电子 sh688545</td><td class="up">+17.03%</td></tr>
+  <tr><td>4</td><td>锗镓概念</td><td class="up">+4.99%</td><td>中金岭南 sz000060</td><td class="up">+10.06%</td></tr>
+  <tr><td>5</td><td>半导体（行业）</td><td class="up">+4.58%</td><td>普冉股份 sh688766</td><td class="up">+20.00%</td></tr>
+</table>
+
+<!-- 主力资金 -->
+<h2>主力资金流入 TOP3</h2>
+<table>
+  <tr><th>排名</th><th>板块</th><th>主力净流入</th><th>涨跌幅</th><th>领涨股</th></tr>
+  <tr><td>1</td><td>半导体产业（概念）</td><td class="up">72.8亿</td><td class="up">+2.70%</td><td>科威尔 +20.01%</td></tr>
+  <tr><td>2</td><td>存储器（概念）</td><td class="up">71.2亿</td><td class="up">+3.56%</td><td>同有科技 +20.00%</td></tr>
+  <tr><td>3</td><td>半导体（行业）</td><td class="up">62.1亿</td><td class="up">+4.58%</td><td>普冉股份 +20.00%</td></tr>
+</table>
+
+<!-- ======== 次日操作计划 ======== -->
+<h2>次日操作计划（5月12日周二）</h2>
+<p class="section-desc">按优先级排序，基于一阳指体系买卖规则制定具体操作计划。仓位参考：短线40% + 波段中线30% + 长线30%，单票不超过30%。</p>
+
+<div class="action-grid">
+
+  <!-- 第一梯队：重点关注 -->
+  <div class="action-card" style="border-left: 3px solid var(--green);">
+    <div class="action-header">
+      <span class="action-name">徐工机械 sz000425</span>
+      <span class="tag tag-buy">转势战法 / 短线+波段</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>转势战法（日线级别）<br>
+      <strong>买入计划：</strong>明日观察，若回踩 <span class="buy-price">10.2~10.5元</span>（突破阳线实体区间/60分钟6均线附近），量比缩量回踩时低吸建仓<br>
+      <strong>仓位：</strong>短线15% + 波段10% = 25%（首批先打半仓）<br>
+      <strong>止损位：</strong><span class="stop-price">9.45元</span>（跌破4月20日低点，极限止损）<br>
+      <strong>止盈参考：</strong>第一目标12~13元（偏离日线21均线过远时分批止盈）<br>
+      <strong>注意：</strong>5MA=10.276，10MA=10.099，20MA=10.183，均线已拐头向上。今日涨停量比6.33，大幅放量，是近期底部盘整后转势信号。
+    </div>
+  </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--green);">
+    <div class="action-header">
+      <span class="action-name">同有科技 sz300302</span>
+      <span class="tag tag-buy">开门战法 / 短线</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开门战法（四条件待验证，存储器概念今日领涨）<br>
+      <strong>买入计划：</strong>明日开盘观察，若低开回踩 <span class="buy-price">36~38元</span>（今日开盘价附近/6日均线），分时黄线附近低吸<br>
+      <strong>仓位：</strong>短线10%（首批先打半仓，谨慎操作）<br>
+      <strong>止损位：</strong><span class="stop-price">33元</span>（跌破前期整理区间下沿）<br>
+      <strong>离场信号：</strong>跌破日线6均线 / 高位跌停 / 顶部带量大阴线<br>
+      <strong>注意：</strong>存储器概念主力净流入71.2亿，板块今日强势
+    </div>
+  </div>
+
+</div>
+
+<div class="action-grid">
+
+  <!-- 第二梯队：等待回调 -->
+  <div class="action-card" style="border-left: 3px solid var(--accent);">
+    <div class="action-header">
+      <span class="action-name">澜起科技 sh688008</span>
+      <span class="tag tag-wait">开门战法 / 等回调</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开门战法（已在主升浪中，今日涨幅14.61%）<br>
+      <strong>操作计划：</strong>明日不追高，等回调至 <span class="buy-price">210~220元</span>（日线6均线/前高区域）再考虑介入<br>
+      <strong>仓位：</strong>波段10%~15%<br>
+      <strong>止损位：</strong><span class="stop-price">190元</span>（跌破前期重要支撑位）<br>
+      <strong>离场信号：</strong>跌破日线6均线 / 高位跌停 / 顶部带量大阴线<br>
+      <strong>注意：</strong>年初至今涨幅104.58%，20日涨幅73.12%，严重偏离均线，追高风险极高
+    </div>
+  </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--accent);">
+    <div class="action-header">
+      <span class="action-name">普冉股份 sh688766</span>
+      <span class="tag tag-wait">开门战法 / 等回调</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开门战法（已在主升浪中，今日20cm涨停）<br>
+      <strong>操作计划：</strong>明日不追高，等回调至 <span class="buy-price">300~320元</span>（日线6/12均线附近）再考虑介入<br>
+      <strong>仓位：</strong>波段10%<br>
+      <strong>止损位：</strong><span class="stop-price">270元</span>（跌破前期整理区间）<br>
+      <strong>离场信号：</strong>跌破日线6均线 / 高位跌停 / 顶部带量大阴线<br>
+      <strong>注意：</strong>年初至今涨幅199.5%，追高风险极大，20cm振幅剧烈
+    </div>
+  </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--accent);">
+    <div class="action-header">
+      <span class="action-name">科威尔 sh688551</span>
+      <span class="tag tag-wait">开门战法 / 等回调</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开门战法（今日20cm涨停封板）<br>
+      <strong>操作计划：</strong>等回调至 <span class="buy-price">48~52元</span>（日线6均线/前期高点区域）再介入<br>
+      <strong>仓位：</strong>波段10%<br>
+      <strong>止损位：</strong><span class="stop-price">44元</span>（跌破前期低点43.14元）<br>
+      <strong>离场信号：</strong>跌破日线6均线 / 高位跌停 / 顶部带量大阴线<br>
+      <strong>注意：</strong>年初至今涨幅64.60%，5日涨幅33.03%，短期涨幅较大，注意回调
+    </div>
+  </div>
+
+</div>
+
+<div class="action-grid">
+
+  <!-- 第三梯队：观望 -->
+  <div class="action-card" style="border-left: 3px solid var(--muted);">
+    <div class="action-header">
+      <span class="action-name">三一重工 sh600031</span>
+      <span class="tag tag-skip">工程机械 / 观望等回调</span>
+    </div>
+    <div class="action-detail">
+      <strong>状态：</strong>今日涨幅+7.65%，工程机械板块联动。量比5.88放量明显<br>
+      <strong>操作计划：</strong>今日跟随徐工涨幅，暂不追高，等60分钟图回踩6和21均线 <span class="buy-price">20~21元</span> 区域再介入<br>
+      <strong>止损位：</strong>跌破日线6均线立即离场<br>
+      <strong>注意：</strong>大盘蓝筹弹性相对小，适合波段持有
+    </div>
+  </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--muted);">
+    <div class="action-header">
+      <span class="action-name">光迅科技 sz002281</span>
+      <span class="tag tag-skip">光纤通信 / 高位继续观望</span>
+    </div>
+    <div class="action-detail">
+      <strong>状态：</strong>今日涨幅+7.89%至194.98元，5月8日已达180.72元，继续新高<br>
+      <strong>操作计划：</strong>暂不参与，偏离均线过远。等大幅回调至 <span class="buy-price">150元以下</span>（日线21均线附近）再重新评估<br>
+      <strong>止损位：</strong>任何位置介入，跌破日线6均线立即离场<br>
+      <strong>注意：</strong>从62元涨至195元，涨幅超过200%，追高风险极高
+    </div>
+  </div>
+
+</div>
+
+<!-- ======== 仓位配置建议 ======== -->
+<h2>仓位配置建议</h2>
+<div class="stock-card">
+  <div class="analysis" style="line-height:2">
+    <p><strong>推荐仓位分配（示例）：</strong></p>
+    <table style="margin-top:10px">
+      <tr><th>交易类型</th><th>仓位比例</th><th>建议标的</th><th>预期持仓周期</th></tr>
+      <tr>
+        <td><strong>短线</strong></td>
+        <td class="up">40%</td>
+        <td>徐工机械15% + 同有科技10% + 现金备用15%</td>
+        <td>1~5天</td>
+      </tr>
+      <tr>
+        <td><strong>波段中线</strong></td>
+        <td class="up">30%</td>
+        <td>等澜起科技/科威尔回调后各10%~15%</td>
+        <td>数天~数周</td>
+      </tr>
+      <tr>
+        <td><strong>长线/观察</strong></td>
+        <td>30%</td>
+        <td>三一重工（等回调）、现金储备、防御性配置</td>
+        <td>数周以上</td>
+      </tr>
+    </table>
+    <p style="margin-top:12px"><strong>核心纪律：</strong>当前上证指数估值处于历史99.96%高位，建议整体保持60%~70%仓位，留有充足子弹应对波动。单票不超过30%，首批建仓先打半仓，确认趋势后再加仓。</p>
+  </div>
+</div>
+
+<!-- ======== 开门战法候选详情 ======== -->
+<h2>开门战法候选详情</h2>
+<p class="section-desc">筛选条件：大阳突破前期高点 + 均线多头排列(6/12/21) + 量能配合 + 契合市场热度</p>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">澜起科技</span> <span class="stock-code">sh688008</span> <span class="tag tag-hot">CPU概念/半导体</span></div>
+    <div class="price up">241.00 (+14.61%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>大阳突破前期高点</strong>：今日涨幅14.61%至241元，创近期新高，区间（4月10日至今）涨幅73.10%</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>均线多头排列</strong>：从港股数据参考，5MA=320，10MA=286，20MA=249（港股侧面验证），A股已走出多头趋势</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：今日成交额111.2亿，主力净流入2.34亿，量比3.68，放量明显</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>契合热度</strong>：CPU概念今日涨幅第一（+6.33%），人工智能算力主线龙头</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>底部酝酿</strong>：4月10日至今已连续运行，区间涨幅73%，已处于主升浪中段偏后段，非新晋突破</div>
+    <p style="margin-top:8px;color:var(--accent)">综合评分：&#9733;&#9733;&#9733;&#9734;&#9734; 趋势强劲但追高风险大，等回调</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val" style="color:var(--accent)"><strong>明日不追高。</strong>等回调至 <span class="buy-price">210~220元</span>（日线6均线/前高区域）再考虑介入</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">波段10%~15%</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">190元</span>（跌破前期重要支撑位，无条件离场）</span></div>
+    <div class="op-row"><span class="op-label">离场：</span><span class="op-val">跌破日线6均线 / 高位跌停 / 顶部带量大阴线 — 三者任一触发即离场</span></div>
+    <div class="op-row"><span class="op-label">风险：</span><span class="op-val">年初至今涨幅104.58%，20日涨幅73.12%，科创板20cm弹性极大，追高风险极高</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">普冉股份</span> <span class="stock-code">sh688766</span> <span class="tag tag-hot">存储芯片/半导体</span></div>
+    <div class="price up">381.00 (+20.00%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>大阳突破前期高点</strong>：今日20cm涨停381元，突破近期历史高位，区间涨幅56.93%</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>均线多头排列</strong>：从242元区间一路上攻，均线持续多头排列</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：今日成交额30.7亿，量比5.56，大幅放量涨停，封板率委比100%</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>契合热度</strong>：存储器概念主力净流入71.2亿，半导体行业今日主线</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>底部酝酿</strong>：区间涨幅56.93%，年初至今涨幅199.5%，已严重偏离均线，处于高位</div>
+    <p style="margin-top:8px;color:var(--blue)">综合评分：&#9733;&#9733;&#9733;&#9734;&#9734; 趋势强，但严重高位，等大幅回调</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val" style="color:var(--accent)"><strong>明日不追高。</strong>等回调至 <span class="buy-price">300~320元</span>（日线6/12均线）再介入</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">波段10%</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">270元</span>（跌破近期整理区间下沿）</span></div>
+    <div class="op-row"><span class="op-label">离场：</span><span class="op-val">跌破日线6均线 / 高位跌停 / 顶部带量大阴线</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">科威尔</span> <span class="stock-code">sh688551</span> <span class="tag tag-warm">测试电源/功率半导体</span></div>
+    <div class="price up">60.46 (+20.01%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>大阳突破前期高点</strong>：今日20cm涨停60.46元，创近期新高，突破前期高点区域</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>均线多头排列</strong>：4月10日以来从44元区域上攻，5日涨幅33.03%，趋势明确向上</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：今日量比7.56，委比100%（满封），成交额2.66亿，倍量放量</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>契合热度</strong>：所属其他电源设备板块主力净流入13.5亿排第2，有热度</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>底部酝酿</strong>：4月24日低点43.14元至今，区间涨幅约40%，但底部整理时间偏短（约2周）</div>
+    <p style="margin-top:8px;color:var(--blue)">综合评分：&#9733;&#9733;&#9733;&#9734;&#9734; 趋势向上但底部酝酿不充分，等回调</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">等回调至 <span class="buy-price">48~52元</span>（日线6均线/前期高点区域），分时黄线附近买入</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">波段10%</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">44元</span>（跌破4月24日低点43.14元，极限止损）</span></div>
+    <div class="op-row"><span class="op-label">离场：</span><span class="op-val">跌破日线6均线 / 高位跌停 / 顶部带量大阴线</span></div>
+  </div>
+</div>
+
+<!-- ======== 转势战法候选详情 ======== -->
+<h2>转势战法候选详情</h2>
+<p class="section-desc">筛选条件：底部盘整/洗盘充分 → 突破性大阳线(一阳指) → 量能放大 → 均线突破 → 板块有热度</p>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">徐工机械</span> <span class="stock-code">sz000425</span> <span class="tag tag-hot">工程机械</span></div>
+    <div class="price up">10.97 (+10.03%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>底部酝酿</strong>：4月20日低点9.45元后，在9.45~10.37区间震荡约3周，均线收敛至粘合状态（5MA=10.276，10MA=10.099，20MA=10.183），均线间距极窄，底部酝酿特征明显</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>一阳指形态</strong>：今日涨停10.97元（+10.03%），从10.47开盘一路封板，突破近3周的横盘压制区间（最高10.35），一根大阳线完成突破</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：今日成交额16.9亿，量比6.33，较近期日均成交额大幅放量（约3~4倍），突破充分有力</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>均线突破</strong>：今日价格10.97已站上5MA（10.276）、10MA（10.099）、20MA（10.183），三均线同时向上，符合趋势反转特征</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>板块热度</strong>：工程机械行业今日涨幅第一（+5.63%），主力净流入10.5亿排第3，热度充足</div>
+    <p style="margin-top:8px;color:var(--accent)">综合评分：&#9733;&#9733;&#9733;&#9733;&#9733; 标准转势战法形态，今日为重点关注一阳指</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">明日观察，若低开或平开回踩 <span class="buy-price">10.2~10.5元</span>（突破阳线实体区间内/60分钟6均线附近），分批低吸</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">短线15% + 波段10% = 25%（首批先打半仓，确认趋势后再加仓）</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val">常规止损 <span class="stop-price">9.97元</span>（跌破今日一阳指阳线实体下沿）；极限止损 <span class="stop-price">9.45元</span>（跌破4月20日低点）</span></div>
+    <div class="op-row"><span class="op-label">止盈：</span><span class="op-val">偏离日线21均线过远时分批止盈；第一目标12~13元</span></div>
+    <div class="op-row"><span class="op-label">卖出信号：</span><span class="op-val">量大阴线跌破6均线 / 6与21均线距离快速扩大 / K线反复回踩均线趋势变弱</span></div>
+    <div class="op-row"><span class="op-label">特别提醒：</span><span class="op-val">今日涨停次日若高开秒板则放弃追高，等回踩机会；工程机械行业基本面改善（2025年报营收1008亿，净利65.72亿）</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">中金岭南</span> <span class="stock-code">sz000060</span> <span class="tag tag-warm">锗镓/小金属</span></div>
+    <div class="price up">8.75 (+10.06%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>底部酝酿</strong>：锗镓概念近期持续活跃，锗镓概念板块5日涨幅21.59%，20日涨幅50.60%，显示资金持续关注</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>一阳指形态</strong>：今日涨停+10.06%，为锗镓概念领涨股，磷化铟晶片概念同步领涨</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：今日换手率7.07%，量比5.29，放量明显</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>热度</strong>：锗镓概念今日涨幅+4.99%，小金属行业+2.97%，有色稀金属稀土题材主线</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>底部不确定</strong>：需进一步确认个股底部盘整情况，若5月8日前有充分横盘则评分更高</div>
+    <p style="margin-top:8px;color:var(--blue)">综合评分：&#9733;&#9733;&#9733;&#9734;&#9734; 板块热度强，个股待进一步确认，谨慎介入</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">等明日回踩 <span class="buy-price">8.0~8.3元</span>（今日一阳指阳线实体区间内/60分钟6均线），分批建仓</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">短线10%（谨慎控仓，待确认底部情况）</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">7.5元</span>（跌破今日阳线实体下沿，无条件离场）</span></div>
+    <div class="op-row"><span class="op-label">注意：</span><span class="op-val">锗镓/磷化铟稀有金属有色板块是近期热门，但需确认板块热度持续性</span></div>
+  </div>
+</div>
+
+<!-- ======== 排除说明 ======== -->
+<h2>排除说明</h2>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">N春光集团</span> <span class="stock-code">sz301531</span></div>
+    <div class="price up">93.08 (+599.85%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon fail">&#10008;</span><strong>不符合原因</strong>：今日新股上市，属于新股首日行情，无底部盘整历史，无均线参考，不适用一阳指任何战法。一阳指战法不参与新股上市当日行情。</div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">N长裕</span> <span class="stock-code">sh603407</span></div>
+    <div class="price up">81.54 (+488.31%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon fail">&#10008;</span><strong>不符合原因</strong>：新股上市首日，与N春光集团同理，无底部历史，不适用一阳指战法。</div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">兴福电子</span> <span class="stock-code">sh688545</span></div>
+    <div class="price up">73.79 (+17.13%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon fail">&#10008;</span><strong>不符合原因</strong>：属于国家大基金持股/电子化学品概念，今日涨幅17.13%，但未达到完整涨停（科创板20cm上限）。该股属于化学材料子行业，当前板块热度不如半导体主线，且换手率9.09%偏高，短期筹码松动。需待均线整理后再观察。</div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">同有科技</span> <span class="stock-code">sz300302</span>（降级观察）</div>
+    <div class="price up">42.60 (+20.00%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>今日涨停</strong>：20cm涨停，存储器概念领涨</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>注意事项</strong>：存储器概念板块热度较强，但需确认该股底部盘整情况。换手率17.30%偏高，说明参与者众多，短期筹码相对较散。降为第一梯队谨慎候选，明日需观察分时形态确认后再介入。</div>
+  </div>
+</div>
+
+<!-- 风险提示 -->
+<h2>风险提示与交易纪律</h2>
+<div class="risk-warning">
+  <strong>重要提醒：</strong>
+  <p style="margin-top:6px">1. 以上所有价格均为参考区间，实际买入价以明日盘中走势为准，严格在设定区域附近操作，不追高不杀跌。</p>
+  <p>2. 止损是生存根基，任何一笔交易必须设定止损位，触发后无条件离场，不抱侥幸心理。</p>
+  <p>3. <strong>当前上证指数估值处于历史99.96%百分位高位，整体市场风险偏高，建议总仓位不超过70%，保留充足现金仓位。</strong></p>
+  <p>4. 今日数据为10:09盘中快照，非收盘数据。最终交易决策以当日收盘价和次日开盘走势为准。</p>
+  <p>5. 模式是铁律 — 情绪上头乱买乱卖是亏损根源。不符合一阳指标准的行情坚决不做。</p>
+  <p>6. 本次重点标的【徐工机械】符合转势战法标准，但工程机械行业弹性相对小于半导体，需有耐心等待回踩。</p>
+</div>
+
+<div class="stock-card">
+  <div class="analysis" style="line-height:2">
+    <p><strong>核心原则：</strong></p>
+    <p>- 今日新晋一阳指突破标的：徐工机械（★★★★★）、中金岭南（★★★，待确认）</p>
+    <p>- 半导体主线（澜起/普冉/科威尔）：均在高位，需等回调后再介入，不追高</p>
+    <p>- 单票仓位不超过30%，理想单票仓位10%-20%</p>
+    <p>- 首批建仓建议先打半仓，确认趋势后再加仓</p>
+    <p>- 不追求买在最低、卖在最高，大概率正确的事情反复做</p>
+    <p>- 不断小亏大赚才是成功的核心要义</p>
+    <p>- 趋势变弱要警觉：K线反复回踩均线，小心行情终结</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>基于一阳指选股操作体系（转势战法 + 开门战法）| 数据来源：NeoData金融数据服务 | 数据时间：2026-05-11 10:09 | 仅供学习参考，不构成投资建议</p>
+</div>
+
+</body>
+</html>
