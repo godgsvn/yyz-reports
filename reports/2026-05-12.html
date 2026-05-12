@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-05-12</title>
+<style>
+:root {
+  --red: #e74c3c;
+  --green: #2ecc71;
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #f0b429;
+  --blue: #58a6ff;
+  --purple: #bc8cff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 1.8rem; margin-bottom: 6px; }
+.date { color: var(--muted); margin-bottom: 20px; }
+h2 { font-size: 1.3rem; margin: 28px 0 14px; padding-left: 12px; border-left: 4px solid var(--accent); }
+h3 { font-size: 1.1rem; margin: 20px 0 10px; color: var(--blue); }
+.market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.market-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+.market-card .name { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.market-card .val { font-size: 1.3rem; font-weight: bold; }
+.market-card .chg { font-size: 0.9rem; margin-top: 2px; }
+.up { color: var(--red); }
+.down { color: var(--green); }
+table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 0.9rem; }
+th { background: #1c2128; padding: 10px 8px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; color: var(--muted); font-weight: 600; }
+td { padding: 10px 8px; border-bottom: 1px solid var(--border); }
+tr:hover { background: rgba(255,255,255,0.03); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-hot { background: rgba(231,76,60,0.15); color: var(--red); }
+.tag-warm { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-mid { background: rgba(88,166,255,0.15); color: var(--blue); }
+.tag-buy { background: rgba(46,204,113,0.15); color: var(--green); }
+.tag-wait { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-skip { background: rgba(139,148,158,0.15); color: var(--muted); }
+.stock-section { margin-bottom: 20px; }
+.stock-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.stock-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+.stock-card .stock-name { font-size: 1.1rem; font-weight: bold; }
+.stock-card .stock-code { color: var(--muted); font-size: 0.85rem; }
+.stock-card .price { font-size: 1.4rem; font-weight: bold; }
+.stock-card .analysis { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+.stock-card .analysis strong { color: var(--text); }
+.check-item { display: flex; gap: 8px; align-items: flex-start; margin: 4px 0; }
+.check-icon { flex-shrink: 0; }
+.pass { color: var(--green); }
+.fail { color: var(--red); }
+.op-box { background: #1c2128; border-radius: 8px; padding: 14px 16px; margin-top: 10px; border-left: 3px solid var(--purple); }
+.op-box .op-title { color: var(--purple); font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; }
+.op-box .op-row { display: flex; gap: 8px; margin: 5px 0; align-items: flex-start; }
+.op-box .op-label { flex-shrink: 0; font-weight: 600; min-width: 60px; color: var(--text); }
+.op-box .op-val { color: var(--muted); }
+.op-box .op-val strong { color: var(--text); }
+.op-box .op-val .buy-price { color: var(--green); font-weight: bold; }
+.op-box .op-val .sell-price { color: var(--red); font-weight: bold; }
+.op-box .op-val .stop-price { color: var(--red); font-weight: bold; text-decoration: underline; }
+.action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; margin: 16px 0; }
+.action-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.action-card .action-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.action-card .action-name { font-weight: bold; font-size: 1rem; }
+.action-card .action-detail { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.action-card .action-detail strong { color: var(--text); }
+.risk-box { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.3); border-radius: 8px; padding: 16px; margin: 20px 0; }
+.risk-box h3 { color: var(--red); margin-top: 0; }
+.risk-box p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+.hold-card { background: var(--card); border: 1px solid var(--accent); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.hold-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.summary-bar { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 16px 0; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+.summary-bar .item { text-align: center; }
+.summary-bar .item .label { font-size: 0.8rem; color: var(--muted); }
+.summary-bar .item .value { font-size: 1.1rem; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>📊 一阳指选股复盘</h1>
+<p class="date">2026年5月12日 · 星期二 · A股交易日</p>
+
+<!-- 市场概览 -->
+<h2>📈 市场概览</h2>
+<div class="market-grid">
+  <div class="market-card">
+    <div class="name">上证指数</div>
+    <div class="val">4,221.26</div>
+    <div class="chg down">-0.09%</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">年初至今 +6.46%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">深证成指</div>
+    <div class="val">15,881.64</div>
+    <div class="chg down">-0.11%</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">年初至今 +16.74%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">创业板指</div>
+    <div class="val">3,952.59</div>
+    <div class="chg up">+0.60%</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">年初至今 +21.88%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">上证估值PE-TTM</div>
+    <div class="val">17.94</div>
+    <div class="chg" style="color:var(--red);">历史百分位 100%</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">高估区</div>
+  </div>
+  <div class="market-card">
+    <div class="name">融资余额</div>
+    <div class="val">28,040.8亿</div>
+    <div class="chg up">+305.52亿</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">持续攀升</div>
+  </div>
+  <div class="market-card">
+    <div class="name">成交额(昨日)</div>
+    <div class="val">3.57万亿</div>
+    <div class="chg up">放量4897亿</div>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:4px;">连续4日超3万亿</div>
+  </div>
+</div>
+
+<div class="summary-bar">
+  <div class="item"><div class="label">今日特征</div><div class="value" style="font-size:0.95rem;">昨日暴涨后高开低走，小幅调整</div></div>
+  <div class="item"><div class="label">市场情绪</div><div class="value" style="color:var(--accent);">分化</div></div>
+  <div class="item"><div class="label">主线方向</div><div class="value" style="color:var(--blue);">电力/通信设备/电网</div></div>
+</div>
+
+<!-- 热门板块TOP5 -->
+<h2>🔥 热门板块 TOP5</h2>
+<table>
+  <thead>
+    <tr><th>排名</th><th>板块</th><th>涨幅</th><th>换手率</th><th>5日涨幅</th><th>20日涨幅</th><th>领涨股</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td><td>昨日连板</td><td class="up">+3.32%</td><td>5.81%</td><td class="up">+18.06%</td><td class="up">+78.78%</td><td>康欣新材 +10.10%</td>
+    </tr>
+    <tr>
+      <td>2</td><td>昨日涨停</td><td class="up">+2.56%</td><td>5.51%</td><td class="up">+15.99%</td><td class="up">+52.11%</td><td>百邦科技 +20.00%</td>
+    </tr>
+    <tr>
+      <td>3</td><td>电力改革</td><td class="up">+2.54%</td><td>1.84%</td><td class="up">+9.24%</td><td class="up">+13.57%</td><td>大唐发电 +10.02%</td>
+    </tr>
+    <tr>
+      <td>4</td><td>磁悬浮压缩机</td><td class="up">+2.47%</td><td>2.03%</td><td class="up">+12.16%</td><td class="up">+19.94%</td><td>鑫磊股份 +14.37%</td>
+    </tr>
+    <tr>
+      <td>5</td><td>高低压设备</td><td class="up">+2.33%</td><td>3.56%</td><td class="up">+8.52%</td><td class="up">+12.29%</td><td>通光线缆 +20.00%</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 申万一级行业涨幅TOP5 -->
+<h2>🏭 申万一级行业涨幅 TOP5</h2>
+<table>
+  <thead>
+    <tr><th>排名</th><th>行业</th><th>涨幅</th><th>换手率</th><th>5日涨幅</th><th>年初至今</th><th>领涨股</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td><td>通信设备</td><td class="up">+3.24%</td><td>4.33%</td><td class="up">+15.89%</td><td class="up">+56.03%</td><td>通鼎互联 +9.99%</td>
+    </tr>
+    <tr>
+      <td>2</td><td>电网设备</td><td class="up">+2.33%</td><td>3.83%</td><td class="up">+7.37%</td><td class="up">+29.49%</td><td>通光线缆 +20.00%</td>
+    </tr>
+    <tr>
+      <td>3</td><td>铁路公路</td><td class="up">+1.50%</td><td>0.59%</td><td class="up">+2.51%</td><td class="down">-0.62%</td><td>三羊马 +4.45%</td>
+    </tr>
+    <tr>
+      <td>4</td><td>电力</td><td class="up">+1.48%</td><td>1.76%</td><td class="up">+5.73%</td><td class="up">+15.79%</td><td>韶能股份 +10.07%</td>
+    </tr>
+    <tr>
+      <td>5</td><td>非金属材料</td><td class="up">+1.38%</td><td>2.03%</td><td class="up">+10.31%</td><td class="up">+48.30%</td><td>联瑞新材 +9.48%</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 主力资金TOP3 -->
+<h2>💰 主力资金净流入板块 TOP3</h2>
+<table>
+  <thead>
+    <tr><th>排名</th><th>板块</th><th>主力净流入</th><th>5日净流入</th><th>涨幅</th><th>领涨股</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td><td>电网设备（行业）</td><td class="up">+44.24亿</td><td class="up">+0.74亿</td><td class="up">+2.33%</td><td>通光线缆 +20.00%</td>
+    </tr>
+    <tr>
+      <td>2</td><td>光芯片（概念）</td><td class="up">+3.42亿</td><td class="up">+4.85亿</td><td class="up">+1.65%</td><td>源杰科技 +6.70%</td>
+    </tr>
+    <tr>
+      <td>3</td><td>通信设备（行业）</td><td class="up">+2.03亿</td><td class="up">+10.96亿</td><td class="up">+3.28%</td><td>通鼎互联 +9.99%</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 持仓股 -->
+<h2>📍 持仓跟踪</h2>
+<div class="hold-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">乾照光电</span>
+      <span class="stock-code">300102.SZ</span>
+    </div>
+    <div>
+      <span class="price down">32.18</span>
+      <span class="down" style="font-size:0.9rem;"> -3.71%</span>
+    </div>
+  </div>
+  <div class="analysis">
+    <strong>成本约34.8元</strong> · 当前浮亏 <span class="down">约-7.5%</span><br>
+    所属光学光电子板块跌幅-0.15%，弱于大盘。5日涨幅-1.80%，短线走弱。<br>
+    主力净流出9,336万元，超大单流出5,226万元，资金明显撤离。<br>
+    <strong>策略：</strong>已跌破成本线，建议关注31元支撑位。若失守考虑止损，反弹至34元以上可减亏离场。
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">持仓：</span><span class="op-val">持有观察，设止损位 <strong class="stop-price">31.00</strong></span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val">跌破31.00元严格止损（约-11%）</span></div>
+    <div class="op-row"><span class="op-label">止盈：</span><span class="op-val">反弹至34.5元以上减仓</span></div>
+  </div>
+</div>
+
+<!-- 一阳指战法候选 -->
+<h2>🎯 一阳指战法候选分析</h2>
+
+<h3>🔴 开门战法 · 主升浪趋势延续</h3>
+
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">通鼎互联</span>
+      <span class="stock-code">002491.SZ</span>
+      <span class="tag tag-hot">连板3天</span>
+    </div>
+    <div>
+      <span class="price up">25.00</span>
+      <span class="up"> +9.99%</span>
+    </div>
+  </div>
+  <div class="analysis">
+    <strong>通信设备板块领涨，5日涨幅+58.23%，年初至今+316.67%</strong><br>
+    量比3.05，换手率8.91%，连续3天涨停，趋势极度加速。<br>
+    主力净流出1.38亿元，游资获利了结迹象明显。
+  </div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件①主升浪确认：<strong class="pass">✓ 已在主升浪</strong></span></div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件②量能配合：<strong class="fail">✗ 主力净流出1.38亿</strong></span></div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件③均线支撑：<strong class="pass">✓ 5日/10日均线多头排列</strong></span></div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件④趋势未破：<strong class="pass">✓ 连板趋势延续</strong></span></div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">评级：</span><span class="op-val"><span class="tag tag-wait">⏳ 第二梯队</span> 等回调</span></div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">回调至 <strong class="buy-price">20.50-21.50</strong> 区间关注</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val"><strong>≤15%</strong>（连板股风险高，轻仓试错）</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><strong class="stop-price">19.00</strong>（跌破5日均线）</span></div>
+    <div class="op-row"><span class="op-label">止盈：</span><span class="op-val">28-30元分批止盈</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">大唐发电</span>
+      <span class="stock-code">601991.SH</span>
+      <span class="tag tag-hot">连板4天</span>
+    </div>
+    <div>
+      <span class="price up">6.70</span>
+      <span class="up"> +10.02%</span>
+    </div>
+  </div>
+  <div class="analysis">
+    <strong>电力改革核心标的，5日涨幅+61.06%，年初至今+91.98%</strong><br>
+    量比4.53，换手率5.39%，连续4天涨停，缩量加速特征明显。<br>
+    主力净流出5.06亿元，大资金出逃严重，散户接盘为主。
+  </div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件①主升浪确认：<strong class="pass">✓ 强力主升浪</strong></span></div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件②量能配合：<strong class="fail">✗ 主力净流出5.06亿，严重背离</strong></span></div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件③均线支撑：<strong class="pass">✓ 均线完美多头</strong></span></div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>四条件④趋势未破：<strong class="pass">✓ 连板趋势</strong></span></div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">评级：</span><span class="op-val"><span class="tag tag-skip">🚫 观望</span> 不追高</span></div>
+    <div class="op-row"><span class="op-label">理由：</span><span class="op-val">4连板+主力大幅流出，炸板风险极高，AH溢价-56.5%暗示H股不认可</span></div>
+    <div class="op-row"><span class="op-label">若参与：</span><span class="op-val">仅限超短线，回调至 <strong class="buy-price">5.50-5.80</strong> 博反弹</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><strong class="stop-price">5.20</strong>（跌破首板起点）</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">源杰科技</span>
+      <span class="stock-code">688498.SH</span>
+      <span class="tag tag-warm">光芯片龙头</span>
+    </div>
+    <div>
+      <span class="price up">1,729.14</span>
+      <span class="up"> +6.47%</span>
+    </div>
+  </div>
+  <div class="analysis">
+    <strong>光芯片概念龙头，20日涨幅+53.27%，年初至今+169.34%</strong><br>
+    量比2.07，换手率2.59%，光芯片板块主力净流入3.42亿排名第一。<br>
+    主力净流入2,252万元，超大单流入1.91亿元，机构资金介入。
+  </div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>四条件①主升浪确认：<strong class="pass">✓ 趋势明确向上</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>四条件②量能配合：<strong class="pass">✓ 光芯片板块主力净流入第一</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>四条件③均线支撑：<strong class="pass">✓ 5日/10日/20日多头排列</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>四条件④趋势未破：<strong class="pass">✓ 不断新高</strong></span></div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">评级：</span><span class="op-val"><span class="tag tag-buy">🟢 第一梯队</span> 可介入</span></div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">回调至 <strong class="buy-price">1,600-1,650</strong> 区间</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val"><strong>≤20%</strong></span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><strong class="stop-price">1,500</strong>（跌破10日均线）</span></div>
+    <div class="op-row"><span class="op-label">止盈：</span><span class="op-val">1,900-2,000元分批止盈</span></div>
+  </div>
+</div>
+
+<h3>🟡 转势战法 · 底部一阳突破</h3>
+
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">通光线缆</span>
+      <span class="stock-code">300265.SZ</span>
+      <span class="tag tag-hot">20cm涨停</span>
+    </div>
+    <div>
+      <span class="price up">23.22</span>
+      <span class="up"> +20.00%</span>
+    </div>
+  </div>
+  <div class="analysis">
+    <strong>电网设备板块领涨，20cm涨停，5日涨幅+34.92%，年初至今+73.28%</strong><br>
+    量比5.74（极高），换手率20.39%，放量大阳线突破。<br>
+    主力净流入5.44亿元，超大单流入6.79亿元，资金强力做多。
+  </div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>底部盘整：<strong class="pass">✓ 此前横盘整理后突破</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>一阳突破：<strong class="pass">✓ 20cm涨停，突破力度极强</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>量能配合：<strong class="pass">✓ 量比5.74，主力净流入5.44亿</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>均线突破：<strong class="pass">✓ 一阳穿多线</strong></span></div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">评级：</span><span class="op-val"><span class="tag tag-buy">🟢 第一梯队</span> 可介入</span></div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">回调至 <strong class="buy-price">19.50-20.50</strong> 区间</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val"><strong>≤20%</strong></span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><strong class="stop-price">18.00</strong>（跌破5日均线）</span></div>
+    <div class="op-row"><span class="op-label">止盈：</span><span class="op-val">26-28元分批止盈</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">韶能股份</span>
+      <span class="stock-code">000601.SZ</span>
+      <span class="tag tag-warm">10cm涨停</span>
+    </div>
+    <div>
+      <span class="price up">8.09</span>
+      <span class="up"> +10.07%</span>
+    </div>
+  </div>
+  <div class="analysis">
+    <strong>电力板块领涨，5日涨幅+23.14%，年初至今+72.13%</strong><br>
+    量比2.20，换手率6.39%，涨停突破前高。<br>
+    主力净流入1.65亿元，超大单流入1.82亿元，资金介入明显。
+  </div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>底部盘整：<strong class="fail">✗ 非典型底部盘整，前期已有较大涨幅</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>一阳突破：<strong class="pass">✓ 涨停突破</strong></span></div>
+  <div class="check-item"><span class="check-icon pass">✓</span><span>量能配合：<strong class="pass">✓ 量比2.20，主力净流入1.65亿</strong></span></div>
+  <div class="check-item"><span class="check-icon fail">✗</span><span>均线突破：<strong class="pass">✓ 均线多头</strong></span></div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">评级：</span><span class="op-val"><span class="tag tag-wait">⏳ 第二梯队</span> 等回调</span></div>
+    <div class="op-row"><span class="op-label">理由：</span><span class="op-val">非典型底部盘整，更偏向趋势加速，转势形态不够纯粹</span></div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">回调至 <strong class="buy-price">7.00-7.30</strong> 区间</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val"><strong>≤15%</strong></span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><strong class="stop-price">6.60</strong></span></div>
+  </div>
+</div>
+
+<!-- 次日操作计划 -->
+<h2>📋 次日操作计划</h2>
+<div class="action-grid">
+  <div class="action-card">
+    <div class="action-header">
+      <span class="action-name">🟢 第一梯队（可介入）</span>
+    </div>
+    <div class="action-detail">
+      <strong>通光线缆 300265</strong>：回调至19.50-20.50买入，仓位≤20%，止损18.00<br>
+      <strong>源杰科技 688498</strong>：回调至1,600-1,650买入，仓位≤20%，止损1,500
+    </div>
+  </div>
+  <div class="action-card">
+    <div class="action-header">
+      <span class="action-name">⏳ 第二梯队（等回调）</span>
+    </div>
+    <div class="action-detail">
+      <strong>通鼎互联 002491</strong>：回调至20.50-21.50关注，仓位≤15%，止损19.00<br>
+      <strong>韶能股份 000601</strong>：回调至7.00-7.30关注，仓位≤15%，止损6.60
+    </div>
+  </div>
+  <div class="action-card">
+    <div class="action-header">
+      <span class="action-name">🚫 观望/排除</span>
+    </div>
+    <div class="action-detail">
+      <strong>大唐发电 601991</strong>：4连板+主力大幅出逃5.06亿，AH溢价严重，炸板风险极高<br>
+      <strong>乾照光电 300102</strong>（持仓）：跌破成本线，关注31元支撑
+    </div>
+  </div>
+</div>
+
+<!-- 排除说明 -->
+<h2>❌ 排除说明</h2>
+<div class="stock-card">
+  <div class="analysis">
+    <strong>大唐发电 601991</strong> — 虽然连板4天属于强势开门战法形态，但：<br>
+    ① 主力净流出5.06亿元，大资金明显出逃<br>
+    ② AH溢价-56.5%，港股仅3.36港元，A股6.70元，定价严重脱节<br>
+    ③ 缩量加速后极易炸板，追高风险极大<br>
+    → 综合判断：不符合开门战法量能条件，排除<br><br>
+    <strong>通鼎互联 002491</strong> — 连板3天，趋势强劲但：<br>
+    ① 主力净流出1.38亿元，游资获利了结<br>
+    ② 市盈率-196（亏损股），纯情绪博弈<br>
+    ③ 年初至今+316.67%，涨幅过大<br>
+    → 综合判断：降为第二梯队，仅限轻仓短线
+  </div>
+</div>
+
+<!-- 仓位配置建议 -->
+<h2>📊 仓位配置建议</h2>
+<table>
+  <thead>
+    <tr><th>标的</th><th>建议仓位</th><th>买入区间</th><th>止损位</th><th>止盈目标</th><th>优先级</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>通光线缆 300265</td><td>≤20%</td><td class="up">19.50-20.50</td><td class="down">18.00</td><td class="up">26-28</td><td><span class="tag tag-buy">高</span></td></tr>
+    <tr><td>源杰科技 688498</td><td>≤20%</td><td class="up">1,600-1,650</td><td class="down">1,500</td><td class="up">1,900-2,000</td><td><span class="tag tag-buy">高</span></td></tr>
+    <tr><td>通鼎互联 002491</td><td>≤15%</td><td class="up">20.50-21.50</td><td class="down">19.00</td><td class="up">28-30</td><td><span class="tag tag-wait">中</span></td></tr>
+    <tr><td>韶能股份 000601</td><td>≤15%</td><td class="up">7.00-7.30</td><td class="down">6.60</td><td class="up">9-10</td><td><span class="tag tag-wait">中</span></td></tr>
+    <tr><td>乾照光电 300102（持）</td><td>维持</td><td>—</td><td class="down">31.00</td><td class="up">34.5减亏</td><td><span class="tag tag-skip">低</span></td></tr>
+  </tbody>
+</table>
+<div class="analysis" style="margin-top:8px;">
+  💡 总仓位建议不超过<strong>总资金的60%</strong>，保留40%现金应对波动。当前上证估值PE 17.94处于历史百分位100%极高位，市场随时可能出现显著回调，务必控制仓位、严格止损。
+</div>
+
+<!-- 风险提示 -->
+<div class="risk-box">
+  <h3>⚠️ 风险提示</h3>
+  <p>
+    1. <strong>估值极端高位</strong>：上证PE-TTM 17.94，历史百分位100%，已达高估区上沿，随时可能回调。<br>
+    2. <strong>市场分化加剧</strong>：昨日暴涨后今日高开低走，三大指数小幅调整，赚钱效应集中在电力/通信等少数板块。<br>
+    3. <strong>连板股风险</strong>：大唐发电4连板、通鼎互联3连板，主力资金大幅流出，炸板概率高。<br>
+    4. <strong>融资余额创新高</strong>：两融余额28,040.8亿，单日增加305.52亿，杠杆资金加速入场，需警惕去杠杆风险。<br>
+    5. <strong>板块轮动加速</strong>：半导体/存储芯片等前期热门板块今日出现调整，资金高低切换明显。<br>
+    6. 以上分析仅基于一阳指选股体系的技术面判断，<strong>不构成投资建议</strong>，投资有风险，入市需谨慎。
+  </p>
+</div>
+
+<p style="text-align:center;color:var(--muted);font-size:0.8rem;margin-top:30px;">
+  一阳指选股复盘 · 自动生成 · 2026-05-12<br>
+  数据来源：NeoData Financial Search
+</p>
+
+</body>
+</html>
