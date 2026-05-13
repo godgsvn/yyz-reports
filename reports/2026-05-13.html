@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>一阳指选股复盘 2026-05-13</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #121a2b;
+      --text: #e6edf7;
+      --muted: #9fb0cc;
+      --red: #ff4d4f;
+      --green: #22c55e;
+      --yellow: #fbbf24;
+      --line: #24324a;
+      --blue: #60a5fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #0b1220 0%, #0e1628 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+    h1, h2, h3 { margin: 0 0 14px; }
+    .sub { color: var(--muted); margin-bottom: 24px; }
+    .grid { display: grid; gap: 14px; }
+    .idx-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card {
+      background: rgba(18, 26, 43, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+    }
+    .name { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .price { font-size: 30px; font-weight: 700; margin-bottom: 6px; }
+    .up { color: var(--red); }
+    .down { color: var(--green); }
+    .flat { color: var(--yellow); }
+    .metrics { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: #bcd0ef; font-weight: 600; }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-size: 12px;
+      color: #bcd0ef;
+      margin-right: 8px;
+      margin-bottom: 6px;
+    }
+    .plan-list, .risk-list { margin: 8px 0 0 0; padding-left: 18px; }
+    .small { color: var(--muted); font-size: 13px; }
+    .section { margin-top: 22px; }
+    .warn {
+      background: rgba(255, 77, 79, 0.08);
+      border: 1px solid rgba(255, 77, 79, 0.35);
+      border-radius: 10px;
+      padding: 12px;
+      color: #ffd3d4;
+    }
+    a { color: var(--blue); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>一阳指选股复盘（收盘）</h1>
+    <div class="sub">日期：2026-05-13（周三）｜数据源：NeoData Financial Search</div>
+
+    <div class="card">
+      <h2>市场概览（三大指数）</h2>
+      <div class="grid idx-grid">
+        <div class="card">
+          <div class="name">上证指数</div>
+          <div class="price">4206.07</div>
+          <div class="down">日涨跌：-0.20%</div>
+          <div class="metrics">
+            <div>年初至今：<span class="up">+6.08%</span></div>
+            <div>量比：未提供</div>
+            <div>估值百分位：<span class="up">99.96%</span></div>
+            <div>TTM PE：17.8992</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="name">深证成指</div>
+          <div class="price">15742.55</div>
+          <div class="down">日涨跌：-0.52%</div>
+          <div class="metrics">
+            <div>年初至今：<span class="up">+15.72%</span></div>
+            <div>量比：未提供</div>
+            <div>估值百分位：<span class="up">99.96%</span></div>
+            <div>TTM PE：37.3069</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="name">创业板指</div>
+          <div class="price">3898.79</div>
+          <div class="down">日涨跌：-0.92%</div>
+          <div class="metrics">
+            <div>年初至今：<span class="up">+20.23%</span></div>
+            <div>量比：未提供</div>
+            <div>估值百分位：60.91%</div>
+            <div>TTM PE：47.4651</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card section">
+      <h2>今日热门板块 TOP5（按涨幅）</h2>
+      <table>
+        <thead>
+          <tr><th>板块</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>电力改革</td><td class="up">+3.76%</td><td>晋控电力</td><td class="up">+10.11%</td></tr>
+          <tr><td>昨日首板</td><td class="up">+3.55%</td><td>线上线下</td><td class="up">+18.82%</td></tr>
+          <tr><td>昨日涨停</td><td class="up">+3.44%</td><td>线上线下</td><td class="up">+18.82%</td></tr>
+          <tr><td>昨日连板</td><td class="up">+3.41%</td><td>华电辽能</td><td class="up">+10.03%</td></tr>
+          <tr><td>葡萄酒概念</td><td class="up">+2.77%</td><td>威龙股份</td><td class="up">+10.07%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card section">
+      <h2>主力净流入板块 TOP3</h2>
+      <table>
+        <thead>
+          <tr><th>板块</th><th>涨幅</th><th>主力净流入</th><th>领涨股</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>风电概念</td><td class="up">+1.56%</td><td class="up">+47.71亿元</td><td>通光线缆（+12.58%）</td></tr>
+          <tr><td>算力租赁</td><td class="up">+1.07%</td><td class="up">+44.51亿元</td><td>协鑫能科（+10.02%）</td></tr>
+          <tr><td>英伟达概念</td><td class="down">-0.04%</td><td class="up">+43.13亿元</td><td>协鑫能科（+10.02%）</td></tr>
+        </tbody>
+      </table>
+      <div class="small">注：原始数据单位为万元，表中已折算为亿元。</div>
+    </div>
+
+    <div class="card section">
+      <h2>申万一级行业涨幅 TOP5</h2>
+      <table>
+        <thead><tr><th>行业</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr></thead>
+        <tbody>
+          <tr><td>其他电源设备Ⅱ</td><td class="up">+3.63%</td><td>科威尔</td><td class="up">+9.87%</td></tr>
+          <tr><td>电网设备</td><td class="up">+2.99%</td><td>通光线缆</td><td class="up">+12.58%</td></tr>
+          <tr><td>航海装备Ⅱ</td><td class="up">+2.96%</td><td>松发股份</td><td class="up">+4.39%</td></tr>
+          <tr><td>非金属材料Ⅱ</td><td class="up">+2.86%</td><td>力量钻石</td><td class="up">+9.83%</td></tr>
+          <tr><td>电力</td><td class="up">+2.68%</td><td>晋控电力</td><td class="up">+10.11%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card section">
+      <h2>当日重点股票与战法筛选</h2>
+      <div class="small">说明：本数据源未直接返回完整涨停/20cm清单及全市场放量榜；以下以“板块龙头+资金净流入显著个股”作为候选池进行一阳指体系判断。</div>
+
+      <h3 style="margin-top:14px;">第一梯队（可介入）</h3>
+      <table>
+        <thead><tr><th>股票</th><th>战法</th><th>关键信号</th><th>结论</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>协鑫能科（002015）</td>
+            <td>开门战法</td>
+            <td>两日加速（+4.83%→+10.02%）、主力净流入+4.86亿元、放量显著</td>
+            <td><span class="up">符合趋势延续条件，强势首选</span></td>
+          </tr>
+          <tr>
+            <td>晋控电力（000767）</td>
+            <td>转势战法</td>
+            <td>连续两日涨停级别（+9.93%、+10.11%）、主力净流入+1.21亿元、电力主线强化</td>
+            <td><span class="up">符合突破+量能特征</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:14px;">第二梯队（等回调）</h3>
+      <table>
+        <thead><tr><th>股票</th><th>战法</th><th>关键信号</th><th>结论</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>科威尔（688551）</td>
+            <td>开门战法</td>
+            <td>前日20cm后今日再涨+9.28%，主力净流入+0.53亿元</td>
+            <td>短线乖离偏大，<span class="yellow">等回踩5日线</span></td>
+          </tr>
+          <tr>
+            <td>松发股份（603268）</td>
+            <td>开门战法</td>
+            <td>趋势延续，资金净流入较小（+0.08亿元）</td>
+            <td>强度次于主线龙头，<span class="yellow">观察量能确认</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:14px;">排除说明</h3>
+      <ul class="plan-list">
+        <li>通光线缆（300265）：虽属高弹性强势股，但今日主力净流出约1.56亿元，短线分歧显著，暂不列入第一梯队。</li>
+        <li>纯情绪连板/高位妖股：在上证估值百分位接近100%背景下，追高性价比偏低。</li>
+      </ul>
+    </div>
+
+    <div class="card section">
+      <h2>次日操作计划</h2>
+      <ul class="plan-list">
+        <li><b>协鑫能科</b>：买入区间 22.20-22.90；仓位 20%-25%；止损 21.30；第一止盈 24.80，第二止盈 25.80。</li>
+        <li><b>晋控电力</b>：买入区间 4.90-5.02；仓位 15%-20%；止损 4.62；止盈 5.45/5.70 分批。</li>
+        <li><b>科威尔（回调预案）</b>：回踩 63.0-64.5 且缩量企稳再考虑，仓位 ≤15%。</li>
+      </ul>
+    </div>
+
+    <div class="card section">
+      <h2>仓位配置建议</h2>
+      <div>
+        <span class="tag">总仓位：50%-65%</span>
+        <span class="tag">第一梯队：35%-45%</span>
+        <span class="tag">第二梯队试错：10%-20%</span>
+        <span class="tag">现金：35%-50%</span>
+      </div>
+      <div class="small" style="margin-top:8px;">当前指数估值偏高（上证/深证历史百分位约99.96%），建议控制节奏，优先分批、回踩介入，不追一致性过强的高位加速板。</div>
+    </div>
+
+    <div class="card section warn">
+      <h2 style="margin-bottom:8px;">风险提示</h2>
+      <ul class="risk-list">
+        <li>指数处于高估区，短线波动和高位分歧风险提升。</li>
+        <li>板块轮动加快，若主线断板需快速降仓。</li>
+        <li>个股策略均需严格执行止损，不得重仓单一标的。</li>
+        <li>本报告仅作交易复盘与研究记录，不构成任何投资建议。</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
