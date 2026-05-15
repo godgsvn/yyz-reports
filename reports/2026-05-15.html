@@ -1,264 +1,503 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>一阳指选股复盘 2026-05-15</title>
-  <style>
-    :root {
-      --bg: #0b1020;
-      --card: #131a2e;
-      --card-2: #1a2340;
-      --text: #e8ecf8;
-      --muted: #9aa6c5;
-      --red: #ff5b6e;
-      --green: #37d67a;
-      --yellow: #ffd166;
-      --blue: #4ea1ff;
-      --border: #2a355d;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, #1e2a52 0%, var(--bg) 45%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    .wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 28px 18px 40px;
-    }
-    h1, h2, h3 { margin: 0 0 12px; }
-    h1 { font-size: 28px; }
-    h2 { font-size: 20px; margin-top: 26px; }
-    h3 { font-size: 16px; color: #cfe0ff; }
-    .sub { color: var(--muted); font-size: 14px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-    }
-    .card {
-      background: linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,.18);
-    }
-    .kpi { font-size: 24px; font-weight: 700; margin: 8px 0; }
-    .down { color: var(--green); }
-    .up { color: var(--red); }
-    .tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      overflow: hidden;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-    th, td {
-      border-bottom: 1px solid var(--border);
-      padding: 10px 8px;
-      text-align: left;
-      font-size: 13px;
-      vertical-align: top;
-    }
-    th {
-      background: #1b2649;
-      color: #cfe0ff;
-      position: sticky;
-      top: 0;
-    }
-    tr:hover td { background: rgba(78,161,255,.06); }
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    ul { margin: 8px 0 0 18px; }
-    .warn {
-      background: rgba(255, 209, 102, 0.08);
-      border: 1px solid rgba(255, 209, 102, 0.4);
-      border-radius: 10px;
-      padding: 12px;
-      color: #ffe7a6;
-      margin-top: 12px;
-    }
-    .footer {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 12px;
-      border-top: 1px dashed var(--border);
-      padding-top: 12px;
-    }
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .two-col { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-05-15</title>
+<style>
+:root {
+  --red: #e74c3c;
+  --green: #2ecc71;
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #f0b429;
+  --blue: #58a6ff;
+  --purple: #bc8cff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 1.8rem; margin-bottom: 6px; }
+.date { color: var(--muted); margin-bottom: 20px; }
+h2 { font-size: 1.3rem; margin: 28px 0 14px; padding-left: 12px; border-left: 4px solid var(--accent); }
+h3 { font-size: 1.1rem; margin: 20px 0 10px; color: var(--blue); }
+
+/* Market Overview */
+.market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.market-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+.market-card .name { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.market-card .val { font-size: 1.3rem; font-weight: bold; }
+.market-card .chg { font-size: 0.9rem; margin-top: 2px; }
+.up { color: var(--red); }
+.down { color: var(--green); }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 0.9rem; }
+th { background: #1c2128; padding: 10px 8px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; color: var(--muted); font-weight: 600; }
+td { padding: 10px 8px; border-bottom: 1px solid var(--border); }
+tr:hover { background: rgba(255,255,255,0.03); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-hot { background: rgba(231,76,60,0.15); color: var(--red); }
+.tag-warm { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-mid { background: rgba(88,166,255,0.15); color: var(--blue); }
+.tag-buy { background: rgba(46,204,113,0.15); color: var(--green); }
+.tag-wait { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-skip { background: rgba(139,148,158,0.15); color: var(--muted); }
+
+/* Stock cards */
+.stock-section { margin-bottom: 20px; }
+.stock-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.stock-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+.stock-card .stock-name { font-size: 1.1rem; font-weight: bold; }
+.stock-card .stock-code { color: var(--muted); font-size: 0.85rem; }
+.stock-card .price { font-size: 1.4rem; font-weight: bold; }
+.stock-card .analysis { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+.stock-card .analysis strong { color: var(--text); }
+.check-item { display: flex; gap: 8px; align-items: flex-start; margin: 4px 0; }
+.check-icon { flex-shrink: 0; }
+.pass { color: var(--green); }
+.fail { color: var(--red); }
+
+/* Operation Box */
+.op-box { background: #1c2128; border-radius: 8px; padding: 14px 16px; margin-top: 10px; border-left: 3px solid var(--purple); }
+.op-box .op-title { color: var(--purple); font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; }
+.op-box .op-row { display: flex; gap: 8px; margin: 5px 0; align-items: flex-start; }
+.op-box .op-label { flex-shrink: 0; font-weight: 600; min-width: 60px; color: var(--text); }
+.op-box .op-val { color: var(--muted); }
+.op-box .op-val strong { color: var(--text); }
+.op-box .op-val .buy-price { color: var(--green); font-weight: bold; }
+.op-box .op-val .sell-price { color: var(--red); font-weight: bold; }
+.op-box .op-val .stop-price { color: var(--red); font-weight: bold; text-decoration: underline; }
+
+/* Action Summary */
+.action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; margin: 16px 0; }
+.action-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.action-card .action-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.action-card .action-name { font-weight: bold; font-size: 1rem; }
+.action-card .action-detail { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.action-card .action-detail strong { color: var(--text); }
+
+/* Section descriptions */
+.section-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
+
+/* Footer */
+.footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+.warning { background: rgba(240,180,41,0.1); border: 1px solid rgba(240,180,41,0.3); border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 0.85rem; color: var(--accent); }
+.risk-warning { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.25); border-radius: 8px; padding: 12px 16px; margin: 16px 0; font-size: 0.85rem; color: var(--red); }
+
+@media (max-width: 600px) {
+  body { padding: 12px; }
+  .market-grid { grid-template-columns: repeat(2, 1fr); }
+  .action-grid { grid-template-columns: 1fr; }
+  table { font-size: 0.8rem; }
+  th, td { padding: 8px 4px; }
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>一阳指选股复盘 · 2026-05-15（周五）</h1>
-    <div class="sub">数据源：neodata-financial-search（收盘后快照）｜报告生成时间：2026-05-15</div>
 
-    <h2>市场概览（三大指数）</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>上证指数</h3>
-        <div class="kpi">4165.98</div>
-        <div class="down">-0.29%</div>
-        <div class="sub">年初至今：<span class="up">+5.07%</span></div>
-        <div class="sub">历史估值分位：99.75%（高估区）</div>
-      </div>
-      <div class="card">
-        <h3>深证成指</h3>
-        <div class="kpi">15677.73</div>
-        <div class="down">-0.43%</div>
-        <div class="sub">年初至今：<span class="up">+15.24%</span></div>
-        <div class="sub">历史估值分位：99.88%（高估区）</div>
-      </div>
-      <div class="card">
-        <h3>创业板指</h3>
-        <div class="kpi">3939.83</div>
-        <div class="down">-0.29%</div>
-        <div class="sub">年初至今：<span class="up">+21.49%</span></div>
-        <div class="sub">历史估值分位：61.07%（中性偏高）</div>
-      </div>
+<h1>一阳指选股复盘</h1>
+<p class="date">2026年5月15日（周五）收盘后复盘 · 收盘数据快照</p>
+
+<div class="warning">本报告基于「一阳指」战法体系（转势战法 + 开门战法）自动筛选，仅供参考学习，不构成投资建议。</div>
+
+<!-- 市场概览 -->
+<h2>市场概览</h2>
+<div class="market-grid">
+  <div class="market-card">
+    <div class="name">上证指数</div>
+    <div class="val down">4165.98</div>
+    <div class="chg down">-0.29%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">深证成指</div>
+    <div class="val down">15677.73</div>
+    <div class="chg down">-0.43%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">创业板指</div>
+    <div class="val down">3939.83</div>
+    <div class="chg down">-0.29%</div>
+  </div>
+  <div class="market-card">
+    <div class="name">年初至今</div>
+    <div class="val up">+5.07%~+21.49%</div>
+    <div class="chg" style="color:var(--accent)">估值99%+高位</div>
+  </div>
+</div>
+<div class="stock-card">
+  <div class="analysis">
+    <strong>今日市场特征：</strong>三大指数小幅回调（上证-0.29%、深证-0.43%、创业板-0.29%），承接昨日大阴线后的惯性下跌。成交额较昨日明显缩量（上证7977亿 vs 昨日14981亿）。市场风格切换明显，前期科技主线（算力/半导体）大幅回调，<strong>机器人执行器/空心杯电机/氟化工</strong>接力成为今日最强方向。<strong>上证估值分位99.75%，深证99.88%</strong>，均处于历史极端高位，系统性风险仍需警惕。
+  </div>
+</div>
+
+<!-- 热门板块 -->
+<h2>热门板块 TOP5（概念涨幅）</h2>
+<table>
+  <tr><th>排名</th><th>板块（概念）</th><th>涨跌幅</th><th>量比</th><th>领涨股</th><th>领涨涨幅</th></tr>
+  <tr><td>1</td><td>空心杯电机</td><td class="up">+6.22%</td><td>2.25</td><td>禾川科技 sh688320</td><td class="up">+10.02%</td></tr>
+  <tr><td>2</td><td>机器人执行器概念</td><td class="up">+6.12%</td><td>2.17</td><td>禾川科技 sh688320</td><td class="up">+10.02%</td></tr>
+  <tr><td>3</td><td>华为机器人</td><td class="up">+5.75%</td><td>2.11</td><td>禾川科技 sh688320</td><td class="up">+10.02%</td></tr>
+  <tr><td>4</td><td>PLC概念</td><td class="up">+4.45%</td><td>1.51</td><td>信捷电气 sh603416</td><td class="up">+10.00%</td></tr>
+  <tr><td>5</td><td>电子鼻</td><td class="up">+3.89%</td><td>1.90</td><td>安培龙 sz301413</td><td class="up">+7.35%</td></tr>
+</table>
+
+<h2>申万一级行业涨幅 TOP5</h2>
+<table>
+  <tr><th>排名</th><th>行业</th><th>涨跌幅</th><th>量比</th><th>领涨股</th><th>领涨涨幅</th></tr>
+  <tr><td>1</td><td>小家电</td><td class="up">+3.88%</td><td>1.42</td><td>利仁科技 sz001259</td><td class="up">+10.00%</td></tr>
+  <tr><td>2</td><td>电机Ⅱ</td><td class="up">+3.69%</td><td>1.68</td><td>三瑞智能 sz301696</td><td class="up">+11.97%</td></tr>
+  <tr><td>3</td><td>广告营销</td><td class="up">+3.17%</td><td>1.87</td><td>易点天下 sz301171</td><td class="up">+10.12%</td></tr>
+  <tr><td>4</td><td>家电零部件Ⅱ</td><td class="up">+2.57%</td><td>1.68</td><td>汉宇集团 sz300403</td><td class="up">+8.13%</td></tr>
+  <tr><td>5</td><td>自动化设备</td><td class="up">+2.35%</td><td>2.12</td><td>三丰智能 sz300276</td><td class="up">+19.94%</td></tr>
+</table>
+
+<!-- 主力资金 -->
+<h2>主力资金流入 TOP3（概念）</h2>
+<table>
+  <tr><th>排名</th><th>板块</th><th>主力净流入</th><th>涨跌幅</th><th>领涨股</th></tr>
+  <tr><td>1</td><td>减速器</td><td class="up">25.29亿</td><td class="up">+3.19%</td><td>绿的谐波 sh688017 +11.83%</td></tr>
+  <tr><td>2</td><td>氟化工概念</td><td class="up">24.89亿</td><td class="up">+2.88%</td><td>中巨芯-U sh688549 +20.01%</td></tr>
+  <tr><td>3</td><td>化学原料概念</td><td class="up">22.91亿</td><td class="up">+1.61%</td><td>恒光股份 sz301118 +19.99%</td></tr>
+</table>
+
+<h2>主力资金流入 TOP3（行业）</h2>
+<table>
+  <tr><th>排名</th><th>行业</th><th>主力净流入</th><th>涨跌幅</th><th>领涨股</th></tr>
+  <tr><td>1</td><td>化学制品</td><td class="up">23.27亿</td><td class="up">+1.25%</td><td>怡达股份 sz300721 +19.98%</td></tr>
+  <tr><td>2</td><td>汽车零部件</td><td class="up">11.62亿</td><td class="up">+2.16%</td><td>凯龙高科 sz300912 +10.88%</td></tr>
+  <tr><td>3</td><td>广告营销</td><td class="up">11.49亿</td><td class="up">+3.17%</td><td>易点天下 sz301171 +10.12%</td></tr>
+</table>
+
+<!-- ======== 次日操作计划 ======== -->
+<h2>次日操作计划（5月16日周一）</h2>
+<p class="section-desc">按优先级排序，基于一阳指体系买卖规则制定具体操作计划。仓位参考：短线40% + 波段中线30% + 长线30%，单票不超过30%。</p>
+
+<div class="action-grid">
+
+  <!-- 第一梯队：重点关注 -->
+  <div class="action-card" style="border-left: 3px solid var(--green);">
+    <div class="action-header">
+      <span class="action-name">绿的谐波 sh688017</span>
+      <span class="tag tag-buy">开门战法 / 短线+波段</span>
     </div>
-
-    <h2>热门板块 TOP5（按涨幅）</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>排名</th><th>板块</th><th>涨幅</th><th>量比</th><th>领涨股</th><th>领涨股涨幅</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>空心杯电机</td><td class="up">+6.22%</td><td>2.25</td><td>禾川科技</td><td class="up">+10.02%</td></tr>
-        <tr><td>2</td><td>机器人执行器概念</td><td class="up">+6.12%</td><td>2.17</td><td>禾川科技</td><td class="up">+10.02%</td></tr>
-        <tr><td>3</td><td>华为机器人</td><td class="up">+5.75%</td><td>2.11</td><td>禾川科技</td><td class="up">+10.02%</td></tr>
-        <tr><td>4</td><td>PLC概念</td><td class="up">+4.45%</td><td>1.51</td><td>信捷电气</td><td class="up">+10.00%</td></tr>
-        <tr><td>5</td><td>电子鼻</td><td class="up">+3.89%</td><td>1.90</td><td>安培龙</td><td class="up">+7.35%</td></tr>
-      </tbody>
-    </table>
-
-    <h2>主力净流入最多板块 TOP3</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>排名</th><th>板块</th><th>涨幅</th><th>主力净流入（万元）</th><th>领涨股</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>减速器</td><td class="up">+3.19%</td><td class="up">252,913.32</td><td>绿的谐波（+11.83%）</td></tr>
-        <tr><td>2</td><td>氟化工概念</td><td class="up">+2.88%</td><td class="up">248,948.75</td><td>中巨芯-U（+20.01%）</td></tr>
-        <tr><td>3</td><td>化学原料概念</td><td class="up">+1.61%</td><td class="up">229,056.19</td><td>恒光股份（+19.99%）</td></tr>
-      </tbody>
-    </table>
-
-    <h2>申万一级行业涨幅 TOP5</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>排名</th><th>行业</th><th>涨幅</th><th>量比</th><th>领涨股</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>小家电</td><td class="up">+3.88%</td><td>1.42</td><td>利仁科技（+10.00%）</td></tr>
-        <tr><td>2</td><td>电机Ⅱ</td><td class="up">+3.69%</td><td>1.68</td><td>三瑞智能（+11.97%）</td></tr>
-        <tr><td>3</td><td>广告营销</td><td class="up">+3.17%</td><td>1.87</td><td>易点天下（+10.12%）</td></tr>
-        <tr><td>4</td><td>家电零部件Ⅱ</td><td class="up">+2.57%</td><td>1.68</td><td>汉宇集团（+8.13%）</td></tr>
-        <tr><td>5</td><td>自动化设备</td><td class="up">+2.35%</td><td>2.12</td><td>三丰智能（+19.94%）</td></tr>
-      </tbody>
-    </table>
-
-    <h2>重点个股（涨停/放量/主力净流入）</h2>
-    <div class="card">
-      <ul>
-        <li>20cm/强势涨停方向（结合板块龙头表现）：中巨芯-U、恒光股份、三丰智能、禾川科技、易点天下等。</li>
-        <li>成交显著放大方向：机器人执行器、自动化设备、广告营销链条个股普遍量比在1.8~2.3。</li>
-        <li>主力资金净流入代表：绿的谐波、恒光股份、易点天下等板块龙头获资金承接。</li>
-      </ul>
-      <div class="sub">说明：本次“重点个股”原始接口返回偏资讯化，结合当日板块领涨股与主力净流入表进行交叉提炼。</div>
-    </div>
-
-    <h2>一阳指候选分析</h2>
-    <div class="two-col">
-      <div class="card">
-        <h3>转势战法（底部盘整 + 一阳突破 + 量能 + 均线）</h3>
-        <p><span class="tag">第一梯队（可低吸跟踪）</span></p>
-        <ul>
-          <li><b>绿的谐波</b>：减速器主线龙头，涨幅强、资金净流入明确，若回踩不破5日线可观察二次介入。</li>
-          <li><b>恒光股份</b>：20cm涨停，化学原料概念中辨识度高，需确认次日量能承接。</li>
-        </ul>
-        <p><span class="tag">第二梯队（等回调）</span></p>
-        <ul>
-          <li>易点天下、三丰智能：趋势向上但短线波动大，等回踩关键均线后再评估。</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>开门战法（主升浪趋势延续 + 四条件）</h3>
-        <ul>
-          <li><b>禾川科技</b>：机器人多概念共振，日内强趋势延续，若次日高开不追，优先等分时回踩。</li>
-          <li><b>信捷电气</b>：PLC概念龙头，趋势完整，适合观察“开门后回踩不破分时均线”的低吸点。</li>
-          <li><b>中巨芯-U</b>：20cm强板，弹性高但波动也高，仓位宜轻。</li>
-        </ul>
-      </div>
-    </div>
-
-    <h2>次日操作计划</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>标的</th><th>方向</th><th>参考买入区间</th><th>建议仓位</th><th>止损</th><th>止盈</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>绿的谐波</td><td>转势/趋势共振</td><td>回踩5日线附近分批</td><td>10%~15%</td><td>跌破10日线</td><td>+12%~18% 分批止盈</td></tr>
-        <tr><td>信捷电气</td><td>开门战法</td><td>开盘后回踩分时均线</td><td>8%~12%</td><td>跌破前一日低点</td><td>+10%~15%</td></tr>
-        <tr><td>易点天下</td><td>趋势跟踪</td><td>回调至5日/10日线</td><td>5%~8%</td><td>跌破10日线</td><td>前高附近减仓</td></tr>
-      </tbody>
-    </table>
-
-    <h2>排除说明</h2>
-    <div class="card">
-      <ul>
-        <li>高位一字板、连续加速且无换手的个股：放弃追涨，避免接力末端风险。</li>
-        <li>仅有题材热度、缺乏主力净流入配合的个股：不纳入第一梯队。</li>
-        <li>日K未站稳关键均线（6/12/21）或量能虚高（冲高回落）的个股：暂列观察。</li>
-      </ul>
-    </div>
-
-    <h2>仓位配置建议</h2>
-    <div class="card">
-      <ul>
-        <li>短线机动仓：40%（用于一阳指候选）</li>
-        <li>波段趋势仓：30%（板块龙头回踩低吸）</li>
-        <li>防守仓/现金：30%（应对高估值回撤）</li>
-        <li>单票上限：不超过总仓30%</li>
-      </ul>
-    </div>
-
-    <h2>风险提示</h2>
-    <div class="warn">
-      当前上证与深证估值分位分别为 99.75% 与 99.88%，处于历史高估区。指数短线波动加大，追高风险显著提升。建议严格执行分批建仓与硬止损纪律，优先“强势回踩确认”而非盘中追涨。
-    </div>
-
-    <div class="footer">
-      本报告仅供策略复盘与学习交流，不构成任何投资建议。市场有风险，投资需谨慎。
+    <div class="action-detail">
+      <strong>战法：</strong>开门战法（减速器主线龙头，趋势延续）<br>
+      <strong>买入计划：</strong>周一开盘观察，若回踩 <span class="buy-price">分时均线附近</span>（不追高），等分时企稳后低吸；若高开冲高回落则放弃<br>
+      <strong>仓位：</strong>短线10% + 波段5% = 15%（首批先打半仓）<br>
+      <strong>止损位：</strong><span class="stop-price">跌破今日最低价</span>（无条件离场）<br>
+      <strong>止盈参考：</strong>偏离日线21均线过远时分批止盈<br>
+      <strong>注意：</strong>减速器板块主力净流入25.29亿排第一，今日涨幅11.83%，机器人执行器多概念共振。但市场大盘回调日，需确认周一市场企稳后再介入。
     </div>
   </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--green);">
+    <div class="action-header">
+      <span class="action-name">信捷电气 sh603416</span>
+      <span class="tag tag-buy">开门战法 / 短线</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开门战法（PLC概念龙头，涨停突破）<br>
+      <strong>买入计划：</strong>周一若低开回踩 <span class="buy-price">60~62元</span>（今日涨停板实体区间/6日均线），分时黄线附近低吸<br>
+      <strong>仓位：</strong>短线10%（首批先打半仓）<br>
+      <strong>止损位：</strong><span class="stop-price">跌破今日涨停板实体下沿</span><br>
+      <strong>离场信号：</strong>跌破日线6均线 / 高位跌停 / 顶部带量大阴线<br>
+      <strong>注意：</strong>PLC概念今日涨幅+4.45%，自动化设备行业年初至今涨幅43.18%，趋势基础好
+    </div>
+  </div>
+
+</div>
+
+<div class="action-grid">
+
+  <!-- 第二梯队：等待回调 -->
+  <div class="action-card" style="border-left: 3px solid var(--accent);">
+    <div class="action-header">
+      <span class="action-name">中巨芯-U sh688549</span>
+      <span class="tag tag-wait">氟化工 / 20cm涨停 / 谨慎</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开盘观察型（20cm涨停，弹性极大）<br>
+      <strong>操作计划：</strong>周一不追高，等回调确认后再评估。<strong>科创板20cm弹性，波动剧烈，仓位宜轻。</strong><br>
+      <strong>仓位：</strong>短线5%（极轻仓试错）<br>
+      <strong>止损位：</strong><span class="stop-price">跌破今日阳线实体下沿，无条件离场</span><br>
+      <strong>注意：</strong>氟化工概念主力净流入24.89亿排第二，但板块5日/20日主力净流入均为负，持续性存疑
+    </div>
+  </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--accent);">
+    <div class="action-header">
+      <span class="action-name">恒光股份 sz301118</span>
+      <span class="tag tag-wait">化学原料 / 20cm涨停 / 谨慎</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开盘观察型（20cm涨停，需确认持续性）<br>
+      <strong>操作计划：</strong>周一观察板块热度是否延续，等回调至 <span class="buy-price">合理价位</span>再介入<br>
+      <strong>仓位：</strong>短线5%（极轻仓试错）<br>
+      <strong>止损位：</strong><span class="stop-price">跌破今日阳线实体下沿</span><br>
+      <strong>注意：</strong>化学原料板块主力5日净流入-48.82亿、20日净流入-216.06亿，板块资金呈持续流出状态，单日反弹需谨慎
+    </div>
+  </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--accent);">
+    <div class="action-header">
+      <span class="action-name">禾川科技 sh688320</span>
+      <span class="tag tag-wait">机器人多概念 / 涨停 / 等回调</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>开门战法（机器人执行器/空心杯电机/华为机器人三概念共振）<br>
+      <strong>操作计划：</strong>周一若高开不追高，等回踩 <span class="buy-price">分时均线</span> 或次日再观察<br>
+      <strong>仓位：</strong>短线5%~8%<br>
+      <strong>止损位：</strong><span class="stop-price">跌破日线6均线</span><br>
+      <strong>注意：</strong>三概念共振+多板块领涨龙头，辨识度高，但大盘回调日追涨停风险大
+    </div>
+  </div>
+
+  <div class="action-card" style="border-left: 3px solid var(--accent);">
+    <div class="action-header">
+      <span class="action-name">易点天下 sz301171</span>
+      <span class="tag tag-wait">广告营销 / 趋势跟踪</span>
+    </div>
+    <div class="action-detail">
+      <strong>战法：</strong>趋势跟踪（广告营销行业主力净流入11.49亿排行业第三）<br>
+      <strong>操作计划：</strong>周一等回调至 <span class="buy-price">5日/10日均线</span>附近再考虑介入<br>
+      <strong>仓位：</strong>波段5%~8%<br>
+      <strong>止损位：</strong><span class="stop-price">跌破10日均线</span><br>
+      <strong>注意：</strong>广告营销行业年初至今涨幅26.84%，60日涨幅-12.94%，板块处于底部反弹阶段，需确认反弹持续性
+    </div>
+  </div>
+
+</div>
+
+<!-- ======== 仓位配置建议 ======== -->
+<h2>仓位配置建议</h2>
+<div class="stock-card">
+  <div class="analysis" style="line-height:2">
+    <p><strong>推荐仓位分配（示例）：</strong></p>
+    <table style="margin-top:10px">
+      <tr><th>交易类型</th><th>仓位比例</th><th>建议标的</th><th>预期持仓周期</th></tr>
+      <tr>
+        <td><strong>短线</strong></td>
+        <td class="up">40%</td>
+        <td>绿的谐波15% + 信捷电气10% + 禾川科技/中巨芯各5% + 现金备用5%</td>
+        <td>1~5天</td>
+      </tr>
+      <tr>
+        <td><strong>波段中线</strong></td>
+        <td class="up">30%</td>
+        <td>易点天下等回调后5%~8%，其余待定观察</td>
+        <td>数天~数周</td>
+      </tr>
+      <tr>
+        <td><strong>长线/观察</strong></td>
+        <td>30%</td>
+        <td>现金储备为主，高估值环境下防守优先</td>
+        <td>数周以上</td>
+      </tr>
+    </table>
+    <p style="margin-top:12px"><strong>核心纪律：</strong>当前上证指数估值处于历史99.75%高位、深证99.88%高位，建议整体保持50%~60%仓位，留有充足子弹应对大盘回调。单票不超过30%，首批建仓先打半仓，确认趋势后再加仓。</p>
+  </div>
+</div>
+
+<!-- ======== 开门战法候选详情 ======== -->
+<h2>开门战法候选详情</h2>
+<p class="section-desc">筛选条件：大阳突破前期高点 + 均线多头排列(6/12/21) + 量能配合 + 契合市场热度</p>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">禾川科技</span> <span class="stock-code">sh688320</span> <span class="tag tag-hot">空心杯电机/机器人执行器/华为机器人</span></div>
+    <div class="price up">41.16 (+10.02%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>大阳涨停</strong>：今日涨停+10.02%至41.16元，封板强势，为空心杯电机、机器人执行器概念、华为机器人三板块共同领涨龙头</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>概念共振</strong>：三个热门概念叠加（空心杯电机+6.22%、机器人执行器+6.12%、华为机器人+5.75%），辨识度极高</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：空心杯电机板块量比2.25，机器人执行器量比2.17，华为机器人量比2.11，整体量能放大</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>契合热度</strong>：机器人方向为今日最强主线，三概念同时霸榜涨幅前三</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>大盘环境</strong>：三大指数全线回调，大盘缩量下跌日追涨停风险较高，周一需确认市场企稳</div>
+    <p style="margin-top:8px;color:var(--accent)">综合评分：&#9733;&#9733;&#9733;&#9733;&#9734; 三概念共振龙头，辨识度极高，但需等大盘企稳后回踩介入</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val" style="color:var(--accent)"><strong>周一不追高。</strong>等回踩 <span class="buy-price">分时均线/6日均线</span> 附近再考虑介入，或观察周一市场整体企稳情况</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">短线5%~8%</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">跌破日线6均线</span>（无条件离场）</span></div>
+    <div class="op-row"><span class="op-label">离场：</span><span class="op-val">跌破日线6均线 / 高位跌停 / 顶部带量大阴线 — 三者任一触发即离场</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">信捷电气</span> <span class="stock-code">sh603416</span> <span class="tag tag-hot">PLC概念/自动化设备</span></div>
+    <div class="price up">64.88 (+10.00%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>大阳涨停</strong>：今日涨停+10.00%至64.88元，为PLC概念领涨龙头</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>行业趋势基础</strong>：自动化设备行业年初至今涨幅43.18%，60日涨幅31.04%，20日涨幅22.02%，处于明确上升趋势中</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：PLC概念量比1.51，自动化设备行业量比2.12，放量明显</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>契合热度</strong>：PLC概念今日涨幅+4.45%，与机器人主线形成联动</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>大盘环境</strong>：同上，大盘回调日需确认次日企稳</div>
+    <p style="margin-top:8px;color:var(--accent)">综合评分：&#9733;&#9733;&#9733;&#9733;&#9734; 行业趋势基础好，辨识度高，等回踩确认后可介入</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val">周一若低开回踩 <span class="buy-price">60~62元</span>（今日涨停板实体区间/6日均线），分时黄线附近低吸</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">短线10%（首批先打半仓）</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">跌破今日涨停板实体下沿</span>（无条件离场）</span></div>
+    <div class="op-row"><span class="op-label">离场：</span><span class="op-val">跌破日线6均线 / 高位跌停 / 顶部带量大阴线</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">绿的谐波</span> <span class="stock-code">sh688017</span> <span class="tag tag-warm">减速器/机器人执行器</span></div>
+    <div class="price up">+11.83%</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>强势大涨</strong>：今日涨幅+11.83%，为减速器板块领涨股，板块主力净流入25.29亿排概念第一</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>板块资金认可</strong>：减速器概念涨股比105/124，主力净流入25.29亿，5日主力净流入10.55亿，资金持续关注</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>契合热度</strong>：减速器为机器人核心零部件，与今日机器人主线高度契合</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：板块量比3.18，换手率3.18%，放量充分</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>科创板弹性</strong>：科创板20cm弹性，波动剧烈，需严格止损</div>
+    <p style="margin-top:8px;color:var(--accent)">综合评分：&#9733;&#9733;&#9733;&#9733;&#9734; 减速器龙头+资金最强方向，等回踩后可重点跟踪</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val" style="color:var(--accent)"><strong>周一不追高。</strong>等回踩 <span class="buy-price">分时均线/6日均线</span>，分时企稳后低吸</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">短线10% + 波段5% = 15%（首批先打半仓）</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">跌破今日最低价</span>（无条件离场）</span></div>
+    <div class="op-row"><span class="op-label">离场：</span><span class="op-val">跌破日线6均线 / 高位跌停 / 顶部带量大阴线</span></div>
+    <div class="op-row"><span class="op-label">风险：</span><span class="op-val">科创板20cm弹性极大，大盘回调环境下追高风险大，务必等回踩确认</span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">中巨芯-U</span> <span class="stock-code">sh688549</span> <span class="tag tag-warm">氟化工/半导体材料</span></div>
+    <div class="price up">+20.01%</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>20cm涨停</strong>：今日+20.01%涨停，为氟化工概念领涨股</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>板块资金</strong>：氟化工概念主力净流入24.89亿排第二，资金认可度高</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>板块资金持续性存疑</strong>：氟化工概念5日主力净流入-78.80亿，20日主力净流入-217.09亿，资金持续流出中，今日可能仅为单日反弹</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>科创板波动</strong>：20cm弹性极大，次日可能大幅波动</div>
+    <p style="margin-top:8px;color:var(--blue)">综合评分：&#9733;&#9733;&#9734;&#9734;&#9734; 单日强势但板块资金持续性存疑，谨慎观察</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val" style="color:var(--red)"><strong>暂不建议介入。</strong>板块5日/20日资金持续流出，今日可能仅为超跌反弹。需观察后续资金是否持续回流。</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">若确认资金回流，短线5%极轻仓</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">任何位置跌破今日阳线实体下沿</span></span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">恒光股份</span> <span class="stock-code">sz301118</span> <span class="tag tag-warm">化学原料</span></div>
+    <div class="price up">+19.99%</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>20cm涨停</strong>：今日+19.99%涨停，为化学原料概念领涨股</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>板块资金</strong>：化学原料概念主力净流入22.91亿排第三</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>板块资金持续流出</strong>：化学原料概念5日主力净流入-48.82亿，20日主力净流入-216.06亿，与氟化工类似，资金持续流出中</div>
+    <p style="margin-top:8px;color:var(--blue)">综合评分：&#9733;&#9733;&#9734;&#9734;&#9734; 单日强势但板块资金面不支持持续上涨，暂不参与</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val" style="color:var(--red)"><strong>暂不介入。</strong>化学原料板块资金面持续恶化，需等待板块资金净流入转正后再考虑。</span></div>
+  </div>
+</div>
+
+<!-- ======== 转势战法候选详情 ======== -->
+<h2>转势战法候选详情</h2>
+<p class="section-desc">筛选条件：底部盘整/洗盘充分 → 突破性大阳线(一阳指) → 量能放大 → 均线突破 → 板块有热度</p>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">三丰智能</span> <span class="stock-code">sz300276</span> <span class="tag tag-warm">自动化设备/机器人</span></div>
+    <div class="price up">8.42 (+19.94%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>大阳突破</strong>：今日+19.94%接近20cm涨停，为自动化设备行业领涨股</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>行业趋势</strong>：自动化设备行业年初至今涨幅43.18%，60日涨幅31.04%，处于明确上升通道</div>
+    <div class="check-item"><span class="check-icon pass">&#10004;</span><strong>量能配合</strong>：自动化设备行业量比2.12，放量充分</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>底部酝酿不足</strong>：需进一步确认近期是否有充分底部盘整，今日19.94%涨幅可能已脱离底部</div>
+    <div class="check-item"><span class="check-icon fail">&#9888;</span><strong>追高风险</strong>：近20cm涨幅后次日追高风险大</div>
+    <p style="margin-top:8px;color:var(--blue)">综合评分：&#9733;&#9733;&#9733;&#9734;&#9734; 行业趋势好但需确认底部，不追高</p>
+  </div>
+  <div class="op-box">
+    <div class="op-title">操作建议</div>
+    <div class="op-row"><span class="op-label">买入：</span><span class="op-val" style="color:var(--accent)"><strong>周一不追高。</strong>等回调至 <span class="buy-price">5日/6日均线</span> 附近再评估。若能回踩至7.5~7.8元区间可考虑轻仓试错。</span></div>
+    <div class="op-row"><span class="op-label">仓位：</span><span class="op-val">短线5%~8%</span></div>
+    <div class="op-row"><span class="op-label">止损：</span><span class="op-val"><span class="stop-price">跌破6日均线</span></span></div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="analysis" style="line-height:1.8">
+    <strong>转势战法总结：</strong>今日市场整体回调，机器人/自动化方向的强势个股更符合开门战法（趋势延续）而非转势战法（底部反转）。大盘高估值环境下，转势战法新晋标的稀缺，建议将重点放在开门战法的回踩低吸机会上。
+  </div>
+</div>
+
+<!-- ======== 排除说明 ======== -->
+<h2>排除说明</h2>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">安培龙</span> <span class="stock-code">sz301413</span></div>
+    <div class="price up">127.00 (+7.35%)</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon fail">&#10008;</span><strong>不符合原因</strong>：电子鼻概念今日涨幅+3.89%排名第五，但电子鼻属于窄概念，历史持续性差。该股涨幅7.35%未达涨停标准，且板块60日涨幅-13.03%，趋势向下，不适用一阳指任何战法。</div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="header">
+    <div><span class="stock-name">AI营销概念</span> <span class="stock-code">板块</span></div>
+    <div class="price up">+3.73%</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon fail">&#10008;</span><strong>不符合原因</strong>：AI营销概念排名第六，60日涨幅-14.33%，年初至今-17.75%，整体处于下行趋势。单日反弹不构成一阳指信号。</div>
+  </div>
+</div>
+
+<div class="stock-card">
+  <div class="analysis" style="line-height:1.8">
+    <strong>排除总结：</strong>今日涨停/强势个股主要集中在机器人执行器、氟化工、化学原料三个方向。其中氟化工和化学原料板块资金面持续流出（5日/20日净流入均为负），仅视为单日超跌反弹，不纳入一阳指候选。仅保留机器人/自动化方向的标的作为重点关注对象。
+  </div>
+</div>
+
+<!-- 风险提示 -->
+<h2>风险提示与交易纪律</h2>
+<div class="risk-warning">
+  <strong>重要提醒：</strong>
+  <p style="margin-top:6px">1. 以上所有价格均为参考区间，实际买入价以周一盘中走势为准，严格在设定区域附近操作，不追高不杀跌。</p>
+  <p>2. 止损是生存根基，任何一笔交易必须设定止损位，触发后无条件离场，不抱侥幸心理。</p>
+  <p>3. <strong>当前上证指数估值处于历史99.75%百分位、深证99.88%百分位，均处于极端高位。大盘昨日（5月14日）单日大跌（上证-1.52%、创业板-2.16%），今日缩量回调。建议总仓位不超过60%，保留充足现金仓位应对进一步回调。</strong></p>
+  <p>4. 今日成交额大幅缩量（上证7977亿 vs 昨日14981亿），缩量下跌若持续需警惕进一步回调风险。</p>
+  <p>5. 模式是铁律 — 情绪上头乱买乱卖是亏损根源。不符合一阳指标准的行情坚决不做。</p>
+  <p>6. 大盘高估值环境下，优先选择"强势回踩确认"而非"追涨突破"，等待更好的入场时机。</p>
+</div>
+
+<div class="stock-card">
+  <div class="analysis" style="line-height:2">
+    <p><strong>核心原则：</strong></p>
+    <p>- 今日重点关注方向：机器人执行器/自动化设备（绿的谐波、禾川科技、信捷电气）</p>
+    <p>- 氟化工/化学原料方向：板块资金持续流出，仅视为单日反弹，暂不参与</p>
+    <p>- 单票仓位不超过30%，理想单票仓位5%-15%</p>
+    <p>- 首批建仓建议先打半仓，确认趋势后再加仓</p>
+    <p>- 不追求买在最低、卖在最高，大概率正确的事情反复做</p>
+    <p>- 不断小亏大赚才是成功的核心要义</p>
+    <p>- 趋势变弱要警觉：K线反复回踩均线，小心行情终结</p>
+    <p>- <strong>高估值+缩量回调 = 防守优先，现金为王</strong></p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>基于一阳指选股操作体系（转势战法 + 开门战法）| 数据来源：NeoData金融数据服务 | 数据时间：2026-05-15 收盘 | 仅供学习参考，不构成投资建议</p>
+</div>
+
 </body>
 </html>
