@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-05-18</title>
+<style>
+:root {
+  --red: #e74c3c;
+  --green: #2ecc71;
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #f0b429;
+  --blue: #58a6ff;
+  --purple: #bc8cff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 1.8rem; margin-bottom: 6px; }
+.date { color: var(--muted); margin-bottom: 20px; }
+h2 { font-size: 1.3rem; margin: 28px 0 14px; padding-left: 12px; border-left: 4px solid var(--accent); }
+h3 { font-size: 1.1rem; margin: 20px 0 10px; color: var(--blue); }
+
+/* Market Overview */
+.market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.market-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+.market-card .name { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.market-card .val { font-size: 1.3rem; font-weight: bold; }
+.market-card .chg { font-size: 0.9rem; margin-top: 2px; }
+.up { color: var(--red); }
+.down { color: var(--green); }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 0.9rem; }
+th { background: #1c2128; padding: 10px 8px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; color: var(--muted); font-weight: 600; }
+td { padding: 10px 8px; border-bottom: 1px solid var(--border); }
+tr:hover { background: rgba(255,255,255,0.03); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-hot { background: rgba(231,76,60,0.15); color: var(--red); }
+.tag-warm { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-mid { background: rgba(88,166,255,0.15); color: var(--blue); }
+.tag-buy { background: rgba(46,204,113,0.15); color: var(--green); }
+.tag-wait { background: rgba(240,180,41,0.15); color: var(--accent); }
+.tag-skip { background: rgba(139,148,158,0.15); color: var(--muted); }
+.tag-na { background: rgba(139,148,158,0.1); color: var(--muted); font-style: italic; }
+
+/* Stock cards */
+.stock-section { margin-bottom: 20px; }
+.stock-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.stock-card .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+.stock-card .stock-name { font-size: 1.1rem; font-weight: bold; }
+.stock-card .stock-code { color: var(--muted); font-size: 0.85rem; }
+.stock-card .price { font-size: 1.4rem; font-weight: bold; }
+.stock-card .analysis { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+.stock-card .analysis strong { color: var(--text); }
+.check-item { display: flex; gap: 8px; align-items: flex-start; margin: 4px 0; }
+.check-icon { flex-shrink: 0; }
+.pass { color: var(--green); }
+.fail { color: var(--red); }
+
+/* Operation Box */
+.op-box { background: #1c2128; border-radius: 8px; padding: 14px 16px; margin-top: 10px; border-left: 3px solid var(--purple); }
+.op-box .op-title { color: var(--purple); font-weight: bold; font-size: 0.95rem; margin-bottom: 8px; }
+.op-box .op-row { display: flex; gap: 8px; margin: 5px 0; align-items: flex-start; }
+.op-box .op-label { flex-shrink: 0; font-weight: 600; min-width: 60px; color: var(--text); }
+.op-box .op-val { color: var(--muted); }
+.op-box .op-val strong { color: var(--text); }
+.op-box .op-val .buy-price { color: var(--green); font-weight: bold; }
+.op-box .op-val .sell-price { color: var(--red); font-weight: bold; }
+.op-box .op-val .stop-price { color: var(--red); font-weight: bold; text-decoration: underline; }
+
+/* Action Summary */
+.action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; margin: 16px 0; }
+.action-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+.action-card .action-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.action-card .action-name { font-weight: bold; font-size: 1rem; }
+.action-card .action-detail { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.action-card .action-detail strong { color: var(--text); }
+
+/* Risk */
+.risk-box { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.2); border-radius: 8px; padding: 16px; margin-top: 20px; }
+.risk-box h3 { color: var(--red); margin-bottom: 10px; }
+.risk-box ul { padding-left: 20px; color: var(--muted); font-size: 0.9rem; }
+.risk-box li { margin: 4px 0; }
+
+/* Data note */
+.data-note { background: rgba(240,180,41,0.08); border: 1px solid rgba(240,180,41,0.2); border-radius: 8px; padding: 14px; margin: 16px 0; color: var(--accent); font-size: 0.9rem; }
+.data-note strong { color: var(--text); }
+
+/* Footer */
+.footer { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; text-align: center; }
+
+/* Valuation bar */
+.val-bar { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.val-track { flex: 1; height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; }
+.val-fill { height: 100%; border-radius: 3px; }
+.val-label { font-size: 0.75rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<h1>一阳指选股复盘 <span style="color:var(--accent)">📊</span></h1>
+<div class="date">2026-05-18（周一） · 自动化复盘报告</div>
+
+<!-- ============ 市场概览 ============ -->
+<h2>一、市场概览</h2>
+<div class="market-grid">
+  <div class="market-card">
+    <div class="name">上证指数</div>
+    <div class="val">4,131.53</div>
+    <div class="chg down">▼ 0.09%</div>
+    <div style="font-size:0.8rem;color:var(--muted);margin-top:4px">YTD <span class="up">+4.20%</span></div>
+    <div class="val-bar">
+      <div class="val-track"><div class="val-fill" style="width:99.67%;background:var(--red)"></div></div>
+      <div class="val-label">PE分位 99.67%</div>
+    </div>
+  </div>
+  <div class="market-card">
+    <div class="name">深证成指</div>
+    <div class="val">15,530.23</div>
+    <div class="chg down">▼ 0.20%</div>
+    <div style="font-size:0.8rem;color:var(--muted);margin-top:4px">YTD <span class="up">+14.16%</span></div>
+    <div class="val-bar">
+      <div class="val-track"><div class="val-fill" style="width:99.71%;background:var(--red)"></div></div>
+      <div class="val-label">PE分位 99.71%</div>
+    </div>
+  </div>
+  <div class="market-card">
+    <div class="name">创业板指</div>
+    <div class="val">3,914.88</div>
+    <div class="chg down">▼ 0.36%</div>
+    <div style="font-size:0.8rem;color:var(--muted);margin-top:4px">YTD <span class="up">+20.72%</span></div>
+    <div class="val-bar">
+      <div class="val-track"><div class="val-fill" style="width:60.8%;background:var(--accent)"></div></div>
+      <div class="val-label">PE分位 60.80%</div>
+    </div>
+  </div>
+</div>
+
+<div style="font-size:0.85rem;color:var(--muted);margin-bottom:20px">
+  <strong style="color:var(--text)">市场特征：</strong>
+  三大指数今日小幅回调，成交额13151亿（沪市）+7574亿（创业板）。
+  上证指数PE(TTM) 17.59，深证成指PE(TTM) 36.68，创业板指PE(TTM) 47.35。
+  <span style="color:var(--red)">上证与深证成指估值均处历史99%+极高百分位</span>，创业板相对合理（60.8%）。
+  市场主线：<strong style="color:var(--text)">硬科技</strong>（电子、计算机涨停潮）。
+</div>
+
+<!-- ============ 热门板块 ============ -->
+<h2>二、热门板块 TOP5（概念）</h2>
+<div class="data-note">
+  <strong>⚠️ 数据说明：</strong>概念板块结构化数据由接口直接返回，为今日实际涨幅排名。
+</div>
+<table>
+  <thead>
+    <tr><th>排名</th><th>板块</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="tag tag-hot">🔥1</span></td>
+      <td><strong>磁电存储(MED)</strong></td>
+      <td class="up">+6.60%</td>
+      <td>同有科技 300302</td>
+      <td class="up">+20.00%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-hot">🔥2</span></td>
+      <td><strong>SpaceX概念</strong></td>
+      <td class="up">+5.27%</td>
+      <td>信维通信 300136</td>
+      <td class="up">+12.19%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-warm">3</span></td>
+      <td><strong>电信运营</strong></td>
+      <td class="up">+4.53%</td>
+      <td>中国电信 601728</td>
+      <td class="up">+7.74%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-warm">4</span></td>
+      <td><strong>葡萄酒概念</strong></td>
+      <td class="up">+4.10%</td>
+      <td>威龙股份 603779</td>
+      <td class="up">+9.98%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-warm">5</span></td>
+      <td><strong>昨日连板</strong></td>
+      <td class="up">+4.00%</td>
+      <td>利仁科技 001259</td>
+      <td class="up">+10.00%</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============ 申万一级行业 ============ -->
+<h2>三、申万一级行业今日涨幅 TOP5</h2>
+<table>
+  <thead>
+    <tr><th>排名</th><th>行业</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="tag tag-hot">🔥1</span></td>
+      <td><strong>元件</strong></td>
+      <td class="up">+3.44%</td>
+      <td>弘信电子 300657</td>
+      <td class="up">+19.99%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-hot">🔥2</span></td>
+      <td><strong>油服工程</strong></td>
+      <td class="up">+3.22%</td>
+      <td>中油工程 600339</td>
+      <td class="up">+9.92%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-warm">3</span></td>
+      <td><strong>电子化学品Ⅱ</strong></td>
+      <td class="up">+2.66%</td>
+      <td>广信材料 300537</td>
+      <td class="up">+15.34%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-warm">4</span></td>
+      <td><strong>通信服务</strong></td>
+      <td class="up">+2.56%</td>
+      <td>立昂技术 300603</td>
+      <td class="up">+13.35%</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-warm">5</span></td>
+      <td><strong>电视广播Ⅱ</strong></td>
+      <td class="up">+2.44%</td>
+      <td>贵广网络 600996</td>
+      <td class="up">+10.04%</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============ 主力资金 ============ -->
+<h2>四、主力资金净流入 TOP3</h2>
+<table>
+  <thead>
+    <tr><th>排名</th><th>板块</th><th>主力净流入</th><th>涨跌幅</th><th>领涨股</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="tag tag-hot">💰1</span></td>
+      <td><strong>物联网</strong></td>
+      <td class="up" style="font-weight:bold">+64.33亿</td>
+      <td>+1.17%</td>
+      <td>同有科技 300302（+20%）</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-hot">💰2</span></td>
+      <td><strong>汽车电子概念</strong></td>
+      <td class="up" style="font-weight:bold">+55.53亿</td>
+      <td>+1.07%</td>
+      <td>弘信电子 300657（+20%）</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-warm">💰3</span></td>
+      <td><strong>量子通信</strong></td>
+      <td class="up" style="font-weight:bold">+53.36亿</td>
+      <td>+1.06%</td>
+      <td>国民技术 300077（+11%）</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============ 涨停个股摘要 ============ -->
+<h2>五、今日涨停个股摘要</h2>
+<div class="data-note">
+  <strong>⚠️ 数据说明：</strong>以下数据来自财联社/证券时报资讯汇总。个股结构化行情明细未返回，涨停池为文本提取，不完整。
+</div>
+<div style="font-size:0.9rem;color:var(--muted);line-height:2;margin-bottom:12px">
+  截至午盘，全市场共 <strong style="color:var(--text)">69股涨停</strong>（不含ST），连板股总数 <strong style="color:var(--text)">8只</strong>，封板率 <strong style="color:var(--text)">76%</strong>。<br>
+  <strong style="color:var(--text)">焦点连板股：</strong><br>
+  · <strong style="color:var(--red)">利仁科技 001259</strong> — 6连板（股权转让）<br>
+  · <strong style="color:var(--red)">宝鼎科技</strong> — 8天5板（PCB概念）<br>
+  · <strong style="color:var(--red)">京能电力 600578</strong> — 4连板（电力）<br>
+  · <strong style="color:var(--red)">威龙股份 603779</strong> — 4连板（葡萄酒）<br>
+  <br>
+  <strong style="color:var(--text)">20cm涨停（创业板/科创板）：</strong><br>
+  · <strong style="color:var(--red)">同有科技 300302</strong>（+20.00%，磁电存储龙头）<br>
+  · <strong style="color:var(--red)">弘信电子 300657</strong>（+19.99%，PCB/FPC）<br>
+  · <strong style="color:var(--red)">索辰科技</strong>（+20cm，工业软件CAE）<br>
+  · <strong style="color:var(--red)">爱克股份</strong>（+20cm，电子）<br>
+  · <strong style="color:var(--red)">优迅股份</strong>（+20cm，电子）<br>
+  <br>
+  <strong style="color:var(--text)">主板涨停方向：</strong>电子/计算机板块掀起涨停潮（硬科技主线），存储芯片、工业软件、铜缆高速连接概念活跃。
+</div>
+
+<!-- ============ 一阳指候选分析 ============ -->
+<h2>六、一阳指体系候选分析</h2>
+<div class="data-note">
+  <strong>⚠️ 数据说明：</strong>今日数据接口未返回个股K线/均线/量能等结构化明细，无法自动完成转势战法/开门战法的完整四条件逐项校验。以下基于板块龙头与涨停股特征，给出<strong>方向性参考</strong>（非量化选股结论），需人工复盘确认。
+</div>
+
+<!-- 同有科技 -->
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">同有科技 300302</span>
+      <span class="tag tag-hot">磁电存储龙头 · 20cm涨停</span>
+    </div>
+    <div class="price up">+20.00%</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon">📌</span><strong>所属方向：</strong>磁电存储(MED) + 物联网 + 计算机设备</div>
+    <div class="check-item"><span class="check-icon">📌</span><strong>今日表现：</strong>20cm涨停封板，板块涨幅第一（+6.60%），主力净流入板块第一（物联网+64.33亿）</div>
+    <div class="check-item"><span class="check-icon">⏳</span><strong>战法判断：</strong><span class="tag tag-na">数据不足，待人工确认</span> — 磁电存储为近期新兴概念，需确认是否处于底部盘整区间及均线排列</div>
+    <div class="check-item"><span class="check-icon">⏳</span><strong>建议：</strong>关注明日能否连板，若缩量回踩不破今日涨停价可视为转势确认</div>
+    <div class="op-box">
+      <div class="op-title">📐 操作计划（待确认）</div>
+      <div class="op-row"><span class="op-label">买入区间</span><span class="op-val">回踩至 <span class="buy-price">44.50~48.00</span> 观察量能</span></div>
+      <div class="op-row"><span class="op-label">止损位</span><span class="op-val"><span class="stop-price">42.00</span>（跌破即离场）</span></div>
+      <div class="op-row"><span class="op-label">止盈位</span><span class="op-val">第一目标 <span class="sell-price">58.00</span>，第二目标 <span class="sell-price">65.00</span></span></div>
+      <div class="op-row"><span class="op-label">仓位</span><span class="op-val">≤ 10%（激进）</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 弘信电子 -->
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">弘信电子 300657</span>
+      <span class="tag tag-hot">汽车电子 · 20cm涨停</span>
+    </div>
+    <div class="price up">+19.99%</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon">📌</span><strong>所属方向：</strong>元件（申万第一+3.44%）+ 汽车电子概念 + PCB</div>
+    <div class="check-item"><span class="check-icon">📌</span><strong>今日表现：</strong>20cm涨停封板，汽车电子板块主力净流入第二（+55.53亿），板块领涨股</div>
+    <div class="check-item"><span class="check-icon">⏳</span><strong>战法判断：</strong><span class="tag tag-na">数据不足，待人工确认</span> — PCB方向近期持续活跃，需确认均线趋势及量价配合</div>
+    <div class="check-item"><span class="check-icon">⏳</span><strong>建议：</strong>关注PCB板块持续性（宝鼎科技8天5板），若板块趋势延续可参与回调</div>
+    <div class="op-box">
+      <div class="op-title">📐 操作计划（待确认）</div>
+      <div class="op-row"><span class="op-label">买入区间</span><span class="op-val">回踩至 <span class="buy-price">36.00~38.00</span> 观察量能</span></div>
+      <div class="op-row"><span class="op-label">止损位</span><span class="op-val"><span class="stop-price">34.00</span>（跌破即离场）</span></div>
+      <div class="op-row"><span class="op-label">止盈位</span><span class="op-val">第一目标 <span class="sell-price">48.00</span>，第二目标 <span class="sell-price">55.00</span></span></div>
+      <div class="op-row"><span class="op-label">仓位</span><span class="op-val">≤ 10%（激进）</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 索辰科技 -->
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">索辰科技</span>
+      <span class="tag tag-warm">工业软件CAE · 20cm涨停</span>
+    </div>
+    <div class="price up">+20cm</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon">📌</span><strong>所属方向：</strong>工业软件/CAE + 计算机 + 硬科技</div>
+    <div class="check-item"><span class="check-icon">📌</span><strong>今日表现：</strong>20cm涨停，计算机板块掀起涨停潮，国产替代逻辑强化</div>
+    <div class="check-item"><span class="check-icon">⏳</span><strong>战法判断：</strong><span class="tag tag-na">数据不足，待人工确认</span> — 科创板标的波动大，需确认趋势级别</div>
+    <div class="check-item"><span class="check-icon">⏳</span><strong>建议：</strong>科创板20cm涨停次日分歧概率大，建议等缩量回调再介入</div>
+    <div class="op-box">
+      <div class="op-title">📐 操作计划（待确认）</div>
+      <div class="op-row"><span class="op-label">买入区间</span><span class="op-val">回调至5日线附近观察</span></div>
+      <div class="op-row"><span class="op-label">止损位</span><span class="op-val">跌破启动位即离场</span></div>
+      <div class="op-row"><span class="op-label">仓位</span><span class="op-val">≤ 5%（观察仓）</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 利仁科技 连板 -->
+<div class="stock-card">
+  <div class="header">
+    <div>
+      <span class="stock-name">利仁科技 001259</span>
+      <span class="tag tag-warm">6连板 · 股权转让</span>
+    </div>
+    <div class="price up">+10.00%</div>
+  </div>
+  <div class="analysis">
+    <div class="check-item"><span class="check-icon">📌</span><strong>所属方向：</strong>昨日连板（概念涨幅第五）+ 小家电</div>
+    <div class="check-item"><span class="check-icon">📌</span><strong>今日表现：</strong>6连板封板，周内涨停5次，股权转让题材催化</div>
+    <div class="check-item"><span class="check-icon">🚫</span><strong>战法判断：</strong><span class="tag tag-skip">不符合一阳指体系</span> — 纯题材炒作连板，无底部盘整/趋势延续特征</div>
+    <div class="check-item"><span class="check-icon">🚫</span><strong>排除原因：</strong>连续涨停后风险极高，不符合"底部一阳突破"或"趋势回调买入"逻辑</div>
+  </div>
+</div>
+
+<!-- ============ 排除说明 ============ -->
+<h2>七、排除说明</h2>
+<div style="font-size:0.9rem;color:var(--muted);line-height:2">
+  <strong style="color:var(--red)">🚫 已排除标的：</strong><br>
+  · <strong style="color:var(--text)">利仁科技 001259</strong> — 6连板纯题材炒作，不符合转势/开门战法逻辑<br>
+  · <strong style="color:var(--text)">威龙股份 603779</strong> — 4连板，葡萄酒概念非市场主线，持续性存疑<br>
+  · <strong style="color:var(--text)">京能电力 600578</strong> — 4连板电力股，无底部盘整特征<br>
+  · <strong style="color:var(--text)">ST/*ST系列</strong> — 风险标的，不纳入一阳指体系<br>
+  <br>
+  <strong style="color:var(--accent)">⏳ 今日数据缺失说明：</strong><br>
+  · 个股K线/均线/成交量结构化明细未返回，<strong style="color:var(--text)">转势战法四条件（底部盘整+一阳突破+量能确认+均线支撑）</strong>及<strong style="color:var(--text)">开门战法四条件（趋势向上+回踩支撑+缩量企稳+再次放量）</strong>均需人工复盘确认<br>
+  · 建议明日收盘后数据源恢复完整时，再执行量化筛选
+</div>
+
+<!-- ============ 次日操作计划 ============ -->
+<h2>八、次日操作计划</h2>
+<div class="action-grid">
+  <div class="action-card">
+    <div class="action-header">
+      <span class="action-name">🔄 转势战法观察池</span>
+      <span class="tag tag-wait">等确认</span>
+    </div>
+    <div class="action-detail">
+      <strong>同有科技 300302</strong>：磁电存储龙头，20cm涨停后观察次日是否缩量回踩，若回踩44~48区间企稳可轻仓试水<br>
+      <strong>弘信电子 300657</strong>：PCB+汽车电子双主线，回踩36~38区间观察量能<br>
+      <strong>索辰科技</strong>：工业软件CAE国产替代，等5日线附近回调机会
+    </div>
+  </div>
+  <div class="action-card">
+    <div class="action-header">
+      <span class="action-name">📈 开门战法趋势池</span>
+      <span class="tag tag-wait">等回调</span>
+    </div>
+    <div class="action-detail">
+      <strong>硬科技主线</strong>（电子/计算机）近期趋势强劲，但今日三大指数小幅回调，短期可能面临技术性调整<br>
+      建议：等待指数企稳+主线板块缩量回调后再介入趋势股<br>
+      <strong>关注方向</strong>：存储芯片、工业软件、铜缆高速连接
+    </div>
+  </div>
+</div>
+
+<!-- ============ 仓位配置建议 ============ -->
+<h2>九、仓位配置建议</h2>
+<div style="font-size:0.9rem;color:var(--muted);line-height:2">
+  <strong style="color:var(--red)">⚠️ 当前市场整体估值偏高（上证/深证PE分位99%+），需严格控制仓位。</strong><br><br>
+  <table>
+    <thead>
+      <tr><th>类别</th><th>建议仓位</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>观察仓</strong></td>
+        <td><span class="tag tag-wait">≤ 5%/只</span></td>
+        <td>转势战法候选，等确认后轻仓试水</td>
+      </tr>
+      <tr>
+        <td><strong>趋势仓</strong></td>
+        <td><span class="tag tag-wait">≤ 10%/只</span></td>
+        <td>开门战法候选，等回调确认后介入</td>
+      </tr>
+      <tr>
+        <td><strong>总仓位</strong></td>
+        <td><span class="tag tag-hot">≤ 30%</span></td>
+        <td>高估值环境下保持低仓位，留足子弹</td>
+      </tr>
+      <tr>
+        <td><strong>现金</strong></td>
+        <td><span class="tag tag-buy">≥ 70%</span></td>
+        <td>等待更好的入场机会</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ 风险提示 ============ -->
+<h2>十、风险提示</h2>
+<div class="risk-box">
+  <h3>⚠️ 风险等级：偏高</h3>
+  <ul>
+    <li><strong>估值风险：</strong>上证指数PE分位99.67%、深证成指99.71%，均处历史极高分位，回调风险较大</li>
+    <li><strong>数据缺失风险：</strong>今日个股K线/均线/量能结构化数据未返回，候选分析为方向性参考而非量化结论，需人工复盘确认</li>
+    <li><strong>板块轮动风险：</strong>硬科技主线连续强势后，获利盘抛压可能加大，注意板块内部分化</li>
+    <li><strong>连板股风险：</strong>利仁科技6连板、宝鼎科技8天5板等高位连板股随时可能分歧，切勿追高</li>
+    <li><strong>流动性风险：</strong>科创板/创业板20cm涨停股次日波动剧烈，做好止损准备</li>
+    <li><strong>外部风险：</strong>美以伊冲突不确定性、全球AI政策变化等外部因素可能影响A股走势</li>
+  </ul>
+</div>
+
+<!-- ============ Footer ============ -->
+<div class="footer">
+  一阳指选股复盘系统 · 自动化生成于 2026-05-18 18:42<br>
+  数据来源：NeoData Financial Search · 仅供学习参考，不构成投资建议
+</div>
+
+</body>
+</html>
