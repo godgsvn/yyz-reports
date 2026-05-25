@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-05-25</title>
+<style>
+:root {
+    --bg: #0d1117;
+    --bg-card: #161b22;
+    --bg-hover: #1c2128;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-secondary: #8b949e;
+    --up: #ff4d4f;
+    --down: #52c41a;
+    --accent: #58a6ff;
+    --gold: #e3b341;
+    --green: #3fb950;
+    --red: #f85149;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+header {
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+}
+header h1 { font-size: 28px; color: var(--gold); margin-bottom: 8px; }
+header .subtitle { color: var(--text-secondary); font-size: 14px; }
+
+/* 市场概览卡片 */
+.market-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s;
+}
+.card:hover { transform: translateY(-2px); }
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.card-title { font-size: 16px; color: var(--text-secondary); }
+.card-value { font-size: 32px; font-weight: 700; }
+.card-change {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 4px;
+}
+.card-detail {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+/* 表格 */
+.table-section { margin-bottom: 30px; }
+.section-title {
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 3px solid var(--gold);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+th, td { padding: 12px 16px; text-align: left; font-size: 14px; }
+th {
+    background: var(--bg-hover);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+tr { border-bottom: 1px solid var(--border); }
+tr:last-child { border-bottom: none; }
+tr:hover { background: var(--bg-hover); }
+
+/* 候选股卡片 */
+.candidate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+.candidate-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+.candidate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.candidate-name { font-size: 18px; font-weight: 700; }
+.candidate-code { color: var(--text-secondary); font-size: 12px; margin-left: 6px; }
+.candidate-score {
+    background: var(--gold);
+    color: #000;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+.candidate-method {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+.method-zhuanshi { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+.method-kaimen { background: rgba(63, 185, 80, 0.15); color: var(--green); }
+.candidate-analysis {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.7;
+}
+.candidate-plan {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+}
+.plan-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--border);
+}
+.plan-row:last-child { border-bottom: none; }
+.plan-label { color: var(--text-secondary); }
+.plan-value { font-weight: 600; }
+
+/* 风险提示 */
+.risk-box {
+    background: rgba(248, 81, 73, 0.08);
+    border: 1px solid rgba(248, 81, 73, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.risk-title { color: var(--red); font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+.risk-content { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+
+/* 仓位建议 */
+.position-box {
+    background: rgba(88, 166, 255, 0.08);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.position-title { color: var(--accent); font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+
+/* 排除说明 */
+.exclude-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.exclude-title { color: var(--text-secondary); font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+.exclude-item {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.exclude-item:last-child { border-bottom: none; }
+.exclude-name { font-weight: 600; }
+.exclude-reason { color: var(--text-secondary); margin-left: 8px; }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+}
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.badge-high { background: rgba(248, 81, 73, 0.15); color: var(--red); }
+.badge-mid { background: rgba(227, 179, 65, 0.15); color: var(--gold); }
+.badge-low { background: rgba(63, 185, 80, 0.15); color: var(--green); }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+    <h1>一阳指选股复盘</h1>
+    <div class="subtitle">2026-05-25 · A股市场每日精选</div>
+</header>
+
+<!-- 市场概览 -->
+<div class="market-cards">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">上证指数</span>
+            <span class="badge badge-mid">估值极高</span>
+        </div>
+        <div class="card-value" style="color: #ff4d4f">4152.57</div>
+        <div class="card-change" style="background: rgba(255,77,79,0.15); color: var(--up)">+0.96%</div>
+        <div class="card-detail">
+            <div>量比: 1.28</div>
+            <div>年初至今: +4.73%</div>
+            <div>PE-TTM: 17.51</div>
+            <div>估值百分位: 99.46%</div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">深证成指</span>
+        </div>
+        <div class="card-value" style="color: #ff4d4f">15856.61</div>
+        <div class="card-change" style="background: rgba(255,77,79,0.15); color: var(--up)">+1.66%</div>
+        <div class="card-detail">
+            <div>量比: 3.21</div>
+            <div>年初至今: +16.56%</div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">创业板指</span>
+        </div>
+        <div class="card-value" style="color: #ff4d4f">4021.16</div>
+        <div class="card-change" style="background: rgba(255,77,79,0.15); color: var(--up)">+2.10%</div>
+        <div class="card-detail">
+            <div>量比: 4.47</div>
+            <div>年初至今: +24.00%</div>
+        </div>
+    </div>
+</div>
+
+<!-- 热门板块TOP5 -->
+<div class="table-section">
+    <div class="section-title">热门板块 TOP5</div>
+    <table>
+        <thead>
+            <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>电子布</td>
+                <td style="color: #ff4d4f">+7.60%</td>
+                <td>长海股份 (sz300196)</td>
+                <td style="color: #ff4d4f">+20.02%</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>高带宽存储器HBM</td>
+                <td style="color: #ff4d4f">+6.20%</td>
+                <td>盛美上海 (sh688082)</td>
+                <td style="color: #ff4d4f">+17.75%</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>大基金二期</td>
+                <td style="color: #ff4d4f">+5.60%</td>
+                <td>华兴源创 (sh688001)</td>
+                <td style="color: #ff4d4f">+20.00%</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>模拟芯片</td>
+                <td style="color: #ff4d4f">+5.35%</td>
+                <td>晶丰明源 (sh688368)</td>
+                <td style="color: #ff4d4f">+13.47%</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>培育钻石</td>
+                <td style="color: #ff4d4f">+5.22%</td>
+                <td>力量钻石 (sz301071)</td>
+                <td style="color: #ff4d4f">+14.86%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 主力资金TOP3 -->
+<div class="table-section">
+    <div class="section-title">主力资金净流入 TOP3</div>
+    <table>
+        <thead>
+            <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>主力净流入</th><th>领涨股</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>芯片概念</td>
+                <td style="color: #ff4d4f">+2.19%</td>
+                <td>270.39万</td>
+                <td>商络电子 (+20.00%)</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>TMT</td>
+                <td style="color: #ff4d4f">+1.17%</td>
+                <td>223.59万</td>
+                <td>梅安森 (+20.00%)</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>半导体产业</td>
+                <td style="color: #ff4d4f">+3.32%</td>
+                <td>215.43万</td>
+                <td>东芯股份 (+20.00%)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 申万一级行业TOP5 -->
+<div class="table-section">
+    <div class="section-title">申万一级行业涨幅 TOP5</div>
+    <table>
+        <thead>
+            <tr><th>排名</th><th>行业名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>半导体</td>
+                <td style="color: #ff4d4f">+6.40%</td>
+                <td>东芯股份</td>
+                <td style="color: #ff4d4f">+20.00%</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>电子化学品Ⅱ</td>
+                <td style="color: #ff4d4f">+4.61%</td>
+                <td>容大感光</td>
+                <td style="color: #ff4d4f">+14.02%</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>玻璃玻纤</td>
+                <td style="color: #ff4d4f">+4.43%</td>
+                <td>长海股份</td>
+                <td style="color: #ff4d4f">+20.02%</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>通信设备</td>
+                <td style="color: #ff4d4f">+4.37%</td>
+                <td>菲菱科思</td>
+                <td style="color: #ff4d4f">+11.76%</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>电视广播Ⅱ</td>
+                <td style="color: #ff4d4f">+4.20%</td>
+                <td>贵广网络</td>
+                <td style="color: #ff4d4f">+10.06%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="table-section">
+    <div class="section-title">次日操作计划</div>
+    <table>
+        <thead>
+            <tr><th>股票</th><th>战法</th><th>买入区间</th><th>仓位</th><th>止损</th><th>止盈</th><th>风险</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>满坤科技</strong> (301132)</td>
+                <td><span class="badge badge-mid">转势战法</span></td>
+                <td>39.50-40.50</td>
+                <td>15%</td>
+                <td style="color: var(--green)">37.00</td>
+                <td style="color: var(--up)">46.00</td>
+                <td><span class="badge badge-low">中</span></td>
+            </tr>
+            <tr>
+                <td><strong>扬杰科技</strong> (300373)</td>
+                <td><span class="badge badge-low">开门战法</span></td>
+                <td>92.00-94.00</td>
+                <td>20%</td>
+                <td style="color: var(--green)">88.00</td>
+                <td style="color: var(--up)">108.00</td>
+                <td><span class="badge badge-low">中</span></td>
+            </tr>
+            <tr>
+                <td><strong>达瑞电子</strong> (300976)</td>
+                <td><span class="badge badge-low">开门战法</span></td>
+                <td>86.00-88.00</td>
+                <td>15%</td>
+                <td style="color: var(--green)">82.00</td>
+                <td style="color: var(--up)">100.00</td>
+                <td><span class="badge badge-low">中</span></td>
+            </tr>
+            <tr>
+                <td><strong>新雷能</strong> (300593)</td>
+                <td><span class="badge badge-mid">转势战法</span></td>
+                <td>34.50-35.50</td>
+                <td>10%</td>
+                <td style="color: var(--green)">32.00</td>
+                <td style="color: var(--up)">45.00</td>
+                <td><span class="badge badge-mid">高</span></td>
+            </tr>
+            <tr>
+                <td><strong>拓荆科技</strong> (688072)</td>
+                <td><span class="badge badge-low">开门战法</span></td>
+                <td>640-660</td>
+                <td>10%</td>
+                <td style="color: var(--green)">580</td>
+                <td style="color: var(--up)">850</td>
+                <td><span class="badge badge-mid">高</span></td>
+            </tr>
+            <tr>
+                <td><strong>盛合晶微</strong> (688820)</td>
+                <td><span class="badge badge-low">开门战法</span></td>
+                <td>180-190</td>
+                <td>5%</td>
+                <td style="color: var(--green)">160</td>
+                <td style="color: var(--up)">260</td>
+                <td><span class="badge badge-high">极高</span></td>
+            </tr>
+            <tr>
+                <td><strong>四方达</strong> (300179)</td>
+                <td><span class="badge badge-mid">转势战法</span></td>
+                <td>33.00-34.50</td>
+                <td>10%</td>
+                <td style="color: var(--green)">30.00</td>
+                <td style="color: var(--up)">42.00</td>
+                <td><span class="badge badge-mid">高</span></td>
+            </tr>
+            <tr>
+                <td><strong>容大感光</strong> (300576)</td>
+                <td><span class="badge badge-low">开门战法</span></td>
+                <td>47.00-48.50</td>
+                <td>10%</td>
+                <td style="color: var(--green)">44.00</td>
+                <td style="color: var(--up)">60.00</td>
+                <td><span class="badge badge-mid">高</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 第一梯队 -->
+<div class="section-title">第一梯队（可介入）</div>
+<div class="candidate-grid">
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">满坤科技</span>
+            <span class="candidate-code">301132</span>
+        </div>
+        <span class="candidate-score">★4</span>
+    </div>
+    <div class="candidate-method method-zhuanshi">转势战法</div>
+    <div class="candidate-analysis">底部盘整后放量突破，量比2.92，换手率14.13%，今日大涨11.40%突破前期平台。20日跌幅-4.76%显示此前处于调整，今日一阳突破。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">40.84</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+11.40%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">39.50-40.50</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">37.00</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">46.00</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">15%</span></div>
+    </div>
+</div>
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">扬杰科技</span>
+            <span class="candidate-code">300373</span>
+        </div>
+        <span class="candidate-score">★4</span>
+    </div>
+    <div class="candidate-method method-kaimen">开门战法</div>
+    <div class="candidate-analysis">主升浪趋势延续，5日涨幅17.00%，20日涨幅15.44%，今日放量上涨10.26%，量比1.58，主力资金净流入3.51亿。半导体功率器件龙头，业绩稳健。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">95.24</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+10.26%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">92.00-94.00</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">88.00</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">108.00</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">20%</span></div>
+    </div>
+</div>
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">达瑞电子</span>
+            <span class="candidate-code">300976</span>
+        </div>
+        <span class="candidate-score">★4</span>
+    </div>
+    <div class="candidate-method method-kaimen">开门战法</div>
+    <div class="candidate-analysis">趋势延续，5日涨幅15.82%，20日涨幅45.04%，今日大涨11.63%。消费电子+新能源结构件双轮驱动，2025年营收31.88亿，净利2.82亿。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">89.39</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+11.63%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">86.00-88.00</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">82.00</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">100.00</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">15%</span></div>
+    </div>
+</div>
+</div>
+
+<!-- 第二梯队 -->
+<div class="section-title">第二梯队（等回调）</div>
+<div class="candidate-grid">
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">新雷能</span>
+            <span class="candidate-code">300593</span>
+        </div>
+        <span class="candidate-score">★3</span>
+    </div>
+    <div class="candidate-method method-zhuanshi">转势战法</div>
+    <div class="candidate-analysis">今日大涨17.05%，量比2.16，换手率19.62%，主力资金净流入1.72亿。但5日涨幅已达26.13%，短期涨幅过大，建议等回调至35元附近再考虑。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">39.00</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+17.05%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">34.50-35.50</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">32.00</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">45.00</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">10%</span></div>
+    </div>
+</div>
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">拓荆科技</span>
+            <span class="candidate-code">688072</span>
+        </div>
+        <span class="candidate-score">★3</span>
+    </div>
+    <div class="candidate-method method-kaimen">开门战法</div>
+    <div class="candidate-analysis">半导体设备龙头，5日涨幅37.28%，20日涨幅82.55%，趋势极强但短期涨幅巨大。今日振幅25.32%，波动剧烈。建议等回调至650元附近。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">721.00</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+16.86%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">640-660</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">580</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">850</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">10%</span></div>
+    </div>
+</div>
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">盛合晶微</span>
+            <span class="candidate-code">688820</span>
+        </div>
+        <span class="candidate-score">★3</span>
+    </div>
+    <div class="candidate-method method-kaimen">开门战法</div>
+    <div class="candidate-analysis">先进封测新股，年初至今涨幅987%，20日涨幅125%。今日换手率27.95%，波动极大。基本面优秀（2025年营收65.2亿），但估值过高，建议观望。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">213.93</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+13.82%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">180-190</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">160</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">260</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">5%</span></div>
+    </div>
+</div>
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">四方达</span>
+            <span class="candidate-code">300179</span>
+        </div>
+        <span class="candidate-score">★3</span>
+    </div>
+    <div class="candidate-method method-zhuanshi">转势战法</div>
+    <div class="candidate-analysis">培育钻石概念，今日大涨14.77%，换手率27.10%，量比1.73。年初至今涨幅146%，20日涨幅29.97%，短期涨幅较大，建议等回调。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">37.21</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+14.77%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">33.00-34.50</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">30.00</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">42.00</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">10%</span></div>
+    </div>
+</div>
+<div class="candidate-card">
+    <div class="candidate-header">
+        <div>
+            <span class="candidate-name">容大感光</span>
+            <span class="candidate-code">300576</span>
+        </div>
+        <span class="candidate-score">★3</span>
+    </div>
+    <div class="candidate-method method-kaimen">开门战法</div>
+    <div class="candidate-analysis">电子化学品龙头，今日大涨14.02%，换手率33.78%，量比1.94。20日涨幅36.36%，趋势良好但短期涨幅较大，建议等回调至48元附近。</div>
+    <div class="candidate-plan">
+        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">52.20</span></div>
+        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+14.02%</span></div>
+        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">47.00-48.50</span></div>
+        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">44.00</span></div>
+        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">60.00</span></div>
+        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">10%</span></div>
+    </div>
+</div>
+</div>
+
+<!-- 排除说明 -->
+<div class="exclude-box">
+    <div class="exclude-title">排除说明</div>
+    <div class="exclude-item">
+        <span class="exclude-name">中芯国际 (688981)</span>
+        <span class="exclude-reason">市值过大（1.25万亿），弹性不足，更适合作为板块风向标</span>
+    </div>
+    <div class="exclude-item">
+        <span class="exclude-name">大普微-UW (301666)</span>
+        <span class="exclude-reason">年初至今涨幅1694%，PE 27789倍，估值极度泡沫化，今日下跌6.97%显示资金出逃</span>
+    </div>
+    <div class="exclude-item">
+        <span class="exclude-name">华虹公司 (688347)</span>
+        <span class="exclude-reason">20cm涨停但市值3732亿，盘子过大，次日溢价空间有限</span>
+    </div>
+    <div class="exclude-item">
+        <span class="exclude-name">长海股份 (300196)</span>
+        <span class="exclude-reason">20cm涨停，但市盈率偏高，且为概念炒作（电子布），持续性存疑</span>
+    </div>
+    <div class="exclude-item">
+        <span class="exclude-name">索辰科技 (688507)</span>
+        <span class="exclude-reason">PE 1260倍，估值过高，虽然趋势强但风险极大</span>
+    </div>
+</div>
+
+<!-- 仓位配置建议 -->
+<div class="position-box">
+    <div class="position-title">仓位配置建议</div>
+    <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+        <p><strong>当前市场环境：</strong>上证指数估值百分位99.46%，处于历史极高估区间。创业板年初至今涨幅24%，科技板块过热。</p>
+        <p><strong>建议总仓位：</strong>不超过 50%</p>
+        <p><strong>配置方向：</strong></p>
+        <ul style="margin-left: 20px; margin-top: 8px;">
+            <li>半导体/电子（第一梯队）：30% — 趋势最强，但注意高位风险</li>
+            <li>消费电子（达瑞电子）：10% — 业绩稳健，估值相对合理</li>
+            <li>现金储备：60% — 市场处于高位，保留机动资金</li>
+        </ul>
+        <p style="margin-top: 12px;"><strong>操作纪律：</strong>严格执行止损，单票亏损不超过总资金的3%。次日开盘若高开超过3%，放弃买入计划。</p>
+    </div>
+</div>
+
+<!-- 风险提示 -->
+<div class="risk-box">
+    <div class="risk-title">风险提示</div>
+    <div class="risk-content">
+        <p>1. <strong>估值风险：</strong>上证指数PE-TTM 17.51倍，历史百分位99.46%，处于历史极高估区间。市场随时可能面临回调压力。</p>
+        <p>2. <strong>板块过热：</strong>半导体、电子板块年初至今涨幅超60%，短期涨幅巨大，追高风险极高。</p>
+        <p>3. <strong>个股风险：</strong>部分候选股（如盛合晶微、大普微）估值极高，波动剧烈，不适合普通投资者。</p>
+        <p>4. <strong>流动性风险：</strong>部分科创板/创业板个股换手率极高（如容大感光33.78%），存在资金博弈特征。</p>
+        <p>5. <strong>系统性风险：</strong>当前市场处于高位，任何宏观利空（如美联储政策、地缘政治）都可能引发剧烈调整。</p>
+        <p style="margin-top: 12px; color: var(--red);"><strong>免责声明：本报告仅供参考，不构成投资建议。股市有风险，投资需谨慎。</strong></p>
+    </div>
+</div>
+
+<footer>
+    <p>一阳指选股复盘 · {date_str} · 数据仅供参考</p>
+    <p style="margin-top: 4px;">Generated by WorkBuddy Automation</p>
+</footer>
+
+</div>
+</body>
+</html>
