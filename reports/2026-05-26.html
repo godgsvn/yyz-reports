@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-05-26</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-card: #161b22;
+    --bg-elevated: #1c2128;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --up: #ff4d4f;
+    --down: #238636;
+    --warning: #d29922;
+    --danger: #f85149;
+    --success: #3fb950;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+  h1 { font-size: 24px; margin: 0 0 8px; color: var(--accent); }
+  .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    font-size: 16px;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent);
+  }
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .index-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .index-card .name { font-size: 14px; color: var(--text-muted); }
+  .index-card .price { font-size: 28px; font-weight: 700; margin: 4px 0; }
+  .index-card .change { font-size: 16px; font-weight: 600; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .muted { color: var(--text-muted); font-size: 13px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--text-muted);
+    font-weight: 500;
+    background: var(--bg-elevated);
+  }
+  tr:hover td { background: rgba(88,166,255,0.05); }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .tag-up { background: rgba(255,77,79,0.15); color: var(--up); }
+  .tag-down { background: rgba(35,134,54,0.15); color: var(--down); }
+  .tag-warn { background: rgba(210,153,34,0.15); color: var(--warning); }
+  .tag-info { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .plan-box {
+    background: var(--bg-elevated);
+    border-left: 3px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 10px 0;
+  }
+  .plan-box h4 { margin: 0 0 8px; color: var(--accent); font-size: 14px; }
+  .plan-box p { margin: 4px 0; font-size: 13px; }
+  .candidate {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .candidate h4 { margin: 0 0 8px; font-size: 15px; }
+  .candidate .meta { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+  .candidate .score {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .score-high { background: rgba(63,185,80,0.15); color: var(--success); }
+  .score-mid { background: rgba(210,153,34,0.15); color: var(--warning); }
+  .score-low { background: rgba(248,81,73,0.15); color: var(--danger); }
+  .exclude { color: var(--text-muted); text-decoration: line-through; }
+  .risk-banner {
+    background: rgba(248,81,73,0.1);
+    border: 1px solid rgba(248,81,73,0.3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .footer { text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>一阳指选股复盘 · 2026-05-26</h1>
+  <div class="subtitle">收盘快照 18:00 | 数据来源：neodata-financial-search + westock-data</div>
+
+  <!-- 市场概览 -->
+  <div class="card">
+    <h2>市场概览</h2>
+    <div class="index-grid">
+      <div class="index-card">
+        <div class="name">上证指数 000001.SH</div>
+        <div class="price">4,145.37</div>
+        <div class="change down">-0.17% (-7.20)</div>
+        <div class="muted">量比 1.36 | 年初至今 +4.55% | 估值分位 99.63%</div>
+      </div>
+      <div class="index-card">
+        <div class="name">深证成指 399001.SZ</div>
+        <div class="price">15,876.16</div>
+        <div class="change up">+0.12% (+19.55)</div>
+        <div class="muted">量比 — | 年初至今 +16.70% | 估值分位 —</div>
+      </div>
+      <div class="index-card">
+        <div class="name">创业板指 399006.SZ</div>
+        <div class="price">4,043.07</div>
+        <div class="change up">+0.54% (+21.91)</div>
+        <div class="muted">量比 — | 年初至今 +24.67% | 估值分位 —</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;font-size:13px;color:var(--text-muted);">
+      两市成交约 3.24万亿 | 上涨 1250家 / 下跌 3658家 / 平盘 63家 | 涨停 49家 / 跌停 17家
+    </div>
+  </div>
+
+  <!-- 热门板块TOP5 -->
+  <div class="card">
+    <h2>热门板块 TOP5（概念涨幅）</h2>
+    <table>
+      <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>换手率</th><th>5日涨幅</th><th>领涨股</th></tr>
+      <tr><td>1</td><td>有色(锡)</td><td class="up">+4.80%</td><td>2.75%</td><td class="up">+5.80%</td><td>华锡有色 +10.01%</td></tr>
+      <tr><td>2</td><td>博通概念</td><td class="up">+4.64%</td><td>6.28%</td><td class="up">+10.58%</td><td>生益电子 +20.00%</td></tr>
+      <tr><td>3</td><td>有色(锑)</td><td class="up">+3.31%</td><td>3.77%</td><td class="up">+1.13%</td><td>华锡有色 +10.01%</td></tr>
+      <tr><td>4</td><td>纳米压印</td><td class="up">+3.01%</td><td>21.48%</td><td class="up">+22.18%</td><td>利和兴 +6.88%</td></tr>
+      <tr><td>5</td><td>白银概念</td><td class="up">+2.72%</td><td>3.14%</td><td class="up">+3.06%</td><td>国城矿业 +7.87%</td></tr>
+    </table>
+  </div>
+
+  <!-- 主力资金TOP3 -->
+  <div class="card">
+    <h2>主力资金净流入 TOP3（行业）</h2>
+    <table>
+      <tr><th>排名</th><th>行业名称</th><th>涨跌幅</th><th>主力净流入(万元)</th><th>5日净流入(万元)</th><th>领涨股</th></tr>
+      <tr><td>1</td><td>工业金属</td><td class="up">+4.27%</td><td class="up">+521,944.65</td><td class="up">+116,464.61</td><td>中国铝业 +10.01%</td></tr>
+      <tr><td>2</td><td>贵金属</td><td class="up">+4.06%</td><td class="up">+99,381.23</td><td class="up">+11,472.84</td><td>招金黄金 +10.00%</td></tr>
+      <tr><td>3</td><td>玻璃玻纤</td><td class="up">+2.65%</td><td class="up">+55,911.45</td><td class="up">+342,312.69</td><td>山东玻纤 +10.01%</td></tr>
+    </table>
+  </div>
+
+  <!-- 申万一级行业涨幅TOP5 -->
+  <div class="card">
+    <h2>申万一级行业涨幅 TOP5</h2>
+    <table>
+      <tr><th>排名</th><th>行业名称</th><th>涨跌幅</th><th>换手率</th><th>5日涨幅</th><th>20日涨幅</th><th>领涨股</th></tr>
+      <tr><td>1</td><td>工业金属</td><td class="up">+4.27%</td><td>3.57%</td><td class="up">+6.30%</td><td class="up">+0.11%</td><td>中国铝业 +10.01%</td></tr>
+      <tr><td>2</td><td>贵金属</td><td class="up">+4.06%</td><td>3.17%</td><td class="up">+3.34%</td><td class="down">-8.44%</td><td>招金黄金 +10.00%</td></tr>
+      <tr><td>3</td><td>非金属材料Ⅱ</td><td class="up">+3.15%</td><td>4.99%</td><td class="up">+11.66%</td><td class="up">+29.48%</td><td>联瑞新材 +12.51%</td></tr>
+      <tr><td>4</td><td>玻璃玻纤</td><td class="up">+2.65%</td><td>7.69%</td><td class="up">+16.98%</td><td class="up">+28.81%</td><td>山东玻纤 +10.01%</td></tr>
+      <tr><td>5</td><td>元件</td><td class="up">+2.40%</td><td>8.53%</td><td class="up">+14.94%</td><td class="up">+32.74%</td><td>生益电子 +20.00%</td></tr>
+    </table>
+  </div>
+
+  <!-- 次日操作计划 -->
+  <div class="card">
+    <h2>次日操作计划</h2>
+    <div class="plan-box">
+      <h4>第一梯队（可介入）</h4>
+      <p><span class="tag tag-up">转势战法</span> <strong>中国铝业 601600</strong> — 买入区间 11.5~12.0元，止损 11.0元，止盈 13.5元</p>
+      <p><span class="tag tag-up">转势战法</span> <strong>华锡有色 600301</strong> — 买入区间 57~60元，止损 54元，止盈 70元</p>
+    </div>
+    <div class="plan-box">
+      <h4>第二梯队（等回调）</h4>
+      <p><span class="tag tag-warn">开门战法</span> <strong>山东玻纤 605006</strong> — 等回调至 16~17元区间观察</p>
+      <p><span class="tag tag-warn">开门战法</span> <strong>生益电子 688183</strong> — 等回调至 115~120元区间观察</p>
+    </div>
+    <div class="plan-box">
+      <h4>仓位配置建议</h4>
+      <p>总仓位建议 ≤ 20%（上证估值分位 99.63% 历史极高位，市场风险极大）</p>
+      <p>短线仓位 ≤ 10%，单票不超过总仓位 30%</p>
+    </div>
+  </div>
+
+  <!-- 转势战法候选详情 -->
+  <div class="card">
+    <h2>转势战法候选详情</h2>
+
+    <div class="candidate">
+      <h4>中国铝业 601600 <span class="score score-high">★★★★☆</span></h4>
+      <div class="meta">收盘价 12.09元 | 涨幅 +10.01% | 换手率 4.14% | 量比 2.43</div>
+      <p><strong>底部盘整：</strong>4月中旬至5月中旬在 11.2~12.8元区间震荡整理，5月15日冲高后回落至 10.84元低点，形成双底结构。</p>
+      <p><strong>一阳突破：</strong>今日放量涨停突破近期整理平台，收盘价 12.09元站上 MA5(11.21)、MA10(11.17)、MA20(11.52)。</p>
+      <p><strong>量能：</strong>今日成交额 63.7亿，较昨日 21.3亿放大约 3倍，放量明显。</p>
+      <p><strong>均线：</strong>MA5上穿MA10形成金叉，MA20在 11.52元提供支撑。MACD DIF(-0.244) 接近DEA(-0.283)，即将金叉。</p>
+      <p><strong>结论：</strong>符合转势战法介入条件。工业金属板块今日主力净流入第一（+52.2亿），板块效应强。</p>
+    </div>
+
+    <div class="candidate">
+      <h4>华锡有色 600301 <span class="score score-high">★★★★☆</span></h4>
+      <div class="meta">收盘价 61.22元 | 涨幅 +10.01% | 换手率 8.34% | 量比 1.82</div>
+      <p><strong>底部盘整：</strong>4月下旬在 48~52元区间筑底，5月上旬反弹至 64元后回落至 52元附近，形成W底形态。</p>
+      <p><strong>一阳突破：</strong>今日放量涨停突破近期高点 58元，收盘价 61.22元创近期新高。</p>
+      <p><strong>量能：</strong>今日成交额 13.3亿，较昨日 9.4亿放量约 41%，量能配合良好。</p>
+      <p><strong>均线：</strong>收盘价站上全部短期均线 MA5(55.35)、MA10(56.21)、MA20(55.92)、MA30(54.60)。MACD DIF(0.882) 在DEA(0.948)附近，即将金叉。</p>
+      <p><strong>结论：</strong>符合转势战法介入条件。锡+锑双概念叠加，有色(锡)板块今日涨幅第一（+4.80%）。</p>
+    </div>
+  </div>
+
+  <!-- 开门战法候选详情 -->
+  <div class="card">
+    <h2>开门战法候选详情</h2>
+
+    <div class="candidate">
+      <h4>山东玻纤 605006 <span class="score score-mid">★★★☆☆</span></h4>
+      <div class="meta">收盘价 17.92元 | 涨幅 +10.01% | 换手率 12.19% | 量比 1.09</div>
+      <p><strong>趋势状态：</strong>4月下旬从 9元附近启动，至今涨幅已超 100%，处于主升浪阶段。</p>
+      <p><strong>四条件检查：</strong></p>
+      <p>① 日K阳线：今日涨停阳线 ✓</p>
+      <p>② 均线多头排列：MA5(15.73) > MA10(15.42) > MA20(14.24) > MA30(12.99) ✓</p>
+      <p>③ 成交量放大：今日成交额 12.2亿，较5日均量放大，但量比仅 1.09，不算显著放量</p>
+      <p>④ MACD红柱：MACD DIF(1.451) > DEA(1.325)，红柱 0.253 ✓</p>
+      <p><strong>结论：</strong>四条件基本满足，但涨幅已大（年初至今 +145%），追高风险高。建议等回调至 16~17元（MA5附近）再观察。</p>
+    </div>
+
+    <div class="candidate">
+      <h4>生益电子 688183 <span class="score score-mid">★★★☆☆</span></h4>
+      <div class="meta">收盘价 132.10元 | 涨幅 +20.00% | 换手率 9.27% | 量比 2.43</div>
+      <p><strong>趋势状态：</strong>4月中旬从 93元启动，今日20CM涨停创历史新高 132.10元，处于强主升浪。</p>
+      <p><strong>四条件检查：</strong></p>
+      <p>① 日K阳线：今日20CM涨停大阳线 ✓</p>
+      <p>② 均线多头排列：MA5(110.81) > MA10(107.09) > MA20(108.60) > MA30(108.49) ✓（MA5>MA10>MA30，MA20略低于MA30需关注）</p>
+      <p>③ 成交量放大：今日成交额 97.1亿，较昨日 51.3亿放大近 1倍，量比 2.43 ✓</p>
+      <p>④ MACD红柱：MACD DIF(3.429) > DEA(2.318)，红柱 2.222，强势 ✓</p>
+      <p><strong>结论：</strong>四条件满足，但今日20CM涨停后追高风险极大。主力资金今日净流入 6.87亿，但超大单净流出 3.22亿（机构可能在高位派发）。建议等回调至 115~120元再观察。</p>
+    </div>
+  </div>
+
+  <!-- 排除说明 -->
+  <div class="card">
+    <h2>排除说明</h2>
+    <table>
+      <tr><th>股票</th><th>排除原因</th></tr>
+      <tr><td>招金黄金 000506</td><td>今日涨停但主力资金净流入仅 1.83亿，超大单净流出 1057万，机构参与度不高；黄金板块受国际金价波动影响大，不确定性高</td></tr>
+      <tr><td>大唐发电 601991</td><td>今日下跌 -3.24%，主力资金净流出 4.84亿，5日净流出 15.1亿，资金持续流出，不符合任何战法</td></tr>
+      <tr><td>长电科技 600584</td><td>今日涨停但主力资金净流出 19.0亿，超大单净流出 15.7亿，机构大幅派发，风险极高</td></tr>
+      <tr><td>华天科技 002185</td><td>今日涨停，主力资金净流入 9.49亿，但超大单净流出 2.24亿，机构有分歧；且封板较早（开盘价即涨停），介入机会已失</td></tr>
+    </table>
+  </div>
+
+  <!-- 风险提示 -->
+  <div class="risk-banner">
+    <strong>⚠️ 风险提示</strong><br>
+    上证指数估值分位 99.63%，处于历史极高位。今日两市 3658只个股下跌，跌停 17家，市场赚钱效应差。<br>
+    尽管有色/贵金属板块今日强势，但整体市场处于高风险区域。建议严格控制仓位（≤20%），设置好止损，不宜重仓追高。<br><br>
+    <em>本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。</em>
+  </div>
+
+  <div class="footer">
+    一阳指选股复盘 · 2026-05-26 ·  Generated by WorkBuddy
+  </div>
+</div>
+</body>
+</html>
