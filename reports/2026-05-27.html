@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一阳指选股复盘 · 2026-05-27</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #1c2128;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --green: #3fb950;
+            --red: #f85149;
+            --accent: #58a6ff;
+            --warning: #d29922;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header .date { color: var(--text-secondary); font-size: 14px; }
+        .header .tag {
+            display: inline-block;
+            background: var(--bg-secondary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 10px;
+            border: 1px solid var(--border);
+        }
+
+        /* 指数卡片 */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .index-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .index-card:hover { transform: translateY(-2px); }
+        .index-card .name { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
+        .index-card .price { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+        .index-card .change { font-size: 16px; font-weight: 600; }
+        .index-card .green { color: var(--green); }
+        .index-card .red { color: var(--red); }
+        .index-card .details {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        /* 板块表格 */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .section h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section h2 .icon { font-size: 20px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 13px;
+            background: var(--bg-secondary);
+        }
+        tr:hover { background: rgba(88, 166, 255, 0.05); }
+        .tag-green {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--green);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .tag-red {
+            background: rgba(248, 81, 73, 0.15);
+            color: var(--red);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        /* 候选股卡片 */
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .stock-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+        }
+        .stock-card .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .stock-card .stock-name { font-size: 16px; font-weight: 600; }
+        .stock-card .stock-code { color: var(--text-secondary); font-size: 13px; }
+        .stock-card .stock-change { font-size: 18px; font-weight: 700; }
+        .stock-card .analysis {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .stock-card .analysis li { margin-left: 16px; }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-buy { background: rgba(63, 185, 80, 0.2); color: var(--green); }
+        .badge-wait { background: rgba(210, 153, 34, 0.2); color: var(--warning); }
+        .badge-skip { background: rgba(139, 148, 158, 0.2); color: var(--text-secondary); }
+
+        /* 操作计划 */
+        .plan-box {
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(88, 166, 255, 0.05));
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+        .plan-box h3 { color: var(--accent); margin-bottom: 12px; font-size: 16px; }
+        .plan-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        .plan-item:last-child { border-bottom: none; }
+        .plan-label { color: var(--text-secondary); }
+        .plan-value { font-weight: 600; }
+
+        /* 风险提示 */
+        .risk-box {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--red);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+        .risk-box h3 { color: var(--red); margin-bottom: 8px; font-size: 15px; }
+        .risk-box p { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>一阳指选股复盘</h1>
+            <div class="date">2026年5月27日 星期三</div>
+            <div class="tag">A股交易日复盘</div>
+        </div>
+
+        <!-- 市场概览 -->
+        <div class="index-grid">
+            <div class="index-card">
+                <div class="name">上证指数 (000001.SH)</div>
+                <div class="price">4,093.73</div>
+                <div class="change red">-1.25% (-51.64点)</div>
+                <div class="details">
+                    <div>成交额: 1.47万亿</div>
+                    <div>换手率: 1.37%</div>
+                    <div>年初至今: +3.24%</div>
+                    <div>估值百分位: 99.59%</div>
+                </div>
+            </div>
+            <div class="index-card">
+                <div class="name">深证成指 (399001.SZ)</div>
+                <div class="price">15,736.47</div>
+                <div class="change red">-0.88% (-139.69点)</div>
+                <div class="details">
+                    <div>成交额: 1.77万亿</div>
+                    <div>换手率: 3.36%</div>
+                    <div>年初至今: +15.67%</div>
+                    <div>估值区间: 正常偏高</div>
+                </div>
+            </div>
+            <div class="index-card">
+                <div class="name">创业板指 (399006.SZ)</div>
+                <div class="price">4,045.77</div>
+                <div class="change green">+0.07% (+2.70点)</div>
+                <div class="details">
+                    <div>成交额: 8,346亿</div>
+                    <div>换手率: 4.33%</div>
+                    <div>年初至今: +24.76%</div>
+                    <div>盘中最高: 4,148.23</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 热门板块TOP5 -->
+        <div class="section">
+            <h2><span class="icon">🔥</span> 今日热门板块 TOP5（概念涨幅）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>板块名称</th>
+                        <th>涨跌幅</th>
+                        <th>领涨股</th>
+                        <th>领涨股涨幅</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>爱奇艺概念</td>
+                        <td><span class="tag-green">+2.90%</span></td>
+                        <td>百纳千成</td>
+                        <td><span class="tag-green">+20.04%</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>昨日连板</td>
+                        <td><span class="tag-green">+2.54%</span></td>
+                        <td>香江控股</td>
+                        <td><span class="tag-green">+10.00%</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>昨日涨停</td>
+                        <td><span class="tag-green">+1.36%</span></td>
+                        <td>步步高</td>
+                        <td><span class="tag-green">+10.12%</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>被动元件概念</td>
+                        <td><span class="tag-green">+1.34%</span></td>
+                        <td>艾华集团</td>
+                        <td><span class="tag-green">+10.02%</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>电力改革</td>
+                        <td><span class="tag-green">+1.31%</span></td>
+                        <td>粤电力Ａ</td>
+                        <td><span class="tag-green">+10.04%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 主力资金TOP3 -->
+        <div class="section">
+            <h2><span class="icon">💰</span> 主力资金净流入 TOP3（行业）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>行业名称</th>
+                        <th>涨跌幅</th>
+                        <th>主力净流入</th>
+                        <th>领涨股</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>电力</td>
+                        <td><span class="tag-green">+1.02%</span></td>
+                        <td><span class="tag-green">+22.60亿</span></td>
+                        <td>粤电力Ａ (+10.04%)</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>白酒Ⅱ</td>
+                        <td><span class="tag-green">+2.15%</span></td>
+                        <td><span class="tag-green">+17.73亿</span></td>
+                        <td>水井坊 (+10.02%)</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>电池</td>
+                        <td><span class="tag-green">+1.43%</span></td>
+                        <td><span class="tag-green">+11.48亿</span></td>
+                        <td>德新科技 (+10.01%)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 申万行业涨幅TOP5 -->
+        <div class="section">
+            <h2><span class="icon">📊</span> 申万一级行业涨幅 TOP5</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>行业名称</th>
+                        <th>涨跌幅</th>
+                        <th>领涨股</th>
+                        <th>领涨股涨幅</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>综合Ⅱ</td>
+                        <td><span class="tag-green">+2.76%</span></td>
+                        <td>东阳光</td>
+                        <td><span class="tag-green">+6.88%</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>白酒Ⅱ</td>
+                        <td><span class="tag-green">+2.15%</span></td>
+                        <td>水井坊</td>
+                        <td><span class="tag-green">+10.02%</span></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>煤炭开采</td>
+                        <td><span class="tag-green">+1.67%</span></td>
+                        <td>辽宁能源</td>
+                        <td><span class="tag-green">+9.95%</span></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>影视院线</td>
+                        <td><span class="tag-green">+1.61%</span></td>
+                        <td>百纳千成</td>
+                        <td><span class="tag-green">+20.04%</span></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>电池</td>
+                        <td><span class="tag-green">+1.43%</span></td>
+                        <td>德新科技</td>
+                        <td><span class="tag-green">+10.01%</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 次日操作计划 -->
+        <div class="section">
+            <h2><span class="icon">📋</span> 次日操作计划（2026-05-28）</h2>
+            <div class="plan-box">
+                <h3>🟢 第一梯队（可介入）</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">今日市场分化明显，沪指大跌1.25%但创业板微红，科技板块回调明显。暂无明确符合一阳指转势/开门战法四条件的候选股，建议观望为主。</p>
+                <div class="plan-item">
+                    <span class="plan-label">买入区间</span>
+                    <span class="plan-value">—</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-label">建议仓位</span>
+                    <span class="plan-value">空仓观望 / ≤20%</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-label">止损位</span>
+                    <span class="plan-value">—</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-label">止盈位</span>
+                    <span class="plan-value">—</span>
+                </div>
+            </div>
+            <div class="plan-box" style="margin-top: 16px; border-color: var(--warning); background: linear-gradient(135deg, rgba(210, 153, 34, 0.1), rgba(210, 153, 34, 0.05));">
+                <h3 style="color: var(--warning);">⏳ 第二梯队（等回调）</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">关注科技主线回调后的低吸机会，特别是光通信、半导体封测、MLCC等方向。</p>
+                <div class="plan-item">
+                    <span class="plan-label">关注方向</span>
+                    <span class="plan-value">光模块 / 先进封测 / 被动元件</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-label">介入条件</span>
+                    <span class="plan-value">缩量回调至5/10日线附近</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 转势战法候选 -->
+        <div class="section">
+            <h2><span class="icon">🔄</span> 转势战法候选分析</h2>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">条件：底部盘整 + 一阳突破 + 量能放大 + 均线支撑</p>
+            <div class="stock-grid">
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div>
+                            <div class="stock-name">粤电力Ａ</div>
+                            <div class="stock-code">sz000539</div>
+                        </div>
+                        <div class="stock-change green">+10.04%</div>
+                    </div>
+                    <span class="badge badge-wait">待观察</span>
+                    <ul class="analysis">
+                        <li>电力板块今日领涨，主力净流入第一</li>
+                        <li>涨停封板，但属于防御性板块轮动</li>
+                        <li>非科技主线，持续性待验证</li>
+                        <li>不符合转势战法核心条件</li>
+                    </ul>
+                </div>
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div>
+                            <div class="stock-name">水井坊</div>
+                            <div class="stock-code">sh600779</div>
+                        </div>
+                        <div class="stock-change green">+10.02%</div>
+                    </div>
+                    <span class="badge badge-skip">排除</span>
+                    <ul class="analysis">
+                        <li>白酒板块反弹，但年初至今-12%</li>
+                        <li>属于超跌反弹性质</li>
+                        <li>非当前市场主线方向</li>
+                        <li>排除：板块趋势不明</li>
+                    </ul>
+                </div>
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div>
+                            <div class="stock-name">百纳千成</div>
+                            <div class="stock-code">sz300291</div>
+                        </div>
+                        <div class="stock-change green">+20.04%</div>
+                    </div>
+                    <span class="badge badge-skip">排除</span>
+                    <ul class="analysis">
+                        <li>20cm涨停，影视院线板块</li>
+                        <li>属于概念炒作，基本面支撑弱</li>
+                        <li>成交量和持续性待观察</li>
+                        <li>排除：非主线+高风险</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 开门战法候选 -->
+        <div class="section">
+            <h2><span class="icon">🚪</span> 开门战法候选分析</h2>
+            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">条件：主升浪趋势延续 + 四条件（趋势/量能/均线/资金）</p>
+            <div class="stock-grid">
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div>
+                            <div class="stock-name">新易盛</div>
+                            <div class="stock-code">sz300502</div>
+                        </div>
+                        <div class="stock-change">近期强势</div>
+                    </div>
+                    <span class="badge badge-wait">等回调</span>
+                    <ul class="analysis">
+                        <li>光模块龙头，股价站上700元创新高</li>
+                        <li>5月25日主力净流入31.73亿</li>
+                        <li>AI算力需求爆发，订单排至2027年</li>
+                        <li>今日科技板块整体回调，等缩量回踩5日线</li>
+                    </ul>
+                </div>
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div>
+                            <div class="stock-name">华天科技</div>
+                            <div class="stock-code">sz002185</div>
+                        </div>
+                        <div class="stock-change green">+10.02%</div>
+                    </div>
+                    <span class="badge badge-wait">等回调</span>
+                    <ul class="analysis">
+                        <li>先进封测龙头，5月26日龙虎榜净买入5.87亿</li>
+                        <li>投资30亿扩产，年封装4.3亿只</li>
+                        <li>北向资金净买入4.07亿</li>
+                        <li>今日涨停但板块分化，等次日确认</li>
+                    </ul>
+                </div>
+                <div class="stock-card">
+                    <div class="stock-header">
+                        <div>
+                            <div class="stock-name">阳光电源</div>
+                            <div class="stock-code">sz300274</div>
+                        </div>
+                        <div class="stock-change">近期强势</div>
+                    </div>
+                    <span class="badge badge-wait">等回调</span>
+                    <ul class="analysis">
+                        <li>储能龙头，获阿联酋7.5GWh大单</li>
+                        <li>5月26日主力净流入22.82亿</li>
+                        <li>自5月15日累计涨幅32.56%</li>
+                        <li>短期涨幅较大，等缩量回调介入</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 排除说明 -->
+        <div class="section">
+            <h2><span class="icon">🚫</span> 排除说明</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>股票</th>
+                        <th>排除原因</th>
+                        <th>类型</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ST/*ST 个股</td>
+                        <td>风险警示股，不符合选股标准</td>
+                        <td><span class="badge badge-skip">风险排除</span></td>
+                    </tr>
+                    <tr>
+                        <td>连续一字板</td>
+                        <td>无介入机会，开板风险大</td>
+                        <td><span class="badge badge-skip">流动性排除</span></td>
+                    </tr>
+                    <tr>
+                        <td>非主线板块</td>
+                        <td>白酒、影视等防御/概念板块持续性差</td>
+                        <td><span class="badge badge-skip">板块排除</span></td>
+                    </tr>
+                    <tr>
+                        <td>高位放量滞涨</td>
+                        <td>电子板块今日主力净流出234亿，短期见顶信号</td>
+                        <td><span class="badge badge-skip">技术排除</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 仓位配置建议 -->
+        <div class="section">
+            <h2><span class="icon">⚖️</span> 仓位配置建议</h2>
+            <div class="plan-box" style="border-color: var(--warning);">
+                <h3 style="color: var(--warning);">当前建议：低仓位防守</h3>
+                <div class="plan-item">
+                    <span class="plan-label">总仓位建议</span>
+                    <span class="plan-value" style="color: var(--warning);">≤ 20%</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-label">科技成长</span>
+                    <span class="plan-value">0-10%（等回调）</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-label">防御配置</span>
+                    <span class="plan-value">10-20%（电力/煤炭）</span>
+                </div>
+                <div class="plan-item">
+                    <span class="plan-label">现金比例</span>
+                    <span class="plan-value">≥ 80%</span>
+                </div>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 12px;">
+                理由：沪指大跌1.25%回踩60日线，创业板指盘中创新高后回落，科技板块主力大幅流出234亿，市场分歧加大。建议控制仓位，等待明确信号。
+            </p>
+        </div>
+
+        <!-- 风险提示 -->
+        <div class="risk-box">
+            <h3>⚠️ 风险提示</h3>
+            <p>
+                1. 上证指数估值百分位99.59%，处于历史极高水平，系统性风险较大。<br>
+                2. 创业板指盘中超越沪指后回落，短期或有震荡消化需求。<br>
+                3. 电子板块主力资金连续大幅流出，短期注意高位回调风险。<br>
+                4. 本报告仅供参考，不构成投资建议。股市有风险，投资需谨慎。<br>
+                5. 一阳指战法需结合次日开盘情况动态调整，请勿机械执行。
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>一阳指选股复盘系统 · 自动生成于 2026-05-27 18:00</p>
+            <p>数据来源：neodata-financial-search · 仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+</html>
