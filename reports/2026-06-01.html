@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-06-01</title>
+<style>
+  :root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-card: #1c2128;
+    --border: #30363d;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent: #58a6ff;
+    --up: #ff4d4f;
+    --down: #00b578;
+    --warn: #f0883e;
+    --success: #3fb950;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 24px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .index-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .index-name { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+  .index-price { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .index-change { font-size: 14px; font-weight: 600; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .index-detail {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 12px;
+    background: var(--bg-secondary);
+  }
+  tr:hover td { background: rgba(88,166,255,0.05); }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .tag-red { background: rgba(255,77,79,0.15); color: var(--up); }
+  .tag-green { background: rgba(0,181,120,0.15); color: var(--down); }
+  .tag-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .tag-orange { background: rgba(240,136,62,0.15); color: var(--warn); }
+  .highlight-box {
+    background: rgba(88,166,255,0.08);
+    border-left: 3px solid var(--accent);
+    padding: 14px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .warn-box {
+    background: rgba(240,136,62,0.08);
+    border-left: 3px solid var(--warn);
+  }
+  .stock-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .stock-name { font-size: 15px; font-weight: 600; }
+  .stock-code { font-size: 12px; color: var(--text-secondary); margin-left: 6px; }
+  .stock-tags { display: flex; gap: 6px; }
+  .stock-body { font-size: 13px; color: var(--text-secondary); }
+  .stock-body strong { color: var(--text-primary); }
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .plan-item {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .plan-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+  .plan-value { font-size: 14px; font-weight: 600; }
+  .footer {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 640px) {
+    .index-grid { grid-template-columns: 1fr; }
+    .plan-grid { grid-template-columns: 1fr; }
+    body { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>一阳指选股复盘 · 2026-06-01</h1>
+<div class="subtitle">A股每日收盘复盘 | 数据截至收盘</div>
+
+<!-- 市场概览 -->
+<div class="section">
+  <div class="section-title">市场概览</div>
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-price">4,057.74</div>
+      <div class="index-change down">-0.27%</div>
+      <div class="index-detail">
+        <span>成交额 1,320亿</span>
+        <span>YTD +2.34%</span>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-price">15,340.36</div>
+      <div class="index-change down">-1.51%</div>
+      <div class="index-detail">
+        <span>成交额 1,558亿</span>
+        <span>YTD +12.76%</span>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-price">3,950.94</div>
+      <div class="index-change down">-2.15%</div>
+      <div class="index-detail">
+        <span>成交额 729亿</span>
+        <span>YTD +21.83%</span>
+      </div>
+    </div>
+  </div>
+  <div class="highlight-box warn-box" style="margin-top:16px;">
+    <strong>估值提示：</strong>上证指数PE-TTM为17.37倍，历史估值百分位 <strong>99.01%</strong>，处于历史极高估区间。市场整体风险偏高，建议控制仓位。
+  </div>
+</div>
+
+<!-- 热门板块 -->
+<div class="section">
+  <div class="section-title">热门概念板块 TOP5</div>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>华为盘古</td><td class="up">+5.69%</td><td>软通动力</td><td class="up">+20.01%</td></tr>
+      <tr><td>2</td><td>电子签名</td><td class="up">+5.61%</td><td>泛微网络</td><td class="up">+9.99%</td></tr>
+      <tr><td>3</td><td>西安自贸区</td><td class="up">+5.46%</td><td>达刚控股</td><td class="up">+20.05%</td></tr>
+      <tr><td>4</td><td>AI编程</td><td class="up">+5.23%</td><td>久其软件</td><td class="up">+10.08%</td></tr>
+      <tr><td>5</td><td>财税改革</td><td class="up">+5.18%</td><td>润和软件</td><td class="up">+12.26%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 主力资金 -->
+<div class="section">
+  <div class="section-title">主力资金净流入 TOP3（概念）</div>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块</th><th>主力净流入</th><th>板块涨幅</th><th>领涨股</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>AIGC</td><td class="up">+54.49亿</td><td class="up">+3.95%</td><td>光云科技 +17.96%</td></tr>
+      <tr><td>2</td><td>破净股</td><td class="up">+52.78亿</td><td class="up">+2.13%</td><td>*ST元道 +19.95%</td></tr>
+      <tr><td>3</td><td>华为鸿蒙</td><td class="up">+52.64亿</td><td class="up">+2.71%</td><td>软通动力 +20.01%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 申万行业 -->
+<div class="section">
+  <div class="section-title">申万一级行业涨幅 TOP5</div>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>行业</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>煤炭开采</td><td class="up">+5.63%</td><td>大有能源</td><td class="up">+10.10%</td></tr>
+      <tr><td>2</td><td>数字媒体</td><td class="up">+5.35%</td><td>视觉中国</td><td class="up">+10.00%</td></tr>
+      <tr><td>3</td><td>广告营销</td><td class="up">+5.01%</td><td>天地在线</td><td class="up">+9.99%</td></tr>
+      <tr><td>4</td><td>农产品加工</td><td class="up">+4.10%</td><td>祖名股份</td><td class="up">+10.00%</td></tr>
+      <tr><td>5</td><td>化妆品</td><td class="up">+3.98%</td><td>锦盛新材</td><td class="up">+20.02%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 行业主力 -->
+<div class="section">
+  <div class="section-title">主力资金净流入 TOP3（行业）</div>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>行业</th><th>主力净流入</th><th>行业涨幅</th><th>领涨股</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>软件开发</td><td class="up">+30.69亿</td><td class="up">+2.99%</td><td>星环科技-U +15.72%</td></tr>
+      <tr><td>2</td><td>煤炭开采</td><td class="up">+28.60亿</td><td class="up">+5.63%</td><td>大有能源 +10.10%</td></tr>
+      <tr><td>3</td><td>IT服务II</td><td class="up">+25.15亿</td><td class="up">+2.74%</td><td>软通动力 +20.01%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 重点个股 -->
+<div class="section">
+  <div class="section-title">重点个股监测</div>
+  <div style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">今日两市涨幅居前的个股（含20cm及10cm涨停）：</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+    <span class="tag tag-red">软通动力 +20.01%</span>
+    <span class="tag tag-red">达刚控股 +20.05%</span>
+    <span class="tag tag-red">锦盛新材 +20.02%</span>
+    <span class="tag tag-red">杭州园林 +20.00%</span>
+    <span class="tag tag-red">信音电子 +20.00%</span>
+    <span class="tag tag-red">泓淋电力 +19.98%</span>
+    <span class="tag tag-red">瑜欣电子 +19.98%</span>
+    <span class="tag tag-red">大有能源 +10.10%</span>
+    <span class="tag tag-red">久其软件 +10.08%</span>
+    <span class="tag tag-red">晋控电力 +10.04%</span>
+    <span class="tag tag-red">用友网络 +10.03%</span>
+    <span class="tag tag-red">华能国际 +10.03%</span>
+    <span class="tag tag-red">润和软件 +12.26%</span>
+    <span class="tag tag-red">光云科技 +17.96%</span>
+    <span class="tag tag-red">星环科技-U +15.72%</span>
+  </div>
+  <div class="highlight-box">
+    <strong>今日特征：</strong>指数下跌但概念题材活跃，资金明显流向<strong>软件/AI方向</strong>（AIGC、华为鸿蒙、软件开发、IT服务）和<strong>煤炭/电力</strong>等传统能源板块。创业板大跌-2.15%，科技成长股承压，市场呈现典型的结构性行情。
+  </div>
+</div>
+
+<!-- 一阳指候选 -->
+<div class="section">
+  <div class="section-title">一阳指候选股分析</div>
+
+  <div style="font-size:14px;font-weight:600;margin-bottom:12px;color:var(--success);">🟢 第一梯队（可介入）</div>
+
+  <div class="stock-card">
+    <div class="stock-header">
+      <div><span class="stock-name">软通动力</span><span class="stock-code">301236.SZ</span></div>
+      <div class="stock-tags"><span class="tag tag-blue">转势战法</span><span class="tag tag-red">20cm涨停</span></div>
+    </div>
+    <div class="stock-body">
+      <strong>逻辑：</strong>华为盘古+华为鸿蒙双概念龙头，20cm涨停，所在华为鸿蒙板块主力净流入+52.64亿（概念第三），AIGC板块净流入+54.49亿（概念第一）。软件开发和IT服务行业均获大额主力流入。今日强势突破，量价齐升。<br>
+      <strong>买入区间：</strong>38.0-39.5元（今日涨停价附近，等待回调至5日均线附近介入）<br>
+      <strong>止损：</strong>36.5元（-7%）<br>
+      <strong>止盈：</strong>第一目标45元，第二目标50元
+    </div>
+  </div>
+
+  <div class="stock-card">
+    <div class="stock-header">
+      <div><span class="stock-name">大有能源</span><span class="stock-code">600403.SH</span></div>
+      <div class="stock-tags"><span class="tag tag-blue">转势战法</span><span class="tag tag-red">10cm涨停</span></div>
+    </div>
+    <div class="stock-body">
+      <strong>逻辑：</strong>煤炭开采行业龙头，板块今日大涨+5.63%（申万行业第一），行业主力净流入+28.60亿（行业第二）。个股10cm涨停，煤炭板块5日涨幅+10.47%，趋势强劲。能源板块在指数调整期具备防御属性。<br>
+      <strong>买入区间：</strong>5.3-5.5元（涨停价附近，等待盘中回踩介入）<br>
+      <strong>止损：</strong>5.0元（-7%）<br>
+      <strong>止盈：</strong>第一目标6.2元，第二目标6.8元
+    </div>
+  </div>
+
+  <div class="stock-card">
+    <div class="stock-header">
+      <div><span class="stock-name">晋控电力</span><span class="stock-code">000767.SZ</span></div>
+      <div class="stock-tags"><span class="tag tag-blue">转势战法</span><span class="tag tag-red">10cm涨停</span></div>
+    </div>
+    <div class="stock-body">
+      <strong>逻辑：</strong>电力板块强势股，10cm涨停，换手率23.59%显示资金高度活跃。电力改革预期+夏季用电高峰，板块具备政策面和季节性双重催化。今日涨停突破前期平台，量能显著放大。<br>
+      <strong>买入区间：</strong>5.8-6.1元（等待回调介入）<br>
+      <strong>止损：</strong>5.5元（-7%）<br>
+      <strong>止盈：</strong>第一目标7.0元，第二目标7.5元
+    </div>
+  </div>
+
+  <div style="font-size:14px;font-weight:600;margin:20px 0 12px;color:var(--warn);">⏳ 第二梯队（等回调）</div>
+
+  <div class="stock-card">
+    <div class="stock-header">
+      <div><span class="stock-name">润和软件</span><span class="stock-code">300339.SZ</span></div>
+      <div class="stock-tags"><span class="tag tag-orange">开门战法</span></div>
+    </div>
+    <div class="stock-body">
+      <strong>逻辑：</strong>财税改革+华为概念，今日大涨+12.26%，但非涨停，留有上影线。软件开发板块主力净流入行业第一。前期已有一定涨幅，建议等待回调至5日均线附近再考虑介入。<br>
+      <strong>观察区间：</strong>42-43元（回踩5日线）<br>
+      <strong>止损：</strong>39元（-8%）<br>
+      <strong>止盈：</strong>第一目标50元，第二目标55元
+    </div>
+  </div>
+
+  <div class="stock-card">
+    <div class="stock-header">
+      <div><span class="stock-name">久其软件</span><span class="stock-code">002279.SZ</span></div>
+      <div class="stock-tags"><span class="tag tag-blue">转势战法</span><span class="tag tag-red">10cm涨停</span></div>
+    </div>
+    <div class="stock-body">
+      <strong>逻辑：</strong>AI编程概念龙头，10cm涨停。但市值较小（63亿），流动性一般，且概念持续性存疑。建议观察明日能否连板确认强度。<br>
+      <strong>观察区间：</strong>6.8-7.1元（明日盘中观察）<br>
+      <strong>止损：</strong>6.5元（-7%）<br>
+      <strong>止盈：</strong>第一目标8.0元
+    </div>
+  </div>
+
+  <div class="stock-card">
+    <div class="stock-header">
+      <div><span class="stock-name">用友网络</span><span class="stock-code">600588.SH</span></div>
+      <div class="stock-tags"><span class="tag tag-blue">转势战法</span><span class="tag tag-red">10cm涨停</span></div>
+    </div>
+    <div class="stock-body">
+      <strong>逻辑：</strong>企业管理软件龙头，10cm涨停，市值较大（390亿），机构关注度较高。软件开发行业获主力大幅流入，但个股前期跌幅较深，今日反弹性质需确认。<br>
+      <strong>观察区间：</strong>10.8-11.2元（等待回踩确认）<br>
+      <strong>止损：</strong>10.2元（-7%）<br>
+      <strong>止盈：</strong>第一目标12.5元，第二目标14元
+    </div>
+  </div>
+
+</div>
+
+<!-- 排除说明 -->
+<div class="section">
+  <div class="section-title">排除说明</div>
+  <div style="font-size:13px;color:var(--text-secondary);line-height:2;">
+    ❌ <strong>达刚控股、锦盛新材、信音电子、杭州园林、泓淋电力、瑜欣电子</strong>等20cm涨停股：市值过小（多数&lt;50亿），流动性差，容易被操纵，不符合稳健交易原则。<br>
+    ❌ <strong>*ST元道、*ST动力、ST亚光、*ST清越、*ST易录</strong>等ST股：风险极高，排除。<br>
+    ❌ <strong>创业板/科创板整体</strong>：今日创业板指大跌-2.15%，科技成长方向整体承压，暂时回避高估值成长股。<br>
+    ❌ <strong>英力股份</strong>：振幅0%，存在异常，排除。<br>
+    ❌ <strong>光云科技、星环科技-U</strong>：科创板个股，波动大，需等待更明确的趋势确认。
+  </div>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="section">
+  <div class="section-title">次日操作计划（2026-06-02）</div>
+  <div class="plan-grid">
+    <div class="plan-item">
+      <div class="plan-label">大盘预判</div>
+      <div class="plan-value">上证在4000-4100区间震荡，创业板或继续探底</div>
+    </div>
+    <div class="plan-item">
+      <div class="plan-label">仓位建议</div>
+      <div class="plan-value">3-4成（轻仓试错，控制回撤）</div>
+    </div>
+    <div class="plan-item">
+      <div class="plan-label">重点关注</div>
+      <div class="plan-value">软件/AI方向、煤炭/电力能源</div>
+    </div>
+    <div class="plan-item">
+      <div class="plan-label">回避方向</div>
+      <div class="plan-value">高估值科技股、ST股、微盘股</div>
+    </div>
+  </div>
+  <div class="highlight-box" style="margin-top:14px;">
+    <strong>具体策略：</strong><br>
+    1. 软通动力：若开盘在38-39元区间且量能配合，可轻仓介入；若高开超过5%则放弃追高。<br>
+    2. 大有能源：观察煤炭板块持续性，若板块继续强势且个股回踩5日线附近可考虑介入。<br>
+    3. 晋控电力：等待回踩确认，不追涨。<br>
+    4. 润和软件：等回调至42元附近再考虑。<br>
+    5. 总体原则：大盘估值99%历史百分位，严格控制仓位，单笔不超过总仓位10%。
+  </div>
+</div>
+
+<!-- 风险提示 -->
+<div class="section">
+  <div class="section-title">风险提示</div>
+  <div style="font-size:13px;color:var(--text-secondary);line-height:2;">
+    ⚠️ 上证指数估值百分位99.01%，处于历史极高估区间，市场整体风险收益比不佳。<br>
+    ⚠️ 创业板指今日大跌-2.15%，科技成长股承压，注意规避高估值品种。<br>
+    ⚠️ 今日两市涨跌比可能偏向下跌家数较多，情绪偏谨慎。<br>
+    ⚠️ 本报告基于公开数据和技术分析框架生成，仅供参考，不构成投资建议。股市有风险，投资需谨慎。<br>
+    ⚠️ 严格执行止损纪律，单笔亏损不超过总资金的2%。
+  </div>
+</div>
+
+<div class="footer">
+  一阳指选股复盘 · 自动化生成 · 2026-06-01<br>
+  数据来源：NeoData 金融数据服务
+</div>
+
+</div>
+</body>
+</html>
