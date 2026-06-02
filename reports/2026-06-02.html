@@ -5,414 +5,225 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>一阳指选股复盘 · 2026-06-02</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #0d1117;
-    color: #c9d1d9;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
-  }
-  .container { max-width: 960px; margin: 0 auto; }
-  h1 {
-    text-align: center;
-    color: #58a6ff;
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-    border-bottom: 1px solid #30363d;
-    padding-bottom: 12px;
-  }
-  .subtitle {
-    text-align: center;
-    color: #8b949e;
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-  }
-  .section {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .section h2 {
-    color: #f0883e;
-    font-size: 1.2rem;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .index-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  .index-card {
-    background: #21262d;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-  }
-  .index-card .name { color: #8b949e; font-size: 0.85rem; margin-bottom: 4px; }
-  .index-card .price { font-size: 1.6rem; font-weight: bold; margin-bottom: 4px; }
-  .index-card .change { font-size: 1rem; font-weight: 600; }
-  .up { color: #ff4d4f; }
-  .down { color: #52c41a; }
-  .index-card .detail {
-    margin-top: 10px;
-    font-size: 0.8rem;
-    color: #8b949e;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    text-align: left;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  th, td {
-    padding: 10px 8px;
-    text-align: left;
-    border-bottom: 1px solid #30363d;
-  }
-  th {
-    color: #8b949e;
-    font-weight: 600;
-    background: #21262d;
-  }
-  tr:hover { background: #1c2128; }
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-  .badge-red { background: rgba(255,77,79,0.15); color: #ff4d4f; }
-  .badge-green { background: rgba(82,196,26,0.15); color: #52c41a; }
-  .badge-blue { background: rgba(88,166,255,0.15); color: #58a6ff; }
-  .badge-orange { background: rgba(240,136,62,0.15); color: #f0883e; }
-  .stock-analysis {
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
-  }
-  .stock-analysis h3 {
-    color: #58a6ff;
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-  .stock-analysis .meta {
-    font-size: 0.85rem;
-    color: #8b949e;
-    margin-bottom: 10px;
-  }
-  .stock-analysis .verdict {
-    font-size: 0.9rem;
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 6px;
-    background: #21262d;
-  }
-  .plan-box {
-    background: #1a2f1a;
-    border: 1px solid #2d5a2d;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
-  }
-  .plan-box h4 {
-    color: #52c41a;
-    margin-bottom: 8px;
-  }
-  .plan-box p { font-size: 0.9rem; margin-bottom: 6px; }
-  .warning {
-    background: #2a1a1a;
-    border: 1px solid #5a2d2d;
-    border-radius: 8px;
-    padding: 16px;
-    margin-top: 16px;
-  }
-  .warning h4 { color: #ff4d4f; margin-bottom: 8px; }
-  .warning p { font-size: 0.85rem; color: #c9d1d9; }
-  .footer {
-    text-align: center;
-    color: #484f58;
-    font-size: 0.8rem;
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid #30363d;
-  }
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#c9d1d9;--text2:#8b949e;--red:#ff7b72;--green:#7ee787;--gold:#ffd700;--accent:#58a6ff;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.6;padding:20px;max-width:900px;margin:0 auto}
+h1{text-align:center;color:var(--gold);margin-bottom:8px;font-size:28px}
+.subtitle{text-align:center;color:var(--text2);margin-bottom:24px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
+.card h2{color:var(--accent);font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.index-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.index-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.index-item .name{font-size:14px;color:var(--text2);margin-bottom:4px}
+.index-item .price{font-size:24px;font-weight:700;margin-bottom:4px}
+.index-item .change{font-size:14px;font-weight:600}
+.up{color:var(--red)}
+.down{color:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--text2);font-weight:600;font-size:12px;background:rgba(88,166,255,0.05)}
+tr:hover{background:rgba(88,166,255,0.03)}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+.tag-red{background:rgba(255,123,114,0.15);color:var(--red)}
+.tag-green{background:rgba(126,231,135,0.15);color:var(--green)}
+.tag-gold{background:rgba(255,215,0,0.15);color:var(--gold)}
+.tag-blue{background:rgba(88,166,255,0.15);color:var(--accent)}
+.plan-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.plan-item:last-child{border-bottom:none}
+.plan-label{color:var(--text2);font-size:13px}
+.plan-value{font-weight:600;font-size:14px}
+.stock-detail{padding:12px;background:rgba(88,166,255,0.05);border-radius:8px;margin-bottom:10px;border-left:3px solid var(--accent)}
+.stock-detail h4{color:var(--gold);margin-bottom:6px;font-size:15px}
+.stock-detail p{color:var(--text2);font-size:13px;margin-bottom:4px}
+.stock-detail .signal{color:var(--red);font-weight:700}
+.exclude-item{padding:10px;background:rgba(255,123,114,0.05);border-radius:8px;margin-bottom:8px;border-left:3px solid var(--red)}
+.exclude-item h4{color:var(--red);margin-bottom:4px;font-size:14px}
+.exclude-item p{color:var(--text2);font-size:12px}
+.warning{background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);border-radius:8px;padding:12px;color:var(--gold);font-size:13px}
+.footer{text-align:center;color:var(--text2);font-size:12px;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)}
+@media(max-width:600px){.index-grid{grid-template-columns:1fr}table{font-size:12px}th,td{padding:8px 6px}}
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>一阳指选股复盘报告</h1>
-  <div class="subtitle">2026年6月2日（周二）· A股收盘</div>
+<h1>一阳指选股复盘</h1>
+<p class="subtitle">2026年6月2日（周二）· A股交易日收盘后</p>
 
-  <!-- 市场概览 -->
-  <div class="section">
-    <h2>📊 市场概览</h2>
-    <div class="index-cards">
-      <div class="index-card">
-        <div class="name">上证指数</div>
-        <div class="price">4075.10</div>
-        <div class="change up">+0.43% +17.36</div>
-        <div class="detail">
-          <span>量比: 0.96</span>
-          <span>YTD: +2.68%</span>
-          <span>估值百分位: 98.8%</span>
-          <span>PE-TTM: 17.99</span>
-        </div>
-      </div>
-      <div class="index-card">
-        <div class="name">深证成指</div>
-        <div class="price">15591.13</div>
-        <div class="change up">+1.63% +250.77</div>
-        <div class="detail">
-          <span>量比: 0.92</span>
-          <span>YTD: +15.28%</span>
-          <span>PE-TTM: 51.67</span>
-          <span>换手: 3.03%</span>
-        </div>
-      </div>
-      <div class="index-card">
-        <div class="name">创业板指</div>
-        <div class="price">4055.87</div>
-        <div class="change up">+2.66% +104.93</div>
-        <div class="detail">
-          <span>量比: 0.92</span>
-          <span>YTD: +26.62%</span>
-          <span>PE-TTM: 71.15</span>
-          <span>换手: 3.92%</span>
-        </div>
-      </div>
-    </div>
-    <p style="font-size:0.9rem;color:#8b949e;margin-top:8px;">
-      两市合计成交约 <strong style="color:#c9d1d9;">3505亿</strong>（沪深主板），个股跌多涨少：上涨 <span class="up">1254</span> 只 / 下跌 <span class="down">3654</span> 只 / 平盘 68 只；涨停 <span class="up">65</span> 只，跌停 <span class="down">16</span> 只。
-    </p>
+<!-- 市场概览 -->
+<div class="index-grid">
+  <div class="index-item">
+    <div class="name">上证指数</div>
+    <div class="price">4075.10</div>
+    <div class="change up">+0.43%</div>
+    <div style="font-size:11px;color:var(--text2);margin-top:4px">估值百分位 98.8%</div>
+  </div>
+  <div class="index-item">
+    <div class="name">深证成指</div>
+    <div class="price">15591.13</div>
+    <div class="change up">+1.63%</div>
+    <div style="font-size:11px;color:var(--text2);margin-top:4px">成交额 1.51万亿</div>
+  </div>
+  <div class="index-item">
+    <div class="name">创业板指</div>
+    <div class="price">4055.87</div>
+    <div class="change up">+2.66%</div>
+    <div style="font-size:11px;color:var(--text2);margin-top:4px">年初至今 +25.07%</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>📊 今日市场概况</h2>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:13px">
+    <div>涨跌家数：<span class="up">涨1254</span> / <span class="down">跌3654</span> / 平68</div>
+    <div>涨停：<span class="up">65只</span>　跌停：<span class="down">16只</span></div>
+    <div>上证成交额：<span class="up">1.28万亿</span></div>
+    <div>深证成交额：<span class="up">1.51万亿</span></div>
+    <div>两市合计：<span class="up">≈2.79万亿</span></div>
+    <div>上证估值：<span class="tag tag-red">极高（98.8%）</span></div>
+  </div>
+</div>
+
+<!-- 热门板块 -->
+<div class="card">
+  <h2>🔥 热门板块 TOP5</h2>
+  <table>
+    <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    <tr><td>1</td><td>光芯片</td><td class="up">+5.33%</td><td>光库科技</td><td class="up">+14.85%</td></tr>
+    <tr><td>2</td><td>有色(锡)</td><td class="up">+5.09%</td><td>锡业股份</td><td class="up">+10.01%</td></tr>
+    <tr><td>3</td><td>靶材</td><td class="up">+4.90%</td><td>江丰电子</td><td class="up">+11.25%</td></tr>
+    <tr><td>4</td><td>有色(锆)</td><td class="up">+4.76%</td><td>国瓷材料</td><td class="up">+13.50%</td></tr>
+    <tr><td>5</td><td>纳米压印</td><td class="up">+4.75%</td><td>美迪凯</td><td class="up">+20.00%</td></tr>
+  </table>
+</div>
+
+<!-- 主力资金 -->
+<div class="card">
+  <h2>💰 主力资金净流入 TOP3（行业）</h2>
+  <table>
+    <tr><th>排名</th><th>行业</th><th>涨跌幅</th><th>主力净流入</th><th>领涨股</th></tr>
+    <tr><td>1</td><td>通信设备</td><td class="up">+6.48%</td><td class="up">+156.64亿</td><td>阿莱德 +20.00%</td></tr>
+    <tr><td>2</td><td>工业金属</td><td class="up">+4.19%</td><td class="up">+62.66亿</td><td>宜安科技 +11.34%</td></tr>
+    <tr><td>3</td><td>元件</td><td class="up">+5.63%</td><td class="up">+47.21亿</td><td>达利凯普 +20.01%</td></tr>
+  </table>
+</div>
+
+<!-- 申万一级行业 -->
+<div class="card">
+  <h2>📈 申万一级行业涨幅 TOP5</h2>
+  <table>
+    <tr><th>排名</th><th>行业</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    <tr><td>1</td><td>通信设备</td><td class="up">+6.48%</td><td>阿莱德</td><td class="up">+20.00%</td></tr>
+    <tr><td>2</td><td>元件</td><td class="up">+5.63%</td><td>达利凯普</td><td class="up">+20.01%</td></tr>
+    <tr><td>3</td><td>工业金属</td><td class="up">+4.19%</td><td>宜安科技</td><td class="up">+11.34%</td></tr>
+    <tr><td>4</td><td>小金属</td><td class="up">+3.56%</td><td>锡业股份</td><td class="up">+10.01%</td></tr>
+    <tr><td>5</td><td>自动化设备</td><td class="up">+3.32%</td><td>东杰智能</td><td class="up">+20.02%</td></tr>
+  </table>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="card">
+  <h2>🎯 次日操作计划</h2>
+  <div class="plan-item"><span class="plan-label">大盘策略</span><span class="plan-value up">轻仓位观望，等待回调机会</span></div>
+  <div class="plan-item"><span class="plan-label">重点关注板块</span><span class="plan-value">通信设备、工业金属、元件</span></div>
+  <div class="plan-item"><span class="plan-label">第一梯队买入区间</span><span class="plan-value">开盘±2%内，放量突破可追</span></div>
+  <div class="plan-item"><span class="plan-label">建议仓位</span><span class="plan-value tag tag-gold">30%-40%</span></div>
+  <div class="plan-item"><span class="plan-label">止损线</span><span class="plan-value down">-5%（跌破5日线）</span></div>
+  <div class="plan-item"><span class="plan-label">止盈线</span><span class="plan-value up">+10%~+15%</span></div>
+</div>
+
+<!-- 第一梯队 -->
+<div class="card">
+  <h2>🟢 第一梯队（可介入）</h2>
+
+  <div class="stock-detail">
+    <h4>锡业股份（sz000960）· 开门战法 ★★★★</h4>
+    <p><strong>今日表现：</strong>涨停 +10.01%，收盘价 43.19元</p>
+    <p><strong>资金动向：</strong>机构净买入 <span class="up">1.98亿</span>，游资成都系买入 <span class="up">9917万</span></p>
+    <p><strong>技术面：</strong>均线多头排列（股价>MA5>MA10>MA20>MA30>MA60），MACD金叉，KDJ强势区</p>
+    <p><strong>板块逻辑：</strong>有色(锡)板块领涨，锡价上涨催化，工业金属主力资金流入 <span class="up">+62.66亿</span></p>
+    <p><strong>买点：</strong>次日开盘±2%内，放量突破前高可追</p>
+    <p><strong>止损：</strong>跌破MA5（39.56元）或-5%</p>
+    <p class="signal">✅ 符合开门战法：均线多头排列 + MACD金叉 + 板块强势 + 机构大买</p>
   </div>
 
-  <!-- 热门板块 -->
-  <div class="section">
-    <h2>🔥 热门板块涨幅 TOP5（概念）</h2>
-    <table>
-      <thead>
-        <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>光芯片</td><td class="up">+5.33%</td><td>光库科技</td><td class="up">+14.85%</td></tr>
-        <tr><td>2</td><td>有色(锡)</td><td class="up">+5.09%</td><td>锡业股份</td><td class="up">+10.01%</td></tr>
-        <tr><td>3</td><td>靶材</td><td class="up">+4.90%</td><td>江丰电子</td><td class="up">+11.25%</td></tr>
-        <tr><td>4</td><td>有色(锆)</td><td class="up">+4.76%</td><td>国瓷材料</td><td class="up">+13.50%</td></tr>
-        <tr><td>5</td><td>纳米压印</td><td class="up">+4.75%</td><td>美迪凯</td><td class="up">+20.00%</td></tr>
-      </tbody>
-    </table>
+  <div class="stock-detail">
+    <h4>亨通光电（sh600487）· 开门战法 ★★★★</h4>
+    <p><strong>今日表现：</strong>涨停 +10.01%，收盘价 83.12元</p>
+    <p><strong>资金动向：</strong>主力资金大幅流入，通信设备板块龙头</p>
+    <p><strong>技术面：</strong>均线多头排列，MACD即将金叉，KDJ强势区（J=101）</p>
+    <p><strong>板块逻辑：</strong>通信设备板块大涨 <span class="up">+6.48%</span>，主力资金净流入 <span class="up">+156.64亿</span></p>
+    <p><strong>买点：</strong>次日开盘±2%内，或回踩MA5（75元附近）</p>
+    <p><strong>止损：</strong>跌破MA10（73.65元）或-5%</p>
+    <p class="signal">✅ 符合开门战法：主升浪趋势延续 + 板块最强 + 量能配合</p>
+  </div>
+</div>
+
+<!-- 第二梯队 -->
+<div class="card">
+  <h2>⏳ 第二梯队（等回调）</h2>
+
+  <div class="stock-detail" style="border-left-color:var(--gold)">
+    <h4>火炬电子（sh603678）· 开门战法 ★★★</h4>
+    <p><strong>今日表现：</strong>涨停 +10.00%，收盘价 58.61元</p>
+    <p><strong>资金动向：</strong>机构买入 <span class="up">2.55亿</span>，4家机构席位参与</p>
+    <p><strong>技术面：</strong>均线多头排列，MACD金叉，但KDJ超买（J=106）</p>
+    <p><strong>买点：</strong>等待回踩MA5（50.13元）附近或KDJ修复后再介入</p>
+    <p><strong>风险：</strong>短期涨幅较大（3天3板），KDJ严重超买</p>
+    <p class="signal">⚠️ 技术面强势但超买，建议等待回调确认</p>
   </div>
 
-  <!-- 主力资金 -->
-  <div class="section">
-    <h2>💰 主力资金净流入 TOP3（概念板块）</h2>
-    <table>
-      <thead>
-        <tr><th>排名</th><th>板块名称</th><th>主力净流入</th><th>涨幅</th><th>领涨股</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>5G概念</td><td class="up">+241.28亿</td><td class="up">+1.01%</td><td>达利凯普 +20.01%</td></tr>
-        <tr><td>2</td><td>共封装光模块(CPO)</td><td class="up">+233.23亿</td><td class="up">+3.32%</td><td>阿莱德 +20.00%</td></tr>
-        <tr><td>3</td><td>数据中心</td><td class="up">+182.71亿</td><td class="down">-0.05%</td><td>裕太微-U +17.91%</td></tr>
-      </tbody>
-    </table>
-    <p style="font-size:0.85rem;color:#8b949e;margin-top:10px;">
-      今日个股主力资金净流入前五：东山精密(+26.53亿)、新易盛(+18.68亿)、宁德时代(+15.57亿)、天孚通信(+14.98亿)、比亚迪(+12.69亿)。
-    </p>
+  <div class="stock-detail" style="border-left-color:var(--gold)">
+    <h4>中京电子（sz002579）· 开门战法 ★★★</h4>
+    <p><strong>今日表现：</strong>涨停 +10.02%，收盘价 20.76元</p>
+    <p><strong>技术面：</strong>均线多头排列，MACD金叉，但KDJ超买（J=104）</p>
+    <p><strong>买点：</strong>等待回踩MA5（18.30元）附近</p>
+    <p><strong>风险：</strong>KDJ超买，短期回调风险大</p>
+    <p class="signal">⚠️ 等回调至MA5附近再考虑</p>
   </div>
+</div>
 
-  <!-- 次日操作计划 -->
-  <div class="section">
-    <h2>📋 次日操作计划（2026-06-03）</h2>
-
-    <div class="plan-box">
-      <h4>🟢 第一梯队 — 可介入</h4>
-      <p><strong>锡业股份（sz000960）</strong> — 转势战法 ★★★★</p>
-      <p>买入区间：42.0~43.5元（突破回踩确认）</p>
-      <p>仓位建议：15%~20%</p>
-      <p>止损位：40.0元（跌破MA20）</p>
-      <p>止盈位：48.0元（前高附近）</p>
-      <p>逻辑：盘整突破+涨停放量+有色主线，机构看好锡价上行。</p>
-    </div>
-
-    <div class="plan-box">
-      <h4>⏳ 第二梯队 — 等回调或观察</h4>
-      <p><strong>新易盛（sz300502）</strong> — 开门战法 ★★★★</p>
-      <p>状态：主升浪延续中，今日大涨9.88%接近涨停，主力资金净流入18.68亿。</p>
-      <p>均线：MA5=709 MA10=667 MA20=624，多头排列。</p>
-      <p>策略：已处高位，不追高，等回踩MA5（约709元）或MA10（约667元）再介入。</p>
-      <p style="margin-top:8px;"><strong>中际旭创（sz300308）</strong> — 开门战法 ★★★</p>
-      <p>状态：趋势延续，今日+3.46%，主力资金净流入11.68亿。</p>
-      <p>策略：等回踩MA5（约1158元）或MA10（约1106元）。</p>
-      <p style="margin-top:8px;"><strong>天孚通信（sz300394）</strong> — 开门战法 ★★★</p>
-      <p>状态：趋势延续，今日+6.56%，主力资金净流入14.98亿。</p>
-      <p>策略：等回踩MA5（约443元）再考虑。</p>
-    </div>
-
-    <div style="background:#21262d;border-radius:8px;padding:16px;margin-top:12px;">
-      <h4 style="color:#f0883e;margin-bottom:8px;">⚠️ 观察标的</h4>
-      <p><strong>东山精密（sz002384）</strong> — 暂不符合战法</p>
-      <p>6月1日大跌-9.3%，6月2日涨停反包。但MA5=211.6已高于收盘价210.9，短期均线走平。</p>
-      <p>主力资金：6月1日净流出34.57亿 → 6月2日净流入26.53亿，波动剧烈。</p>
-      <p>策略：继续观察，若明日站稳MA5上方且均线重新发散，可纳入开门战法观察。</p>
-    </div>
+<!-- 排除说明 -->
+<div class="card">
+  <h2>❌ 排除说明</h2>
+  <div class="exclude-item">
+    <h4>东山精密（sz002384）</h4>
+    <p>排除原因：MACD死叉（DIF&lt;DEA），股价低于MA5和MA10，短期趋势走弱。虽机构大买6.93亿，但技术面不符合一阳指体系。</p>
   </div>
-
-  <!-- 转势战法候选详情 -->
-  <div class="section">
-    <h2>🔄 转势战法候选详情</h2>
-    <p style="font-size:0.85rem;color:#8b949e;margin-bottom:16px;">转势战法核心：底部盘整 + 一阳突破 + 量能放大 + 均线粘合/金叉</p>
-
-    <div class="stock-analysis">
-      <h3>锡业股份（sz000960）</h3>
-      <div class="meta">收盘价 43.19元 | 涨幅 +10.01%（涨停）| 主力资金净流入：板块领涨</div>
-      <table style="font-size:0.85rem;margin:10px 0;">
-        <tr><td>MA5</td><td>MA10</td><td>MA20</td><td>MA30</td><td>MA60</td></tr>
-        <tr><td>39.56</td><td>39.01</td><td>39.04</td><td>38.33</td><td>36.14</td></tr>
-      </table>
-      <div class="verdict">
-        <strong>判断：</strong><span class="badge badge-green">符合转势战法 ★★★★</span><br>
-        1. <strong>底部盘整</strong>：5月中旬以来在38~42元区间震荡盘整约半月。<br>
-        2. <strong>一阳突破</strong>：6月2日放量涨停，收盘价43.19元突破盘整区间上沿。<br>
-        3. <strong>量能放大</strong>：成交量1157万手，显著高于近期平均水平（约60~80万手）。<br>
-        4. <strong>均线</strong>：MA5/MA10/MA20粘合于39元附近，今日大涨后均线开始发散向上。<br>
-        <strong>结论：</strong>典型盘整突破形态，有色金属（锡）为今日最强主线之一，可积极关注。
-      </div>
-    </div>
+  <div class="exclude-item">
+    <h4>长飞光纤（sh601869）</h4>
+    <p>排除原因：MACD死叉，短期均线出现死叉迹象，股价处于调整期。不符合开门战法趋势延续条件。</p>
   </div>
-
-  <!-- 开门战法候选详情 -->
-  <div class="section">
-    <h2>🚪 开门战法候选详情</h2>
-    <p style="font-size:0.85rem;color:#8b949e;margin-bottom:16px;">开门战法核心：主升浪趋势延续 + 四条件（均线多头、量能配合、资金流入、板块共振）</p>
-
-    <div class="stock-analysis">
-      <h3>新易盛（sz300502）</h3>
-      <div class="meta">收盘价 747元 | 涨幅 +9.88% | 主力资金净流入 +18.68亿</div>
-      <table style="font-size:0.85rem;margin:10px 0;">
-        <tr><td>MA5</td><td>MA10</td><td>MA20</td><td>MA30</td><td>MA60</td></tr>
-        <tr><td>709.3</td><td>666.6</td><td>624.5</td><td>604.8</td><td>527.7</td></tr>
-      </table>
-      <div class="verdict">
-        <strong>判断：</strong><span class="badge badge-blue">符合开门战法 ★★★★</span><br>
-        1. <strong>趋势</strong>：5月11日低点563元以来持续上涨，涨幅+33%，主升浪明确。<br>
-        2. <strong>均线</strong>：747 > MA5 > MA10 > MA20 > MA30 > MA60，完美多头排列。<br>
-        3. <strong>量能</strong>：今日成交量3871万，较前几日明显放大，资金积极入场。<br>
-        4. <strong>资金</strong>：主力资金净流入18.68亿，位列全市场第二。<br>
-        5. <strong>板块</strong>：光芯片/CPO为今日最强主线，板块共振。<br>
-        <strong>结论：</strong>主升浪延续，但短期涨幅较大，不建议追高，等回踩MA5/MA10再介入。
-      </div>
-    </div>
-
-    <div class="stock-analysis">
-      <h3>中际旭创（sz300308）</h3>
-      <div class="meta">收盘价 1191.81元 | 涨幅 +3.46% | 主力资金净流入 +11.68亿</div>
-      <table style="font-size:0.85rem;margin:10px 0;">
-        <tr><td>MA5</td><td>MA10</td><td>MA20</td><td>MA30</td><td>MA60</td></tr>
-        <tr><td>1158.5</td><td>1105.7</td><td>1044.3</td><td>983.3</td><td>799.6</td></tr>
-      </table>
-      <div class="verdict">
-        <strong>判断：</strong><span class="badge badge-blue">符合开门战法 ★★★</span><br>
-        1. <strong>趋势</strong>：5月11日低点870元以来持续上涨，涨幅+37%。<br>
-        2. <strong>均线</strong>：1191.8 > MA5 > MA10 > MA20 > MA30 > MA60，多头排列。<br>
-        3. <strong>量能</strong>：今日成交2900万，量能维持活跃。<br>
-        4. <strong>资金</strong>：主力资金净流入11.68亿，持续流入。<br>
-        <strong>结论：</strong>趋势健康，今日涨幅相对温和，可考虑分批建仓或等回踩MA5。
-      </div>
-    </div>
-
-    <div class="stock-analysis">
-      <h3>天孚通信（sz300394）</h3>
-      <div class="meta">收盘价 457元 | 涨幅 +6.56% | 主力资金净流入 +14.98亿</div>
-      <table style="font-size:0.85rem;margin:10px 0;">
-        <tr><td>MA5</td><td>MA10</td><td>MA20</td><td>MA30</td><td>MA60</td></tr>
-        <tr><td>443.5</td><td>408.9</td><td>382.6</td><td>368.6</td><td>346.3</td></tr>
-      </table>
-      <div class="verdict">
-        <strong>判断：</strong><span class="badge badge-blue">符合开门战法 ★★★</span><br>
-        1. <strong>趋势</strong>：5月11日低点332元以来持续上涨，涨幅+38%。<br>
-        2. <strong>均线</strong>：457 > MA5 > MA10 > MA20 > MA30 > MA60，多头排列。<br>
-        3. <strong>量能</strong>：今日成交4753万，量能充沛。<br>
-        4. <strong>资金</strong>：主力资金净流入14.98亿，位列全市场第四。<br>
-        <strong>结论：</strong>趋势强劲，但短期乖离率偏大，建议等回踩MA5（约443元）再介入。
-      </div>
-    </div>
-
-    <div class="stock-analysis">
-      <h3>东山精密（sz002384）</h3>
-      <div class="meta">收盘价 210.93元 | 涨幅 +10.00%（涨停）| 主力资金净流入 +26.53亿（全市场第一）</div>
-      <table style="font-size:0.85rem;margin:10px 0;">
-        <tr><td>MA5</td><td>MA10</td><td>MA20</td><td>MA30</td><td>MA60</td></tr>
-        <tr><td>211.6</td><td>215.6</td><td>214.0</td><td>202.4</td><td>158.5</td></tr>
-      </table>
-      <div class="verdict">
-        <strong>判断：</strong><span class="badge badge-orange">暂不符合 ★★</span><br>
-        1. <strong>趋势</strong>：5月7日低点188元启动，5月25日冲高至228元后回调，6月1日大跌-9.3%，6月2日涨停反包。<br>
-        2. <strong>均线</strong>：收盘价210.9 < MA5(211.6) < MA10(215.6)，短期均线已走平/向下。<br>
-        3. <strong>量能</strong>：6月1日放量大跌（1359万手），6月2日涨停反包（1081万手），波动剧烈。<br>
-        4. <strong>资金</strong>：主力资金大幅波动，6月1日净流出34.57亿，6月2日净流入26.53亿。<br>
-        <strong>结论：</strong>虽然今日涨停且资金流入全市场第一，但短期形态被6月1日大阴线破坏，MA5/MA10已拐头。需观察明日能否站稳MA5上方并重启发散。暂列为观察标的，不急于介入。
-      </div>
-    </div>
+  <div class="exclude-item">
+    <h4>美迪凯（sh688079）</h4>
+    <p>排除原因：科创板20cm涨停，游资炒作为主（机构净卖出1232万），波动大且非主板标的，不参与。</p>
   </div>
-
-  <!-- 排除说明 -->
-  <div class="section">
-    <h2>❌ 排除说明</h2>
-    <p style="font-size:0.9rem;margin-bottom:8px;">以下个股今日虽有异动，但不符合一阳指体系，予以排除：</p>
-    <ul style="font-size:0.9rem;color:#c9d1d9;padding-left:20px;">
-      <li><strong>宁德时代（sz300750）</strong>：主力资金净流入15.57亿，但处于高位震荡阶段，无明显突破形态，不符合转势或开门战法。</li>
-      <li><strong>比亚迪（sz002594）</strong>：主力资金净流入12.69亿，但近期走势偏弱，处于调整阶段，无明显战法信号。</li>
-      <li><strong>光库科技、美迪凯、阿莱德等</strong>：20cm涨停，但多为小市值概念股，流动性不足，且缺乏持续资金流入的确认，风险较高。</li>
-    </ul>
+  <div class="exclude-item">
+    <h4>宏和科技（sh603256）</h4>
+    <p>排除原因：涨幅仅9.27%未涨停，且价格198.80元过高，股性活跃度不够。</p>
   </div>
+</div>
 
-  <!-- 仓位配置 -->
-  <div class="section">
-    <h2>📐 仓位配置建议</h2>
-    <table>
-      <thead>
-        <tr><th>类型</th><th>建议仓位</th><th>当前判断</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>短线（持股3~5天）</td><td>30%~40%</td><td>可参与锡业股份（转势）</td></tr>
-        <tr><td>波段中线（持股2~4周）</td><td>20%~30%</td><td>光模块三剑客等回调</td></tr>
-        <tr><td>长线（持股1~3月）</td><td>20%~30%</td><td>暂不新增</td></tr>
-        <tr><td>现金储备</td><td>20%~30%</td><td>应对市场波动</td></tr>
-      </tbody>
-    </table>
-    <p style="font-size:0.85rem;color:#8b949e;margin-top:10px;">
-      单票仓位不超过总资金的30%。当前上证指数估值百分位<strong style="color:#ff4d4f;">98.8%</strong>，处于历史极高区间，建议控制总仓位不超过70%。
-    </p>
-  </div>
+<!-- 仓位配置 -->
+<div class="card">
+  <h2>📊 仓位配置建议</h2>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:12px">当前上证估值百分位 <span class="tag tag-red">98.8%</span>（历史极高），建议控制总体仓位。</p>
+  <div class="plan-item"><span class="plan-label">总体仓位</span><span class="plan-value tag tag-gold">30%-40%</span></div>
+  <div class="plan-item"><span class="plan-label">第一梯队（锡业股份）</span><span class="plan-value">15%</span></div>
+  <div class="plan-item"><span class="plan-label">第一梯队（亨通光电）</span><span class="plan-value">15%</span></div>
+  <div class="plan-item"><span class="plan-label">现金预留</span><span class="plan-value">70%</span></div>
+</div>
 
-  <!-- 风险提示 -->
-  <div class="warning">
-    <h4>⚠️ 风险提示</h4>
-    <p>1. 上证指数估值百分位高达98.8%，市场整体处于历史高位，系统性风险较大。</p>
-    <p>2. 今日个股跌多涨少（1254涨 vs 3654跌），指数上涨主要由少数权重股和热点板块拉动，市场分化严重。</p>
-    <p>3. 光模块/光芯片板块短期涨幅巨大，需注意追高风险和回调压力。</p>
-    <p>4. 有色金属（锡）受大宗商品价格波动影响较大，需关注锡价走势。</p>
-    <p>5. 本报告仅为技术分析复盘，不构成投资建议。股市有风险，投资需谨慎。</p>
-  </div>
+<!-- 风险提示 -->
+<div class="warning">
+  <strong>⚠️ 风险提示</strong><br><br>
+  1. 当前上证指数估值处于历史 <strong>98.8%</strong> 极高区间，市场系统性风险较大，需严格控制仓位。<br><br>
+  2. 今日涨少跌多（上涨1254只 vs 下跌3654只），虽然指数收涨，但个股分化严重，赚钱效应一般。<br><br>
+  3. 创业板从昨日大跌-2.15%今日大涨+2.66%，波动剧烈，追高需谨慎。<br><br>
+  4. 以上分析仅供参考，不构成投资建议。股市有风险，入市需谨慎。
+</div>
 
-  <div class="footer">
-    一阳指选股复盘系统 · 自动生成于 2026-06-02 18:00<br>
-    数据来源：NeoData / 腾讯自选股 · 仅供参考
-  </div>
+<div class="footer">
+  一阳指选股复盘系统 · 自动生成于 2026-06-02 17:55<br>
+  数据来源：neodata-financial-search / westock-data / 腾讯自选股
 </div>
 </body>
 </html>
