@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-06-03</title>
+<style>
+  :root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-card: #1c2128;
+    --border: #30363d;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent: #58a6ff;
+    --accent-green: #3fb950;
+    --accent-red: #f85149;
+    --accent-orange: #d29922;
+    --accent-purple: #a371f7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 {
+    font-size: 24px; font-weight: 700; margin-bottom: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px; font-weight: 600;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .icon { font-size: 18px; }
+
+  /* 三大指数卡片 */
+  .index-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .index-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .index-name { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; }
+  .index-price { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .index-change { font-size: 14px; font-weight: 600; }
+  .index-detail { font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+  .up { color: var(--accent-red); }
+  .down { color: var(--accent-green); }
+
+  /* 表格 */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-secondary); font-weight: 500; background: var(--bg-secondary); }
+  tr:hover td { background: rgba(88,166,255,0.05); }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600;
+  }
+  .badge-red { background: rgba(248,81,73,0.15); color: var(--accent-red); }
+  .badge-green { background: rgba(63,185,80,0.15); color: var(--accent-green); }
+  .badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .badge-purple { background: rgba(163,113,247,0.15); color: var(--accent-purple); }
+  .badge-orange { background: rgba(210,153,34,0.15); color: var(--accent-orange); }
+
+  /* 候选股 */
+  .candidate {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .candidate-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px;
+  }
+  .candidate-name { font-size: 16px; font-weight: 700; }
+  .candidate-tag { font-size: 12px; }
+  .candidate-detail {
+    font-size: 13px; color: var(--text-secondary);
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
+  }
+  .candidate-detail span { display: block; }
+
+  /* 操作计划 */
+  .plan-box {
+    background: linear-gradient(135deg, rgba(88,166,255,0.08), rgba(163,113,247,0.08));
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .plan-item {
+    display: flex; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px dashed var(--border);
+  }
+  .plan-item:last-child { border-bottom: none; }
+  .plan-label { color: var(--text-secondary); }
+  .plan-value { font-weight: 600; }
+
+  /* 风险提示 */
+  .risk-box {
+    background: rgba(248,81,73,0.08);
+    border: 1px solid rgba(248,81,73,0.3);
+    border-radius: 10px;
+    padding: 16px;
+    color: #ff7b72;
+  }
+
+  @media (max-width: 640px) {
+    .index-grid { grid-template-columns: 1fr; }
+    .candidate-detail { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>一阳指选股复盘</h1>
+<div class="subtitle">2026年6月3日（周三）· A股收盘</div>
+
+<!-- 市场概览 -->
+<div class="card">
+  <div class="card-title"><span class="icon">📊</span> 市场概览</div>
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-price up">4083.97</div>
+      <div class="index-change up">+8.87 +0.22%</div>
+      <div class="index-detail">量比 1.00 | 年初至今 +2.90%</div>
+      <div class="index-detail">PE-TTM 17.42 | 估值百分位 <span class="up">99.22%</span></div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-price up">15704.71</div>
+      <div class="index-change up">+113.58 +0.73%</div>
+      <div class="index-detail">量比 1.01 | 年初至今 +16.12%</div>
+    </div>
+    <div class="index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-price up">4122.99</div>
+      <div class="index-change up">+67.12 +1.65%</div>
+      <div class="index-detail">量比 1.01 | 年初至今 +28.72%</div>
+    </div>
+  </div>
+  <div style="margin-top:16px; font-size:13px; color:var(--text-secondary);">
+    涨跌分布：上涨 <span class="up">1599</span> 只 / 下跌 <span class="down">3312</span> 只 / 涨停 <span class="up">66</span> 只 / 跌停 <span class="down">11</span> 只
+  </div>
+</div>
+
+<!-- 热门板块TOP5 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🔥</span> 热门板块涨幅 TOP5</div>
+  <table>
+    <tr><th>排名</th><th>板块</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    <tr>
+      <td>1</td><td>通信设备</td><td class="up">+5.49%</td><td>美信科技</td><td class="up">+13.97%</td>
+    </tr>
+    <tr>
+      <td>2</td><td>航天装备</td><td class="up">+4.07%</td><td>中国卫星</td><td class="up">+6.78%</td>
+    </tr>
+    <tr>
+      <td>3</td><td>小金属</td><td class="up">+3.56%</td><td>东方锆业</td><td class="up">+10.01%</td>
+    </tr>
+    <tr>
+      <td>4</td><td>半导体</td><td class="up">+3.42%</td><td>源杰科技</td><td class="up">+16.41%</td>
+    </tr>
+    <tr>
+      <td>5</td><td>煤炭开采</td><td class="up">+2.59%</td><td>郑州煤电</td><td class="up">+10.06%</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 主力资金TOP3 -->
+<div class="card">
+  <div class="card-title"><span class="icon">💰</span> 主力资金净流入 TOP3 行业</div>
+  <table>
+    <tr><th>排名</th><th>行业</th><th>主力净流入</th><th>成交额</th><th>领涨股</th></tr>
+    <tr>
+      <td>1</td><td>半导体</td><td class="up">+76.11 亿</td><td>4488.79 亿</td><td>源杰科技 +16.41%</td>
+    </tr>
+    <tr>
+      <td>2</td><td>通信设备</td><td class="up">+58.54 亿</td><td>2864.35 亿</td><td>美信科技 +13.97%</td>
+    </tr>
+    <tr>
+      <td>3</td><td>小金属</td><td class="up">+22.78 亿</td><td>677.88 亿</td><td>东方锆业 +10.01%</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🎯</span> 次日操作计划（2026-06-04）</div>
+  <div class="plan-box">
+    <div class="plan-item">
+      <span class="plan-label">第一梯队 · 东方锆业（sz002167）</span>
+      <span class="plan-value"><span class="badge badge-red">转势 ★★★★</span></span>
+    </div>
+    <div style="font-size:13px;color:var(--text-secondary);padding:0 0 12px 0;">
+      买入区间：13.80 - 14.50 元 | 仓位：20% | 止损：13.20（-7%） | 止盈：16.50（+14%）<br>
+      逻辑：底部盘整后放量涨停突破，MACD金叉，均线由粘合发散向上，主力资金净流入3.21亿
+    </div>
+    <div class="plan-item">
+      <span class="plan-label">第一梯队 · 美信科技（sz301577）</span>
+      <span class="plan-value"><span class="badge badge-purple">开门 ★★★★</span></span>
+    </div>
+    <div style="font-size:13px;color:var(--text-secondary);padding:0 0 12px 0;">
+      买入区间：92.00 - 96.00 元 | 仓位：15% | 止损：85.00（-8%） | 止盈：115.00（+20%）<br>
+      逻辑：通信设备板块领涨，均线多头排列，MACD金叉，放量上涨（量比1.65），20cm弹性大
+    </div>
+    <div class="plan-item">
+      <span class="plan-label">第二梯队 · 黄河旋风（sh600172）</span>
+      <span class="plan-value"><span class="badge badge-orange">开门 ★★★</span></span>
+    </div>
+    <div style="font-size:13px;color:var(--text-secondary);padding:0 0 12px 0;">
+      等回调至 14.00 - 14.30 元介入 | 仓位：10% | 止损：13.20（-7%） | 止盈：17.00（+18%）<br>
+      逻辑：均线多头排列，MACD金叉红柱，但年初至今已涨163%，追高需谨慎，等回调更安全
+    </div>
+    <div class="plan-item">
+      <span class="plan-label">第二梯队 · 豫能控股（sz001896）</span>
+      <span class="plan-value"><span class="badge badge-orange">开门 ★★★</span></span>
+    </div>
+    <div style="font-size:13px;color:var(--text-secondary);padding:0 0 0 0;">
+      等回调至 18.50 - 19.00 元介入 | 仓位：10% | 止损：17.50（-7%） | 止盈：23.00（+21%）<br>
+      逻辑：连板强势，MACD金叉，但缩量涨停（量比0.74），年初至今涨幅286%过高，等分歧后介入
+    </div>
+  </div>
+</div>
+
+<!-- 转势战法候选详情 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🔄</span> 转势战法候选详情</div>
+
+  <div class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-name">东方锆业 <span style="font-size:13px;color:var(--text-secondary);">sz002167</span></span>
+      <span class="candidate-tag"><span class="badge badge-red">转势 ★★★★</span></span>
+    </div>
+    <div class="candidate-detail">
+      <span>现价：14.73元 <span class="up">+10.01%</span></span>
+      <span>量比：1.35（放量）</span>
+      <span>主力资金净流入：+3.21亿</span>
+      <span>年初至今：+19.27%</span>
+      <span>MACD：DIF=0.21，DEA=0.04，红柱扩大 <span style="color:var(--accent-green)">✅金叉</span></span>
+      <span>均线：MA5=13.66 > MA10=13.19 > MA20=13.04，均线由粘合发散 <span style="color:var(--accent-green)">✅多头</span></span>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:var(--text-secondary);">
+      <strong style="color:var(--text-primary)">分析：</strong>小金属板块领涨股，今日涨停突破前期平台，均线由长期粘合状态开始向上发散，MACD零轴上方金叉，量能配合良好。年初至今涨幅仅19%，相对低位，转势概率高。主力资金净流入3.21亿，游资东方锆业龙虎榜有华鑫证券上海莲花路买入3495万（胜率53%）。
+    </div>
+  </div>
+</div>
+
+<!-- 开门战法候选详情 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🚪</span> 开门战法候选详情</div>
+
+  <div class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-name">美信科技 <span style="font-size:13px;color:var(--text-secondary);">sz301577</span></span>
+      <span class="candidate-tag"><span class="badge badge-purple">开门 ★★★★</span></span>
+    </div>
+    <div class="candidate-detail">
+      <span>现价：98.46元 <span class="up">+13.97%</span></span>
+      <span>量比：1.65（明显放量）</span>
+      <span>主力资金净流入：+0.69亿</span>
+      <span>年初至今：+74.39%</span>
+      <span>MACD：DIF=4.87，DEA=3.03，MACD=3.66 <span style="color:var(--accent-green)">✅金叉</span></span>
+      <span>均线：MA5=83.63 > MA10=78.35 > MA20=76.21 > MA30=72.75 <span style="color:var(--accent-green)">✅多头排列</span></span>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:var(--text-secondary);">
+      <strong style="color:var(--text-primary)">分析：</strong>通信设备板块领涨（+13.97%），20cm弹性标的。均线完美多头排列，MACD金叉且红柱扩大，量比1.65明显放量。通信设备板块今日涨幅第一（+5.49%），主力资金净流入58.54亿，板块效应强。创业板个股，波动大需控制仓位。
+    </div>
+  </div>
+
+  <div class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-name">黄河旋风 <span style="font-size:13px;color:var(--text-secondary);">sh600172</span></span>
+      <span class="candidate-tag"><span class="badge badge-orange">开门 ★★★</span></span>
+    </div>
+    <div class="candidate-detail">
+      <span>现价：15.04元 <span class="up">+8.20%</span></span>
+      <span>量比：1.15</span>
+      <span>主力资金净流入：+3.83亿</span>
+      <span>年初至今：+163.40%</span>
+      <span>MACD：DIF=1.38，DEA=1.10，MACD=0.56 <span style="color:var(--accent-green)">✅金叉</span></span>
+      <span>均线：MA5=14.22 > MA10=13.07 > MA20=11.81 > MA30=10.71 <span style="color:var(--accent-green)">✅多头排列</span></span>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:var(--text-secondary);">
+      <strong style="color:var(--text-primary)">分析：</strong>游资成都系买入（国泰海通成都北一环路），高胜率席位关注。均线多头排列，MACD金叉红柱。但年初至今已涨163%，处于高位，追高风险较大，建议等回调后介入。
+    </div>
+  </div>
+
+  <div class="candidate">
+    <div class="candidate-header">
+      <span class="candidate-name">豫能控股 <span style="font-size:13px;color:var(--text-secondary);">sz001896</span></span>
+      <span class="candidate-tag"><span class="badge badge-orange">开门 ★★★</span></span>
+    </div>
+    <div class="candidate-detail">
+      <span>现价：20.08元 <span class="up">+10.03%</span>（涨停）</span>
+      <span>量比：0.74（缩量）</span>
+      <span>主力资金净流入：+6.91亿</span>
+      <span>年初至今：+286.15%</span>
+      <span>MACD：DIF=0.60，DEA=0.30，MACD=0.60 <span style="color:var(--accent-green)">✅金叉</span></span>
+      <span>均线：MA5=17.61 > MA10=16.94 > MA20=16.60，MA30=16.69 <span style="color:var(--accent-green)">✅接近多头</span></span>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:var(--text-secondary);">
+      <strong style="color:var(--text-primary)">分析：</strong>电力+新能源概念，3天3板强势标的。游资成都系、知春路大买，机构也有介入。MACD金叉但缩量涨停，且年初至今涨幅286%过高，位置偏高，建议等分歧回调后再考虑。
+    </div>
+  </div>
+</div>
+
+<!-- 排除说明 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🚫</span> 排除说明</div>
+  <table>
+    <tr><th>股票</th><th>原因</th><th>建议</th></tr>
+    <tr>
+      <td>通富微电 sz002156</td>
+      <td>MACD即将死叉（DIF=4.25 &lt; DEA=4.44，MACD负值），虽主力资金第一（+30.96亿）但技术面走差</td>
+      <td>观望，等MACD重新金叉</td>
+    </tr>
+    <tr>
+      <td>源杰科技 sh688498</td>
+      <td>价格过高（1405元），涨幅过大（+16.41%），年初至今+217%，主力资金仅+0.82亿</td>
+      <td>风险收益比不佳，放弃</td>
+    </tr>
+    <tr>
+      <td>亨通光电 sh600487</td>
+      <td>缩量涨停（量比仅0.33），年初至今+270%，连续大涨后接力难度大</td>
+      <td>等充分回调后再评估</td>
+    </tr>
+    <tr>
+      <td>达实智能 sz002421</td>
+      <td>今日下跌-1.81%，前期龙头开始调整</td>
+      <td>龙头补跌，回避</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 仓位配置建议 -->
+<div class="card">
+  <div class="card-title"><span class="icon">⚖️</span> 仓位配置建议</div>
+  <div style="font-size:14px;line-height:2;">
+    <p><strong>总仓位建议：30% - 40%</strong>（防守型）</p>
+    <p>理由：上证指数估值百分位 <span class="up">99.22%</span>，处于历史极高区间。今日涨少跌多（1599涨 vs 3312跌），市场情绪偏谨慎。虽然通信/半导体板块强势，但市场整体分化严重，不宜重仓。</p>
+    <ul style="margin-left:20px;color:var(--text-secondary);">
+      <li>第一梯队合计：35%（东方锆业20% + 美信科技15%）</li>
+      <li>第二梯队合计：20%（黄河旋风10% + 豫能控股10%，等回调介入）</li>
+      <li>现金预留：45%（应对市场回调或更好机会）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 龙虎榜 highlights -->
+<div class="card">
+  <div class="card-title"><span class="icon">📈</span> 龙虎榜 Highlights</div>
+  <table>
+    <tr><th>类型</th><th>标的</th><th>买入方</th><th>金额</th><th>备注</th></tr>
+    <tr>
+      <td><span class="badge badge-blue">机构</span></td>
+      <td>通富微电</td>
+      <td>3家机构</td>
+      <td class="up">2.60亿</td>
+      <td>买入占比9.99%</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-purple">游资</span></td>
+      <td>黄河旋风/豫能控股/通富微电</td>
+      <td>成都系</td>
+      <td class="up">3.74亿</td>
+      <td>国泰海通成都北一环路</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-purple">游资</span></td>
+      <td>通富微电</td>
+      <td>中山东路</td>
+      <td class="up">2.79亿</td>
+      <td>国泰海通上海松江中山东路</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-orange">高胜率</span></td>
+      <td>亨通光电</td>
+      <td>多席位合力</td>
+      <td class="up">23.17亿</td>
+      <td>10%上涨概率（涨停）</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-orange">高胜率</span></td>
+      <td>东方锆业</td>
+      <td>华鑫上海莲花路</td>
+      <td class="up">3495万</td>
+      <td>胜率53.49%</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 风险提示 -->
+<div class="risk-box">
+  <div style="font-weight:700;margin-bottom:8px;">⚠️ 风险提示</div>
+  <div style="font-size:13px;line-height:1.8;">
+    1. 当前上证指数估值百分位为 <strong>99.22%</strong>，处于历史极高区间，市场系统性风险较大。<br>
+    2. 今日个股跌多涨少（1599涨 vs 3312跌），涨停66只但跌停11只，市场分化加剧，赚钱效应一般。<br>
+    3. 通信/半导体板块连续强势，需警惕追高风险和板块轮动。<br>
+    4. 以上分析仅供学习交流，不构成投资建议。股市有风险，入市需谨慎。<br>
+    5. 严格执行止损纪律，单只个股亏损不超过-7%，总仓位不超过40%。
+  </div>
+</div>
+
+<div style="text-align:center; margin-top:24px; color:var(--text-secondary); font-size:12px;">
+  一阳指选股复盘 · 自动生成于 2026-06-03 18:00
+</div>
+
+</div>
+</body>
+</html>
