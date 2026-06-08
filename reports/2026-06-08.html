@@ -5,600 +5,634 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>一阳指选股复盘 · 2026-06-08</title>
 <style>
-:root {
-    --bg: #0d1117;
-    --bg-card: #161b22;
-    --bg-hover: #1c2128;
-    --border: #30363d;
-    --text: #c9d1d9;
+  :root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-card: #1c2128;
+    --border-color: #30363d;
+    --text-primary: #e6edf3;
     --text-secondary: #8b949e;
-    --up: #ff4d4f;
-    --down: #52c41a;
-    --accent: #58a6ff;
-    --gold: #e3b341;
-    --green: #3fb950;
-    --red: #f85149;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --text-muted: #6e7681;
+    --accent-green: #3fb950;
+    --accent-red: #f85149;
+    --accent-yellow: #d29922;
+    --accent-blue: #58a6ff;
+    --accent-purple: #a371f7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
-    padding: 20px;
-}
-.container { max-width: 1200px; margin: 0 auto; }
-header {
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  header {
     text-align: center;
-    padding: 30px 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 30px;
-}
-header h1 { font-size: 28px; color: var(--gold); margin-bottom: 8px; }
-header .subtitle { color: var(--text-secondary); font-size: 14px; }
-
-/* 市场概览卡片 */
-.market-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 30px;
-}
-.card {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 32px;
+  }
+  header h1 { font-size: 28px; font-weight: 700; color: var(--accent-yellow); margin-bottom: 8px; }
+  header .date { color: var(--text-secondary); font-size: 16px; }
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent-yellow);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .card {
     background: var(--bg-card);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 20px;
     transition: transform 0.2s;
-}
-.card:hover { transform: translateY(-2px); }
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-.card-title { font-size: 16px; color: var(--text-secondary); }
-.card-value { font-size: 32px; font-weight: 700; }
-.card-change {
-    font-size: 18px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 6px;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent-yellow); }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .card-title { font-size: 16px; font-weight: 600; color: var(--text-secondary); }
+  .card-value { font-size: 32px; font-weight: 700; }
+  .card-change { font-size: 18px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+  .up { color: var(--accent-red); }
+  .down { color: var(--accent-green); }
+  .bg-up { background: rgba(248, 81, 73, 0.15); }
+  .bg-down { background: rgba(63, 185, 80, 0.15); }
+  .card-detail { margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+  .card-detail span { display: inline-block; margin-right: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-color); }
+  th { color: var(--text-secondary); font-weight: 600; background: var(--bg-secondary); }
+  tr:hover { background: var(--bg-secondary); }
+  .badge {
     display: inline-block;
-    margin-top: 4px;
-}
-.card-detail {
-    margin-top: 12px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-}
-
-/* 表格 */
-.table-section { margin-bottom: 30px; }
-.section-title {
-    font-size: 18px;
-    color: var(--gold);
-    margin-bottom: 16px;
-    padding-left: 12px;
-    border-left: 3px solid var(--gold);
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--bg-card);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-}
-th, td { padding: 12px 16px; text-align: left; font-size: 14px; }
-th {
-    background: var(--bg-hover);
-    color: var(--text-secondary);
-    font-weight: 600;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-tr { border-bottom: 1px solid var(--border); }
-tr:last-child { border-bottom: none; }
-tr:hover { background: var(--bg-hover); }
-
-/* 候选股卡片 */
-.candidate-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 16px;
-    margin-bottom: 30px;
-}
-.candidate-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-}
-.candidate-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-.candidate-name { font-size: 18px; font-weight: 700; }
-.candidate-code { color: var(--text-secondary); font-size: 12px; margin-left: 6px; }
-.candidate-score {
-    background: var(--gold);
-    color: #000;
     padding: 2px 10px;
     border-radius: 12px;
     font-size: 12px;
-    font-weight: 700;
-}
-.candidate-method {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    margin-bottom: 8px;
-}
-.method-zhuanshi { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
-.method-kaimen { background: rgba(63, 185, 80, 0.15); color: var(--green); }
-.candidate-analysis {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-bottom: 12px;
-    line-height: 1.7;
-}
-.candidate-plan {
-    background: var(--bg);
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 13px;
-}
-.plan-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-    border-bottom: 1px dashed var(--border);
-}
-.plan-row:last-child { border-bottom: none; }
-.plan-label { color: var(--text-secondary); }
-.plan-value { font-weight: 600; }
-
-/* 风险提示 */
-.risk-box {
-    background: rgba(248, 81, 73, 0.08);
-    border: 1px solid rgba(248, 81, 73, 0.3);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-.risk-title { color: var(--red); font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-.risk-content { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
-
-/* 仓位建议 */
-.position-box {
-    background: rgba(88, 166, 255, 0.08);
-    border: 1px solid rgba(88, 166, 255, 0.3);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-.position-title { color: var(--accent); font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-
-/* 排除说明 */
-.exclude-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-.exclude-title { color: var(--text-secondary); font-size: 16px; font-weight: 700; margin-bottom: 12px; }
-.exclude-item {
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-}
-.exclude-item:last-child { border-bottom: none; }
-.exclude-name { font-weight: 600; }
-.exclude-reason { color: var(--text-secondary); margin-left: 8px; }
-
-footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--text-secondary);
-    font-size: 12px;
-    border-top: 1px solid var(--border);
-}
-.badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
     font-weight: 600;
-}
-.badge-high { background: rgba(248, 81, 73, 0.15); color: var(--red); }
-.badge-mid { background: rgba(227, 179, 65, 0.15); color: var(--gold); }
-.badge-low { background: rgba(63, 185, 80, 0.15); color: var(--green); }
+  }
+  .badge-red { background: rgba(248, 81, 73, 0.2); color: var(--accent-red); }
+  .badge-green { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+  .badge-yellow { background: rgba(210, 153, 34, 0.2); color: var(--accent-yellow); }
+  .badge-blue { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
+  .badge-purple { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
+  .stock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .stock-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .stock-name { font-size: 18px; font-weight: 700; }
+  .stock-code { color: var(--text-muted); font-size: 14px; margin-left: 8px; }
+  .stock-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .stock-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 12px 0; font-size: 13px; }
+  .stock-detail-item { color: var(--text-secondary); }
+  .stock-detail-item span { color: var(--text-primary); font-weight: 600; }
+  .analysis-box {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+  }
+  .analysis-box h4 { color: var(--accent-yellow); margin-bottom: 8px; font-size: 14px; }
+  .analysis-box p { color: var(--text-secondary); font-size: 13px; line-height: 1.8; }
+  .plan-box {
+    background: linear-gradient(135deg, rgba(210, 153, 34, 0.1), rgba(88, 166, 255, 0.1));
+    border: 1px solid var(--accent-yellow);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .plan-box h3 { color: var(--accent-yellow); margin-bottom: 16px; }
+  .plan-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+  .plan-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .plan-title { font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+  .plan-detail { color: var(--text-secondary); font-size: 14px; line-height: 1.8; }
+  .risk-box {
+    background: rgba(248, 81, 73, 0.1);
+    border: 1px solid var(--accent-red);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  .risk-box h3 { color: var(--accent-red); margin-bottom: 12px; }
+  .risk-box ul { list-style: none; padding: 0; }
+  .risk-box li { color: var(--text-secondary); font-size: 14px; padding: 6px 0; padding-left: 20px; position: relative; }
+  .risk-box li::before { content: "•"; color: var(--accent-red); position: absolute; left: 0; }
+  .highlight { color: var(--accent-yellow); font-weight: 600; }
+  .star { color: var(--accent-yellow); }
+  .exclude-box {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .exclude-box h4 { color: var(--accent-red); margin-bottom: 12px; }
+  .exclude-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+  .exclude-item:last-child { border-bottom: none; }
+  .exclude-reason { color: var(--text-muted); }
+  footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 32px;
+  }
+  @media (max-width: 768px) {
+    .grid-3 { grid-template-columns: 1fr; }
+    .container { padding: 16px; }
+    header h1 { font-size: 22px; }
+    .card-value { font-size: 24px; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
+
 <header>
-    <h1>一阳指选股复盘</h1>
-    <div class="subtitle">2026-06-08 · A股市场每日精选</div>
+  <h1>一阳指选股复盘</h1>
+  <div class="date">2026年6月8日 星期一</div>
 </header>
 
 <!-- 市场概览 -->
-<div class="market-cards">
+<section class="section">
+  <h2 class="section-title">📊 市场概览</h2>
+  <div class="grid-3">
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">上证指数</span>
-            <span class="badge badge-high">估值极高</span>
-        </div>
-        <div class="card-value" style="color: #52c41a">3959.34</div>
-        <div class="card-change" style="background: rgba(82,196,26,0.15); color: var(--down)">-1.70%</div>
-        <div class="card-detail">
-            <div>量比: 1.37</div>
-            <div>年初至今: -0.15%</div>
-            <div>PE-TTM: 17.21</div>
-            <div>估值百分位: 98.19%</div>
-        </div>
+      <div class="card-header">
+        <span class="card-title">上证指数</span>
+        <span class="card-change bg-down down">-1.70%</span>
+      </div>
+      <div class="card-value down">3,959.34</div>
+      <div class="card-detail">
+        <span>成交额: 12,673亿</span>
+        <span>量比: 1.01</span>
+        <span>估值百分位: <span class="highlight">98.19%</span></span>
+        <span>PE TTM: 17.21</span>
+        <span>年初至今: -0.24%</span>
+      </div>
     </div>
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">深证成指</span>
-        </div>
-        <div class="card-value" style="color: #52c41a">14821.19</div>
-        <div class="card-change" style="background: rgba(82,196,26,0.15); color: var(--down)">-3.22%</div>
-        <div class="card-detail">
-            <div>量比: 1.15</div>
-            <div>年初至今: +8.95%</div>
-        </div>
+      <div class="card-header">
+        <span class="card-title">深证成指</span>
+        <span class="card-change bg-down down">-3.22%</span>
+      </div>
+      <div class="card-value down">14,821.19</div>
+      <div class="card-detail">
+        <span>成交额: 15,255亿</span>
+        <span>量比: 1.03</span>
+        <span>估值百分位: <span class="highlight">99.01%</span></span>
+        <span>PE TTM: 35.88</span>
+        <span>年初至今: +9.58%</span>
+      </div>
     </div>
     <div class="card">
-        <div class="card-header">
-            <span class="card-title">创业板指</span>
-        </div>
-        <div class="card-value" style="color: #52c41a">3811.79</div>
-        <div class="card-change" style="background: rgba(82,196,26,0.15); color: var(--down)">-3.69%</div>
-        <div class="card-detail">
-            <div>量比: 1.38</div>
-            <div>年初至今: +17.54%</div>
-        </div>
+      <div class="card-header">
+        <span class="card-title">创业板指</span>
+        <span class="card-change bg-down down">-3.69%</span>
+      </div>
+      <div class="card-value down">3,811.79</div>
+      <div class="card-detail">
+        <span>成交额: 7,224亿</span>
+        <span>量比: 1.07</span>
+        <span>估值百分位: 60.59%</span>
+        <span>PE TTM: 47.08</span>
+        <span>年初至今: +19.00%</span>
+      </div>
     </div>
-</div>
+  </div>
+  <div class="card" style="margin-top: 16px;">
+    <div class="card-detail" style="font-size: 14px; color: var(--text-primary);">
+      <span>两市成交额: <strong>约35,152亿</strong></span>
+      <span>上证指数5日涨跌: <span class="down">-2.43%</span></span>
+      <span>深证成指5日涨跌: <span class="down">-3.38%</span></span>
+      <span>创业板指5日涨跌: <span class="down">-3.52%</span></span>
+    </div>
+  </div>
+</section>
 
-<!-- 热门板块TOP5 -->
-<div class="table-section">
-    <div class="section-title">热门板块 TOP5</div>
-    <table>
-        <thead>
-            <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>昨日连板</td>
-                <td style="color: #ff4d4f">+4.74%</td>
-                <td>中重科技 (sh603135)</td>
-                <td style="color: #ff4d4f">+9.98%</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>煤矿安全</td>
-                <td style="color: #ff4d4f">+4.19%</td>
-                <td>北路智控 (sz301195)</td>
-                <td style="color: #ff4d4f">+19.99%</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>机器人执行器概念</td>
-                <td style="color: #ff4d4f">+2.68%</td>
-                <td>中大力德 (sz002896)</td>
-                <td style="color: #ff4d4f">+9.72%</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>华为机器人</td>
-                <td style="color: #ff4d4f">+2.58%</td>
-                <td>拓斯达 (sz300607)</td>
-                <td style="color: #ff4d4f">+5.92%</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>微软合作伙伴</td>
-                <td style="color: #ff4d4f">+1.97%</td>
-                <td>奥比中光 (sh688322)</td>
-                <td style="color: #ff4d4f">+14.37%</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<!-- 热门板块 -->
+<section class="section">
+  <h2 class="section-title">🔥 热门板块 TOP5（概念）</h2>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-red">1</span></td>
+        <td>昨日连板</td>
+        <td><span class="up">+4.74%</span></td>
+        <td>中重科技</td>
+        <td><span class="up">+9.98%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">2</span></td>
+        <td>煤矿安全</td>
+        <td><span class="up">+4.19%</span></td>
+        <td>北路智控</td>
+        <td><span class="up">+19.99%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-yellow">3</span></td>
+        <td>机器人执行器</td>
+        <td><span class="up">+2.68%</span></td>
+        <td>中大力德</td>
+        <td><span class="up">+9.72%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-yellow">4</span></td>
+        <td>华为机器人</td>
+        <td><span class="up">+2.58%</span></td>
+        <td>拓斯达</td>
+        <td><span class="up">+5.92%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-yellow">5</span></td>
+        <td>微软合作伙伴</td>
+        <td><span class="up">+1.97%</span></td>
+        <td>奥比中光</td>
+        <td><span class="up">+14.37%</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
-<!-- 主力资金TOP3 -->
-<div class="table-section">
-    <div class="section-title">主力资金净流入 TOP3</div>
-    <table>
-        <thead>
-            <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>主力净流入</th><th>领涨股</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>银行概念</td>
-                <td style="color: #ff4d4f">+0.42%</td>
-                <td>15.57万</td>
-                <td>中信银行 (+4.34%)</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>铁路基建</td>
-                <td style="color: #52c41a">-2.36%</td>
-                <td>11.08万</td>
-                <td>泰和新材 (+9.98%)</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>红利股</td>
-                <td style="color: #52c41a">-0.87%</td>
-                <td>8.41万</td>
-                <td>香江控股 (+7.56%)</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<!-- 主力资金 -->
+<section class="section">
+  <h2 class="section-title">💰 主力资金净流入 TOP3</h2>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块名称</th><th>主力净流入</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-red">1</span></td>
+        <td>银行概念</td>
+        <td><span class="up">+15.57亿</span></td>
+        <td>中信银行</td>
+        <td><span class="up">+4.34%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">2</span></td>
+        <td>铁路基建</td>
+        <td><span class="up">+11.08亿</span></td>
+        <td>泰和新材</td>
+        <td><span class="up">+9.98%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">3</span></td>
+        <td>红利股</td>
+        <td><span class="up">+8.41亿</span></td>
+        <td>香江控股</td>
+        <td><span class="up">+7.56%</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
-<!-- 申万一级行业TOP5 -->
-<div class="table-section">
-    <div class="section-title">申万一级行业涨幅 TOP5</div>
-    <table>
-        <thead>
-            <tr><th>排名</th><th>行业名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>工程机械</td>
-                <td style="color: #ff4d4f">+2.30%</td>
-                <td>邵阳液压</td>
-                <td style="color: #ff4d4f">+8.71%</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>国有大型银行Ⅱ</td>
-                <td style="color: #ff4d4f">+1.74%</td>
-                <td>农业银行</td>
-                <td style="color: #ff4d4f">+3.30%</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>小家电</td>
-                <td style="color: #ff4d4f">+0.97%</td>
-                <td>科沃斯</td>
-                <td style="color: #ff4d4f">+4.02%</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>油服工程</td>
-                <td style="color: #ff4d4f">+0.67%</td>
-                <td>通源石油</td>
-                <td style="color: #ff4d4f">+4.73%</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>煤炭开采</td>
-                <td style="color: #ff4d4f">+0.60%</td>
-                <td>大有能源</td>
-                <td style="color: #ff4d4f">+9.95%</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<!-- 申万行业涨幅 -->
+<section class="section">
+  <h2 class="section-title">📈 申万一级行业涨幅 TOP5</h2>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>行业名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-red">1</span></td>
+        <td>工程机械</td>
+        <td><span class="up">+2.30%</span></td>
+        <td>邵阳液压</td>
+        <td><span class="up">+8.71%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">2</span></td>
+        <td>国有大型银行Ⅱ</td>
+        <td><span class="up">+1.74%</span></td>
+        <td>农业银行</td>
+        <td><span class="up">+3.30%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-yellow">3</span></td>
+        <td>小家电</td>
+        <td><span class="up">+0.97%</span></td>
+        <td>科沃斯</td>
+        <td><span class="up">+4.02%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-yellow">4</span></td>
+        <td>油服工程</td>
+        <td><span class="up">+0.67%</span></td>
+        <td>通源石油</td>
+        <td><span class="up">+4.73%</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-yellow">5</span></td>
+        <td>煤炭开采</td>
+        <td><span class="up">+0.60%</span></td>
+        <td>大有能源</td>
+        <td><span class="up">+9.95%</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
 <!-- 次日操作计划 -->
-<div class="table-section">
-    <div class="section-title">次日操作计划</div>
-    <table>
-        <thead>
-            <tr><th>股票</th><th>战法</th><th>买入区间</th><th>仓位</th><th>止损</th><th>止盈</th><th>风险</th></tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>邵阳液压</strong> (301079)</td>
-                <td><span class="badge badge-mid">转势战法</span></td>
-                <td>36.50-38.00</td>
-                <td>10%</td>
-                <td style="color: var(--green)">33.00</td>
-                <td style="color: var(--up)">48.00</td>
-                <td><span class="badge badge-low">中</span></td>
-            </tr>
-            <tr>
-                <td><strong>通源石油</strong> (300164)</td>
-                <td><span class="badge badge-mid">转势战法</span></td>
-                <td>9.30-9.60</td>
-                <td>10%</td>
-                <td style="color: var(--green)">8.50</td>
-                <td style="color: var(--up)">12.50</td>
-                <td><span class="badge badge-low">中</span></td>
-            </tr>
-            <tr>
-                <td><strong>北路智控</strong> (301195)</td>
-                <td><span class="badge badge-low">开门战法</span></td>
-                <td>27-29</td>
-                <td>5%</td>
-                <td style="color: var(--green)">24</td>
-                <td style="color: var(--up)">42</td>
-                <td><span class="badge badge-mid">高</span></td>
-            </tr>
-            <tr>
-                <td><strong>中大力德</strong> (002896)</td>
-                <td><span class="badge badge-low">开门战法</span></td>
-                <td>82-86</td>
-                <td>5%</td>
-                <td style="color: var(--green)">75</td>
-                <td style="color: var(--up)">115</td>
-                <td><span class="badge badge-mid">高</span></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<section class="section">
+  <h2 class="section-title">🎯 次日操作计划</h2>
+  <div class="plan-box">
+    <h3>第一梯队（可介入）</h3>
+    
+    <div class="plan-item">
+      <div class="plan-title">北路智控（301195.SZ）— 转势战法 <span class="star">★★★★</span></div>
+      <div class="plan-detail">
+        <strong>买入区间：</strong>30-32元（突破MA20/MA30回踩确认）<br>
+        <strong>仓位：</strong>5%-10%<br>
+        <strong>止损：</strong>28元（MA20下方）<br>
+        <strong>止盈：</strong>38-40元（布林带上轨33.67 + 20%空间）<br>
+        <strong>理由：</strong>底部盘整后20cm涨停突破，MACD即将金叉，量比6.38显著放量，主力净流入7158万，PE 32倍合理，年初至今仅-2.36%
+      </div>
+    </div>
+    
+    <div class="plan-item">
+      <div class="plan-title">埃斯顿（002747.SZ）— 开门战法 <span class="star">★★★★</span></div>
+      <div class="plan-detail">
+        <strong>买入区间：</strong>32-33元（MA5附近回踩）<br>
+        <strong>仓位：</strong>10%-15%<br>
+        <strong>止损：</strong>29元（MA10下方）<br>
+        <strong>止盈：</strong>40-42元（20%空间）<br>
+        <strong>理由：</strong>机器人减速器龙头，均线完美多头排列，MACD强势金叉，放量涨停，主力净流入5亿。但20日涨幅40%+，J值100超买，注意追高风险
+      </div>
+    </div>
+    
+    <h3 style="margin-top: 24px;">第二梯队（等回调）</h3>
+    
+    <div class="plan-item">
+      <div class="plan-title">中望软件（688083.SH）— 开门战法 <span class="star">★★★</span></div>
+      <div class="plan-detail">
+        <strong>买入区间：</strong>58-60元（等回调）<br>
+        <strong>仓位：</strong>暂不介入<br>
+        <strong>理由：</strong>20cm涨停，量比5.02放量，主力净流入1.29亿。但PE 372倍极高，技术数据不完整，追高需谨慎
+      </div>
+    </div>
+    
+    <div class="plan-item">
+      <div class="plan-title">泰和新材（002254.SZ）— 开门战法 <span class="star">★★★</span></div>
+      <div class="plan-detail">
+        <strong>买入区间：</strong>15元附近（等回调）<br>
+        <strong>仓位：</strong>暂不介入<br>
+        <strong>理由：</strong>连续2天涨停，MACD金叉，均线多头排列，主力净流入1.71亿。但20日涨幅42%，J值105超买，连续涨停追高风险大
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- 第一梯队 -->
-<div class="section-title">第一梯队（可介入）</div>
-<div class="candidate-grid">
-<div class="candidate-card">
-    <div class="candidate-header">
-        <div>
-            <span class="candidate-name">邵阳液压</span>
-            <span class="candidate-code">301079</span>
+<!-- 转势战法候选 -->
+<section class="section">
+  <h2 class="section-title">🔄 转势战法候选详情</h2>
+  
+  <div class="stock-card">
+    <div class="stock-header">
+      <div>
+        <span class="stock-name">北路智控</span>
+        <span class="stock-code">301195.SZ</span>
+        <div class="stock-tags">
+          <span class="badge badge-blue">转势★★★★</span>
+          <span class="badge badge-green">煤矿安全概念</span>
+          <span class="badge badge-yellow">20cm涨停</span>
         </div>
-        <span class="candidate-score">★3</span>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--accent-red);">33.13元</div>
+        <div style="color: var(--accent-red); font-weight: 600;">+19.99%</div>
+      </div>
     </div>
-    <div class="candidate-method method-zhuanshi">转势战法</div>
-    <div class="candidate-analysis">工程机械行业今日+2.30%领涨申万一级行业，公司大涨8.71%为行业领涨股。行业年初至今-6.10%处于相对低位，今日放量上涨（量比1.75），主力资金净流入行业第二（45109万）。股价从前期高点回调后今日逆势走强，底部启动特征明显。</div>
-    <div class="candidate-plan">
-        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">39.33</span></div>
-        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+8.71%</span></div>
-        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">36.50-38.00</span></div>
-        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">33.00</span></div>
-        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">48.00</span></div>
-        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">10%</span></div>
+    <div class="stock-detail">
+      <div class="stock-detail-item">成交额: <span>2.60亿</span></div>
+      <div class="stock-detail-item">换手率: <span>9.32%</span></div>
+      <div class="stock-detail-item">量比: <span>6.38</span></div>
+      <div class="stock-detail-item">主力净流入: <span>+7158万</span></div>
+      <div class="stock-detail-item">PE TTM: <span>32.17</span></div>
+      <div class="stock-detail-item">20日涨幅: <span>+2.47%</span></div>
+      <div class="stock-detail-item">年初至今: <span>-2.36%</span></div>
+      <div class="stock-detail-item">5日涨幅: <span>+16.98%</span></div>
     </div>
-</div>
-<div class="candidate-card">
-    <div class="candidate-header">
-        <div>
-            <span class="candidate-name">通源石油</span>
-            <span class="candidate-code">300164</span>
-        </div>
-        <span class="candidate-score">★3</span>
+    <div class="analysis-box">
+      <h4>一阳指转势战法判断</h4>
+      <p>
+        ✅ <strong>底部盘整：</strong>股价长期盘整于26-30元区间，今日20cm涨停突破<br>
+        ✅ <strong>一阳突破：</strong>股价33.13元突破所有均线（MA5/MA10/MA20/MA30/MA60）<br>
+        ✅ <strong>量能配合：</strong>量比6.38显著放量，成交额2.60亿<br>
+        ✅ <strong>均线：</strong>MA5=28.69，MA10=28.98，MA20=30.09，股价远超所有均线<br>
+        🟡 <strong>MACD：</strong>DIF -0.606，DEA -0.653，MACD柱0.093（即将金叉，尚未完全确认）<br>
+        ✅ <strong>估值：</strong>PE 32倍合理，PB 1.83倍<br>
+        ✅ <strong>资金：</strong>主力净流入7158万，超大单流入8050万
+      </p>
     </div>
-    <div class="candidate-method method-zhuanshi">转势战法</div>
-    <div class="candidate-analysis">油服工程行业今日+0.67%逆势上涨，公司+4.73%为行业领涨股。油气股今日震荡回升，山东墨龙涨停。行业年初至今+8.83%，处于温和上升趋势。油价回升预期下，油服板块有望持续受益。</div>
-    <div class="candidate-plan">
-        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">9.96</span></div>
-        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+4.73%</span></div>
-        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">9.30-9.60</span></div>
-        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">8.50</span></div>
-        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">12.50</span></div>
-        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">10%</span></div>
-    </div>
-</div>
-</div>
+  </div>
+</section>
 
-<!-- 第二梯队 -->
-<div class="section-title">第二梯队（等回调）</div>
-<div class="candidate-grid">
-<div class="candidate-card">
-    <div class="candidate-header">
-        <div>
-            <span class="candidate-name">北路智控</span>
-            <span class="candidate-code">301195</span>
+<!-- 开门战法候选 -->
+<section class="section">
+  <h2 class="section-title">🚪 开门战法候选详情</h2>
+  
+  <div class="stock-card">
+    <div class="stock-header">
+      <div>
+        <span class="stock-name">埃斯顿</span>
+        <span class="stock-code">002747.SZ</span>
+        <div class="stock-tags">
+          <span class="badge badge-purple">开门★★★★</span>
+          <span class="badge badge-green">机器人减速器</span>
+          <span class="badge badge-yellow">10cm涨停</span>
         </div>
-        <span class="candidate-score">★2</span>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--accent-red);">34.12元</div>
+        <div style="color: var(--accent-red); font-weight: 600;">+9.99%</div>
+      </div>
     </div>
-    <div class="candidate-method method-kaimen">开门战法</div>
-    <div class="candidate-analysis">煤矿安全概念今日+4.19%居概念涨幅第二，公司接近20cm涨停。但今日涨幅过大（+19.99%），且煤矿安全概念持续性存疑。建议等回调至28元附近再考虑介入。</div>
-    <div class="candidate-plan">
-        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">33.13</span></div>
-        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+19.99%</span></div>
-        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">27-29</span></div>
-        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">24</span></div>
-        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">42</span></div>
-        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">5%</span></div>
+    <div class="stock-detail">
+      <div class="stock-detail-item">成交额: <span>36.80亿</span></div>
+      <div class="stock-detail-item">换手率: <span>14.43%</span></div>
+      <div class="stock-detail-item">量比: <span>1.42</span></div>
+      <div class="stock-detail-item">主力净流入: <span>+5.00亿</span></div>
+      <div class="stock-detail-item">PE TTM: <span>253.66</span></div>
+      <div class="stock-detail-item">20日涨幅: <span>+40.82%</span></div>
+      <div class="stock-detail-item">年初至今: <span>+43.97%</span></div>
+      <div class="stock-detail-item">5日涨幅: <span>+27.46%</span></div>
     </div>
-</div>
-<div class="candidate-card">
-    <div class="candidate-header">
-        <div>
-            <span class="candidate-name">中大力德</span>
-            <span class="candidate-code">002896</span>
+    <div class="analysis-box">
+      <h4>一阳指开门战法四条件判断</h4>
+      <p>
+        ✅ <strong>条件1-均线多头排列：</strong>MA5=30.13 > MA10=29.19 > MA20=27.76 > MA30=25.85 > MA60=23.29<br>
+        ✅ <strong>条件2-MACD金叉：</strong>DIF 2.068 > DEA 1.724，MACD柱0.688（强势金叉）<br>
+        ✅ <strong>条件3-量能温和放大：</strong>量比1.42，换手率14.43%，成交额36.80亿<br>
+        ✅ <strong>条件4-股价位于均线上方：</strong>股价34.12元远超所有均线<br>
+        ⚠️ <strong>注意：</strong>20日涨幅40.82%偏高，KDJ J值100.56超买，追高风险较大
+      </p>
+    </div>
+  </div>
+  
+  <div class="stock-card">
+    <div class="stock-header">
+      <div>
+        <span class="stock-name">中望软件</span>
+        <span class="stock-code">688083.SH</span>
+        <div class="stock-tags">
+          <span class="badge badge-purple">开门★★★</span>
+          <span class="badge badge-green">软件开发</span>
+          <span class="badge badge-yellow">20cm涨停</span>
         </div>
-        <span class="candidate-score">★2</span>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--accent-red);">66.71元</div>
+        <div style="color: var(--accent-red); font-weight: 600;">+20.00%</div>
+      </div>
     </div>
-    <div class="candidate-method method-kaimen">开门战法</div>
-    <div class="candidate-analysis">机器人执行器概念今日+2.68%，公司+9.72%接近涨停。机器人概念持续活跃，丰光精密30CM二连板。但股价已较高（95.20元），今日接近涨停后追高风险大。建议等回调至85元附近再考虑。</div>
-    <div class="candidate-plan">
-        <div class="plan-row"><span class="plan-label">最新价</span><span class="plan-value">95.20</span></div>
-        <div class="plan-row"><span class="plan-label">今日涨幅</span><span class="plan-value" style="color: #ff4d4f">+9.72%</span></div>
-        <div class="plan-row"><span class="plan-label">买入区间</span><span class="plan-value">82-86</span></div>
-        <div class="plan-row"><span class="plan-label">止损位</span><span class="plan-value" style="color: var(--green)">75</span></div>
-        <div class="plan-row"><span class="plan-label">目标位</span><span class="plan-value" style="color: var(--up)">115</span></div>
-        <div class="plan-row"><span class="plan-label">建议仓位</span><span class="plan-value">5%</span></div>
+    <div class="stock-detail">
+      <div class="stock-detail-item">成交额: <span>10.34亿</span></div>
+      <div class="stock-detail-item">换手率: <span>9.59%</span></div>
+      <div class="stock-detail-item">量比: <span>5.02</span></div>
+      <div class="stock-detail-item">主力净流入: <span>+1.29亿</span></div>
+      <div class="stock-detail-item">PE TTM: <span>372.14</span></div>
+      <div class="stock-detail-item">20日涨幅: <span>+13.90%</span></div>
+      <div class="stock-detail-item">年初至今: <span>-1.55%</span></div>
+      <div class="stock-detail-item">5日涨幅: <span>+18.30%</span></div>
     </div>
-</div>
-</div>
+    <div class="analysis-box">
+      <h4>一阳指开门战法四条件判断</h4>
+      <p>
+        ✅ <strong>条件1-均线多头排列：</strong>5日涨18.30%，20日涨13.90%，趋势向上<br>
+        🟡 <strong>条件2-MACD：</strong>技术数据未完整返回，需进一步确认<br>
+        ✅ <strong>条件3-量能放大：</strong>量比5.02显著放量，换手率9.59%<br>
+        ✅ <strong>条件4-股价位于均线上方：</strong>20cm涨停，股价创新高<br>
+        ⚠️ <strong>注意：</strong>PE 372倍极高，技术数据不完整，追高需谨慎
+      </p>
+    </div>
+  </div>
+  
+  <div class="stock-card">
+    <div class="stock-header">
+      <div>
+        <span class="stock-name">泰和新材</span>
+        <span class="stock-code">002254.SZ</span>
+        <div class="stock-tags">
+          <span class="badge badge-purple">开门★★★</span>
+          <span class="badge badge-green">化学纤维</span>
+          <span class="badge badge-yellow">2连板</span>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--accent-red);">17.08元</div>
+        <div style="color: var(--accent-red); font-weight: 600;">+9.98%</div>
+      </div>
+    </div>
+    <div class="stock-detail">
+      <div class="stock-detail-item">成交额: <span>11.39亿</span></div>
+      <div class="stock-detail-item">换手率: <span>8.11%</span></div>
+      <div class="stock-detail-item">量比: <span>1.50</span></div>
+      <div class="stock-detail-item">主力净流入: <span>+1.71亿</span></div>
+      <div class="stock-detail-item">PE TTM: <span>312.89</span></div>
+      <div class="stock-detail-item">20日涨幅: <span>+42.21%</span></div>
+      <div class="stock-detail-item">年初至今: <span>+70.80%</span></div>
+      <div class="stock-detail-item">5日涨幅: <span>+26.14%</span></div>
+    </div>
+    <div class="analysis-box">
+      <h4>一阳指开门战法四条件判断</h4>
+      <p>
+        ✅ <strong>条件1-均线多头排列：</strong>MA5=14.77 > MA10=14.49 > MA20=14.54 > MA30=13.43 > MA60=12.18<br>
+        ✅ <strong>条件2-MACD金叉：</strong>DIF 0.794 > DEA 0.73，MACD柱0.129<br>
+        ✅ <strong>条件3-量能温和：</strong>量比1.50，换手率8.11%<br>
+        ✅ <strong>条件4-股价位于均线上方：</strong>股价17.08远超所有均线<br>
+        ⚠️ <strong>注意：</strong>连续2天涨停，20日涨幅42%，KDJ J值105.29超买，追高风险极大
+      </p>
+    </div>
+  </div>
+</section>
 
 <!-- 排除说明 -->
-<div class="exclude-box">
-    <div class="exclude-title">排除说明</div>
+<section class="section">
+  <h2 class="section-title">❌ 排除说明</h2>
+  <div class="exclude-box">
+    <h4>以下股票不符合一阳指体系或风险过高，已排除：</h4>
     <div class="exclude-item">
-        <span class="exclude-name">大有能源 (600403)</span>
-        <span class="exclude-reason">6连板煤炭股，涨幅过大，属于连板接力模式而非一阳指体系</span>
+      <span><strong>索辰科技</strong>（688507.SH）</span>
+      <span class="exclude-reason">PE 1520倍极高，主力净流出2444万，20日涨幅130%，风险极高</span>
     </div>
     <div class="exclude-item">
-        <span class="exclude-name">中重科技 (603135)</span>
-        <span class="exclude-reason">4连板智能制造概念股，连续涨停多日，追高风险极高</span>
+      <span><strong>皖维高新</strong>（600063.SH）</span>
+      <span class="exclude-reason">昨日转势候选，今日大跌-6.33%，主力净流出1.85亿，转势失败</span>
     </div>
     <div class="exclude-item">
-        <span class="exclude-name">丰光精密 (430510)</span>
-        <span class="exclude-reason">30CM二连板，涨幅过大，追高风险极大</span>
+      <span><strong>绿的谐波</strong>（688017.SH）</span>
+      <span class="exclude-reason">昨日开门候选，主力净流出3.11亿，20日涨幅58%，PE 574倍，不建议追</span>
     </div>
     <div class="exclude-item">
-        <span class="exclude-name">凡拓数创 (301313)</span>
-        <span class="exclude-reason">20cm涨停，物理AI概念6天4板，短期涨幅过大</span>
+      <span><strong>京东方A</strong>（000725.SZ）</span>
+      <span class="exclude-reason">昨日开门候选，今日主力净流出18.93亿，资金面不配合，降至观望</span>
     </div>
-    <div class="exclude-item">
-        <span class="exclude-name">格灵深瞳 (688207)</span>
-        <span class="exclude-reason">20cm涨停，空间计算概念单日涨幅过大，持续性存疑</span>
-    </div>
-    <div class="exclude-item">
-        <span class="exclude-name">节能铁汉 (300197)</span>
-        <span class="exclude-reason">创业板6天4板，资产重组概念，涨幅过大不符合体系</span>
-    </div>
-    <div class="exclude-item">
-        <span class="exclude-name">达实智能 (002421)</span>
-        <span class="exclude-reason">6天4板，物理AI概念，短期涨幅过大</span>
-    </div>
-</div>
+  </div>
+</section>
 
 <!-- 仓位配置建议 -->
-<div class="position-box">
-    <div class="position-title">仓位配置建议</div>
-    <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
-        <p><strong>当前市场环境：</strong>上证指数估值百分位98.19%，处于历史极高估区间。今日三大指数集体大跌（创业板-3.69%、深证-3.22%、上证-1.70%），两市成交额2.79万亿元，较昨日缩量2765亿，属于缩量下跌。全市场62股涨停，56股跌停，4513只个股下跌，仅665只上涨，市场情绪极度偏弱。北证50逆势涨1.33%。机器人、物理AI、油气等少数板块逆势走强。</p>
-        <p><strong>建议总仓位：</strong>不超过 20%</p>
-        <p><strong>配置方向：</strong></p>
-        <ul style="margin-left: 20px; margin-top: 8px;">
-            <li>工程机械（邵阳液压）：10% — 行业领涨，底部启动迹象，主力资金净流入</li>
-            <li>油服工程（通源石油）：10% — 油气板块逆势走强，油价回升预期</li>
-            <li>现金储备：80% — 市场极度弱势，保留充足机动资金等待更好买点</li>
-        </ul>
-        <p style="margin-top: 12px;"><strong>操作纪律：</strong>严格执行止损，单票亏损不超过总资金的3%。次日开盘若高开超过3%，放弃买入计划。当前市场环境下，谨慎追高，耐心等待回调确认。上证指数失守4000点，短期或有进一步下探风险。</p>
+<section class="section">
+  <h2 class="section-title">💼 仓位配置建议</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title" style="margin-bottom: 12px;">短线仓位</div>
+      <div class="card-value" style="font-size: 28px; color: var(--accent-yellow);">30%-40%</div>
+      <div class="card-detail" style="margin-top: 12px;">
+        精选个股控制节奏，单票不超过总仓位的15%
+      </div>
     </div>
-</div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom: 12px;">现金储备</div>
+      <div class="card-value" style="font-size: 28px; color: var(--accent-green);">60%-70%</div>
+      <div class="card-detail" style="margin-top: 12px;">
+        保留现金等回调，市场估值处于历史极高区间
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom: 12px;">操作原则</div>
+      <div class="card-detail" style="margin-top: 0; font-size: 13px;">
+        1. 不追高，等回踩<br>
+        2. 严格止损（-8%至-10%）<br>
+        3. 分批建仓，不all in<br>
+        4. 指数高估区间控制仓位
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- 风险提示 -->
-<div class="risk-box">
-    <div class="risk-title">风险提示</div>
-    <div class="risk-content">
-        <p>1. <strong>估值风险：</strong>上证指数PE-TTM 17.21倍，历史百分位98.19%，处于历史极高估区间。市场随时可能面临深度回调压力。</p>
-        <p>2. <strong>缩量下跌：</strong>今日沪深两市成交额2.79万亿元，较昨日缩量2765亿，缩量下跌表明承接力度不足，短期可能继续下探。</p>
-        <p>3. <strong>个股跌多涨少：</strong>今日仅665只个股上涨，4513只下跌，涨跌比约1:7，市场情绪极度悲观。</p>
-        <p>4. <strong>指数破位：</strong>上证指数失守4000点整数关口，创业板暴跌3.69%，深证成指跌3.22%，主要指数均跌破短期均线支撑。</p>
-        <p>5. <strong>高位股补跌：</strong>前期强势板块（CPO、半导体、有色金属等）今日大幅回调，锡业股份跌停，高位股风险持续释放。</p>
-        <p>6. <strong>系统性风险：</strong>当前市场处于高位+极致缩量下跌环境，可能预示阶段性调整开始，需高度警惕。</p>
-        <p style="margin-top: 12px; color: var(--red);"><strong>免责声明：本报告仅供参考，不构成投资建议。股市有风险，投资需谨慎。</strong></p>
-    </div>
-</div>
+<section class="section">
+  <h2 class="section-title">⚠️ 风险提示</h2>
+  <div class="risk-box">
+    <h3>当前市场风险</h3>
+    <ul>
+      <li>上证指数估值百分位 <strong>98.19%</strong>，处于历史极高区间</li>
+      <li>深证成指估值百分位 <strong>99.01%</strong>，处于历史极高区间</li>
+      <li>今日指数大跌（上证-1.70%，深证-3.22%，创业板-3.69%），市场波动加剧</li>
+      <li>指数与个股背离：指数大跌但涨停个股众多，分化严重</li>
+      <li>强势股（机器人、AI）涨幅过大，追高风险极高</li>
+      <li>创业板指5日跌幅-3.52%，短期趋势向下</li>
+      <li>以上分析仅供参考，不构成投资建议。股市有风险，投资需谨慎。</li>
+    </ul>
+  </div>
+</section>
 
 <footer>
-    <p>一阳指选股复盘 · {date_str} · 数据仅供参考</p>
-    <p style="margin-top: 4px;">Generated by WorkBuddy Automation</p>
+  <p>一阳指选股复盘 ·  generated on 2026-06-08</p>
+  <p style="margin-top: 8px;">数据来源：NeoData Financial Search · 技术分析仅供参考，不构成投资建议</p>
 </footer>
 
 </div>
