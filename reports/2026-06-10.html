@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一阳指选股复盘 · 2026-06-10</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #1c2128;
+            --border-color: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --up-color: #ff4d4f;
+            --down-color: #52c41a;
+            --accent: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+        .header {
+            text-align: center;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 28px; font-weight: 700; letter-spacing: 1px; }
+        .header .date { color: var(--text-secondary); font-size: 14px; margin-top: 8px; }
+        .header .badge {
+            display: inline-block;
+            background: var(--accent-glow);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .section { margin-bottom: 32px; }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .card-name { font-size: 16px; font-weight: 600; }
+        .card-value { font-size: 24px; font-weight: 700; }
+        .card-change { font-size: 14px; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+        .up { color: var(--up-color); background: rgba(255, 77, 79, 0.1); }
+        .down { color: var(--down-color); background: rgba(82, 196, 26, 0.1); }
+        .card-detail { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color); }
+        .detail-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; }
+        .detail-row span:last-child { color: var(--text-primary); font-weight: 500; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background: var(--bg-secondary); color: var(--text-secondary); font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .tag-primary { background: rgba(245, 158, 11, 0.15); color: var(--accent); }
+        .tag-success { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+        .tag-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        .highlight-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .stock-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent);
+        }
+        .stock-info { flex: 1; }
+        .stock-name { font-weight: 600; font-size: 15px; }
+        .stock-code { color: var(--text-muted); font-size: 12px; margin-left: 6px; }
+        .stock-reason { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
+        .stock-metrics { text-align: right; }
+        .stock-price { font-size: 18px; font-weight: 700; }
+        .stock-pct { font-size: 14px; font-weight: 600; }
+        .analysis-box {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .analysis-box strong { color: var(--text-primary); }
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .plan-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .plan-card h4 { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
+        .plan-card .value { font-size: 18px; font-weight: 700; color: var(--accent); }
+        .risk-bar {
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .risk-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 32px;
+        }
+        .exclude-item {
+            padding: 10px 16px;
+            background: rgba(239, 68, 68, 0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--danger);
+            font-size: 13px;
+        }
+        .exclude-reason { color: var(--text-secondary); margin-top: 4px; }
+        @media (max-width: 768px) {
+            .cards { grid-template-columns: 1fr; }
+            .plan-grid { grid-template-columns: 1fr; }
+            table { font-size: 12px; }
+            th, td { padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>一阳指选股复盘</h1>
+            <div class="date">2026年6月10日 星期三 | A股交易日</div>
+            <div class="badge">估值高位 · 谨慎操作</div>
+        </div>
+
+        <!-- 市场概览 -->
+        <div class="section">
+            <div class="section-title">市场概览</div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-name">上证指数</span>
+                    </div>
+                    <div class="card-value">3993.23</div>
+                    <span class="card-change down">-0.42%</span>
+                    <div class="card-detail">
+                        <div class="detail-row"><span>成交额</span><span>12,271亿</span></div>
+                        <div class="detail-row"><span>量比</span><span>0.94</span></div>
+                        <div class="detail-row"><span>年初至今</span><span>+0.61%</span></div>
+                        <div class="detail-row"><span>PE-TTM</span><span>17.66</span></div>
+                        <div class="detail-row"><span>估值百分位</span><span style="color: var(--danger); font-weight: 700;">97.61%</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-name">深证成指</span>
+                    </div>
+                    <div class="card-value">14,954.10</div>
+                    <span class="card-change down">-2.06%</span>
+                    <div class="card-detail">
+                        <div class="detail-row"><span>成交额</span><span>13,922亿</span></div>
+                        <div class="detail-row"><span>量比</span><span>0.93</span></div>
+                        <div class="detail-row"><span>年初至今</span><span>+10.57%</span></div>
+                        <div class="detail-row"><span>PE-TTM</span><span>49.52</span></div>
+                        <div class="detail-row"><span>估值百分位</span><span style="color: var(--danger); font-weight: 700;">98.97%</span></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-name">创业板指</span>
+                    </div>
+                    <div class="card-value">3,854.79</div>
+                    <span class="card-change down">-2.70%</span>
+                    <div class="card-detail">
+                        <div class="detail-row"><span>成交额</span><span>6,489亿</span></div>
+                        <div class="detail-row"><span>量比</span><span>0.94</span></div>
+                        <div class="detail-row"><span>年初至今</span><span>+20.34%</span></div>
+                        <div class="detail-row"><span>PE-TTM</span><span>68.11</span></div>
+                        <div class="detail-row"><span>估值百分位</span><span style="color: var(--warning); font-weight: 700;">60.58%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="highlight-box" style="margin-top: 16px;">
+                <div class="detail-row"><span>沪深总成交额</span><span>约 26,193 亿</span></div>
+                <div class="detail-row"><span>涨跌家数</span><span>上涨 1,485 / 下跌 3,421 / 平盘 76</span></div>
+                <div class="detail-row"><span>涨停/跌停</span><span><span style="color: var(--up-color);">涨停 71 家</span> / <span style="color: var(--down-color);">跌停 30 家</span></span></div>
+                <div class="detail-row"><span>市场情绪</span><span style="color: var(--down-color);">跌多涨少，市场偏弱</span></div>
+            </div>
+        </div>
+
+        <!-- 热门板块TOP5 -->
+        <div class="section">
+            <div class="section-title">热门板块 TOP5</div>
+            <div class="highlight-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>板块名称</th>
+                            <th>涨跌幅</th>
+                            <th>领涨股</th>
+                            <th>领涨股涨幅</th>
+                            <th>换手率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag tag-primary">1</span></td>
+                            <td><strong>靶材</strong></td>
+                            <td><span class="up">+7.45%</span></td>
+                            <td>欧莱新材</td>
+                            <td><span class="up">+13.35%</span></td>
+                            <td>13.43%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-primary">2</span></td>
+                            <td><strong>电子特气</strong></td>
+                            <td><span class="up">+4.83%</span></td>
+                            <td>中船特气</td>
+                            <td><span class="up">+16.42%</span></td>
+                            <td>6.86%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-primary">3</span></td>
+                            <td><strong>电子树脂</strong></td>
+                            <td><span class="up">+4.66%</span></td>
+                            <td>中化国际</td>
+                            <td><span class="up">+10.08%</span></td>
+                            <td>7.80%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-primary">4</span></td>
+                            <td><strong>环氧丙烷概念</strong></td>
+                            <td><span class="up">+3.84%</span></td>
+                            <td>怡达股份</td>
+                            <td><span class="up">+19.99%</span></td>
+                            <td>1.60%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-primary">5</span></td>
+                            <td><strong>工业气体</strong></td>
+                            <td><span class="up">+2.76%</span></td>
+                            <td>中船特气</td>
+                            <td><span class="up">+16.42%</span></td>
+                            <td>3.97%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 主力资金TOP3 -->
+        <div class="section">
+            <div class="section-title">主力资金净流入板块 TOP3</div>
+            <div class="highlight-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>板块名称</th>
+                            <th>主力净流入</th>
+                            <th>板块涨幅</th>
+                            <th>成交额</th>
+                            <th>领涨股</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="tag tag-success">1</span></td>
+                            <td><strong>电子特气</strong></td>
+                            <td><span style="color: var(--success); font-weight: 700;">+20.98 亿</span></td>
+                            <td><span class="up">+4.83%</span></td>
+                            <td>414亿</td>
+                            <td>中船特气 +16.42%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-success">2</span></td>
+                            <td><strong>工业气体</strong></td>
+                            <td><span style="color: var(--success); font-weight: 700;">+16.77 亿</span></td>
+                            <td><span class="up">+2.76%</span></td>
+                            <td>410亿</td>
+                            <td>中船特气 +16.42%</td>
+                        </tr>
+                        <tr>
+                            <td><span class="tag tag-success">3</span></td>
+                            <td><strong>靶材</strong></td>
+                            <td><span style="color: var(--success); font-weight: 700;">+14.93 亿</span></td>
+                            <td><span class="up">+7.45%</span></td>
+                            <td>138亿</td>
+                            <td>欧莱新材 +13.35%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 申万一级行业 -->
+        <div class="section">
+            <div class="section-title">申万一级行业 5日涨幅 TOP5</div>
+            <div class="highlight-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>行业名称</th>
+                            <th>5日涨幅</th>
+                            <th>20日涨幅</th>
+                            <th>60日涨幅</th>
+                            <th>年初至今</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>通信</strong></td>
+                            <td><span class="up">+3.22%</span></td>
+                            <td><span class="up">+11.08%</span></td>
+                            <td><span class="up">+51.25%</span></td>
+                            <td><span class="up">+219.11%</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>机械设备</strong></td>
+                            <td><span class="up">+2.97%</span></td>
+                            <td><span class="up">+0.41%</span></td>
+                            <td><span class="up">+6.11%</span></td>
+                            <td><span class="up">+57.29%</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>电子</strong></td>
+                            <td><span class="up">+1.76%</span></td>
+                            <td><span class="up">+6.07%</span></td>
+                            <td><span class="up">+35.37%</span></td>
+                            <td><span class="up">+126.37%</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>银行</strong></td>
+                            <td><span class="up">+0.41%</span></td>
+                            <td><span class="up">+1.16%</span></td>
+                            <td><span class="up">+0.88%</span></td>
+                            <td><span class="down">-4.66%</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>煤炭</strong></td>
+                            <td><span class="down">-0.22%</span></td>
+                            <td><span class="up">+7.15%</span></td>
+                            <td><span class="up">+1.67%</span></td>
+                            <td><span class="up">+32.94%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 一阳指候选股 -->
+        <div class="section">
+            <div class="section-title">一阳指候选股分析</div>
+
+            <h4 style="color: var(--success); margin-bottom: 12px; font-size: 15px;">第一梯队（可介入）</h4>
+
+            <div class="stock-item">
+                <div class="stock-info">
+                    <div class="stock-name">有研新材 <span class="stock-code">sh600206</span></div>
+                    <div class="stock-reason">电子树脂概念 | 新材料 | 主力资金排名第5</div>
+                </div>
+                <div class="stock-metrics">
+                    <div class="stock-price">32.24</div>
+                    <div class="stock-pct up">+10.00%</div>
+                </div>
+            </div>
+            <div class="analysis-box">
+                <strong>【转势战法】</strong><br>
+                1. <strong>底部盘整</strong>：此前在27-32元区间震荡整理，今日涨停突破箱体上沿。<br>
+                2. <strong>一阳突破</strong>：收盘价32.24元，突破MA5/MA10/MA20/MA30所有均线。<br>
+                3. <strong>量能配合</strong>：今日成交额35.73亿，较前期明显放大（前5日均值约20亿）。<br>
+                4. <strong>均线</strong>：MA5=29.54, MA10=29.09, MA20=29.56，股价站上所有短期均线。<br>
+                5. <strong>MACD</strong>：DIF=0.627, DEA=0.684，MACD=-0.113，即将金叉。<br>
+                6. <strong>资金</strong>：主力净流入<strong>6.24亿</strong>（市场排名第5），大资金认可度极高。<br>
+                <strong>结论</strong>：转势信号明确，可重点关注。建议次日开盘价附近介入，仓位不超过15%。
+            </div>
+
+            <div class="stock-item">
+                <div class="stock-info">
+                    <div class="stock-name">杭氧股份 <span class="stock-code">sz002430</span></div>
+                    <div class="stock-reason">工业气体概念 | 电子特气 | MACD即将金叉</div>
+                </div>
+                <div class="stock-metrics">
+                    <div class="stock-price">26.94</div>
+                    <div class="stock-pct up">+10.00%</div>
+                </div>
+            </div>
+            <div class="analysis-box">
+                <strong>【转势战法】</strong><br>
+                1. <strong>底部盘整</strong>：从前期高点31元回落至24元附近盘整，今日涨停。<br>
+                2. <strong>一阳突破</strong>：收盘价26.94元，突破MA5/MA10/MA20均线。<br>
+                3. <strong>量能配合</strong>：今日成交额8.01亿，量能放大（前5日均值约4.5亿）。<br>
+                4. <strong>MACD</strong>：DIF=-1.106, DEA=-1.178, MACD=0.145，MACD即将金叉或刚金叉，信号积极。<br>
+                5. <strong>资金</strong>：主力净流入<strong>1.87亿</strong>（市场排名第56）。<br>
+                <strong>结论</strong>：MACD金叉确认中，转势信号较强。建议次日开盘价附近介入，仓位不超过10%。
+            </div>
+
+            <div class="stock-item">
+                <div class="stock-info">
+                    <div class="stock-name">中化国际 <span class="stock-code">sh600500</span></div>
+                    <div class="stock-reason">电子树脂概念 | 低价股 | 底部盘整突破</div>
+                </div>
+                <div class="stock-metrics">
+                    <div class="stock-price">6.55</div>
+                    <div class="stock-pct up">+10.08%</div>
+                </div>
+            </div>
+            <div class="analysis-box">
+                <strong>【转势战法】</strong><br>
+                1. <strong>底部盘整</strong>：长期在4.2-6.3元区间震荡，今日涨停突破区间上沿。<br>
+                2. <strong>一阳突破</strong>：收盘价6.55元涨停，突破所有均线。<br>
+                3. <strong>量能</strong>：今日成交额2.06亿，量能放大但绝对值不大。<br>
+                4. <strong>MACD</strong>：DIF=0.251, DEA=0.254，基本持平，尚未金叉。<br>
+                5. <strong>资金</strong>：主力净流入1553万，5日主力净流入1.26亿。<br>
+                <strong>结论</strong>：低价股转势，但MACD尚未金叉。适合小仓位博弈，仓位不超过8%。
+            </div>
+
+            <h4 style="color: var(--warning); margin: 24px 0 12px; font-size: 15px;">第二梯队（等回调）</h4>
+
+            <div class="stock-item" style="border-left-color: var(--warning);">
+                <div class="stock-info">
+                    <div class="stock-name">拓维信息 <span class="stock-code">sz002261</span></div>
+                    <div class="stock-reason">AI概念 | Manus概念 | 主力资金排名第4</div>
+                </div>
+                <div class="stock-metrics">
+                    <div class="stock-price">30.91</div>
+                    <div class="stock-pct up">+10.00%</div>
+                </div>
+            </div>
+            <div class="analysis-box">
+                <strong>【转势战法】</strong><br>
+                1. <strong>底部盘整</strong>：从高位回落，近期在26-32元震荡。<br>
+                2. <strong>一阳突破</strong>：收盘价30.91元，尚未突破MA20（31.21元）。<br>
+                3. <strong>MACD</strong>：DIF=-1.676, DEA=-1.596，MACD尚未金叉。<br>
+                4. <strong>资金</strong>：主力净流入<strong>7.27亿</strong>（市场排名第4），资金极其强势。<br>
+                <strong>结论</strong>：巨量资金流入但技术形态尚未完全确认。建议等突破MA20且MACD金叉后再介入。
+            </div>
+
+            <div class="stock-item" style="border-left-color: var(--warning);">
+                <div class="stock-info">
+                    <div class="stock-name">雅克科技 <span class="stock-code">sz002409</span></div>
+                    <div class="stock-reason">电子特气概念 | 半导体材料 | 主力资金排名第3</div>
+                </div>
+                <div class="stock-metrics">
+                    <div class="stock-price">122.55</div>
+                    <div class="stock-pct up">+10.00%</div>
+                </div>
+            </div>
+            <div class="analysis-box">
+                <strong>【转势战法】</strong><br>
+                1. <strong>底部盘整</strong>：在100-120元区间震荡整理。<br>
+                2. <strong>一阳突破</strong>：收盘价122.55元，突破MA5/MA10/MA20均线。<br>
+                3. <strong>MACD</strong>：DIF=4.64, DEA=5.38，MACD=-1.48，尚未金叉。<br>
+                4. <strong>资金</strong>：主力净流入<strong>7.63亿</strong>（市场排名第3）。<br>
+                <strong>结论</strong>：资金极其强势，但MACD尚未金叉。等回调至MA5附近或MACD金叉确认后再考虑。
+            </div>
+
+            <div class="stock-item" style="border-left-color: var(--warning);">
+                <div class="stock-info">
+                    <div class="stock-name">怡达股份 <span class="stock-code">sz300721</span></div>
+                    <div class="stock-reason">环氧丙烷概念 | 20cm涨停 | 化工</div>
+                </div>
+                <div class="stock-metrics">
+                    <div class="stock-price">35.83</div>
+                    <div class="stock-pct up">+19.99%</div>
+                </div>
+            </div>
+            <div class="analysis-box">
+                <strong>【转势战法】</strong><br>
+                1. <strong>底部盘整</strong>：从高位回落至28-32元震荡。<br>
+                2. <strong>一阳突破</strong>：20cm涨停，突破所有均线。<br>
+                3. <strong>MACD</strong>：DIF=2.62, DEA=3.08，MACD=-0.92，尚未金叉。<br>
+                4. <strong>资金</strong>：主力净流入1.77亿，但<strong>5日主力净流出4132万</strong>。<br>
+                <strong>结论</strong>：20cm涨停强势，但短期资金流出。建议等回调确认后再介入。
+            </div>
+        </div>
+
+        <!-- 排除说明 -->
+        <div class="section">
+            <div class="section-title">排除说明</div>
+            <div class="exclude-item">
+                <strong>中船特气 (sh688146) +16.42%</strong>
+                <div class="exclude-reason">涨幅过大，KDJ严重超买（K=90.1, D=87.4, J=95.5），位置过高，风险收益比不佳。更适合作为板块风向标观察。</div>
+            </div>
+            <div class="exclude-item">
+                <strong>欧莱新材 (sh688530) +13.35%</strong>
+                <div class="exclude-reason">5日主力净流出2585万，资金持续性存疑。MACD尚未金叉（DIF=0.986, DEA=1.367）。</div>
+            </div>
+        </div>
+
+        <!-- 次日操作计划 -->
+        <div class="section">
+            <div class="section-title">次日操作计划</div>
+            <div class="plan-grid">
+                <div class="plan-card">
+                    <h4>有研新材 (sh600206)</h4>
+                    <div class="value">开仓</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">
+                        买入区间：31.50 - 32.50<br>
+                        仓位：15%<br>
+                        止损：29.80 (-7.5%)<br>
+                        止盈：36.00 (+11%)
+                    </div>
+                </div>
+                <div class="plan-card">
+                    <h4>杭氧股份 (sz002430)</h4>
+                    <div class="value">开仓</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">
+                        买入区间：26.00 - 27.00<br>
+                        仓位：10%<br>
+                        止损：24.50 (-8.5%)<br>
+                        止盈：30.00 (+11%)
+                    </div>
+                </div>
+                <div class="plan-card">
+                    <h4>中化国际 (sh600500)</h4>
+                    <div class="value">小仓位</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">
+                        买入区间：6.30 - 6.55<br>
+                        仓位：8%<br>
+                        止损：5.90 (-9.5%)<br>
+                        止盈：7.20 (+10%)
+                    </div>
+                </div>
+                <div class="plan-card">
+                    <h4>拓维信息 (sz002261)</h4>
+                    <div class="value">观望</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">
+                        等突破MA20(31.21)且MACD金叉后介入<br>
+                        关注价位：31.50上方<br>
+                        潜在仓位：10%
+                    </div>
+                </div>
+                <div class="plan-card">
+                    <h4>雅克科技 (sz002409)</h4>
+                    <div class="value">观望</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">
+                        等MACD金叉或回调至MA5(114.5)附近<br>
+                        关注价位：114 - 118<br>
+                        潜在仓位：10%
+                    </div>
+                </div>
+                <div class="plan-card">
+                    <h4>大盘风险</h4>
+                    <div class="value">控仓</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">
+                        上证估值百分位97.61%，极高估区间<br>
+                        建议总仓位不超过40%<br>
+                        保留60%现金储备
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 仓位配置建议 -->
+        <div class="section">
+            <div class="section-title">仓位配置建议</div>
+            <div class="highlight-box">
+                <div class="detail-row"><span>建议总仓位</span><span style="color: var(--warning); font-weight: 700;">30% - 40%</span></div>
+                <div class="detail-row"><span>现金储备</span><span style="color: var(--success); font-weight: 700;">60% - 70%</span></div>
+                <div class="detail-row"><span>单票最大仓位</span><span>15%</span></div>
+                <div class="detail-row"><span>组合数量</span><span>2 - 3 只</span></div>
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);">
+                    <p style="font-size: 13px; color: var(--text-secondary);">
+                        <strong>理由</strong>：上证指数估值百分位97.61%，处于历史极高估区间。深证成指估值百分位98.97%，同样处于历史极高估区间。市场今日跌多涨少（1485涨/3421跌），情绪偏弱。在这种环境下，应严格控制仓位，以防守为主，小仓位博弈转势机会。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 风险提示 -->
+        <div class="section">
+            <div class="section-title">风险提示</div>
+            <div class="highlight-box" style="border-color: var(--danger);">
+                <div class="risk-bar">
+                    <div class="risk-fill" style="width: 97.61%;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
+                    <span>低估</span>
+                    <span>正常</span>
+                    <span style="color: var(--danger); font-weight: 700;">高估 (97.61%)</span>
+                </div>
+                <ul style="font-size: 13px; color: var(--text-secondary); line-height: 2; padding-left: 18px;">
+                    <li><strong style="color: var(--danger);">估值风险</strong>：上证指数PE-TTM 17.66倍，历史百分位97.61%，处于历史极高估区间。</li>
+                    <li><strong style="color: var(--danger);">市场风险</strong>：今日三大指数均下跌，创业板跌2.70%，市场情绪偏弱。</li>
+                    <li><strong style="color: var(--danger);">个股风险</strong>：跌停30家，市场存在结构性风险。</li>
+                    <li><strong style="color: var(--warning);">转势战法风险</strong>：转势战法属于左侧交易，存在判断失误风险。若次日低开低走，需严格执行止损。</li>
+                    <li><strong style="color: var(--text-primary);">免责声明</strong>：本报告仅供参考，不构成投资建议。股市有风险，投资需谨慎。</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>一阳指选股复盘系统 · 2026-06-10</p>
+            <p style="margin-top: 4px;">数据仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+</html>
