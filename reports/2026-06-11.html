@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-06-11</title>
+<style>
+  :root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-card: #1c2128;
+    --border: #30363d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --up: #ff4d4f;
+    --down: #00b578;
+    --accent: #58a6ff;
+    --warning: #f0883e;
+    --success: #3fb950;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header {
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  header .date { color: var(--text-secondary); font-size: 15px; }
+  .section { margin-bottom: 30px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent);
+    margin-bottom: 16px;
+    border-radius: 0 8px 8px 0;
+  }
+  .index-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .index-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s;
+  }
+  .index-card:hover { transform: translateY(-2px); }
+  .index-card .name { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; }
+  .index-card .price { font-size: 32px; font-weight: 700; }
+  .index-card .change { font-size: 18px; font-weight: 600; margin-top: 4px; }
+  .index-card .details {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 14px;
+  }
+  th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg-secondary); font-weight: 600; color: var(--text-secondary); font-size: 13px; }
+  tr:hover { background: rgba(88, 166, 255, 0.05); }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .tag-hot { background: rgba(255, 77, 79, 0.15); color: var(--up); }
+  .tag-cool { background: rgba(0, 181, 120, 0.15); color: var(--down); }
+  .tag-info { background: rgba(88, 166, 255, 0.15); color: var(--accent); }
+  .alert-box {
+    background: rgba(240, 136, 62, 0.1);
+    border: 1px solid rgba(240, 136, 62, 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .alert-box h4 { color: var(--warning); margin-bottom: 8px; font-size: 15px; }
+  .plan-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .plan-box h4 { margin-bottom: 12px; color: var(--accent); }
+  .plan-box ul { padding-left: 20px; }
+  .plan-box li { margin-bottom: 8px; }
+  .candidate-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .candidate-card h4 { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .candidate-card .meta { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+  .candidate-card .reason { font-size: 14px; line-height: 1.7; }
+  .star { color: #ffd700; }
+  .footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+  .highlight { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>一阳指选股复盘</h1>
+  <div class="date">2026年6月11日 星期四 | A股交易日</div>
+</header>
+
+<!-- 市场概览 -->
+<div class="section">
+  <div class="section-title">市场概览</div>
+  <div class="index-cards">
+    <div class="index-card">
+      <div class="name">上证指数</div>
+      <div class="price">3,987.01</div>
+      <div class="change down">-0.16%</div>
+      <div class="details">
+        <span>成交额 1.19万亿</span>
+        <span>量比 1.18</span>
+        <span>年初至今 +0.55%</span>
+        <span>估值百分位 <span class="up">97.07%</span></span>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="name">深证成指</div>
+      <div class="price">14,851.98</div>
+      <div class="change down">-0.68%</div>
+      <div class="details">
+        <span>成交额 1.37万亿</span>
+        <span>量比 2.75</span>
+        <span>年初至今 +9.17%</span>
+        <span>估值百分位 <span class="up">98.56%</span></span>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="name">创业板指</div>
+      <div class="price">3,811.25</div>
+      <div class="change down">-1.13%</div>
+      <div class="details">
+        <span>成交额 0.65万亿</span>
+        <span>量比 3.80</span>
+        <span>年初至今 +17.53%</span>
+        <span>估值百分位 <span class="up">58.74%</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <h4>市场整体情绪：偏弱</h4>
+    <p>今日三大指数集体收跌，上证-0.16%、深证-0.68%、创业板-1.13%。上涨个股约1,300只（占比约24%），下跌个股4,069只，平盘72只。涨停78只，跌停55只，封板率65%。两市总成交额约3.2万亿。<strong>上证指数估值百分位97.07%，深证成指98.56%，均处于历史极高估区间。</strong></p>
+  </div>
+</div>
+
+<!-- 申万一级行业涨幅TOP5 -->
+<div class="section">
+  <div class="section-title">申万一级行业涨幅 TOP5</div>
+  <table>
+    <thead>
+      <tr>
+        <th>排名</th>
+        <th>行业</th>
+        <th>涨跌幅</th>
+        <th>领涨股</th>
+        <th>领涨股涨幅</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="tag tag-hot">电子化学品Ⅱ</span></td>
+        <td class="up">+5.18%</td>
+        <td>濮阳惠成 (sz300481)</td>
+        <td class="up">+20.01%</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="tag tag-hot">小金属</span></td>
+        <td class="up">+4.86%</td>
+        <td>章源钨业 (sz002378)</td>
+        <td class="up">+10.01%</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="tag tag-info">玻璃玻纤</span></td>
+        <td class="up">+3.23%</td>
+        <td>宏和科技 (sh603256)</td>
+        <td class="up">+6.65%</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="tag tag-info">能源金属</span></td>
+        <td class="up">+2.34%</td>
+        <td>永杉锂业 (sh603399)</td>
+        <td class="up">+9.98%</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="tag tag-info">农化制品</span></td>
+        <td class="up">+2.12%</td>
+        <td>川金诺 (sz300505)</td>
+        <td class="up">+19.99%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 主力资金净流入TOP3 -->
+<div class="section">
+  <div class="section-title">主力资金净流入 TOP3（行业）</div>
+  <table>
+    <thead>
+      <tr>
+        <th>排名</th>
+        <th>行业</th>
+        <th>主力净流入</th>
+        <th>5日净流入</th>
+        <th>领涨股</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>小金属</td>
+        <td class="up">+66.67亿</td>
+        <td class="up">+2.63亿</td>
+        <td>章源钨业 +10.01%</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>能源金属</td>
+        <td class="up">+30.06亿</td>
+        <td class="up">+3.07亿</td>
+        <td>永杉锂业 +9.98%</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>电子化学品Ⅱ</td>
+        <td class="up">+27.60亿</td>
+        <td class="up">+1.63亿</td>
+        <td>濮阳惠成 +20.01%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 热门概念板块 -->
+<div class="section">
+  <div class="section-title">热门概念板块 TOP5</div>
+  <table>
+    <thead>
+      <tr>
+        <th>排名</th>
+        <th>概念板块</th>
+        <th>涨跌幅</th>
+        <th>领涨股</th>
+        <th>领涨股涨幅</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="tag tag-hot">靶材</span></td>
+        <td class="up">+17.23%</td>
+        <td>欧莱新材 (sh688530)</td>
+        <td class="up">+20.01%</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="tag tag-hot">电子特气</span></td>
+        <td class="up">+6.92%</td>
+        <td>华特气体 (sh688268)</td>
+        <td class="up">+20.00%</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="tag tag-hot">锗镓概念</span></td>
+        <td class="up">+6.83%</td>
+        <td>光智科技 (sz300489)</td>
+        <td class="up">+16.46%</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="tag tag-info">工业气体</span></td>
+        <td class="up">+5.25%</td>
+        <td>华特气体 (sh688268)</td>
+        <td class="up">+20.00%</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="tag tag-info">钼概念</span></td>
+        <td class="up">+5.21%</td>
+        <td>欧莱新材 (sh688530)</td>
+        <td class="up">+20.01%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="section">
+  <div class="section-title">次日操作计划</div>
+  <div class="plan-box">
+    <h4>总体策略：空仓观望，严控仓位</h4>
+    <ul>
+      <li><strong>市场环境：</strong>三大指数齐跌，仅24%个股上涨，市场情绪偏弱。上证/深证估值百分位均超97%，处于历史极高估区间，系统性风险较大。</li>
+      <li><strong>仓位建议：</strong><span class="highlight">空仓或不超过1成仓</span>。当前市场处于高位震荡回调阶段，不参与主跌段。</li>
+      <li><strong>买入区间：</strong>暂不设置。等待市场情绪回暖、指数企稳后再考虑介入。</li>
+      <li><strong>止损纪律：</strong>如有持仓，个股跌破今日低点或亏损超5%立即止损。</li>
+      <li><strong>止盈纪律：</strong>如有浮盈持仓，跌破5日均线减半，跌破10日均线清仓。</li>
+      <li><strong>关注方向：</strong>半导体材料（靶材/电子特气/电子化学品）、有色金属（小金属/钨/锗镓），但只跟踪不介入。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 转势战法候选 -->
+<div class="section">
+  <div class="section-title">转势战法候选（底部盘整+一阳突破）</div>
+
+  <div class="candidate-card">
+    <h4>章源钨业 <span class="tag tag-hot">sz002378</span> <span class="star">★★☆</span></h4>
+    <div class="meta">现价 33.63元 | 今日 +10.01% | 小金属板块领涨</div>
+    <div class="reason">
+      <strong>符合条件：</strong>小金属板块今日涨幅居首（+4.86%），主力资金净流入66.67亿，板块效应明显。章源钨业作为板块领涨股，强势封板。<br>
+      <strong>存疑：</strong>个股近期已有一定涨幅，非典型底部盘整后的首阳突破。钨概念年内涨幅64%，位置偏高。<br>
+      <strong>结论：</strong>板块逻辑强但位置偏高，不符合严格转势定义，暂不纳入第一梯队。
+    </div>
+  </div>
+
+  <div class="candidate-card">
+    <h4>炬光科技 <span class="tag tag-hot">sh688167</span> <span class="star">★★☆</span></h4>
+    <div class="meta">现价 338.86元 | 今日 +20.00% | 封单4.17亿居首</div>
+    <div class="reason">
+      <strong>符合条件：</strong>盘后公告重大利好——全资子公司与全球领先半导体代工企业签署1300万美元技术许可协议，另有特许权使用费。今日20cm涨停，封单金额全市场第一。<br>
+      <strong>存疑：</strong>股价绝对值高（338.86元），且涨停主要由利好刺激驱动，属于消息驱动型而非技术形态转势。科创板流动性相对较差。<br>
+      <strong>结论：</strong>消息驱动，非纯粹技术转势，观望为主。
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <h4>转势战法小结</h4>
+    <p>今日市场偏弱，涨停股多由消息驱动或板块联动推动，缺乏典型的底部盘整后一阳突破形态。建议继续等待市场企稳后的优质转势标的。</p>
+  </div>
+</div>
+
+<!-- 开门战法候选 -->
+<div class="section">
+  <div class="section-title">开门战法候选（主升浪趋势延续）</div>
+
+  <div class="candidate-card">
+    <h4>欧莱新材 <span class="tag tag-hot">sh688530</span> <span class="star">★★☆</span></h4>
+    <div class="meta">现价 67.06元 | 今日 +20.01% | 靶材板块绝对龙头</div>
+    <div class="reason">
+      <strong>符合条件：</strong>靶材概念今日暴涨17.23%，欧莱新材20cm涨停领涨，同时为钼概念领涨股（+5.21%），横跨两个强势概念。年内涨幅191%，处于强趋势中。<br>
+      <strong>存疑：</strong>股价短期涨幅巨大，连续加速后追高风险极大。涨停封单仅2.89%（占流通股），封板力度一般。<br>
+      <strong>结论：</strong>趋势极强但位置极高，不符合开门战法"低风险介入点"原则，排除。
+    </div>
+  </div>
+
+  <div class="candidate-card">
+    <h4>华特气体 <span class="tag tag-hot">sh688268</span> <span class="star">★★☆</span></h4>
+    <div class="meta">现价 228.82元 | 今日 +20.00% | 电子特气+工业气体双龙头</div>
+    <div class="reason">
+      <strong>符合条件：</strong>同时领涨电子特气（+6.92%）和工业气体（+5.25%）两大强势板块，20cm涨停，年内涨幅83%，趋势明确。<br>
+      <strong>存疑：</strong>股价绝对值高（228.82元），且涨停为加速段而非开门战法的"趋势中低吸"机会。<br>
+      <strong>结论：</strong>趋势标的但非最佳介入时机，观望等回调。
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <h4>开门战法小结</h4>
+    <p>今日强势股多为加速段涨停，缺乏开门战法要求的"趋势延续中的合理介入点"。市场弱势背景下，追高极易被套。建议空仓等待回调后的开门机会。</p>
+  </div>
+</div>
+
+<!-- 排除说明 -->
+<div class="section">
+  <div class="section-title">排除说明</div>
+  <div class="plan-box">
+    <ul>
+      <li><strong>市场整体偏弱：</strong>三大指数齐跌，仅24%个股上涨，涨停78只但跌停也有55只，多空分歧大，不具备安全操作环境。</li>
+      <li><strong>估值极高：</strong>上证97.07%、深证98.56%的历史估值百分位，系统性下行风险大。</li>
+      <li><strong>缺乏典型转势形态：</strong>今日涨停股多为消息驱动（炬光科技）或高位加速（欧莱新材、华特气体），无底部盘整后的标准一阳突破。</li>
+      <li><strong>缺乏开门介入点：</strong>强势股均在加速段，无趋势中的合理低吸位置。</li>
+      <li><strong>创业板领跌：</strong>创业板指-1.13%，科技成长方向承压，不利于短线题材炒作。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 仓位配置建议 -->
+<div class="section">
+  <div class="section-title">仓位配置建议</div>
+  <div class="plan-box">
+    <table style="margin-bottom: 16px;">
+      <thead>
+        <tr><th>配置项</th><th>建议</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>总仓位</td><td><span class="highlight">0%~10%（空仓为主）</span></td></tr>
+        <tr><td>短线仓位</td><td>0%</td></tr>
+        <tr><td>中线仓位</td><td>0%</td></tr>
+        <tr><td>现金比例</td><td>90%~100%</td></tr>
+      </tbody>
+    </table>
+    <p><strong>理由：</strong>市场处于历史极高估值区间，三大指数齐跌，情绪偏弱。一阳指体系的核心是"顺势而为"，当前趋势向下，空仓是最优选择。保留现金等待市场企稳后的优质机会。</p>
+  </div>
+</div>
+
+<!-- 风险提示 -->
+<div class="section">
+  <div class="section-title">风险提示</div>
+  <div class="alert-box">
+    <h4>重要风险提醒</h4>
+    <ul style="padding-left: 20px;">
+      <li><strong>估值风险：</strong>上证指数PE TTM 17.09倍，处于97.07%历史百分位；深证成指PE TTM 35.07倍，处于98.56%历史百分位。市场系统性估值偏高，回调风险大。</li>
+      <li><strong>情绪风险：</strong>今日仅24%个股上涨，跌停55只，市场恐慌情绪有所蔓延。</li>
+      <li><strong>流动性风险：</strong>创业板量比3.80显著放大，伴随指数下跌，存在放量出货迹象。</li>
+      <li><strong>板块轮动风险：</strong>今日强势的半导体材料、有色金属板块均为近期反复炒作方向，持续性存疑。</li>
+      <li><strong>本报告仅供参考，不构成投资建议。</strong>股市有风险，入市需谨慎。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  <p>一阳指选股复盘 · 自动生成报告</p>
+  <p>数据来源：NeoData Financial Search | 生成时间：2026-06-11 18:00</p>
+  <p style="margin-top: 8px; font-size: 12px;">⚠️ 本报告仅供参考，不构成投资建议。投资者据此操作，风险自担。</p>
+</div>
+
+</div>
+</body>
+</html>
