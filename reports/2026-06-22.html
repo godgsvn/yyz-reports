@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-06-22</title>
+<style>
+:root{--bg:#0f1117;--card:#161922;--border:#252a36;--text:#e8ecf1;--muted:#8b93a4;--red:#e34d4d;--green:#4caf7a;--gold:#d4a843;--accent:#4a90e2;--blue:#4a90e2;--orange:#e88c3a;--purple:#9b59b6;--teal:#1abc9c;--yellow:#f1c40f}
+* {box-sizing:border-box; margin:0; padding:0}
+body {font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background:var(--bg); color:var(--text); line-height:1.6; padding:24px 16px; max-width:980px; margin:0 auto}
+h1 {font-size:24px; font-weight:700; margin-bottom:4px; letter-spacing:-0.5px}
+.date-tag {color:var(--muted); font-size:13px; margin-bottom:20px}
+.section {background:var(--card); border-radius:12px; border:1px solid var(--border); padding:20px; margin-bottom:16px}
+.section-title {font-size:16px; font-weight:600; margin-bottom:12px; display:flex; align-items:center; gap:8px}
+.section-title .icon {font-size:18px}
+.market-cards {display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px}
+@media (max-width:600px){.market-cards{grid-template-columns:1fr}}
+.market-card {background:var(--card); border-radius:12px; border:1px solid var(--border); padding:16px; text-align:center}
+.market-card .name {font-size:13px; color:var(--muted); margin-bottom:4px}
+.market-card .price {font-size:28px; font-weight:700; margin-bottom:2px}
+.market-card .change {font-size:15px; font-weight:600}
+.market-card .detail {font-size:12px; color:var(--muted); margin-top:6px; line-height:1.5}
+.up {color:var(--red)}
+.down {color:var(--green)}
+table {width:100%; border-collapse:collapse; font-size:13px; margin-top:8px}
+th {text-align:left; padding:8px 6px; color:var(--muted); font-weight:500; border-bottom:1px solid var(--border); font-size:12px}
+td {padding:8px 6px; border-bottom:1px solid var(--border)}
+tr:hover td {background:rgba(255,255,255,0.02)}
+.star {color:var(--gold); font-weight:700}
+.badge {display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; margin-left:4px}
+.badge-red {background:rgba(227,77,77,0.15); color:var(--red)}
+.badge-green {background:rgba(76,175,122,0.15); color:var(--green)}
+.badge-blue {background:rgba(74,144,226,0.15); color:var(--blue)}
+.badge-gold {background:rgba(212,168,67,0.15); color:var(--gold)}
+.badge-purple {background:rgba(155,89,182,0.15); color:var(--purple)}
+.badge-orange {background:rgba(232,140,58,0.15); color:var(--orange)}
+.status {display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600}
+.status-buy {background:rgba(26,188,156,0.15); color:var(--teal)}
+.status-wait {background:rgba(212,168,67,0.15); color:var(--gold)}
+.status-exclude {background:rgba(227,77,77,0.15); color:var(--red)}
+.stock-row {display:grid; grid-template-columns:120px 1fr; gap:16px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--border)}
+@media (max-width:600px){.stock-row{grid-template-columns:1fr; gap:8px}}
+.stock-row:last-child {border-bottom:none; margin-bottom:0; padding-bottom:0}
+.stock-name {font-size:16px; font-weight:700; color:var(--text)}
+.stock-code {font-size:12px; color:var(--muted); margin-top:2px}
+.stock-meta {display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:var(--muted); margin-top:4px}
+.stock-meta span {background:var(--bg); padding:2px 8px; border-radius:4px}
+.stock-analysis {font-size:13px; color:var(--text); line-height:1.7}
+.plan-box {background:var(--bg); border-radius:8px; padding:12px; margin-top:8px; font-size:13px; line-height:1.7}
+.plan-box strong {color:var(--gold)}
+.risk-box {background:rgba(227,77,77,0.08); border-left:3px solid var(--red); padding:12px 16px; border-radius:0 8px 8px 0; font-size:13px; line-height:1.7; margin-top:8px}
+.tips-box {background:rgba(26,188,156,0.08); border-left:3px solid var(--teal); padding:12px 16px; border-radius:0 8px 8px 0; font-size:13px; line-height:1.7; margin-top:8px}
+.footer {text-align:center; color:var(--muted); font-size:12px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<h1>一阳指选股复盘 · 2026-06-22</h1>
+<div class="date-tag">A股收盘复盘 | 数据来源：neodata + 腾讯自选股</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">📊</span> 市场概览</div>
+<div class="market-cards">
+<div class="market-card">
+<div class="name">上证指数</div>
+<div class="price up">4,163.10</div>
+<div class="change up">+1.78%</div>
+<div class="detail">成交额: 17,040亿<br>量比: 1.13 | 5日: +3.26% | 年初至今: +4.89%<br>PE(TTM): 18.28 | 估值百分位: ~97%</div>
+</div>
+<div class="market-card">
+<div class="name">深证成指</div>
+<div class="price up">16,372.50</div>
+<div class="change up">+2.13%</div>
+<div class="detail">成交额: 20,332亿<br>量比: 1.15 | 5日: +9.42% | 年初至今: +21.05%<br>PE(TTM): 53.32</div>
+</div>
+<div class="market-card">
+<div class="name">创业板指</div>
+<div class="price up">4,359.39</div>
+<div class="change up">+2.52%</div>
+<div class="detail">成交额: 10,206亿<br>量比: 1.21 | 5日: +13.81% | 年初至今: +36.10%<br>PE(TTM): 75.98</div>
+</div>
+</div>
+<div class="tips-box">
+<strong>📌 市场点评：</strong>三大指数集体大涨，两市成交额约47,578亿（巨量），上证指数突破4160点创阶段新高。市场活跃度极高，涨停134只（封板率84%），个股普涨行情。锗镓概念、有色金属（铋/锑/锡）、培育钻石、证券IT等方向强势领涨。上证估值仍处于历史极高区间（~97%），注意控制仓位。
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">🔥</span> 热门板块TOP5（概念涨幅）</div>
+<table>
+<tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+<tr><td>1</td><td>锗镓概念</td><td class="up">+9.64%</td><td>驰宏锌锗</td><td class="up">+10.02%</td></tr>
+<tr><td>2</td><td>有色(铋)</td><td class="up">+9.54%</td><td>豫光金铅</td><td class="up">+10.03%</td></tr>
+<tr><td>3</td><td>培育钻石</td><td class="up">+8.73%</td><td>四方达</td><td class="up">+20.00%</td></tr>
+<tr><td>4</td><td>证券IT</td><td class="up">+8.41%</td><td>汇金科技</td><td class="up">+20.03%</td></tr>
+<tr><td>5</td><td>有色(锑)</td><td class="up">+7.84%</td><td>豫光金铅</td><td class="up">+10.03%</td></tr>
+</table>
+</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">💰</span> 主力资金净流入TOP个股</div>
+<table>
+<tr><th>排名</th><th>股票名称</th><th>涨跌幅</th><th>主力净流入</th><th>所属板块</th><th>一阳指</th></tr>
+<tr><td>1</td><td>东方财富</td><td class="up">+12.74%</td><td>+38.08亿</td><td>证券Ⅱ</td><td><span class="status status-exclude">排除</span></td></tr>
+<tr><td>2</td><td>阳光电源</td><td class="up">+11.21%</td><td>+12.67亿</td><td>光伏设备</td><td><span class="status status-exclude">排除</span></td></tr>
+<tr><td>3</td><td>四方达</td><td class="up">+20.00%</td><td>+5.31亿</td><td>培育钻石</td><td><span class="status status-wait">等回调</span></td></tr>
+<tr><td>4</td><td>驰宏锌锗</td><td class="up">+10.02%</td><td>+4.67亿</td><td>锗镓概念</td><td><span class="status status-buy">第一梯队</span></td></tr>
+<tr><td>5</td><td>力量钻石</td><td class="up">+20.00%</td><td>+4.42亿</td><td>培育钻石</td><td><span class="status status-wait">等回调</span></td></tr>
+<tr><td>6</td><td>豫光金铅</td><td class="up">+10.03%</td><td>+3.20亿</td><td>有色(铋)</td><td><span class="status status-buy">第一梯队</span></td></tr>
+<tr><td>7</td><td>同花顺</td><td class="up">+14.91%</td><td>+8.85亿</td><td>软件开发</td><td><span class="status status-exclude">排除</span></td></tr>
+<tr><td>8</td><td>万胜智能</td><td class="up">+20.03%</td><td>+0.67亿</td><td>电网设备</td><td><span class="status status-wait">等回调</span></td></tr>
+</table>
+</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">🎯</span> 次日操作计划</div>
+<div class="plan-box">
+<strong>第一梯队（可介入）</strong><br>
+🟢 <strong>驰宏锌锗</strong> (sh600497) | 转势★★★★<br>
+- 买入区间：11.00 ~ 11.50<br>
+- 仓位：15%<br>
+- 止损：10.50 (-7.2%)<br>
+- 止盈：13.00 (+15.0%)<br>
+- 逻辑：锗镓概念板块领涨，MACD金叉+均线多头排列，主力净流入4.67亿，PE 47倍合理，年初至今+56%尚有空间<br><br>
+
+🟢 <strong>豫光金铅</strong> (sh600531) | 转势★★★<br>
+- 买入区间：14.50 ~ 15.00<br>
+- 仓位：10%<br>
+- 止损：13.50 (-8.8%)<br>
+- 止盈：17.00 (+14.8%)<br>
+- 逻辑：有色(铋)概念龙头，MACD刚金叉（0轴下），放量突破，主力净流入3.20亿，PE 19.76倍极低<br><br>
+
+<strong>第二梯队（等回调）</strong><br>
+⏳ <strong>力量钻石</strong> (sz301071) | 开门★★★<br>
+- 等回调区间：75 ~ 80（MA20-MA10附近）<br>
+- 仓位：10%<br>
+- 止损：70<br>
+- 逻辑：培育钻石+金刚石散热双概念，均线完美多头排列，但PE 183倍过高，年初至今+159%，等回调<br><br>
+
+⏳ <strong>四方达</strong> (sz300179) | 开门★★★<br>
+- 等回调区间：44 ~ 48（MA20-MA10附近）<br>
+- 仓位：10%<br>
+- 止损：40<br>
+- 逻辑：金刚石散热+培育钻石，均线多头排列，但PE 274倍极高，年初至今+288%，等回调<br><br>
+
+⏳ <strong>万胜智能</strong> (sz300882) | 转势★★★<br>
+- 等回调区间：15.5 ~ 16.0（MA5-MA10附近）<br>
+- 仓位：5%<br>
+- 止损：14.5<br>
+- 逻辑：电网设备+智能电网，放量20cm涨停，量比6.63，年初至今-3%低位，但均线不完美<br><br>
+
+<strong>排除</strong><br>
+❌ 汇金科技：PE -257倍亏损，MACD死叉<br>
+❌ 阳光电源：MACD死叉，主力虽大买12.67亿但不符合一阳指<br>
+❌ 东方财富：MACD仍在0轴下，均线不完美，虽主力净流入38亿第一但技术面弱<br>
+❌ 同花顺：MACD仍在0轴下，均线不完美<br>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">🔄</span> 转势战法候选详情</div>
+<div class="stock-row">
+<div>
+<div class="stock-name">驰宏锌锗 <span class="badge badge-green">sh600497</span></div>
+<div class="stock-code">涨停 +10.02% | 11.31元 | 量比1.01 | 换手5.16%</div>
+<div class="stock-meta"><span>PE 47.39</span><span>年初至今 +56.22%</span><span>5日 +21.88%</span><span>主力净流入 +4.67亿</span></div>
+</div>
+<div class="stock-analysis">
+<strong>🔄 转势战法评分：★★★★</strong><br>
+✅ 底部盘整后放量涨停突破（10cm涨停）<br>
+✅ MACD金叉：DIF=0.232 > DEA=0.034，MACD柱=0.397（正值放大）<br>
+✅ 均线多头排列：MA5(10.38) > MA20(9.56) > MA10(9.45) > MA60(9.10)<br>
+✅ 价格突破所有均线：11.31 > 所有均线<br>
+✅ 锗镓概念板块今日涨幅第一(+9.64%)<br>
+⚠️ 量比1.01不算放量，需后续确认<br>
+⚠️ 5日涨幅21.88%较大，短期或有震荡<br>
+<strong>结论：符合转势战法核心条件，第一梯队候选。</strong>
+</div>
+</div>
+
+<div class="stock-row">
+<div>
+<div class="stock-name">豫光金铅 <span class="badge badge-green">sh600531</span></div>
+<div class="stock-code">涨停 +10.03% | 14.81元 | 量比1.19 | 换手7.81%</div>
+<div class="stock-meta"><span>PE 19.76</span><span>年初至今 +26.04%</span><span>5日 +13.14%</span><span>主力净流入 +3.20亿</span></div>
+</div>
+<div class="stock-analysis">
+<strong>🔄 转势战法评分：★★★</strong><br>
+✅ 底部盘整后放量涨停突破（10cm涨停）<br>
+✅ MACD刚金叉：DIF=-0.178 > DEA=-0.446，MACD柱=0.535（正值）<br>
+✅ 价格突破所有均线：14.81 > MA5(13.82) > MA10(12.91) > MA20(13.15)<br>
+⚠️ DIF仍在0轴下方，刚金叉确认度不足<br>
+⚠️ MA5(13.82) < MA60(14.04)，长期均线仍压制<br>
+✅ PE 19.76极低，估值合理<br>
+✅ 有色(铋)概念板块今日涨幅第二(+9.54%)<br>
+<strong>结论：基本符合转势战法，MACD刚金叉需观察，三星候选。</strong>
+</div>
+</div>
+
+<div class="stock-row">
+<div>
+<div class="stock-name">万胜智能 <span class="badge badge-blue">sz300882</span></div>
+<div class="stock-code">涨停 +20.03% | 18.04元 | 量比6.63 | 换手6.73%</div>
+<div class="stock-meta"><span>PE 47.82</span><span>年初至今 -3.01%</span><span>5日 +19.00%</span><span>主力净流入 +0.67亿</span></div>
+</div>
+<div class="stock-analysis">
+<strong>🔄 转势战法评分：★★★</strong><br>
+✅ 低位（年初至今-3%）20cm放量涨停突破<br>
+✅ 量比6.63极度放量，成交活跃<br>
+✅ MACD金叉：DIF=-0.732 > DEA=-1.014<br>
+⚠️ MACD仍在0轴下方，金叉力度弱<br>
+⚠️ 均线不完美：MA5(15.90) < MA20(16.12) < MA60(19.10)<br>
+⚠️ 价格18.04 > MA60(19.10)? 不，18.04 < MA60(19.10)，股价未突破60日均线<br>
+<strong>结论：放量明显但均线和MACD不完美，等回调确认后介入。</strong>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">🚪</span> 开门战法候选详情</div>
+<div class="stock-row">
+<div>
+<div class="stock-name">力量钻石 <span class="badge badge-purple">sz301071</span></div>
+<div class="stock-code">涨停 +20.00% | 91.92元 | 量比1.47 | 换手18.95%</div>
+<div class="stock-meta"><span>PE 183.02</span><span>年初至今 +159.30%</span><span>20日 +42.36%</span><span>主力净流入 +4.42亿</span></div>
+</div>
+<div class="stock-analysis">
+<strong>🚪 开门战法评分：★★★</strong><br>
+✅ 均线完美多头排列：MA5(77.24) > MA10(73.69) > MA20(75.24) > MA60(57.54)<br>
+等等，MA10(73.69) < MA20(75.24)，不是完美多头排列！<br>
+✅ 修正：MA5(77.24) > MA20(75.24) > MA10(73.69) > MA60(57.54)<br>
+✅ MACD金叉：DIF=4.747 > DEA=4.337，MACD柱=0.82（正值）<br>
+✅ 培育钻石+金刚石散热双热点概念<br>
+✅ 20cm涨停，趋势强势<br>
+⚠️ PE 183.02极高<br>
+⚠️ 年初至今+159.30%，涨幅过大<br>
+⚠️ 20日涨幅+42.36%，追高风险大<br>
+<strong>结论：趋势延续但估值和涨幅过高，等回调至MA10-MA20区间再考虑。</strong>
+</div>
+</div>
+
+<div class="stock-row">
+<div>
+<div class="stock-name">四方达 <span class="badge badge-purple">sz300179</span></div>
+<div class="stock-code">涨停 +20.00% | 57.48元 | 量比1.51 | 换手29.00%</div>
+<div class="stock-meta"><span>PE 273.85</span><span>年初至今 +287.80%</span><span>20日 +78.94%</span><span>主力净流入 +5.31亿</span></div>
+</div>
+<div class="stock-analysis">
+<strong>🚪 开门战法评分：★★★</strong><br>
+✅ 均线多头排列：MA5(47.56) > MA10(44.98) > MA20(44.46) > MA60(31.96)<br>
+✅ MACD金叉：DIF=4.276 > DEA=3.92，MACD柱=0.713<br>
+✅ 金刚石散热+培育钻石双热点<br>
+⚠️ PE 273.85极高<br>
+⚠️ 年初至今+287.80%，已暴涨近3倍<br>
+⚠️ 20日涨幅+78.94%，短期涨幅巨大<br>
+⚠️ 换手率29%过高，筹码松动<br>
+<strong>结论：趋势强劲但风险极高，等大幅回调至MA20附近再考虑，不建议追高。</strong>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">🚫</span> 排除说明</div>
+<div class="plan-box">
+❌ <strong>汇金科技</strong> (sz300561) — PE -257.39（亏损），MACD死叉(DIF=-1.194 < DEA=-0.928)，基本面不支持<br>
+❌ <strong>阳光电源</strong> (sz300274) — MACD死叉(DIF=-0.795 < DEA=0.357)，虽主力大买12.67亿但不符合一阳指技术体系<br>
+❌ <strong>东方财富</strong> (sz300059) — MACD仍在0轴下方(DIF=-0.129, DEA=-0.37)，均线不完美(MA5<MA60)，虽主力净流入38亿第一但技术面偏弱<br>
+❌ <strong>同花顺</strong> (sz300033) — MACD仍在0轴下方(DIF=-2.742, DEA=-5.478)，均线不完美(MA60>MA20>MA5)<br>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><span class="icon">⚖️</span> 仓位配置建议</div>
+<div class="plan-box">
+<strong>当前市场定位：</strong>上证估值百分位约97%（历史极高），三大指数集体大涨，市场极度活跃。<br><br>
+<strong>总仓位建议：30% ~ 40%</strong><br>
+- 第一梯队（驰宏锌锗+豫光金铅）：25%<br>
+- 第二梯队（等回调）：预留15%<br>
+- 现金：60% ~ 70%<br><br>
+<strong>风控线：</strong><br>
+- 上证4000点：第一道减仓线（减仓至20%）<br>
+- 上证3950点：第二道减仓线（减仓至10%）<br>
+- 个股止损：按各自计划执行，严格-7% ~ -8%止损纪律<br>
+</div>
+</div>
+
+<div class="risk-box">
+<strong>⚠️ 风险提示</strong><br>
+1. 上证指数估值处于历史极高区间（~97%），短期风险大于机会<br>
+2. 今日两市成交额约47,578亿，巨量成交后市场可能面临短期调整<br>
+3. 培育钻石/有色板块今日暴涨，短期追高风险大<br>
+4. 涨停封板率84%，26股封板未遂，市场虽活跃但分歧已现<br>
+5. 本报告仅为一阳指技术体系选股分析，不构成投资建议，请独立判断<br>
+</div>
+
+<div class="footer">
+一阳指选股复盘 · 2026-06-22 | 自动化生成 | 仅供参考，不构成投资建议
+</div>
+</body>
+</html>
