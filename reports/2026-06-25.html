@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-06-25</title>
+<style>
+  :root { --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#c9d1d9; --muted:#8b949e; --red:#f85149; --green:#3fb950; --gold:#ffd700; --blue:#58a6ff; --purple:#d2a8ff; --orange:#f0883e; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; line-height:1.6; }
+  .container { max-width:960px; margin:0 auto; padding:24px 16px; }
+  header { text-align:center; padding:32px 0; border-bottom:1px solid var(--border); margin-bottom:24px; }
+  header h1 { margin:0; font-size:28px; color:var(--gold); letter-spacing:2px; }
+  header .subtitle { color:var(--muted); font-size:14px; margin-top:8px; }
+  .tag { display:inline-block; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:600; margin-left:8px; }
+  .tag-up { background:rgba(248,81,73,0.15); color:var(--red); }
+  .tag-down { background:rgba(63,185,80,0.15); color:var(--green); }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
+  @media(max-width:640px){ .cards { grid-template-columns:1fr; } }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
+  .card h3 { margin:0 0 8px; font-size:14px; color:var(--muted); font-weight:400; }
+  .card .price { font-size:32px; font-weight:700; margin:8px 0; }
+  .card .change { font-size:16px; font-weight:600; }
+  .card .info { font-size:12px; color:var(--muted); margin-top:8px; }
+  .section { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:20px; }
+  .section h2 { margin:0 0 16px; font-size:18px; color:var(--gold); border-bottom:1px solid var(--border); padding-bottom:8px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { padding:10px 8px; text-align:left; border-bottom:1px solid var(--border); }
+  th { color:var(--muted); font-weight:600; font-size:12px; }
+  td { color:var(--text); }
+  tr:hover { background:rgba(255,255,255,0.03); }
+  .text-red { color:var(--red); }
+  .text-green { color:var(--green); }
+  .text-gold { color:var(--gold); }
+  .text-blue { color:var(--blue); }
+  .text-orange { color:var(--orange); }
+  .text-muted { color:var(--muted); }
+  .star { color:var(--gold); }
+  .stock-row { display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--border); }
+  .stock-row:last-child { border-bottom:none; }
+  .stock-name { font-weight:600; }
+  .stock-code { font-size:12px; color:var(--muted); margin-left:4px; }
+  .stock-detail { font-size:12px; color:var(--muted); margin-top:4px; }
+  .tier-badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; }
+  .tier-1 { background:rgba(255,215,0,0.15); color:var(--gold); }
+  .tier-2 { background:rgba(88,166,255,0.15); color:var(--blue); }
+  .tier-ex { background:rgba(139,148,158,0.15); color:var(--muted); }
+  .plan-box { background:rgba(255,215,0,0.05); border:1px solid rgba(255,215,0,0.2); border-radius:8px; padding:16px; margin:12px 0; }
+  .plan-box h4 { margin:0 0 8px; color:var(--gold); }
+  .plan-box ul { margin:0; padding-left:18px; }
+  .plan-box li { margin:4px 0; }
+  .warning-box { background:rgba(248,81,73,0.05); border:1px solid rgba(248,81,73,0.2); border-radius:8px; padding:16px; margin:12px 0; }
+  .warning-box h4 { margin:0 0 8px; color:var(--red); }
+  .warning-box ul { margin:0; padding-left:18px; }
+  .note { font-size:12px; color:var(--muted); margin-top:16px; padding-top:16px; border-top:1px solid var(--border); }
+  .flex-between { display:flex; justify-content:space-between; align-items:center; }
+  .highlight { background:rgba(255,215,0,0.08); padding:2px 6px; border-radius:4px; }
+  .heat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:8px; }
+  @media(max-width:640px){ .heat-grid { grid-template-columns:1fr; } }
+  .heat-item { background:var(--bg); border-radius:6px; padding:8px 12px; font-size:12px; }
+  footer { text-align:center; padding:24px 0; color:var(--muted); font-size:12px; border-top:1px solid var(--border); margin-top:24px; }
+  .kline-sim { height:80px; background:var(--bg); border-radius:6px; display:flex; align-items:flex-end; justify-content:space-around; padding:8px; gap:2px; }
+  .kline-bar { width:6px; border-radius:2px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>☀️ 一阳指选股复盘</h1>
+  <div class="subtitle">2026年6月25日（周四）· A股收盘复盘</div>
+</header>
+
+<!-- 市场概览 -->
+<div class="cards">
+  <div class="card">
+    <h3>上证指数</h3>
+    <div class="price">4,120.28</div>
+    <div class="change text-red">+0.23% <span class="tag tag-up">+9.47</span></div>
+    <div class="info">量比 1.39 · 估值百分位 <span class="text-red">98.39%</span></div>
+  </div>
+  <div class="card">
+    <h3>深证成指</h3>
+    <div class="price">16,344.08</div>
+    <div class="change text-red">+1.82% <span class="tag tag-up">+292.76</span></div>
+    <div class="info">量比 3.41 · 估值百分位 <span class="text-red">99.96%</span></div>
+  </div>
+  <div class="card">
+    <h3>创业板指</h3>
+    <div class="price">4,371.99</div>
+    <div class="change text-red">+2.84% <span class="tag tag-up">+120.57</span></div>
+    <div class="info">量比 4.70 · 估值百分位 <span class="text-orange">74.81%</span></div>
+  </div>
+</div>
+
+<!-- 市场概况 -->
+<div class="section">
+  <h2>📊 市场概况</h2>
+  <div class="heat-grid">
+    <div class="heat-item">💰 两市成交额：<span class="text-gold">约 3.59 万亿</span>（上证 1.62 万亿 + 深市 1.98 万亿）</div>
+    <div class="heat-item">📈 涨停：约 <span class="text-red">85+</span> 只 · 20cm涨停 <span class="text-red">8</span> 只</div>
+    <div class="heat-item">📉 跌停：约 <span class="text-green">15</span> 只</div>
+    <div class="heat-item">🎯 个股涨跌比：约 <span class="text-red">2800:2700</span>（涨多跌少）</div>
+  </div>
+  <div class="note" style="margin-top:12px;">
+    今日三大指数集体收涨，深强沪弱格局明显。创业板指大涨2.84%创历史新高4371.99点，深证成指涨1.82%。半导体、元件、玻璃玻纤等科技板块强势领涨，航空机场板块低位反弹。上证指数微涨0.23%，估值仍处于98.39%历史极高区间。两市成交额约3.59万亿，市场情绪整体偏暖但结构性分化显著。
+  </div>
+</div>
+
+<!-- 热门板块 -->
+<div class="section">
+  <h2>🔥 热门板块 TOP5</h2>
+  <table>
+    <tr><th>排名</th><th>板块/概念</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    <tr><td>1</td><td>靶材</td><td class="text-red">+6.60%</td><td>江丰电子</td><td class="text-red">+8.54%</td></tr>
+    <tr><td>2</td><td>CPU概念</td><td class="text-red">+6.39%</td><td>北京君正</td><td class="text-red">+20.00%</td></tr>
+    <tr><td>3</td><td>MLCC</td><td class="text-red">+5.84%</td><td>杰普特</td><td class="text-red">+18.94%</td></tr>
+    <tr><td>4</td><td>SRAM（静态随机存取存储器）</td><td class="text-red">+4.71%</td><td>北京君正</td><td class="text-red">+20.00%</td></tr>
+    <tr><td>5</td><td>电子布</td><td class="text-red">+4.49%</td><td>中材科技</td><td class="text-red">+10.00%</td></tr>
+  </table>
+</div>
+
+<!-- 申万行业 -->
+<div class="section">
+  <h2>🏭 申万一级行业涨幅 TOP5</h2>
+  <table>
+    <tr><th>排名</th><th>行业</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    <tr><td>1</td><td>玻璃玻纤</td><td class="text-red">+6.93%</td><td>中材科技</td><td class="text-red">+10.00%</td></tr>
+    <tr><td>2</td><td>元件</td><td class="text-red">+6.07%</td><td>三环集团</td><td class="text-red">+12.64%</td></tr>
+    <tr><td>3</td><td>半导体</td><td class="text-red">+4.50%</td><td>北京君正</td><td class="text-red">+20.00%</td></tr>
+    <tr><td>4</td><td>航空机场</td><td class="text-red">+4.32%</td><td>华夏航空</td><td class="text-red">+10.03%</td></tr>
+    <tr><td>5</td><td>非金属材料Ⅱ</td><td class="text-red">+4.18%</td><td>联瑞新材</td><td class="text-red">+9.50%</td></tr>
+  </table>
+</div>
+
+<!-- 一阳指候选 -->
+<div class="section">
+  <h2>🎯 一阳指候选股票</h2>
+
+  <h3 style="color:var(--gold);margin:16px 0 8px;">🟢 第一梯队（可介入）</h3>
+
+  <div class="stock-row">
+    <div>
+      <div class="stock-name">TCL科技 <span class="stock-code">000100.SZ</span> <span class="tier-badge tier-1">开门 ★★★★</span></div>
+      <div class="stock-detail">
+        涨停 +10.10% · 量比1.46 · 换手11.80% · PE 19.93（合理） · 年初至今+20.00%<br>
+        <span class="text-gold">均线</span>：MA5>MA10>MA20>MA30>MA60 完美多头排列<br>
+        <span class="text-gold">MACD</span>：DIF=0.183 > DEA=0.141，红柱放大，金叉确认<br>
+        <span class="text-gold">KDJ</span>：K=71.18 > D=62.27，金叉状态<br>
+        <span class="text-green">买入区间：5.10-5.25元 · 仓位：15% · 止损：4.80元（-8.5%）· 止盈：6.00元（+18%）</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stock-row">
+    <div>
+      <div class="stock-name">华夏航空 <span class="stock-code">002928.SZ</span> <span class="tier-badge tier-1">转势 ★★★★</span></div>
+      <div class="stock-detail">
+        涨停 +10.03% · 量比2.00 · 换手5.38% · PE 14.89（合理） · 年初至今<span class="text-green">-28.51%</span>（低位！）<br>
+        <span class="text-gold">均线</span>：股价突破所有均线，MA5>MA10，MA10<MA20<MA30<MA60（未完全多头排列）<br>
+        <span class="text-gold">MACD</span>：DIF=-0.112 > DEA=-0.207，刚金叉（负数区）<br>
+        <span class="text-gold">KDJ</span>：K=72.49 > D=60.68，金叉状态<br>
+        <span class="text-green">买入区间：7.50-7.75元 · 仓位：15% · 止损：6.80元（-9.3%）· 止盈：9.50元（+26%）</span><br>
+        <span class="text-orange">⚠️ 航空机场板块今日大涨4.32%，低位反弹性质，需确认持续性</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--blue);margin:16px 0 8px;">⏳ 第二梯队（等回调）</h3>
+
+  <div class="stock-row">
+    <div>
+      <div class="stock-name">中科曙光 <span class="stock-code">603019.SH</span> <span class="tier-badge tier-2">转势 ★★★★</span></div>
+      <div class="stock-detail">
+        涨停 +10.00% · 量比2.57（大幅放量）· 换手9.00% · PE 64.54（中等偏高）· 年初至今+14.83%<br>
+        <span class="text-gold">均线</span>：MA5>MA10>MA20，MA20<MA30>MA60（未完全多头排列）<br>
+        <span class="text-gold">MACD</span>：DIF=0.132 > DEA=-1.285，刚金叉转正<br>
+        <span class="text-gold">KDJ</span>：K=83.51 > D=75.04，J=100.44（超买）<br>
+        <span class="text-blue">建议等回调至90-92元区间再介入 · 仓位：10% · 止损：82元</span><br>
+        <span class="text-orange">⚠️ J值100.44超买，短期有回调需求；计算机设备板块+2.05%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stock-row">
+    <div>
+      <div class="stock-name">中京电子 <span class="stock-code">002579.SZ</span> <span class="tier-badge tier-2">开门 ★★★</span></div>
+      <div class="stock-detail">
+        涨停 +10.02% · 量比1.06（略放量）· 换手22.46% · PE <span class="text-red">497.51</span>（极高）· 年初至今+74.88%<br>
+        <span class="text-gold">均线</span>：MA5>MA10>MA20>MA30>MA60 完美多头排列<br>
+        <span class="text-gold">MACD</span>：DIF=1.383 > DEA=1.142，红柱放大，金叉强势<br>
+        <span class="text-gold">KDJ</span>：K=74.33 > D=64.01，金叉状态<br>
+        <span class="text-blue">建议等回调至18.5-19.0元区间 · 仓位：5%（轻仓）· 止损：16.5元</span><br>
+        <span class="text-orange">⚠️ PE 497倍极高，估值泡沫风险大；年初至今涨幅74.88%已不小</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stock-row">
+    <div>
+      <div class="stock-name">豫光金铅 <span class="stock-code">600531.SH</span> <span class="tier-badge tier-2">转势 ★★★</span></div>
+      <div class="stock-detail">
+        +7.99% · 量比2.41（大幅放量）· 换手21.47% · PE 21.03（合理）· 年初至今+42.67%<br>
+        <span class="text-gold">均线</span>：MA5>MA10>MA20，MA20<MA30<MA60（未完全多头排列）<br>
+        <span class="text-gold">MACD</span>：DIF=0.346 > DEA=-0.153，刚金叉转正<br>
+        <span class="text-gold">KDJ</span>：K=88.28 > D=81.08，J=102.67（超买）<br>
+        <span class="text-blue">昨日第一梯队候选，今日继续强势+7.99%，建议持有或轻仓追高</span><br>
+        <span class="text-orange">⚠️ J值102.67超买，连续大涨后追高风险；有色金属板块波动大</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--muted);margin:16px 0 8px;">🚫 排除说明</h3>
+
+  <div class="stock-row">
+    <div>
+      <div class="stock-name">三环集团 <span class="stock-code">300408.SZ</span> <span class="tier-badge tier-ex">排除</span></div>
+      <div class="stock-detail">
+        +12.64% · 元件板块领涨股 · MACD<span class="text-green">死叉</span>（DIF=13.84 < DEA=13.97）<br>
+        年初至今+<span class="text-red">257.02%</span>（涨幅极高）· PE 96.78（极高）<br>
+        <span class="text-green">排除原因：MACD死叉不符合一阳指体系；涨幅和估值均处于极端高位，风险远大于收益</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stock-row">
+    <div>
+      <div class="stock-name">航天电器 <span class="stock-code">002025.SZ</span> <span class="tier-badge tier-ex">排除</span></div>
+      <div class="stock-detail">
+        涨停 +10.00% · 量比2.95（大幅放量）<br>
+        均线未完全多头排列（MA20<MA30<MA60）· PE 176.46（偏高）<br>
+        所属国防军工板块<span class="text-green">-0.42%</span>（板块不配合）<br>
+        <span class="text-green">排除原因：板块整体下跌，个股独立上涨持续性存疑；均线未完全多头排列；PE偏高</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 昨日候选跟踪 -->
+<div class="section">
+  <h2>📌 昨日候选跟踪（2026-06-24）</h2>
+  <table>
+    <tr><th>股票</th><th>昨日梯队</th><th>今日表现</th><th>状态</th></tr>
+    <tr><td>立讯精密 <span class="stock-code">002475.SZ</span></td><td>第一梯队（转势★★★★）</td><td>--</td><td>需关注盘中走势</td></tr>
+    <tr><td>聚辰股份 <span class="stock-code">688123.SH</span></td><td>第一梯队（开门★★★★）</td><td>+13.21%</td><td><span class="text-red">继续强势</span>，可持有</td></tr>
+    <tr><td>领益智造 <span class="stock-code">002600.SZ</span></td><td>第二梯队（转势★★★）</td><td>--</td><td>需关注盘中走势</td></tr>
+    <tr><td>长电科技 <span class="stock-code">600584.SH</span></td><td>第二梯队（开门★★★）</td><td>--</td><td>需关注盘中走势</td></tr>
+  </table>
+  <div class="note">注：昨日候选今日表现数据因数据源限制未完全获取，建议结合盘中实时走势判断。</div>
+</div>
+
+<!-- 操作计划 -->
+<div class="section">
+  <h2>📋 次日操作计划</h2>
+
+  <div class="plan-box">
+    <h4>🟢 第一梯队 — 可直接介入</h4>
+    <ul>
+      <li><b>TCL科技</b>：开盘在5.10-5.25元区间可介入，仓位15%，止损4.80元。面板行业龙头，均线完美多头排列，MACD金叉，PE 19.93合理。关注面板涨价周期是否持续。</li>
+      <li><b>华夏航空</b>：开盘在7.50-7.75元可介入，仓位15%，止损6.80元。航空低位反弹，PE 14.89合理，年初至今-28.51%处于低位。注意航空板块持续性。</li>
+    </ul>
+  </div>
+
+  <div class="plan-box" style="border-color:rgba(88,166,255,0.2);background:rgba(88,166,255,0.05);">
+    <h4 style="color:var(--blue);">⏳ 第二梯队 — 等回调</h4>
+    <ul>
+      <li><b>中科曙光</b>：等回调至90-92元（约-7%~-8%）介入，仓位10%，止损82元。国产算力龙头，但J值超买，短期有回调需求。</li>
+      <li><b>中京电子</b>：等回调至18.5-19.0元介入，仓位5%（轻仓），止损16.5元。PE 497倍极高，仅作短博。</li>
+      <li><b>豫光金铅</b>：已连续强势（昨日涨停+今日+7.99%），持仓者继续持有，未持仓者等回调至15.5-16.0元再介入。</li>
+    </ul>
+  </div>
+
+  <div class="warning-box">
+    <h4>⚠️ 仓位配置与风险提示</h4>
+    <ul>
+      <li><b>建议总仓位</b>：<span class="text-red">30%-40%</span>，保留60%-70%现金。</li>
+      <li><b>上证指数估值</b>98.39%历史极高，深证成指99.96%历史最高，<b>市场整体处于极端高估状态</b>。</li>
+      <li>创业板指估值74.81%相对合理，但今日大涨2.84%创4371.99历史新高，短期追高风险加大。</li>
+      <li>两市成交额约3.59万亿，仍处于历史极高水平，需警惕放量滞涨信号。</li>
+      <li>若上证指数无法有效突破4150点并站稳，需警惕冲高回落风险。</li>
+      <li>严格控制单笔仓位不超过15%，止损纪律必须执行。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 战法说明 -->
+<div class="section">
+  <h2>📖 一阳指体系说明</h2>
+  <div class="heat-grid">
+    <div class="heat-item">
+      <b style="color:var(--gold);">转势战法</b>：底部盘整+一阳突破+量能放大+均线由粘合发散向上<br>
+      适用：低位反弹、趋势反转初期<br>
+      核心：MACD金叉、股价突破MA5/MA10/MA20、量比>1.5
+    </div>
+    <div class="heat-item">
+      <b style="color:var(--blue);">开门战法</b>：主升浪趋势延续+均线多头排列+MACD强势+量能配合<br>
+      适用：趋势确认后的加速阶段<br>
+      核心：MA5>MA10>MA20>MA30>MA60、MACD红柱放大、板块强势
+    </div>
+  </div>
+  <div class="note" style="margin-top:12px;">
+    <b>评分规则</b>：★★★★ = 四条件全部满足（强信号）；★★★ = 三条件满足（中等信号）；★★ = 两条件满足（弱信号，观望）；★ = 一条件满足（排除）。<br>
+    <b>排除条件</b>：MACD死叉、PE>200且年初至今>100%、均线完全空头排列、一字涨停无法买入、ST股票。
+  </div>
+</div>
+
+<footer>
+  一阳指选股复盘 · 2026-06-25 · 数据仅供参考，不构成投资建议 · 股市有风险，入市需谨慎
+</footer>
+
+</div>
+</body>
+</html>
