@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-06-26</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --card-hover: #1c2128;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #79c0ff;
+    --red: #f85149;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #f0883e;
+    --purple: #a371f7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 24px; }
+  .section { margin-bottom: 28px; }
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 3px solid var(--accent);
+  }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: transform .15s, background .15s;
+  }
+  .card:hover { background: var(--card-hover); transform: translateY(-2px); }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .card-name { font-size: 1rem; font-weight: 600; }
+  .card-value { font-size: 1.4rem; font-weight: 700; }
+  .card-change {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  .up { color: var(--red); background: rgba(248,81,73,0.12); }
+  .down { color: var(--green); background: rgba(63,185,80,0.12); }
+  .card-meta { font-size: 0.8rem; color: var(--text-dim); margin-top: 6px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td { padding: 10px 12px; text-align: left; }
+  th { background: rgba(88,166,255,0.08); color: var(--accent2); font-weight: 600; font-size: 0.82rem; }
+  tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .tag-first { background: rgba(63,185,80,0.15); color: var(--green); }
+  .tag-second { background: rgba(210,153,34,0.15); color: var(--yellow); }
+  .tag-warn { background: rgba(248,81,73,0.15); color: var(--red); }
+  .tag-info { background: rgba(88,166,255,0.15); color: var(--accent); }
+  .highlight-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .highlight-box h3 { font-size: 1rem; margin-bottom: 8px; color: var(--accent2); }
+  .stars { color: var(--yellow); letter-spacing: 2px; }
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .plan-item { background: rgba(88,166,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+  .plan-item strong { color: var(--accent2); font-size: 0.85rem; }
+  .plan-item div { font-size: 0.9rem; margin-top: 4px; }
+  .exclude-item { color: var(--text-dim); font-size: 0.85rem; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+  .exclude-item:last-child { border-bottom: none; }
+  .risk-box {
+    background: rgba(248,81,73,0.08);
+    border: 1px solid rgba(248,81,73,0.3);
+    border-radius: 10px;
+    padding: 14px;
+    color: #ff7b72;
+  }
+  .footer { text-align: center; color: var(--text-dim); font-size: 0.75rem; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .summary-bar {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .summary-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  .summary-item strong { color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<h1>一阳指选股复盘 · 2026-06-26</h1>
+<div class="subtitle">A股交易日收盘分析 | 数据截至 16:14 | 自动化生成</div>
+
+<div class="summary-bar">
+  <div class="summary-item">两市成交约 <strong>4.48万亿</strong></div>
+  <div class="summary-item">涨停 <strong>60家</strong></div>
+  <div class="summary-item">连板 <strong>8只</strong></div>
+  <div class="summary-item">封板率 <strong>63%</strong></div>
+  <div class="summary-item">上证指数PE <strong>17.30</strong></div>
+</div>
+
+<!-- 市场概览 -->
+<div class="section">
+  <div class="section-title">市场概览</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">上证指数</span>
+        <span class="card-change down">-2.26%</span>
+      </div>
+      <div class="card-value">4,027.26</div>
+      <div class="card-meta">量比 1.37 | 年初至今 +1.57% | 估值百分位 <span style="color:var(--red)">98.6%</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">深证成指</span>
+        <span class="card-change down">-3.44%</span>
+      </div>
+      <div class="card-value">15,782.22</div>
+      <div class="card-meta">量比 3.42 | 年初至今 +16.01% | 估值百分位 <span style="color:var(--red)">99.96%</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-name">创业板指</span>
+        <span class="card-change down">-4.07%</span>
+      </div>
+      <div class="card-value">4,194.21</div>
+      <div class="card-meta">量比 4.60 | 年初至今 +29.34% | 估值百分位 <span style="color:var(--yellow)">78.44%</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 热门板块TOP5 -->
+<div class="section">
+  <div class="section-title">热门板块 TOP5（概念涨幅）</div>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th><th>量比</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td><td>大硅片</td><td class="up" style="background:none;padding:0">+5.47%</td>
+        <td>有研硅</td><td class="up" style="background:none;padding:0">+20.00%</td><td>1.32</td>
+      </tr>
+      <tr>
+        <td>2</td><td>电子布</td><td class="up" style="background:none;padding:0">+4.26%</td>
+        <td>国际复材</td><td class="up" style="background:none;padding:0">+9.17%</td><td>1.10</td>
+      </tr>
+      <tr>
+        <td>3</td><td>昨日连板</td><td class="up" style="background:none;padding:0">+2.98%</td>
+        <td>宏柏新材</td><td class="up" style="background:none;padding:0">+10.02%</td><td>1.02</td>
+      </tr>
+      <tr>
+        <td>4</td><td>中国建材集团</td><td class="up" style="background:none;padding:0">+2.76%</td>
+        <td>凯盛科技</td><td class="up" style="background:none;padding:0">+10.00%</td><td>1.03</td>
+      </tr>
+      <tr>
+        <td>5</td><td>靶材</td><td class="up" style="background:none;padding:0">+2.69%</td>
+        <td>有研新材</td><td class="up" style="background:none;padding:0">+8.19%</td><td>1.10</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 主力资金TOP3 -->
+<div class="section">
+  <div class="section-title">主力资金净流入 TOP3（板块）</div>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>主力净流入</th><th>领涨股</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td><td>航天系</td><td class="up" style="background:none;padding:0">+1.92%</td>
+        <td style="color:var(--red)">+29.11亿</td><td>航天动力 +10.01%</td>
+      </tr>
+      <tr>
+        <td>2</td><td>房地产开发概念</td><td class="down" style="background:none;padding:0">-1.69%</td>
+        <td style="color:var(--red)">+11.17亿</td><td>盈新发展 +9.97%</td>
+      </tr>
+      <tr>
+        <td>3</td><td>触摸屏概念</td><td class="up" style="background:none;padding:0">+1.39%</td>
+        <td style="color:var(--red)">+10.84亿</td><td>长信科技 +13.41%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 申万一级行业 -->
+<div class="section">
+  <div class="section-title">申万一级行业涨幅 TOP5</div>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>行业名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>航天装备Ⅱ</td><td class="up" style="background:none;padding:0">+6.92%</td><td>电科蓝天</td><td class="up" style="background:none;padding:0">+10.93%</td></tr>
+      <tr><td>2</td><td>玻璃玻纤</td><td class="up" style="background:none;padding:0">+4.95%</td><td>国际复材</td><td class="up" style="background:none;padding:0">+9.17%</td></tr>
+      <tr><td>3</td><td>养殖业</td><td class="up" style="background:none;padding:0">+2.45%</td><td>神农集团</td><td class="up" style="background:none;padding:0">+10.02%</td></tr>
+      <tr><td>4</td><td>橡胶</td><td class="up" style="background:none;padding:0">+1.49%</td><td>彤程新材</td><td class="up" style="background:none;padding:0">+10.00%</td></tr>
+      <tr><td>5</td><td>白色家电</td><td class="up" style="background:none;padding:0">+1.38%</td><td>TCL智家</td><td class="up" style="background:none;padding:0">+7.00%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="section">
+  <div class="section-title">次日操作计划</div>
+  <div class="plan-grid">
+    <div class="plan-item">
+      <strong>第一梯队 · 可介入</strong>
+      <div>航天动力（600343）<br>转势战法 <span class="stars">★★★★☆</span></div>
+      <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px">买入区间：25.0-26.0<br>止损：23.8（-5%）<br>止盈：28.5（+10%）</div>
+    </div>
+    <div class="plan-item">
+      <strong>第一梯队 · 可介入</strong>
+      <div>凯盛科技（600552）<br>开门战法 <span class="stars">★★★★☆</span></div>
+      <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px">买入区间：28.0-29.0<br>止损：27.0（-5%）<br>止盈：32.0（+10%）</div>
+    </div>
+    <div class="plan-item">
+      <strong>第二梯队 · 等回调</strong>
+      <div>神农集团（605296）<br>转势战法 <span class="stars">★★★☆☆</span></div>
+      <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px">关注回调至25.5附近</div>
+    </div>
+    <div class="plan-item">
+      <strong>第二梯队 · 等回调</strong>
+      <div>彤程新材（603650）<br>开门战法 <span class="stars">★★★★☆</span></div>
+      <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px">KDJ超买（J线101），等回调至76附近</div>
+    </div>
+    <div class="plan-item">
+      <strong>第二梯队 · 等开板</strong>
+      <div>超声电子（000823）<br>开门战法 <span class="stars">★★★★☆</span></div>
+      <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px">9天6板，等开板放量</div>
+    </div>
+    <div class="plan-item">
+      <strong>第二梯队 · 观望</strong>
+      <div>兴业科技（002674）<br>开门战法 <span class="stars">★★★★☆</span></div>
+      <div style="font-size:0.8rem;color:var(--text-dim);margin-top:6px">6连板，风险极高，不建议追</div>
+    </div>
+  </div>
+</div>
+
+<!-- 转势战法候选 -->
+<div class="section">
+  <div class="section-title">转势战法候选（底部盘整 + 一阳突破）</div>
+
+  <div class="highlight-box">
+    <h3>航天动力（600343）<span class="tag tag-first">第一梯队</span> <span class="stars">★★★★☆</span></h3>
+    <p><strong>判断依据：</strong></p>
+    <ul>
+      <li>底部盘整：年初至今 <span style="color:var(--green)">-46.35%</span>，20日涨幅 <span style="color:var(--green)">-6.68%</span>，长期处于底部区域</li>
+      <li>一阳突破：今日涨停 <span style="color:var(--red)">+10.01%</span>，收盘价26.27高于5日（24.55）、10日（24.59）、20日（24.96）均线，突破短期均线粘合区</li>
+      <li>量能配合：量比 <span style="color:var(--red)">2.10</span>，成交额15.66亿，显著放量</li>
+      <li>均线：5/10/20日线粘合，今日突破。MACD柱状图0.793>0，KDJ J线90.295</li>
+      <li>主力净流入：<span style="color:var(--red)">+3.51亿</span></li>
+    </ul>
+    <p style="margin-top:8px;color:var(--text-dim)"><strong>风险点：</strong>上方30日均线27.40仍有压力；PE为负（亏损），基本面承压</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>神农集团（605296）<span class="tag tag-second">第二梯队</span> <span class="stars">★★★☆☆</span></h3>
+    <p><strong>判断依据：</strong></p>
+    <ul>
+      <li>底部盘整：年初至今 <span style="color:var(--green)">-7.13%</span>，长期处于低位震荡</li>
+      <li>一阳突破：今日涨停 <span style="color:var(--red)">+10.02%</span>，收盘价27.23略高于5日（25.60）、10日（25.87）、20日（25.86）均线</li>
+      <li>量能配合：量比 <span style="color:var(--red)">2.91</span>，放量明显</li>
+      <li>MACD柱状图0.332>0，KDJ J线67.716</li>
+      <li>主力净流入：<span style="color:var(--red)">+0.32亿</span></li>
+    </ul>
+    <p style="margin-top:8px;color:var(--text-dim)"><strong>风险点：</strong>换手率仅1.06%，量能偏小；PE为负（亏损）；均线纠缠，方向不够明确</p>
+  </div>
+</div>
+
+<!-- 开门战法候选 -->
+<div class="section">
+  <div class="section-title">开门战法候选（主升浪趋势延续）</div>
+
+  <div class="highlight-box">
+    <h3>凯盛科技（600552）<span class="tag tag-first">第一梯队</span> <span class="stars">★★★★☆</span></h3>
+    <p><strong>判断依据：</strong></p>
+    <ul>
+      <li>趋势：5日 <span style="color:var(--red)">+26.93%</span>，20日 <span style="color:var(--red)">+55.22%</span>，年初至今 <span style="color:var(--red)">+139.68%</span>，主升浪确认</li>
+      <li>均线多头排列：5日(27.12) > 10日(24.44) > 20日(22.26) > 30日(21.04) > 60日(17.79)</li>
+      <li>量能：量比1.04，换手率16.23%，成交44.69亿</li>
+      <li>MACD：柱状图 <span style="color:var(--red)">1.336</span> > 0，红柱持续放大</li>
+      <li>KDJ：K线89.191，D线82.599，J线102.375（超买边缘）</li>
+      <li>主力净流入：<span style="color:var(--red)">+5.82亿</span></li>
+    </ul>
+    <p style="margin-top:8px;color:var(--text-dim)"><strong>风险点：</strong>PE 210.64，估值极高；KDJ J线102超买，短期或有回调</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>彤程新材（603650）<span class="tag tag-second">第二梯队</span> <span class="stars">★★★★☆</span></h3>
+    <p><strong>判断依据：</strong></p>
+    <ul>
+      <li>趋势：5日 <span style="color:var(--red)">+30.08%</span>，20日 <span style="color:var(--red)">+51.29%</span>，年初至今 <span style="color:var(--red)">+96.67%</span></li>
+      <li>均线多头排列：5日(76.09) > 10日(69.97) > 20日(62.41) > 30日(61.17) > 60日(57.15)</li>
+      <li>MACD：柱状图 <span style="color:var(--red)">4.911</span> > 0，红柱极强</li>
+      <li>KDJ：J线 <span style="color:var(--red)">101.444</span>，严重超买</li>
+      <li>主力净流入：<span style="color:var(--red)">+4.44亿</span></li>
+    </ul>
+    <p style="margin-top:8px;color:var(--text-dim)"><strong>风险点：</strong>KDJ严重超买（J线101.4），量比0.97略缩量，短期回调压力大</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>超声电子（000823）<span class="tag tag-second">第二梯队</span> <span class="stars">★★★★☆</span></h3>
+    <p><strong>判断依据：</strong></p>
+    <ul>
+      <li>趋势：5日 <span style="color:var(--red)">+31.76%</span>，20日 <span style="color:var(--red)">+67.41%</span>，9天6板</li>
+      <li>均线多头排列：5日(24.60) > 10日(22.52) > 20日(19.91) > 30日(18.69) > 60日(16.90)</li>
+      <li>MACD：柱状图 <span style="color:var(--red)">1.630</span> > 0</li>
+      <li>KDJ：J线 <span style="color:var(--red)">101.145</span></li>
+    </ul>
+    <p style="margin-top:8px;color:var(--text-dim)"><strong>风险点：</strong>连续涨停，KDJ超买，建议等开板后观察</p>
+  </div>
+
+  <div class="highlight-box">
+    <h3>兴业科技（002674）<span class="tag tag-warn">观望</span> <span class="stars">★★★★☆</span></h3>
+    <p><strong>判断依据：</strong></p>
+    <ul>
+      <li>趋势：5日 <span style="color:var(--red)">+61.06%</span>，20日 <span style="color:var(--red)">+88.43%</span>，6连板</li>
+      <li>均线多头排列：5日(24.04) > 10日(20.31) > 20日(17.72) > 30日(16.73) > 60日(15.03)</li>
+      <li>MACD：柱状图 <span style="color:var(--red)">2.533</span> > 0</li>
+      <li>KDJ：J线 <span style="color:var(--red)">107.504</span></li>
+    </ul>
+    <p style="margin-top:8px;color:var(--text-dim)"><strong>风险点：</strong>6连板，风险极高，不建议追高</p>
+  </div>
+</div>
+
+<!-- 排除说明 -->
+<div class="section">
+  <div class="section-title">排除说明</div>
+  <div class="highlight-box">
+    <div class="exclude-item"><strong>有研硅（688432）</strong> — 20cm涨停，5日+21.73%，20日+50.40%，但PE 185.16，估值过高，排除</div>
+    <div class="exclude-item"><strong>富创精密（688409）</strong> — 20cm涨停，5日+35.17%，20日+68.21%，但PE 1177.03，估值极高，排除</div>
+    <div class="exclude-item"><strong>正帆科技（688596）</strong> — 20cm涨停，5日+21.95%，20日+28.09%，但PE 216.78，估值过高，排除</div>
+    <div class="exclude-item"><strong>天娱数科（002354）</strong> — 15天8板，PE -612.54（亏损），换手率30.43%，风险极高，排除</div>
+    <div class="exclude-item"><strong>贤丰控股（002141）</strong> — 13天7板，PE 520.45，估值过高，排除</div>
+  </div>
+</div>
+
+<!-- 仓位配置建议 -->
+<div class="section">
+  <div class="section-title">仓位配置建议</div>
+  <div class="highlight-box">
+    <p>当前市场处于<strong>历史极高估区间</strong>（上证PE百分位98.6%，深证99.96%），今日三大指数放量大跌，市场情绪转弱。</p>
+    <ul style="margin-top:10px">
+      <li><strong>总仓位：</strong>建议不超过 <span style="color:var(--yellow)">30%</span></li>
+      <li><strong>现金储备：</strong>保留 <span style="color:var(--green)">70%</span> 以上</li>
+      <li><strong>第一梯队：</strong>若次日开盘符合条件，可轻仓试仓（单只个股不超过10%）</li>
+      <li><strong>第二梯队：</strong>等回调确认后再介入</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 风险提示 -->
+<div class="section">
+  <div class="section-title">风险提示</div>
+  <div class="risk-box">
+    <p><strong>⚠️ 当前市场风险：</strong></p>
+    <ul style="margin-top:8px">
+      <li>上证指数估值百分位 <strong>98.6%</strong>，深证成指 <strong>99.96%</strong>，均处于历史极高估区间</li>
+      <li>今日三大指数放量大跌，创业板指跌超4%，市场恐慌情绪加剧</li>
+      <li>个股跌多涨少，板块分化严重，仅少数板块逆势走强</li>
+      <li>创业板PE 55.15，虽估值百分位78.44%相对"合理"，但绝对值仍偏高</li>
+      <li>转势战法候选股（航天动力、神农集团）PE为负，基本面承压，需严格控制止损</li>
+      <li>开门战法候选股（凯盛科技、彤程新材）估值极高，仅适合趋势跟随，不宜重仓</li>
+    </ul>
+    <p style="margin-top:10px;font-size:0.85rem">以上分析仅供参考，不构成投资建议。股市有风险，投资需谨慎。</p>
+  </div>
+</div>
+
+<div class="footer">
+  一阳指选股复盘 · 自动化生成 · 2026-06-26 · 数据来源：NeoData Financial Search
+</div>
+
+</body>
+</html>
