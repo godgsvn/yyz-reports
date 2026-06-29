@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-06-29</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --card-bg: #161b22;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --text-muted: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --orange: #f0883e;
+  --yellow: #d29922;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.header {
+  text-align: center; padding: 32px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px;
+}
+.header h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 1px; }
+.header .subtitle { color: var(--text-muted); font-size: 14px; }
+.card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; margin-bottom: 20px;
+}
+.card-title {
+  font-size: 18px; font-weight: 600; margin: 0 0 16px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;
+}
+.index-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.index-card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; text-align: center;
+}
+.index-card .name { font-size: 14px; color: var(--text-muted); margin-bottom: 4px; }
+.index-card .price { font-size: 32px; font-weight: 700; margin: 8px 0; }
+.index-card .change { font-size: 16px; font-weight: 600; }
+.up { color: var(--red); }
+.down { color: var(--green); }
+.tag {
+  display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px;
+  font-weight: 600; margin-left: 6px;
+}
+.tag-high { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); }
+.tag-medium { background: rgba(208,153,34,0.15); color: var(--yellow); border: 1px solid rgba(208,153,34,0.3); }
+.tag-low { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px;
+}
+th {
+  text-align: left; padding: 10px 12px; background: rgba(88,166,255,0.08);
+  color: var(--accent); font-weight: 600; border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+tr:hover td { background: rgba(255,255,255,0.03); }
+.star { color: var(--orange); font-size: 15px; }
+.plan-box {
+  background: rgba(88,166,255,0.06); border-left: 4px solid var(--accent);
+  padding: 16px; border-radius: 0 8px 8px 0; margin: 12px 0;
+}
+.plan-box h4 { margin: 0 0 8px; color: var(--accent); font-size: 15px; }
+.plan-box p, .plan-box ul { margin: 0; padding-left: 18px; }
+.plan-box li { margin-bottom: 4px; }
+.risk-box {
+  background: rgba(248,81,73,0.08); border-left: 4px solid var(--red);
+  padding: 16px; border-radius: 0 8px 8px 0; margin: 12px 0;
+}
+.risk-box h4 { margin: 0 0 8px; color: var(--red); font-size: 15px; }
+.exclude-item {
+  background: rgba(248,81,73,0.04); border: 1px solid rgba(248,81,73,0.15);
+  border-radius: 8px; padding: 12px 16px; margin: 8px 0; font-size: 13px;
+}
+.exclude-item strong { color: var(--red); }
+.candidate-box {
+  background: rgba(63,185,80,0.06); border: 1px solid rgba(63,185,80,0.2);
+  border-radius: 8px; padding: 16px; margin: 12px 0;
+}
+.candidate-box h4 { margin: 0 0 8px; color: var(--green); font-size: 15px; }
+.candidate-box .detail { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+.footer { text-align: center; padding: 24px 0; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); margin-top: 24px; }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.score-item { background: rgba(255,255,255,0.03); border-radius: 8px; padding: 12px; font-size: 13px; }
+.score-item .label { color: var(--text-muted); font-size: 12px; margin-bottom: 4px; }
+.score-item .value { font-size: 16px; font-weight: 600; }
+.section-note { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>一阳指选股复盘</h1>
+  <div class="subtitle">2026年6月29日（周一）· 自动化分析报告</div>
+</div>
+
+<!-- 市场概览 -->
+<div class="card">
+  <div class="card-title">市场概览</div>
+  <div class="index-grid">
+    <div class="index-card">
+      <div class="name">上证指数</div>
+      <div class="price">4,073.90</div>
+      <div class="change up">+1.16% <span class="tag tag-high">极高估 95.67%</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:8px;">PE: 16.92 · 成交额: 1.67万亿</div>
+    </div>
+    <div class="index-card">
+      <div class="name">深证成指</div>
+      <div class="price">15,812.87</div>
+      <div class="change up">+0.19% <span class="tag tag-high">历史最高 99.67%</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:8px;">PE: 37.38 · 成交额: 1.85万亿</div>
+    </div>
+    <div class="index-card">
+      <div class="name">创业板指</div>
+      <div class="price">4,216.70</div>
+      <div class="change up">+0.54% <span class="tag tag-medium">中等 72.64%</span></div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:8px;">PE: 53.02 · 成交额: 0.92万亿</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:12px;font-size:13px;">
+    <div class="score-item"><div class="label">沪深京总成交</div><div class="value">35,396亿</div></div>
+    <div class="score-item"><div class="label">较上一日</div><div class="value down">缩量 361亿</div></div>
+    <div class="score-item"><div class="label">上涨 / 下跌</div><div class="value">2,469 / 2,933</div></div>
+    <div class="score-item"><div class="label">涨停 / 跌停</div><div class="value">124 / 69</div></div>
+  </div>
+  <p class="section-note">今日沪指午后强势拉升涨超1%，但个股跌多涨少（2,469:2,933），指数与个股背离。市场结构性分化明显，医药板块因基金漂移回归大幅爆发，科技板块（CPO、PCB）回调。</p>
+</div>
+
+<!-- 热门板块 -->
+<div class="card">
+  <div class="card-title">热门板块 TOP5</div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>排行</th><th>概念板块</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+      <tr><td>1</td><td>靶材</td><td class="up">+9.07%</td><td>阿石创</td><td class="up">+19.06%</td></tr>
+      <tr><td>2</td><td>CRO</td><td class="up">+7.65%</td><td>万邦医药</td><td class="up">+20.00%</td></tr>
+      <tr><td>3</td><td>减肥药</td><td class="up">+7.44%</td><td>万邦医药</td><td class="up">+20.00%</td></tr>
+      <tr><td>4</td><td>肿瘤治疗</td><td class="up">+7.26%</td><td>广生堂</td><td class="up">+20.00%</td></tr>
+      <tr><td>5</td><td>单抗概念</td><td class="up">+7.23%</td><td>舒泰神</td><td class="up">+20.00%</td></tr>
+    </table>
+  </div>
+  <div class="card-title" style="margin-top:20px;">申万一级行业涨幅 TOP5</div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>排行</th><th>行业</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+      <tr><td>1</td><td>化学制药</td><td class="up">+7.37%</td><td>舒泰神</td><td class="up">+20.00%</td></tr>
+      <tr><td>2</td><td>生物制品</td><td class="up">+7.26%</td><td>三生国健</td><td class="up">+20.00%</td></tr>
+      <tr><td>3</td><td>医疗服务</td><td class="up">+6.82%</td><td>万邦医药</td><td class="up">+20.00%</td></tr>
+      <tr><td>4</td><td>电子化学品Ⅱ</td><td class="up">+4.65%</td><td>广钢气体</td><td class="up">+20.01%</td></tr>
+      <tr><td>5</td><td>养殖业</td><td class="up">+4.52%</td><td>巨星农牧</td><td class="up">+9.98%</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 主力资金 -->
+<div class="card">
+  <div class="card-title">主力资金净流入板块 TOP3</div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>排行</th><th>板块</th><th>主力净流入</th><th>涨跌幅</th><th>领涨股</th></tr>
+      <tr><td>1</td><td>上证50</td><td class="up">+60.72亿</td><td class="up">+2.10%</td><td>澜起科技 +13.08%</td></tr>
+      <tr><td>2</td><td>健康中国</td><td class="up">+58.44亿</td><td class="up">+3.83%</td><td>万邦医药 +20.00%</td></tr>
+      <tr><td>3</td><td>AH股</td><td class="up">+56.78亿</td><td class="up">+1.62%</td><td>百奥赛图 +20.00%</td></tr>
+    </table>
+  </div>
+  <div class="card-title" style="margin-top:20px;">主力资金净流入个股 TOP5</div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>排行</th><th>股票</th><th>代码</th><th>涨跌幅</th><th>主力净流入</th><th>量比</th></tr>
+      <tr><td>1</td><td>澜起科技</td><td>sh688008</td><td class="up">+13.08%</td><td class="up">+23.53亿</td><td>1.38</td></tr>
+      <tr><td>2</td><td>机器人</td><td>sz300024</td><td class="up">+18.92%</td><td class="up">+5.68亿</td><td>2.32</td></tr>
+      <tr><td>3</td><td>正帆科技</td><td>sh688596</td><td class="up">+17.31%</td><td class="up">+4.79亿</td><td>2.50</td></tr>
+      <tr><td>4</td><td>南大光电</td><td>sz300346</td><td class="up">+15.21%</td><td class="up">+2.18亿</td><td>1.27</td></tr>
+      <tr><td>5</td><td>彤程新材</td><td>sh603650</td><td class="up">+10.00%</td><td class="up">+2.10亿</td><td>1.60</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="card">
+  <div class="card-title">次日操作计划（2026-06-30）</div>
+  <div class="plan-box">
+    <h4>第一梯队（可介入）</h4>
+    <ul>
+      <li><strong>机器人（sz300024）</strong> — 转势战法 ★★★☆</li>
+    </ul>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:8px;">
+      买入区间：17.0-17.8元（回踩MA5/MA10确认）<br>
+      仓位：5%-8%（试仓）<br>
+      止损：跌破MA10（16.5元）或亏损-5%<br>
+      止盈：前期高点附近20-22元区间分批止盈
+    </p>
+  </div>
+  <div class="plan-box">
+    <h4>第二梯队（等回调）</h4>
+    <ul>
+      <li><strong>澜起科技（sh688008）</strong> — 开门战法 ★★★★（等回踩MA5）</li>
+      <li><strong>神州泰岳（sz300002）</strong> — 转势战法 ★★★（等均线完全多头排列）</li>
+    </ul>
+    <p style="font-size:13px;color:var(--text-muted);margin-top:8px;">
+      澜起科技：等回调至270-280元区间（MA5/MA10附近），仓位不超过5%<br>
+      神州泰岳：等回调至7.2-7.4元区间确认支撑，仓位3%-5%
+    </p>
+  </div>
+  <div class="risk-box">
+    <h4>仓位配置建议</h4>
+    <ul>
+      <li>总仓位控制在 <strong>30%-35%</strong>，保留 <strong>65%-70%</strong> 现金</li>
+      <li>上证指数估值95.67%极高，深证成指99.67%历史最高，系统性风险大</li>
+      <li>今日缩量上涨+指数与个股背离+跌停69只，市场情绪分化严重</li>
+      <li>明日为上半年最后一个交易日，基金漂移回归结束后资金流向是关键</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 转势战法 -->
+<div class="card">
+  <div class="card-title">转势战法候选详情（底部盘整 + 一阳突破 + 量能 + 均线）</div>
+
+  <div class="candidate-box">
+    <h4>机器人（sz300024）— ★★★☆</h4>
+    <div class="detail">
+      <strong>价格：</strong>18.10元 <strong class="up">+18.92%</strong> · 量比: 2.32 · 换手率: 10.09%<br>
+      <strong>均线：</strong>MA5(16.44) > MA10(16.93) > MA20(16.14) > MA60(15.57) — 多头排列<br>
+      <strong>MACD：</strong>DIF(0.295) > DEA(0.268)，金叉状态，MACD柱(+0.054)温和放大<br>
+      <strong>KDJ：</strong>K=56.8, D=54.8, J=60.9 — 未超买<br>
+      <strong>资金：</strong>主力净流入 <span class="up">+5.68亿</span>（全市场第20名）<br>
+      <strong>估值：</strong>PE -64倍（亏损），PB 7.0倍，年初至今 <span class="down">-0.49%</span>（低位）<br>
+      <strong>判断：</strong>均线多头排列+MACD金叉+放量突破，符合转势战法。但PE为负（亏损），基本面承压。建议小仓位试仓，严格止损。
+    </div>
+  </div>
+
+  <div class="candidate-box">
+    <h4>神州泰岳（sz300002）— ★★★</h4>
+    <div class="detail">
+      <strong>价格：</strong>7.90元 <strong class="up">+12.70%</strong> · 量比: 2.72 · 换手率: 7.86%<br>
+      <strong>均线：</strong>MA5(7.37) > MA10(7.40)，但 MA20(7.49) > MA5，MA60(8.72) > MA20 — 未完全多头排列<br>
+      <strong>MACD：</strong>DIF(-0.333) > DEA(-0.421)，金叉状态，MACD柱(+0.177)<br>
+      <strong>KDJ：</strong>K=52.0, D=46.5, J=63.0 — 未超买<br>
+      <strong>资金：</strong>主力净流入 <span class="up">+1.92亿</span><br>
+      <strong>估值：</strong>PE 21.2倍（合理），PB 2.02倍，年初至今 <span class="down">-31.06%</span>（低位）<br>
+      <strong>判断：</strong>MACD金叉+放量+低位+PE合理，但均线尚未完全多头排列（MA20/MA60仍在上方）。建议等均线确认后再介入，或等回调至7.2-7.4元确认支撑。
+    </div>
+  </div>
+
+  <div class="exclude-item">
+    <strong>排除：威派格（sh603956）</strong> — PE为负(-25)，液冷概念7天4板但基本面亏损，风险过高，已排除。
+  </div>
+</div>
+
+<!-- 开门战法 -->
+<div class="card">
+  <div class="card-title">开门战法候选详情（主升浪趋势延续 + 四条件）</div>
+
+  <div class="candidate-box">
+    <h4>澜起科技（sh688008）— ★★★★（等回调）</h4>
+    <div class="detail">
+      <strong>价格：</strong>296.06元 <strong class="up">+13.08%</strong> · 量比: 1.38 · 换手率: 9.31%<br>
+      <strong>均线：</strong>MA5(272.31) > MA10(265.83) > MA20(251.29) > MA60(213.99) — 完美多头排列<br>
+      <strong>MACD：</strong>DIF(12.73) > DEA(10.27)，强势金叉，MACD柱(+4.93)大幅放大<br>
+      <strong>KDJ：</strong>K=80.9, D=73.2, J=96.2 — <strong style="color:var(--orange)">接近超买</strong><br>
+      <strong>资金：</strong>主力净流入 <span class="up">+23.53亿</span>（全市场第2名），超大单 <span class="up">+27.07亿</span><br>
+      <strong>估值：</strong>PE 141倍（偏高），PB 17.36倍，年初至今 <span class="up">+151.32%</span>（涨幅大）<br>
+      <strong>判断：</strong>均线完美多头排列+MACD强势金叉+巨量资金流入，开门战法四星。但KDJ J=96接近超买，PE 141倍偏高，年初至今+151%。建议等回调至MA5(272元)附近再介入，不追高。
+    </div>
+  </div>
+
+  <div class="exclude-item">
+    <strong>排除：南大光电（sz300346）</strong> — 均线完美多头+MACD金叉，但PE 179倍极高，20日涨幅+74.62%，追高风险极大，已排除。
+  </div>
+  <div class="exclude-item">
+    <strong>排除：正帆科技（sh688596）</strong> — 均线完美多头+MACD金叉+放量(量比2.50)，但PE 254倍极高，KDJ J=99.77超买，20日涨幅+62.6%，已排除。
+  </div>
+  <div class="exclude-item">
+    <strong>排除：彤程新材（sh603650）</strong> — 4天3板，均线完美多头+MACD金叉，但KDJ J=104.6严重超买，PE 99倍偏高，追高风险大，已排除。
+  </div>
+  <div class="exclude-item">
+    <strong>排除：芯源微（sh688037）</strong> — 均线完美多头+MACD强势金叉，但PE 1142倍极高，主力净流入仅0.53亿，资金面偏弱，已排除。
+  </div>
+</div>
+
+<!-- 排除说明 -->
+<div class="card">
+  <div class="card-title">排除说明</div>
+  <div class="exclude-item">
+    <strong>南大光电、正帆科技、彤程新材、芯源微：</strong>虽然均线和MACD均满足开门战法，但估值极高（PE 99-1142倍）或短期涨幅过大（20日+62%~75%），KDJ超买，追高风险远大于收益，不符合"安全优先"原则，已排除。
+  </div>
+  <div class="exclude-item">
+    <strong>威派格：</strong>液冷概念7天4板，但PE为负（亏损），且基本面无支撑，纯题材炒作，已排除。
+  </div>
+  <div class="exclude-item">
+    <strong>医药板块多数涨停股：</strong>今日医药板块（化学制药+7.37%、生物制品+7.26%）大涨主因是公募基金半年报披露期的"风格漂移回归"，属于短期资金调仓行为，非基本面驱动。多数医药股PE极高或亏损，且为事件驱动，持续性存疑，不纳入一阳指体系选股范围。
+  </div>
+</div>
+
+<!-- 昨日候选跟踪 -->
+<div class="card">
+  <div class="card-title">昨日候选跟踪（2026-06-26）</div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>股票</th><th>昨日战法</th><th>今日表现</th><th>跟踪结论</th></tr>
+      <tr><td>航天动力</td><td>转势★★★★☆</td><td class="up">待查</td><td>市场大跌，关注是否抗跌</td></tr>
+      <tr><td>凯盛科技</td><td>开门★★★★☆</td><td class="up">待查</td><td>市场大跌，关注是否抗跌</td></tr>
+      <tr><td>神农集团</td><td>转势★★★☆☆</td><td class="up">待查</td><td>养殖业今日+4.52%，可能受益</td></tr>
+      <tr><td>彤程新材</td><td>开门★★★★☆</td><td class="up">+10.00%</td><td>4天3板，继续强势，但已排除（超买）</td></tr>
+    </table>
+  </div>
+  <p class="section-note">昨日市场大跌（上证-2.26%，跌停91只），今日反弹但分化严重。昨日候选若未触发止损则继续持有，若跌破止损线应严格执行纪律。</p>
+</div>
+
+<!-- 风险提示 -->
+<div class="card">
+  <div class="card-title">风险提示</div>
+  <div class="risk-box">
+    <h4>系统性风险</h4>
+    <ul>
+      <li>上证指数估值百分位 <strong>95.67%</strong>（极高），深证成指 <strong>99.67%</strong>（历史最高），市场处于极端高估状态</li>
+      <li>今日三大指数上涨但个股跌多涨少（2,469:2,933），且跌停69只，指数与个股严重背离</li>
+      <li>沪深京成交额35,396亿，较上一日缩量361亿，缩量上涨说明上攻动能不足</li>
+      <li>明日为上半年最后一个交易日，基金半年报披露截止，风格漂移回归结束后资金流向不确定性大</li>
+      <li>科创综指成交6063亿创历史新高，天量成交往往伴随短期波动加剧</li>
+    </ul>
+  </div>
+  <div class="risk-box">
+    <h4>个股风险</h4>
+    <ul>
+      <li>机器人（sz300024）PE为负（亏损），基本面承压，转势信号虽成立但需严格止损</li>
+      <li>澜起科技（sh688008）PE 141倍，KDJ超买，短期追高风险大</li>
+      <li>多只大牛股今日跌停（宏和科技、山东玻纤、长盈通），高位股风险释放中</li>
+      <li>医药板块今日大涨为基金漂移回归驱动，非基本面改善，持续性存疑</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  <p>一阳指选股复盘 · 自动生成 · 仅供参考，不构成投资建议</p>
+  <p>数据来源：NeoData Financial Search / 腾讯自选股</p>
+</div>
+
+</div>
+</body>
+</html>
