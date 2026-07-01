@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-07-01</title>
+<style>
+:root{--bg:#0f1419;--card:#161b22;--text:#c9d1d9;--muted:#8b949e;--accent:#58a6ff;--accent2:#3fb950;--danger:#f85149;--warn:#d29922;--border:#30363d;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;min-height:100vh}
+.container{max-width:1100px;margin:0 auto;padding:24px 16px}
+header{text-align:center;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+header h1{font-size:1.8rem;font-weight:700;color:var(--accent);margin-bottom:6px}
+header .subtitle{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:transform .2s}
+.card:hover{transform:translateY(-2px)}
+.card h3{font-size:1.05rem;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.card .value{font-size:2rem;font-weight:700;margin-bottom:4px}
+.card .change{font-size:1rem;font-weight:600}
+.card .change.up{color:#ff4d4f}
+.card .change.down{color:#3fb950}
+.card .detail{font-size:.85rem;color:var(--muted);margin-top:8px}
+.up-arrow{color:#ff4d4f}
+.down-arrow{color:#3fb950}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem}
+th{text-align:left;padding:10px 8px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:10px 8px;border-bottom:1px solid #21262d;vertical-align:middle}
+tr:hover td{background:rgba(88,166,255,.04)}
+.star{color:var(--warn)}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75rem;font-weight:600}
+.badge-red{background:rgba(248,81,73,.15);color:var(--danger)}
+.badge-green{background:rgba(63,185,80,.15);color:var(--accent2)}
+.badge-yellow{background:rgba(210,153,34,.15);color:var(--warn)}
+.badge-blue{background:rgba(88,166,255,.15);color:var(--accent)}
+.section{margin-bottom:32px}
+.section-title{font-size:1.25rem;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.plan-box{background:rgba(88,166,255,.06);border-left:4px solid var(--accent);border-radius:6px;padding:16px;margin:12px 0}
+.plan-box h4{font-size:1rem;margin-bottom:8px;color:var(--accent)}
+.plan-box ul{margin-left:18px}
+.plan-box li{margin:6px 0}
+.warn-box{background:rgba(248,81,73,.06);border-left:4px solid var(--danger);border-radius:6px;padding:16px;margin:12px 0}
+.warn-box h4{color:var(--danger);margin-bottom:8px}
+.candidate{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin:12px 0}
+.candidate h4{font-size:1rem;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.candidate .meta{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+.candidate .tags{margin-bottom:8px}
+.candidate .desc{font-size:.9rem;line-height:1.7}
+.footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
+.footer a{color:var(--accent);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.container{padding:16px 12px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+<h1>一阳指选股复盘</h1>
+<div class="subtitle">2026年7月1日（星期三） · A股收盘复盘</div>
+</header>
+
+<!-- 市场概览 -->
+<div class="section">
+<div class="section-title">市场概览</div>
+<div class="grid">
+<div class="card">
+<h3>上证指数</h3>
+<div class="value">4112.45</div>
+<div class="change up">+0.44% <span class="up-arrow">▲</span></div>
+<div class="detail">成交额 1.70万亿 · 估值百分位 <span class="badge badge-red">97.49%</span></div>
+</div>
+<div class="card">
+<h3>深证成指</h3>
+<div class="value">16119.17</div>
+<div class="change down">-0.53% <span class="down-arrow">▼</span></div>
+<div class="detail">成交额 1.96万亿 · 估值百分位 <span class="badge badge-red">99.92%</span></div>
+</div>
+<div class="card">
+<h3>创业板指</h3>
+<div class="value">4260.72</div>
+<div class="change down">-1.89% <span class="down-arrow">▼</span></div>
+<div class="detail">成交额 0.98万亿 · 估值百分位 <span class="badge badge-yellow">77.33%</span></div>
+</div>
+</div>
+<div class="card">
+<h3>今日市场概况</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:8px">
+<div><span class="badge badge-green">涨停 226 只</span></div>
+<div><span class="badge badge-green">个股涨多跌少</span>（超4300只收红）</div>
+<div><span class="badge badge-blue">两市成交 3.66 万亿</span></div>
+<div><span class="badge badge-yellow">较昨日放量 3862 亿</span></div>
+</div>
+</div>
+</div>
+
+<!-- 热门板块 -->
+<div class="section">
+<div class="section-title">热门板块 TOP5</div>
+<table>
+<thead><tr><th>排名</th><th>板块</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>华为机器人</td><td class="up-arrow">+8.27%</td><td>拓斯达</td><td class="up-arrow">+20.01%</td></tr>
+<tr><td>2</td><td>家禽</td><td class="up-arrow">+7.06%</td><td>晓鸣股份</td><td class="up-arrow">+10.99%</td></tr>
+<tr><td>3</td><td>证券IT</td><td class="up-arrow">+6.79%</td><td>汇金科技</td><td class="up-arrow">+19.97%</td></tr>
+<tr><td>4</td><td>科创企业同股不同权</td><td class="up-arrow">+6.72%</td><td>汇宇制药-W</td><td class="up-arrow">+20.04%</td></tr>
+<tr><td>5</td><td>猪肉</td><td class="up-arrow">+6.66%</td><td>傲农生物</td><td class="up-arrow">+10.07%</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 主力资金 -->
+<div class="section">
+<div class="section-title">主力资金净流入 TOP3 板块</div>
+<table>
+<thead><tr><th>排名</th><th>板块</th><th>主力净流入</th><th>涨幅</th><th>领涨股</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>券商</td><td class="up-arrow">+95.81 亿</td><td>+4.79%</td><td>天风证券 +10.09%</td></tr>
+<tr><td>2</td><td>期货概念</td><td class="up-arrow">+82.53 亿</td><td>+4.41%</td><td>朗源股份 +20.09%</td></tr>
+<tr><td>3</td><td>互联网金融</td><td class="up-arrow">+81.86 亿</td><td>+3.53%</td><td>汇金科技 +19.97%</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 申万行业 -->
+<div class="section">
+<div class="section-title">申万一级行业涨幅 TOP5</div>
+<table>
+<thead><tr><th>排名</th><th>行业</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>综合Ⅱ</td><td class="up-arrow">+6.83%</td><td>东阳光</td><td class="up-arrow">+10.01%</td></tr>
+<tr><td>2</td><td>养殖业</td><td class="up-arrow">+6.41%</td><td>晓鸣股份</td><td class="up-arrow">+10.99%</td></tr>
+<tr><td>3</td><td>教育</td><td class="up-arrow">+5.45%</td><td>中公教育</td><td class="up-arrow">+10.00%</td></tr>
+<tr><td>4</td><td>化学制药</td><td class="up-arrow">+5.43%</td><td>汇宇制药-W</td><td class="up-arrow">+20.04%</td></tr>
+<tr><td>5</td><td>保险Ⅱ</td><td class="up-arrow">+4.88%</td><td>中国人寿</td><td class="up-arrow">+9.70%</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="section">
+<div class="section-title">次日操作计划</div>
+<div class="plan-box">
+<h4>第一梯队（可介入）</h4>
+<ul>
+<li><strong>东方财富</strong>：转势★★★★ · 当前 21.45元 · 建议买入区间 20.8-21.5元 · 仓位 10%</li>
+<li><strong>华泰证券</strong>：转势★★★★ · 当前 21.64元 · 建议买入区间 20.5-21.8元 · 仓位 10%</li>
+</ul>
+</div>
+<div class="plan-box">
+<h4>第二梯队（等回调）</h4>
+<ul>
+<li><strong>中信证券</strong>：开门★★★★ · 当前 29.47元 · 建议回调至 28.0-28.5元 介入 · 仓位 8%</li>
+<li><strong>中国银河</strong>：转势★★★★ · 当前 13.13元 · 建议回调至 12.5-12.8元 介入 · 仓位 7%</li>
+</ul>
+</div>
+<div class="warn-box">
+<h4>仓位与风控</h4>
+<ul>
+<li>总仓位建议不超过 <strong>35%</strong>，保留 <strong>65%</strong> 以上现金</li>
+<li>单票最大仓位不超过 10%</li>
+<li>止损：买入价下方 -7% 严格止损</li>
+<li>止盈：买入价上方 +15%~+20% 分批止盈</li>
+</ul>
+</div>
+</div>
+
+<!-- 转势战法 -->
+<div class="section">
+<div class="section-title">转势战法候选详情</div>
+<p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">转势战法：底部盘整 + 一阳突破 + 量能配合 + 均线由粘合发散向上</p>
+
+<div class="candidate">
+<h4><span class="star">★★★★</span> 东方财富（sz300059）</h4>
+<div class="meta">21.45元 · +5.25% · 量比1.50 · PE 25.89</div>
+<div class="tags">
+<span class="badge badge-green">低位</span> <span class="badge badge-green">MACD金叉</span> <span class="badge badge-green">多头排列</span> <span class="badge badge-green">温和放量</span> <span class="badge badge-green">PE合理</span>
+</div>
+<div class="desc">
+✅ 均线：价格 > MA5 > MA10 > MA20 > MA30 > MA60，完美多头排列<br>
+✅ MACD：DIF=0.386 > DEA=0.129，MACD柱=0.513，金叉成立<br>
+✅ 量能：量比1.50，温和放量<br>
+✅ 位置：年初至今-7.06%，处于相对低位<br>
+✅ 估值：PE 25.89倍，PB 3.54倍，估值合理<br>
+⚠️ KDJ：K=68.37，D=65.66，J=73.79，处于合理区间<br>
+📊 总结：券商龙头之一，低位启动+均线完美多头排列+MACD金叉，转势四星信号明确。
+</div>
+</div>
+
+<div class="candidate">
+<h4><span class="star">★★★★</span> 华泰证券（sh601688）</h4>
+<div class="meta">21.64元 · +4.95% · 量比1.42 · PE 11.14</div>
+<div class="tags">
+<span class="badge badge-green">低位</span> <span class="badge badge-green">MACD金叉</span> <span class="badge badge-green">完美多头排列</span> <span class="badge badge-green">温和放量</span> <span class="badge badge-green">PE极低</span>
+</div>
+<div class="desc">
+✅ 均线：价格 > MA5 > MA10 > MA20 > MA30 > MA60，完美多头排列<br>
+✅ MACD：DIF=0.58 > DEA=0.488，MACD柱=0.184，金叉成立<br>
+✅ 量能：量比1.42，温和放量<br>
+✅ 位置：年初至今-8.27%，处于相对低位<br>
+✅ 估值：PE 11.14倍，PB 1.10倍，估值极低<br>
+⚠️ KDJ：K=65.26，D=63.71，J=68.36，处于合理区间<br>
+📊 总结：券商龙头，估值极低(PB仅1.10)，均线完美多头排列+MACD金叉，转势四星信号明确。20日涨幅16.28%适中，短期涨幅可控。
+</div>
+</div>
+
+<div class="candidate">
+<h4><span class="star">★★★★</span> 中国银河（sh601881）</h4>
+<div class="meta">13.13元 · +4.46% · 量比1.47 · PE 11.20</div>
+<div class="tags">
+<span class="badge badge-green">低位</span> <span class="badge badge-green">MACD金叉</span> <span class="badge badge-yellow">均线接近多头</span> <span class="badge badge-green">温和放量</span> <span class="badge badge-green">PE极低</span>
+</div>
+<div class="desc">
+✅ 均线：价格 > MA5 > MA10 > MA20 > MA30，MA30=12.425略低于MA60=12.592，接近多头排列<br>
+✅ MACD：DIF=0.093 > DEA=0.033，MACD柱=0.118，金叉成立<br>
+✅ 量能：量比1.47，温和放量<br>
+✅ 位置：年初至今-16.48%，处于低位<br>
+✅ 估值：PE 11.20倍，PB 1.18倍，估值极低<br>
+⚠️ KDJ：K=63.51，D=60.23，J=70.08，合理区间<br>
+⚠️ 均线：MA30略低于MA60，多头排列尚未完全形成<br>
+📊 总结：券商股中估值最低、跌幅最深的标的之一，MACD金叉+温和放量，但均线多头排列需确认。建议等回调确认均线多头排列后介入。
+</div>
+</div>
+
+<div class="candidate">
+<h4><span class="star">★★★</span> 天风证券（sh601162）</h4>
+<div class="meta">3.71元 · 涨停 +10.09% · 量比1.42 · PB 1.36</div>
+<div class="tags">
+<span class="badge badge-green">低位</span> <span class="badge badge-green">MACD金叉</span> <span class="badge badge-yellow">均线不完全多头</span> <span class="badge badge-green">温和放量</span> <span class="badge badge-yellow">PE极高</span>
+</div>
+<div class="desc">
+✅ 均线：价格 > MA5 > MA10 > MA20，但MA20=3.312 < MA30=3.352，均线不完全多头排列<br>
+✅ MACD：DIF=0.017 > DEA=-0.03，MACD柱=0.094，金叉成立<br>
+✅ 量能：量比1.42，温和放量<br>
+✅ 位置：年初至今-10.82%，处于低位<br>
+⚠️ 估值：PE 283倍极高（券商看PB 1.36倍合理）<br>
+⚠️ KDJ：K=65.58，D=59.07，J=78.60，合理区间<br>
+📊 总结：涨停突破但均线未完全多头排列，PE极高（看PB 1.36合理）。建议等回调确认均线多头排列后观察。暂不入第一梯队。
+</div>
+</div>
+
+</div>
+
+<!-- 开门战法 -->
+<div class="section">
+<div class="section-title">开门战法候选详情</div>
+<p style="color:var(--muted);font-size:.9rem;margin-bottom:12px">开门战法：主升浪趋势延续 + 四条件（均线多头排列 + MACD强势金叉 + 量能温和放大 + 估值合理）</p>
+
+<div class="candidate">
+<h4><span class="star">★★★★</span> 中信证券（sh600030）</h4>
+<div class="meta">29.47元 · +2.58% · 量比1.51 · PE 12.97</div>
+<div class="tags">
+<span class="badge badge-green">完美多头排列</span> <span class="badge badge-green">MACD强势金叉</span> <span class="badge badge-green">温和放量</span> <span class="badge badge-green">PE合理</span> <span class="badge badge-yellow">KDJ接近超买</span>
+</div>
+<div class="desc">
+✅ 均线：价格 > MA5 > MA10 > MA20 > MA30 > MA60，完美多头排列<br>
+✅ MACD：DIF=0.835 > DEA=0.599，MACD柱=0.472，强势金叉<br>
+✅ 量能：量比1.51，温和放量<br>
+✅ 估值：PE 12.97倍，PB 1.53倍，估值合理<br>
+⚠️ KDJ：K=78.65，D=75.27，J=85.42，接近超买区间<br>
+⚠️ 20日涨幅17.08%，短期涨幅适中<br>
+📊 总结：券商龙头，均线完美多头排列+MACD强势金叉，开门战法四星。但KDJ接近超买，建议等回调至MA5/MA10附近（28.0-28.5元）再介入。
+</div>
+</div>
+
+</div>
+
+<!-- 排除说明 -->
+<div class="section">
+<div class="section-title">排除说明</div>
+<table>
+<thead><tr><th>股票</th><th>代码</th><th>排除原因</th></tr></thead>
+<tbody>
+<tr><td>金宏气体</td><td>sh688106</td><td>缩量涨停（量比0.94）+ KDJ严重超买（J=105.96）+ PE 287倍 + 20日涨幅95.52%</td></tr>
+<tr><td>格科微</td><td>sh688728</td><td>KDJ严重超买（J=108.70）+ PE 633倍 + 20日涨幅85.53%</td></tr>
+<tr><td>华安证券</td><td>sh600909</td><td>10日涨幅45.65% + 20日涨幅71.87% + 年初至今+80.24%，追高风险极大</td></tr>
+<tr><td>拓斯达</td><td>sz300607</td><td>PE 199.83倍 + 20日涨幅62.92% + KDJ接近超买（J=99.01）</td></tr>
+<tr><td>傲农生物</td><td>sh603363</td><td>PE亏损（-52.31）+ 均线空头排列 + 基本面承压</td></tr>
+<tr><td>北方稀土</td><td>sh600111</td><td>MACD死叉（DIF < DEA）+ 均线空头排列</td></tr>
+<tr><td>紫金矿业</td><td>sh601899</td><td>MACD死叉 + 均线空头排列 + 年初至今-26.34%</td></tr>
+<tr><td>恩捷股份</td><td>sz002812</td><td>MACD死叉 + 均线空头排列</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- 仓位配置建议 -->
+<div class="section">
+<div class="section-title">仓位配置建议</div>
+<div class="card">
+<h3>当前市场环境</h3>
+<div class="desc" style="margin-top:8px">
+• 上证指数估值百分位 <strong>97.49%</strong>（极高）<br>
+• 深证成指估值百分位 <strong>99.92%</strong>（历史最高）<br>
+• 创业板指估值百分位 <strong>77.33%</strong>（中等偏高）<br>
+• 今日市场个股普涨（超4300只收红），但指数分化（上证涨、深证/创业板跌）<br>
+• 前期热门科技赛道（储能、AI算力）大幅回调，资金转向低估值板块（券商、养殖）<br>
+• 两市成交3.66万亿，放量3862亿，市场活跃度极高
+</div>
+</div>
+<div class="warn-box">
+<h4>仓位建议</h4>
+<ul>
+<li>总仓位建议不超过 <strong>35%</strong>，保留 <strong>65%</strong> 以上现金</li>
+<li>单票最大仓位不超过 10%</li>
+<li>券商板块（东方财富、华泰证券）合计仓位不超过 20%</li>
+<li>若市场继续放量但指数无法突破前高，需进一步减仓至 20%</li>
+</ul>
+</div>
+</div>
+
+<!-- 风险提示 -->
+<div class="section">
+<div class="section-title">风险提示</div>
+<div class="warn-box">
+<h4>市场风险</h4>
+<ul>
+<li>深证成指估值百分位 99.92% 处于历史最高区间，系统性风险极高</li>
+<li>上证指数估值百分位 97.49% 处于历史极高区间</li>
+<li>今日指数分化明显（上证涨、深证/创业板跌），前期强势科技板块回调，市场风格切换剧烈</li>
+<li>前期大牛股（储能、AI算力）大幅回调，高位股风险释放中</li>
+<li>券商板块连续走强，但历史上券商板块持续性较差，需警惕一日游行情</li>
+<li>养殖板块受益生股份半年报业绩暴增催化，属短期事件驱动，持续性存疑</li>
+<li>两融余额突破3万亿历史纪录，杠杆资金高位运行，风险积聚</li>
+</ul>
+</div>
+<div class="warn-box">
+<h4>个股风险</h4>
+<ul>
+<li>今日候选股集中于券商板块，板块集中度风险较高</li>
+<li>华泰证券10日涨幅45.65%，虽今日仅+4.95%，但短期获利盘较多</li>
+<li>东方财富20日涨幅13.43%，涨幅适中，但需关注券商板块整体走势</li>
+<li>中国银河均线多头排列未完全形成，存在假突破风险</li>
+</ul>
+</div>
+</div>
+
+<!-- 免责声明 -->
+<div class="footer">
+<p>⚠️ 风险提示：本报告仅为技术分析复盘，不构成投资建议。股市有风险，投资需谨慎。</p>
+<p>数据来源：腾讯自选股、NeoData金融搜索、公开资讯</p>
+<p>生成时间：2026-07-01 18:00</p>
+<p><a href="https://godgsvn.github.io/yyz-reports/">查看所有历史报告</a></p>
+</div>
+
+</div>
+</body>
+</html>
