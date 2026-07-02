@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一阳指选股复盘 · 2026-07-02</title>
+<style>
+:root {
+  --bg-dark: #0f1115;
+  --bg-card: #1a1d24;
+  --bg-card-hover: #22262f;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --text-muted: #5f6368;
+  --accent-red: #ff4444;
+  --accent-green: #00c853;
+  --accent-gold: #f0b429;
+  --accent-blue: #4285f4;
+  --accent-purple: #a855f7;
+  --border: #2d3139;
+  --border-light: #3c4043;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding: 20px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+header {
+  text-align: center;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 30px;
+}
+header h1 { font-size: 28px; font-weight: 700; color: var(--accent-gold); margin-bottom: 8px; }
+header .subtitle { color: var(--text-secondary); font-size: 15px; }
+header .date { color: var(--text-muted); font-size: 13px; margin-top: 6px; }
+
+/* 市场概览卡片 */
+.market-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.card-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+.card-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600;
+}
+.tag-red { background: rgba(255,68,68,0.15); color: var(--accent-red); }
+.tag-green { background: rgba(0,200,83,0.15); color: var(--accent-green); }
+.tag-gold { background: rgba(240,180,41,0.15); color: var(--accent-gold); }
+.card-value { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+.card-change { font-size: 14px; font-weight: 600; }
+.card-meta { color: var(--text-muted); font-size: 12px; margin-top: 8px; line-height: 1.8; }
+
+/* 表格 */
+.table-wrap { margin-bottom: 28px; overflow-x: auto; }
+.table-wrap h2 {
+  font-size: 18px; font-weight: 600; color: var(--text-primary);
+  margin-bottom: 14px; padding-left: 10px; border-left: 4px solid var(--accent-gold);
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead { background: var(--bg-card); }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--text-secondary); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+tr:hover { background: rgba(255,255,255,0.03); }
+.td-positive { color: var(--accent-red); font-weight: 600; }
+.td-negative { color: var(--accent-green); font-weight: 600; }
+.td-leader { color: var(--accent-blue); font-weight: 500; }
+
+/* 候选卡片 */
+.candidate-section { margin-bottom: 28px; }
+.candidate-section h2 {
+  font-size: 18px; font-weight: 600; color: var(--text-primary);
+  margin-bottom: 14px; padding-left: 10px; border-left: 4px solid var(--accent-gold);
+}
+.candidate-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+.candidate-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+.candidate-name { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+.candidate-code { color: var(--text-muted); font-size: 12px; margin-left: 6px; }
+.candidate-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.candidate-tag {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600;
+}
+.candidate-body { color: var(--text-secondary); font-size: 13px; line-height: 1.8; }
+.candidate-plan {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.plan-item { text-align: center; }
+.plan-label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+.plan-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+/* 排除说明 */
+.exclude-section { margin-bottom: 28px; }
+.exclude-section h2 {
+  font-size: 18px; font-weight: 600; color: var(--text-primary);
+  margin-bottom: 14px; padding-left: 10px; border-left: 4px solid var(--accent-red);
+}
+.exclude-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.exclude-name { font-weight: 600; color: var(--text-primary); font-size: 14px; }
+.exclude-code { color: var(--text-muted); font-size: 12px; margin-left: 6px; }
+.exclude-reason { color: var(--accent-red); font-size: 13px; }
+
+/* 风险提示 */
+.risk-box {
+  background: rgba(255,68,68,0.08);
+  border: 1px solid rgba(255,68,68,0.25);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+.risk-box h3 { color: var(--accent-red); font-size: 15px; margin-bottom: 8px; }
+.risk-box p { color: var(--text-secondary); font-size: 13px; line-height: 1.8; }
+
+/* 操作计划 */
+.plan-box {
+  background: rgba(66,133,244,0.08);
+  border: 1px solid rgba(66,133,244,0.25);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+.plan-box h3 { color: var(--accent-blue); font-size: 15px; margin-bottom: 8px; }
+.plan-box p { color: var(--text-secondary); font-size: 13px; line-height: 1.8; }
+
+/* 页脚 */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* 响应式 */
+@media (max-width: 600px) {
+  .market-cards { grid-template-columns: 1fr; }
+  .candidate-header { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>一阳指选股复盘</h1>
+  <div class="subtitle">A股每日盘后策略分析 · 转势战法 & 开门战法</div>
+  <div class="date">2026年07月02日 收盘数据</div>
+</header>
+
+<!-- 市场概览 -->
+<div class="market-cards">
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">上证指数</span>
+      <span class="card-tag tag-green">-2.03%</span>
+    </div>
+    <div class="card-value" style="color: var(--accent-green)">4,028.90</div>
+    <div class="card-change" style="color: var(--accent-green)">-2.03%</div>
+    <div class="card-meta">
+      量比 1.01 · 年初至今 +1.51%<br>
+      PE 17.71 · 估值 98.15%
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">深证指数</span>
+      <span class="card-tag tag-green">-3.85%</span>
+    </div>
+    <div class="card-value" style="color: var(--accent-green)">15,498.81</div>
+    <div class="card-change" style="color: var(--accent-green)">-3.85%</div>
+    <div class="card-meta">
+      量比 3.47 · 年初至今 +13.93%<br>
+      PE 38.16 · 估值 99.88%
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">创业板指数</span>
+      <span class="card-tag tag-green">-5.71%</span>
+    </div>
+    <div class="card-value" style="color: var(--accent-green)">4,017.27</div>
+    <div class="card-change" style="color: var(--accent-green)">-5.71%</div>
+    <div class="card-meta">
+      量比 4.76 · 年初至今 +23.88%<br>
+      PE 53.91 · 估值 75.23%
+    </div>
+  </div>
+
+</div>
+
+<!-- 热门板块TOP5 -->
+<div class="table-wrap">
+  <h2>热门板块 TOP5</h2>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>元梦之星</td><td class="td-positive">+3.93%</td><td class="td-leader">天娱数科</td><td class="td-positive">+10.00%</td></tr>
+      <tr><td>2</td><td>马彩概念</td><td class="td-positive">+3.19%</td><td class="td-leader">平潭发展</td><td class="td-positive">+10.07%</td></tr>
+      <tr><td>3</td><td>粘胶短纤</td><td class="td-positive">+3.17%</td><td class="td-leader">优彩资源</td><td class="td-positive">+10.07%</td></tr>
+      <tr><td>4</td><td>芬太尼概念</td><td class="td-positive">+2.76%</td><td class="td-leader">石药景峰</td><td class="td-positive">+10.04%</td></tr>
+      <tr><td>5</td><td>醋酸</td><td class="td-positive">+2.76%</td><td class="td-leader">华谊集团</td><td class="td-positive">+5.20%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 主力资金TOP3 -->
+<div class="table-wrap">
+  <h2>主力资金净流入 TOP3</h2>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>板块名称</th><th>板块涨跌幅</th><th>主力净流入</th><th>领涨股</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>铜概念</td><td class="td-positive">+0.34%</td><td class="td-positive">+40.61万</td><td class="td-leader">鹏欣资源 (+10.09%)</td></tr>
+      <tr><td>2</td><td>网络游戏</td><td class="td-positive">+0.30%</td><td class="td-positive">+32.67万</td><td class="td-leader">昆仑万维 (+12.19%)</td></tr>
+      <tr><td>3</td><td>虚拟数字人</td><td class="td-negative">-0.36%</td><td class="td-positive">+32.41万</td><td class="td-leader">福石控股 (19.89%)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 申万行业TOP5 -->
+<div class="table-wrap">
+  <h2>申万一级行业涨幅 TOP5</h2>
+  <table>
+    <thead>
+      <tr><th>排名</th><th>行业名称</th><th>涨跌幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>贵金属</td><td class="td-positive">+5.43%</td><td class="td-leader">招金黄金</td><td class="td-positive">+10.03%</td></tr>
+      <tr><td>2</td><td>广告营销</td><td class="td-positive">+2.65%</td><td class="td-leader">福石控股</td><td class="td-positive">+19.89%</td></tr>
+      <tr><td>3</td><td>纺织制造</td><td class="td-positive">+2.61%</td><td class="td-leader">欣龙控股</td><td class="td-positive">+10.09%</td></tr>
+      <tr><td>4</td><td>乘用车</td><td class="td-positive">+2.06%</td><td class="td-leader">海马汽车</td><td class="td-positive">+10.08%</td></tr>
+      <tr><td>5</td><td>工程机械</td><td class="td-positive">+1.97%</td><td class="td-leader">天元智能</td><td class="td-positive">+10.04%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 重点个股 -->
+<div class="table-wrap">
+  <h2>今日重点个股</h2>
+  <table>
+    <thead>
+      <tr><th>股票</th><th>代码</th><th>最新价</th><th>涨跌幅</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="td-leader">昆仑万维</td><td>300418</td><td>45.55</td><td class="td-positive">+12.19%</td><td>大涨12.19% | 网络游戏龙头，主力净流入32.67亿</td></tr>
+      <tr><td class="td-leader">天娱数科</td><td>002354</td><td>10.34</td><td class="td-positive">+10.00%</td><td>10cm涨停 | 元梦之星概念龙头</td></tr>
+      <tr><td class="td-leader">鹏欣资源</td><td>600490</td><td>6.44</td><td class="td-positive">+10.09%</td><td>10cm涨停 | 铜概念龙头，板块主力净流入40.61亿</td></tr>
+      <tr><td class="td-leader">福石控股</td><td>300071</td><td>4.40</td><td class="td-positive">+19.89%</td><td>20cm大涨 | 虚拟数字人概念，广告营销板块</td></tr>
+      <tr><td class="td-leader">招金黄金</td><td>000506</td><td>12.61</td><td class="td-positive">+10.03%</td><td>10cm涨停 | 贵金属板块龙头</td></tr>
+      <tr><td class="td-leader">平潭发展</td><td>000592</td><td>7.76</td><td class="td-positive">+10.07%</td><td>10cm涨停 | 马彩概念</td></tr>
+      <tr><td class="td-leader">优彩资源</td><td>002998</td><td>7.65</td><td class="td-positive">+10.07%</td><td>10cm涨停 | 粘胶短纤概念</td></tr>
+      <tr><td class="td-leader">石药景峰</td><td>000908</td><td>6.25</td><td class="td-positive">+10.04%</td><td>10cm涨停 | 芬太尼概念</td></tr>
+      <tr><td class="td-leader">先锋新材</td><td>300163</td><td>6.47</td><td class="td-positive">+20.04%</td><td>20cm涨停 | 新材料</td></tr>
+      <tr><td class="td-leader">气派科技</td><td>688216</td><td>51.30</td><td class="td-positive">+20.00%</td><td>20cm涨停 | 半导体封装</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 次日操作计划 -->
+<div class="plan-box">
+  <h3>次日操作计划</h3>
+  <p>
+    <strong>第一梯队（可介入）：</strong>昆仑万维（转势★★★★）— 底部盘整后放量突破，MACD底部金叉，网络游戏板块资金大幅流入。建议开盘42-44元区间介入，仓位15%，止损38.50元。<br><br>
+    <strong>第二梯队（等回调）：</strong>天娱数科（开门★★★）— 主升浪明确但缩量涨停，KDJ超买。建议等回调至9.0-9.5元区间再考虑，仓位10%，止损8.20元。<br><br>
+    <strong>仓位配置：</strong>总仓位不超过30%，保留70%现金。当前市场估值极高，三大指数今日大跌，高位股风险释放中，严控风险。
+  </p>
+</div>
+
+<!-- 候选详情 -->
+<div class="candidate-section">
+  <h2>一阳指候选详情</h2>
+
+  <div class="candidate-card">
+    <div class="candidate-header">
+      <div>
+        <span class="candidate-name">昆仑万维</span>
+        <span class="candidate-code">300418</span>
+      </div>
+      <div class="candidate-tags">
+        <span class="candidate-tag" style="background:rgba(240,180,41,0.15);color:var(--accent-gold)">转势战法</span>
+        <span class="candidate-tag" style="background:rgba(66,133,244,0.15);color:var(--accent-blue)">★★★★</span>
+        <span class="candidate-tag" style="background:rgba(255,68,68,0.15);color:var(--accent-red)">+12.19%</span>
+      </div>
+    </div>
+    <div class="candidate-body">网络游戏龙头，6月18日大涨后在38-44元区间盘整近两周，今日放量突破至45.55元。MACD金叉（DIF=-0.844 > DEA=-1.551），虽0轴下方但底部金叉信号明确。成交量放大2.7倍（158万手 vs 前5日平均60万手），网络游戏板块主力净流入32.67亿居市场第二。年初至今预估-10%~-15%处于低位，估值修复空间大。</div>
+    <div class="candidate-plan">
+      <div class="plan-item"><div class="plan-label">建议买入</div><div class="plan-value">42.00-44.00</div></div>
+      <div class="plan-item"><div class="plan-label">止损位</div><div class="plan-value" style="color:var(--accent-green)">38.50</div></div>
+      <div class="plan-item"><div class="plan-label">目标价</div><div class="plan-value" style="color:var(--accent-red)">52.00</div></div>
+      <div class="plan-item"><div class="plan-label">建议仓位</div><div class="plan-value">15%</div></div>
+      <div class="plan-item"><div class="plan-label">风险等级</div><div class="plan-value">中</div></div>
+    </div>
+  </div>
+
+  <div class="candidate-card">
+    <div class="candidate-header">
+      <div>
+        <span class="candidate-name">天娱数科</span>
+        <span class="candidate-code">002354</span>
+      </div>
+      <div class="candidate-tags">
+        <span class="candidate-tag" style="background:rgba(240,180,41,0.15);color:var(--accent-gold)">开门战法</span>
+        <span class="candidate-tag" style="background:rgba(168,85,247,0.15);color:var(--accent-purple)">★★★☆</span>
+        <span class="candidate-tag" style="background:rgba(255,68,68,0.15);color:var(--accent-red)">+10.00%</span>
+      </div>
+    </div>
+    <div class="candidate-body">元梦之星概念龙头，从6月初6元涨至今日10.34元，主升浪明确。MACD金叉（DIF=0.71 > DEA=0.522），DIF已站上0轴。但今日缩量涨停（换手率6.32% vs 前几日平均30%+，量比仅0.64），KDJ J值预计超买。主力净流入6.22亿，但散户跟风明显。短期涨幅过大，追高风险高。</div>
+    <div class="candidate-plan">
+      <div class="plan-item"><div class="plan-label">建议买入</div><div class="plan-value">9.00-9.50</div></div>
+      <div class="plan-item"><div class="plan-label">止损位</div><div class="plan-value" style="color:var(--accent-green)">8.20</div></div>
+      <div class="plan-item"><div class="plan-label">目标价</div><div class="plan-value" style="color:var(--accent-red)">12.50</div></div>
+      <div class="plan-item"><div class="plan-label">建议仓位</div><div class="plan-value">10%</div></div>
+      <div class="plan-item"><div class="plan-label">风险等级</div><div class="plan-value">高</div></div>
+    </div>
+  </div>
+
+  <div class="candidate-card">
+    <div class="candidate-header">
+      <div>
+        <span class="candidate-name">鹏欣资源</span>
+        <span class="candidate-code">600490</span>
+      </div>
+      <div class="candidate-tags">
+        <span class="candidate-tag" style="background:rgba(240,180,41,0.15);color:var(--accent-gold)">转势战法</span>
+        <span class="candidate-tag" style="background:rgba(168,85,247,0.15);color:var(--accent-purple)">★★☆☆</span>
+        <span class="candidate-tag" style="background:rgba(255,68,68,0.15);color:var(--accent-red)">+10.09%</span>
+      </div>
+    </div>
+    <div class="candidate-body">铜概念龙头，今日涨停突破。但MACD死叉（DIF=-0.428 < DEA=-0.373），MACD柱为负，不符合一阳指转势战法核心条件。虽主力资金净流入1.14亿，但属于超跌反弹性质，非底部转势。铜概念板块近期持续弱势，仅今日一日游概率大。</div>
+    <div class="candidate-plan">
+      <div class="plan-item"><div class="plan-label">建议买入</div><div class="plan-value">暂不建议</div></div>
+      <div class="plan-item"><div class="plan-label">止损位</div><div class="plan-value" style="color:var(--accent-green)">5.80</div></div>
+      <div class="plan-item"><div class="plan-label">目标价</div><div class="plan-value" style="color:var(--accent-red)">7.50</div></div>
+      <div class="plan-item"><div class="plan-label">建议仓位</div><div class="plan-value">0%</div></div>
+      <div class="plan-item"><div class="plan-label">风险等级</div><div class="plan-value">高</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 排除说明 -->
+<div class="exclude-section">
+  <h2>排除股票及原因</h2>
+  <div class="exclude-item">
+    <div><span class="exclude-name">鹏欣资源</span><span class="exclude-code">600490</span></div>
+    <div class="exclude-reason">MACD死叉（DIF<DEA），不符合一阳指体系</div>
+  </div>
+  <div class="exclude-item">
+    <div><span class="exclude-name">福石控股</span><span class="exclude-code">300071</span></div>
+    <div class="exclude-reason">20cm大涨19.89%但PE极高、基本面薄弱，追高风险极大</div>
+  </div>
+  <div class="exclude-item">
+    <div><span class="exclude-name">先锋新材</span><span class="exclude-code">300163</span></div>
+    <div class="exclude-reason">20cm涨停但缺乏基本面支撑，量价比1.61未显著放量</div>
+  </div>
+  <div class="exclude-item">
+    <div><span class="exclude-name">气派科技</span><span class="exclude-code">688216</span></div>
+    <div class="exclude-reason">20cm涨停但科创板波动极大，PE亏损，不符合稳健投资原则</div>
+  </div>
+
+</div>
+
+<!-- 风险提示 -->
+<div class="risk-box">
+  <h3>风险提示</h3>
+  <p>
+    1. 上证指数估值百分位 <strong>98.15%</strong>，深证成指 <strong>99.88%</strong>，均处于历史极高估区间。<br>
+    2. 今日三大指数均大跌（上证-2.03%/深证-3.85%/创业板-5.71%），市场极端分化，指数与个股背离明显。<br>
+    3. 建议总仓位不超过 <strong>30%</strong>，保留 <strong>70%</strong> 现金储备，严控风险。<br>
+    4. 以上分析仅供参考，不构成投资建议。股市有风险，投资需谨慎。
+  </p>
+</div>
+
+<footer>
+  一阳指选股复盘 · 2026年07月02日 · 数据仅供参考，不构成投资建议
+</footer>
+
+</div>
+</body>
+</html>
