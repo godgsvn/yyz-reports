@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一阳指选股复盘 · 2026-07-07</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #0a0e1a;
+            color: #e0e6ed;
+            line-height: 1.7;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid #1e293b;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.2em;
+            color: #f0f4f8;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .header .date {
+            color: #64748b;
+            font-size: 1.1em;
+        }
+        .header .tag {
+            display: inline-block;
+            background: #1e3a5f;
+            color: #60a5fa;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 12px;
+        }
+
+        .section {
+            background: #111827;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+            border: 1px solid #1e293b;
+        }
+        .section-title {
+            font-size: 1.3em;
+            color: #f0f4f8;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #2563eb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title .icon { font-size: 1.2em; }
+
+        .index-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .index-card {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #1e293b;
+            transition: transform 0.2s;
+        }
+        .index-card:hover { transform: translateY(-2px); border-color: #2563eb; }
+        .index-card .name {
+            font-size: 1.1em;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+        .index-card .price {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #f0f4f8;
+            margin-bottom: 6px;
+        }
+        .index-card .change {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .change-up { color: #ef4444; }
+        .change-down { color: #22c55e; }
+        .index-card .detail {
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #64748b;
+            line-height: 1.8;
+        }
+        .index-card .detail span { color: #94a3b8; }
+        .pe-high { color: #ef4444; }
+        .pe-mid { color: #f59e0b; }
+        .pe-low { color: #22c55e; }
+
+        .market-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .summary-item {
+            background: #0f172a;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid #1e293b;
+        }
+        .summary-item .label { color: #64748b; font-size: 0.85em; margin-bottom: 6px; }
+        .summary-item .value { font-size: 1.4em; font-weight: 700; color: #f0f4f8; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        th {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #1e293b;
+        }
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #1e293b;
+            color: #e0e6ed;
+        }
+        tr:hover td { background: #0f172a; }
+        .col-center { text-align: center; }
+        .col-right { text-align: right; }
+        .text-red { color: #ef4444; }
+        .text-green { color: #22c55e; }
+        .text-yellow { color: #f59e0b; }
+        .text-blue { color: #60a5fa; }
+
+        .candidate-card {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #1e293b;
+            border-left: 4px solid #2563eb;
+        }
+        .candidate-card.tier1 { border-left-color: #22c55e; }
+        .candidate-card.tier2 { border-left-color: #f59e0b; }
+        .candidate-card.exclude { border-left-color: #ef4444; opacity: 0.8; }
+        .candidate-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .candidate-name {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #f0f4f8;
+        }
+        .candidate-name .code { color: #64748b; font-size: 0.75em; font-weight: 400; }
+        .candidate-score {
+            background: #1e3a5f;
+            color: #60a5fa;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .candidate-score.star4 { background: #064e3b; color: #34d399; }
+        .candidate-score.star3 { background: #78350f; color: #fbbf24; }
+        .candidate-score.exclude { background: #450a0a; color: #f87171; }
+        .candidate-body {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            font-size: 0.88em;
+            color: #94a3b8;
+        }
+        .candidate-body .item { display: flex; justify-content: space-between; }
+        .candidate-body .item .label { color: #64748b; }
+        .candidate-body .item .value { color: #e0e6ed; font-weight: 500; }
+        .candidate-reason {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #1e293b;
+            font-size: 0.85em;
+            color: #94a3b8;
+        }
+        .candidate-reason .reason-label { color: #60a5fa; font-weight: 600; }
+
+        .operation-plan {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .plan-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+        .plan-item:last-child { border-bottom: none; }
+        .plan-item .label { color: #64748b; font-weight: 500; }
+        .plan-item .value { color: #f0f4f8; font-weight: 600; }
+
+        .risk-box {
+            background: #450a0a;
+            border: 1px solid #7f1d1d;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .risk-box .title { color: #f87171; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .risk-box ul { list-style: none; padding-left: 0; }
+        .risk-box li { color: #fca5a5; padding: 6px 0; padding-left: 20px; position: relative; }
+        .risk-box li::before { content: "⚠️"; position: absolute; left: 0; }
+
+        .position-suggest {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .position-suggest .pct {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #f59e0b;
+        }
+        .position-suggest .desc { color: #94a3b8; margin-top: 8px; }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #475569;
+            font-size: 0.85em;
+            border-top: 1px solid #1e293b;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 12px; }
+            .header h1 { font-size: 1.6em; }
+            .section { padding: 18px; }
+            .index-cards { grid-template-columns: 1fr; }
+            .candidate-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .candidate-body { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>一阳指选股复盘</h1>
+        <div class="date">2026年7月7日 星期二</div>
+        <div class="tag">A股每日复盘</div>
+    </div>
+
+    <!-- 市场概览 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">📊</span> 市场概览</div>
+        <div class="index-cards">
+            <div class="index-card">
+                <div class="name">上证指数</div>
+                <div class="price">3,990.24</div>
+                <div class="change change-down">-1.26%</div>
+                <div class="detail">
+                    <span>成交额:</span> 1.20万亿<br>
+                    <span>估值百分位:</span> <span class="pe-high">96.21%</span>（极高）<br>
+                    <span>量比:</span> 1.07<br>
+                    <span>年初至今:</span> +0.63%
+                </div>
+            </div>
+            <div class="index-card">
+                <div class="name">深证成指</div>
+                <div class="price">15,225.11</div>
+                <div class="change change-down">-1.24%</div>
+                <div class="detail">
+                    <span>成交额:</span> 1.38万亿<br>
+                    <span>估值百分位:</span> <span class="pe-high">99.01%</span>（历史最高）<br>
+                    <span>量比:</span> 2.76<br>
+                    <span>年初至今:</span> +11.92%
+                </div>
+            </div>
+            <div class="index-card">
+                <div class="name">创业板指</div>
+                <div class="price">3,911.91</div>
+                <div class="change change-down">-0.94%</div>
+                <div class="detail">
+                    <span>成交额:</span> 0.62万亿<br>
+                    <span>估值百分位:</span> <span class="pe-mid">66.82%</span>（中等）<br>
+                    <span>量比:</span> 3.54<br>
+                    <span>年初至今:</span> +20.63%
+                </div>
+            </div>
+        </div>
+        <div class="market-summary" style="margin-top: 20px;">
+            <div class="summary-item">
+                <div class="label">两市成交额</div>
+                <div class="value">3.20<span style="font-size:0.7em">万亿</span></div>
+            </div>
+            <div class="summary-item">
+                <div class="label">上涨家数</div>
+                <div class="value text-green">~500</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">下跌家数</div>
+                <div class="value text-red">~4,700</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">涨停数量</div>
+                <div class="value text-red">60+</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">主力资金</div>
+                <div class="value text-green">净流出<span style="font-size:0.7em"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 热门板块 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">🔥</span> 热门板块 TOP5</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>排名</th>
+                    <th>板块名称</th>
+                    <th class="col-right">涨跌幅</th>
+                    <th>领涨股</th>
+                    <th class="col-right">领涨股涨幅</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-center">1</td>
+                    <td>大硅片</td>
+                    <td class="col-right text-red">+4.84%</td>
+                    <td>有研硅</td>
+                    <td class="col-right text-red">+20.00%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">2</td>
+                    <td>靶材</td>
+                    <td class="col-right text-red">+1.71%</td>
+                    <td>有研新材</td>
+                    <td class="col-right text-red">+10.00%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">3</td>
+                    <td>元梦之星</td>
+                    <td class="col-right text-red">+0.72%</td>
+                    <td>奥飞娱乐</td>
+                    <td class="col-right text-red">+5.27%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">4</td>
+                    <td>国家大基金持股</td>
+                    <td class="col-right text-red">+0.65%</td>
+                    <td>华天科技</td>
+                    <td class="col-right text-red">+9.98%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">5</td>
+                    <td>中芯国际概念</td>
+                    <td class="col-right text-red">+0.61%</td>
+                    <td>有研硅</td>
+                    <td class="col-right text-red">+20.00%</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 16px; color: #64748b; font-size: 0.85em;">其他强势板块：游戏Ⅱ +1.96%、国有大型银行Ⅱ +1.72%、影视院线 +1.10%、工程机械 +0.91%。半导体/芯片相关板块在指数大跌中逆势表现。</p>
+    </div>
+
+    <!-- 申万行业 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">🏭</span> 申万一级行业涨幅 TOP5</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>排名</th>
+                    <th>行业名称</th>
+                    <th class="col-right">涨跌幅</th>
+                    <th>领涨股</th>
+                    <th class="col-right">领涨股涨幅</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-center">1</td>
+                    <td>游戏Ⅱ</td>
+                    <td class="col-right text-red">+1.96%</td>
+                    <td>星辉娱乐</td>
+                    <td class="col-right text-red">+14.13%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">2</td>
+                    <td>国有大型银行Ⅱ</td>
+                    <td class="col-right text-red">+1.72%</td>
+                    <td>建设银行</td>
+                    <td class="col-right text-red">+2.59%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">3</td>
+                    <td>影视院线</td>
+                    <td class="col-right text-red">+1.10%</td>
+                    <td>儒意电影</td>
+                    <td class="col-right text-red">+5.99%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">4</td>
+                    <td>工程机械</td>
+                    <td class="col-right text-red">+0.91%</td>
+                    <td>艾迪精密</td>
+                    <td class="col-right text-red">+5.54%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">5</td>
+                    <td>通信设备</td>
+                    <td class="col-right text-red">+0.24%</td>
+                    <td>光迅科技</td>
+                    <td class="col-right text-red">+6.05%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 主力资金 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">💰</span> 主力资金净流入 TOP3 板块</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>排名</th>
+                    <th>板块名称</th>
+                    <th class="col-right">主力净流入</th>
+                    <th class="col-right">涨跌幅</th>
+                    <th>领涨股</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-center">1</td>
+                    <td>氮化镓</td>
+                    <td class="col-right text-red">+53.16亿</td>
+                    <td class="col-right text-green">-1.42%</td>
+                    <td>有研新材 +10.00%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">2</td>
+                    <td>节能照明</td>
+                    <td class="col-right text-red">+52.89亿</td>
+                    <td class="col-right text-green">-1.68%</td>
+                    <td>实益达 +10.01%</td>
+                </tr>
+                <tr>
+                    <td class="col-center">3</td>
+                    <td>国家大基金持股</td>
+                    <td class="col-right text-red">+37.83亿</td>
+                    <td class="col-right text-red">+0.65%</td>
+                    <td>华天科技 +9.98%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 一阳指候选 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">🎯</span> 一阳指候选股票</div>
+
+        <div class="candidate-card tier1">
+            <div class="candidate-header">
+                <div class="candidate-name">瑞芯微 <span class="code">603893.SH</span></div>
+                <div class="candidate-score star3">开门★★★</div>
+            </div>
+            <div class="candidate-body">
+                <div class="item"><span class="label">最新价</span><span class="value">190.71</span></div>
+                <div class="item"><span class="label">涨跌幅</span><span class="value text-red">+8.28%</span></div>
+                <div class="item"><span class="label">量比</span><span class="value">1.89</span></div>
+                <div class="item"><span class="label">主力净流入</span><span class="value text-red">+6.03亿</span></div>
+                <div class="item"><span class="label">MACD</span><span class="value">金叉（DIF=1.68）</span></div>
+                <div class="item"><span class="label">KDJ-J</span><span class="value">55.50</span></div>
+                <div class="item"><span class="label">PE-TTM</span><span class="value">64.23（历史低位12.99%）</span></div>
+                <div class="item"><span class="label">年初至今</span><span class="value text-red">+6.87%</span></div>
+            </div>
+            <div class="candidate-reason">
+                <span class="reason-label">判断依据：</span>MACD金叉（DIF=1.677 > DEA=0.993），柱状图1.368较强，端侧AI概念受益博通与苹果扩大合作催化。量比1.89放量，主力净流入6.03亿。PE 64.23倍处于历史低位区间（12.99%），估值合理。年初至今+6.87%涨幅适中。瑕疵：MA5(181.50) < MA10(183.26)，短期均线未完全多头排列，开门战法扣一星。建议等回调至175-180元区间介入。
+            </div>
+        </div>
+
+        <div class="candidate-card tier2">
+            <div class="candidate-header">
+                <div class="candidate-name">雅化集团 <span class="code">002497.SZ</span></div>
+                <div class="candidate-score star3">转势★★★</div>
+            </div>
+            <div class="candidate-body">
+                <div class="item"><span class="label">最新价</span><span class="value">24.65</span></div>
+                <div class="item"><span class="label">涨跌幅</span><span class="value text-red">+10.00%</span></div>
+                <div class="item"><span class="label">量比</span><span class="value">0.29</span></div>
+                <div class="item"><span class="label">主力净流入</span><span class="value text-red">+1.98亿</span></div>
+                <div class="item"><span class="label">MACD</span><span class="value text-green">死叉（DIF=-0.36）</span></div>
+                <div class="item"><span class="label">KDJ-J</span><span class="value text-yellow">100.16（超买）</span></div>
+                <div class="item"><span class="label">PE-TTM</span><span class="value">29.06</span></div>
+                <div class="item"><span class="label">年初至今</span><span class="value text-green">+0.41%</span></div>
+            </div>
+            <div class="candidate-reason">
+                <span class="reason-label">判断依据：</span>锂矿概念龙头，中报业绩预增710%-857%催化一字涨停。PE 29.06倍合理，年初至今+0.41%处于绝对低位。但MACD尚未金叉（DIF=-0.358 < DEA=-0.729，且均为负值），J值100.16超买。量比仅0.29极度缩量（一字涨停）。建议等MACD金叉确认且量能放大后再考虑介入。若明日高开回落可小仓位试探。
+            </div>
+        </div>
+    </div>
+
+    <!-- 排除说明 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">🚫</span> 排除股票说明</div>
+        <div class="candidate-card exclude">
+            <div class="candidate-header">
+                <div class="candidate-name">有研新材 <span class="code">600206.SH</span></div>
+                <div class="candidate-score exclude">已排除</div>
+            </div>
+            <div class="candidate-reason">MACD死叉（DIF=6.841 < DEA=7.022），不符合一阳指体系。PE 150.8倍极高，年初至今+174.82%涨幅过大。虽然今日涨停且主力净流入11.66亿，但处于高位调整中的反弹性质。</div>
+        </div>
+        <div class="candidate-card exclude">
+            <div class="candidate-header">
+                <div class="candidate-name">有研硅 <span class="code">688432.SH</span></div>
+                <div class="candidate-score exclude">已排除</div>
+            </div>
+            <div class="candidate-reason">年初至今+269.42%涨幅过大，处于极端高位。科创板高波动，20cm涨停但风险极高。不符合一阳指体系的安全边际要求。</div>
+        </div>
+        <div class="candidate-card exclude">
+            <div class="candidate-header">
+                <div class="candidate-name">华天科技 <span class="code">002185.SZ</span></div>
+                <div class="candidate-score exclude">已排除</div>
+            </div>
+            <div class="candidate-reason">MACD死叉（DIF=1.092 < DEA=1.206），不符合一阳指体系。PE 81.23倍偏高，年初至今+98.82%涨幅过大。虽然主力净流入35.13亿居全市场前列，但技术面不配合。</div>
+        </div>
+        <div class="candidate-card exclude">
+            <div class="candidate-header">
+                <div class="candidate-name">TCL中环 <span class="code">002129.SZ</span></div>
+                <div class="candidate-score exclude">已排除</div>
+            </div>
+            <div class="candidate-reason">MACD死叉（DIF=0.338 < DEA=0.369），不符合一阳指体系。PE为负（亏损），基本面承压。虽然今日涨停且主力净流入8.09亿，但处于亏损状态风险较大。</div>
+        </div>
+        <div class="candidate-card exclude">
+            <div class="candidate-header">
+                <div class="candidate-name">露笑科技 <span class="code">002617.SZ</span></div>
+                <div class="candidate-score exclude">已排除</div>
+            </div>
+            <div class="candidate-reason">MACD死叉（DIF=0.191 < DEA=0.208），不符合一阳指体系。PE 92.63倍偏高，净利润增长率-32.93%下滑。虽然今日+8.14%且主力净流入5.73亿，但技术面不配合。</div>
+        </div>
+        <div class="candidate-card exclude">
+            <div class="candidate-header">
+                <div class="candidate-name">沐曦股份 <span class="code">688802.SH</span></div>
+                <div class="candidate-score exclude">已排除</div>
+            </div>
+            <div class="candidate-reason">科创板亏损股（名称带-U），PE极高。今日+14.09%但基本面亏损，不符合一阳指体系的安全要求。</div>
+        </div>
+    </div>
+
+    <!-- 昨日候选跟踪 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">📈</span> 昨日候选跟踪</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>股票</th>
+                    <th>昨日评级</th>
+                    <th class="col-right">今日表现</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>甘李药业</td>
+                    <td>转势★★★★</td>
+                    <td class="col-right text-green">-2.87%</td>
+                    <td>跟随医药板块回调，转势信号仍在，可观察</td>
+                </tr>
+                <tr>
+                    <td>紫光股份</td>
+                    <td>开门★★★★</td>
+                    <td class="col-right text-green">-4.02%</td>
+                    <td>通信设备板块回调，开门趋势未破坏</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 次日操作计划 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">📝</span> 次日操作计划</div>
+        <div class="operation-plan">
+            <div class="plan-item">
+                <span class="label">第一梯队 · 瑞芯微</span>
+                <span class="value">等回调至 175-180 元区间</span>
+            </div>
+            <div class="plan-item">
+                <span class="label">第二梯队 · 雅化集团</span>
+                <span class="value">等MACD金叉确认，若高开回落可试探</span>
+            </div>
+            <div class="plan-item">
+                <span class="label">建议仓位</span>
+                <span class="value">不超过 20%</span>
+            </div>
+            <div class="plan-item">
+                <span class="label">止损策略</span>
+                <span class="value">买入价-8% 或 跌破MA20</span>
+            </div>
+            <div class="plan-item">
+                <span class="label">止盈策略</span>
+                <span class="value">盈利15%-20%分批止盈</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 仓位配置 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">⚖️</span> 仓位配置建议</div>
+        <div class="position-suggest">
+            <div class="pct">≤20%</div>
+            <div class="desc">今日超4700股下跌，三大指数均收跌，市场处于高位调整阶段<br>建议保留 80% 以上现金，等待更明确的企稳信号</div>
+        </div>
+    </div>
+
+    <!-- 风险提示 -->
+    <div class="section">
+        <div class="section-title"><span class="icon">⚠️</span> 风险提示</div>
+        <div class="risk-box">
+            <div class="title">当前市场风险警示</div>
+            <ul>
+                <li>上证指数估值百分位 96.21%，深证成指 99.01%（历史最高），市场处于极端高估状态</li>
+                <li>今日超4700只个股下跌，市场情绪明显恶化，跌停数量增加</li>
+                <li>大部分强势股MACD死叉，处于反弹性质而非趋势确立，追高风险极大</li>
+                <li>两市成交3.2万亿，指数大跌伴随放量，资金出逃迹象明显</li>
+                <li>中报业绩预告窗口开启，高估值科技股面临业绩兑现压力</li>
+                <li>今日市场为典型的"指数与个股双杀"格局，建议严控仓位、多看少动</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>一阳指选股复盘 · 2026-07-07</p>
+        <p style="margin-top: 8px; color: #475569;">⚠️ 本报告仅为技术分析复盘，不构成投资建议。股市有风险，投资需谨慎。</p>
+    </div>
+</div>
+</body>
+</html>
